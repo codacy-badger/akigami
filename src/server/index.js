@@ -38,6 +38,7 @@ app.use((err, req, res) => {
 });
 
 const server = http.createServer(app);
+require('./services/websockets').default(server);
 
 function onError(error) {
     if (error.syscall !== 'listen') {

@@ -166,6 +166,7 @@ module.exports = () => {
                         loader: 'babel-loader',
                         options: {
                             presets: ['stage-0', 'react'],
+                            plugins: ['transform-decorators-legacy'],
                         },
                     },
                 },

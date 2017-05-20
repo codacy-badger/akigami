@@ -1,15 +1,18 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'mobx-react';
 
+import AppStore from '../stores/AppStore';
 
-function Hello() {
-    return (
-        <h1>Hello World</h1>
-    );
-}
+import Group from '../containers/Group';
 
+const stores = {
+    app: new AppStore(),
+};
 
 render(
-    <Hello />,
+    <Provider {...stores}>
+        <Group />
+    </Provider>,
     document.getElementById('root'),
 );
