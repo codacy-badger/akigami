@@ -1,0 +1,35 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "authentication": {
+    "secret": "23874a112c32a5ec18409f7d982649ab9598640fad7ceca4fe999abb09e454f1a62c6883bd934cdbb51cc4eba45c4f2ec38a0307a912a83f3669ae8075f6c21a184f48af55a3cdb3ecd018a37d91923b8179a9a243225c07c5e7dcbe8dc861b90a921a998f3a2f939eea7f551e7cb8e7ba1e8f03dcdda83f0c9d1977f6a4b379533eb34cbc9a8a961c2c5eefe4d38a87905b683cf12f736e9c42d1b4cfe5f603c47b062197945b65e2f0367c67ba7885d18fb61b5832779ff23f7fc0b811f37fe79651cff1f1a39b43b8fde22015693676dfea5a5c154701bf317a6cfd9d7c8bb334dfb7c41aa18c9402de584c50c2d5bff8f869ac1bd4c1ff13698c57367569",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "type": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "service": "users",
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  },
+  "mongodb": "mongodb://akigami:76r12ui@akg.moe/akigami"
+}
