@@ -146,6 +146,8 @@ module.exports = () => {
             publicPath: '/',
             filename: 'app.js',
             chunkFilename: '[name].[chunk].js',
+            hotUpdateChunkFilename: 'hot/hot-update.js',
+            hotUpdateMainFilename: 'hot/hot-update.json',
         },
         module: {
             rules: [
