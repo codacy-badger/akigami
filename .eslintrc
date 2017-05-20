@@ -1,0 +1,16 @@
+{
+    "parser": "babel-eslint",
+    "extends": "airbnb",
+    "rules": {
+        "indent": [2, 4],
+        "react/jsx-indent": [2, 4],
+        "global-require": 0,
+        "import/no-dynamic-require": 0,
+        "prefer-rest-params": 0,
+        "import/no-extraneous-dependencies": 0
+    },
+    "globals": {
+        "document": true,
+        "module": true
+    }
+}
