@@ -4,8 +4,15 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import config from 'config';
+import webpack from 'webpack';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 
 import { normalizePort, requireFiles } from './utils';
+
+const webpackConfig = require('../../webpack.config.js');
+
+const compiler = webpack(webpackConfig());
 
 const app = express();
 const port = normalizePort(config.get('server.port'));
@@ -19,6 +26,24 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '..', '..', 'public')));
+
+if (config.get('enviroment') === 'development') {
+    app.use(webpackDevMiddleware(compiler, {
+        hot: true,
+        noInfo: true,
+        filename: 'app.js',
+        publicPath: '/',
+        stats: {
+            colors: true,
+        },
+        historyApiFallback: true,
+    }));
+
+    app.use(webpackHotMiddleware(compiler, {
+        log: console.log,
+        path: '/__webpack_hmr',
+    }));
+}
 
 requireFiles('routes', app);
 

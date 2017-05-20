@@ -129,9 +129,7 @@ module.exports = () => {
     const entryPoint = isProd
         ? './index.js'
         : [
-            'react-hot-loader/patch',
-            `webpack-dev-server/client?http://${host}:${port}`,
-            'webpack/hot/only-dev-server',
+            `webpack-hot-middleware/client?path=${host}:${port}/__webpack_hmr`,
             './index.js',
         ];
 

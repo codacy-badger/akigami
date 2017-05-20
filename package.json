@@ -42,10 +42,10 @@
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.5",
     "preload-webpack-plugin": "^1.2.2",
-    "react-hot-loader": "next",
     "style-loader": "^0.17.0",
     "uglifyjs-webpack-plugin": "^0.4.3",
     "webpack": "2.5.1",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-middleware": "^1.10.2",
+    "webpack-hot-middleware": "^2.18.0"
   }
 }
