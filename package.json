@@ -7,7 +7,8 @@
   "author": "Yukioru <obt195@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node tools/run"
+    "start": "node tools/run",
+    "dev": "node_modules/.bin/webpack --watch | node tools/run"
   },
   "dependencies": {
     "babel-polyfill": "6.23.0",
@@ -20,7 +21,7 @@
     "hbs": "4.0.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "serve-favicon": "2.4.2"
+    "serve-favicon": "^2.4.3"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
@@ -44,8 +45,6 @@
     "preload-webpack-plugin": "^1.2.2",
     "style-loader": "^0.17.0",
     "uglifyjs-webpack-plugin": "^0.4.3",
-    "webpack": "2.5.1",
-    "webpack-dev-middleware": "^1.10.2",
-    "webpack-hot-middleware": "^2.18.0"
+    "webpack": "2.5.1"
   }
 }

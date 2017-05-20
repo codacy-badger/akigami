@@ -126,12 +126,7 @@ module.exports = () => {
         ];
     }
 
-    const entryPoint = isProd
-        ? './index.js'
-        : [
-            `webpack-hot-middleware/client?path=${host}:${port}/__webpack_hmr`,
-            './index.js',
-        ];
+    const entryPoint = './index.js';
 
     return {
         devtool: isProd ? 'source-map' : 'cheap-module-source-map',

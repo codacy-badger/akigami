@@ -3,16 +3,10 @@ import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import favicon from 'serve-favicon';
 import config from 'config';
-import webpack from 'webpack';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
 
 import { normalizePort, requireFiles } from './utils';
-
-const webpackConfig = require('../../webpack.config.js');
-
-const compiler = webpack(webpackConfig());
 
 const app = express();
 const port = normalizePort(config.get('server.port'));
@@ -21,29 +15,11 @@ app.set('port', port);
 
 app.set('views', path.join(__dirname, '..', '..', 'views'));
 app.set('view engine', 'hbs');
-
+app.use(favicon(path.join(__dirname, '..', '..', 'public', 'favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '..', '..', 'public')));
-
-if (config.get('enviroment') === 'development') {
-    app.use(webpackDevMiddleware(compiler, {
-        hot: true,
-        noInfo: true,
-        filename: 'app.js',
-        publicPath: '/',
-        stats: {
-            colors: true,
-        },
-        historyApiFallback: true,
-    }));
-
-    app.use(webpackHotMiddleware(compiler, {
-        log: console.log,
-        path: '/__webpack_hmr',
-    }));
-}
 
 requireFiles('routes', app);
 
