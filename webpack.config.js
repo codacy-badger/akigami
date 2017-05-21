@@ -85,7 +85,8 @@ module.exports = () => {
                         sourceMap: true,
                         plugins: loader => [
                             require('postcss-import')({ root: loader.resourcePath }),
-                            require('cssnext')(),
+                            require('postcss-nested'),
+                            require('postcss-simple-vars'),
                             require('autoprefixer')(),
                             require('cssnano')(),
                         ],
@@ -95,7 +96,6 @@ module.exports = () => {
         });
     } else {
         plugins.push(
-            new webpack.HotModuleReplacementPlugin(),
             new webpack.NamedModulesPlugin(),
             new webpack.NoEmitOnErrorsPlugin()
         );
@@ -117,7 +117,8 @@ module.exports = () => {
                     sourceMap: true,
                     plugins: loader => [
                         require('postcss-import')({ root: loader.resourcePath }),
-                        require('cssnext')(),
+                        require('postcss-nested'),
+                        require('postcss-simple-vars'),
                         require('autoprefixer')(),
                         require('cssnano')(),
                     ],
@@ -137,15 +138,13 @@ module.exports = () => {
         output: {
             path: paths.build,
             publicPath: '/',
-            filename: 'app.js',
-            chunkFilename: '[name].[chunk].js',
-            hotUpdateChunkFilename: 'hot/hot-update.js',
-            hotUpdateMainFilename: 'hot/hot-update.json',
+            filename: 'assets/app.js',
+            chunkFilename: 'assets/[name].[chunk].js',
         },
         module: {
             rules: [
                 {
-                    test: /\.(html|svg|jpe?g|png|ttf|woff2?)$/,
+                    test: /\.(html|svg|jpe?g|png|ttf|eot|woff2?)$/,
                     exclude: /node_modules/,
                     use: {
                         loader: 'file-loader',
@@ -193,7 +192,6 @@ module.exports = () => {
             historyApiFallback: true,
             port,
             host,
-            hot: !isProd,
             compress: isProd,
             stats,
         },

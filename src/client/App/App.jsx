@@ -4,7 +4,9 @@ import { Provider } from 'mobx-react';
 
 import AppStore from '../stores/AppStore';
 
-import Group from '../containers/Group';
+import Main from '../pages/Main';
+
+import '../../styles/index.pcss';
 
 const stores = {
     app: new AppStore(),
@@ -12,7 +14,7 @@ const stores = {
 
 render(
     <Provider {...stores}>
-        <Group />
+        <Main />
     </Provider>,
     document.getElementById('root'),
 );

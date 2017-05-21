@@ -4,10 +4,10 @@ export default (server) => {
     const io = new Server(server);
 
     io.on('connection', (socket) => {
-        console.log('Socket connected');
-        
+        console.log(`Socket ${socket.conn.id} connected`);
+
         socket.on('disconnect', () => {
-            console.log('Socket disconnected');
+            console.log(`Socket ${socket.conn.id} disconnected`);
         });
 
         socket.on('counter', (msg) => {
