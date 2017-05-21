@@ -1,12 +1,15 @@
 import React, { PureComponent } from 'react';
+
 import Main from '../pages/Main';
+import Sidebar from '../containers/Sidebar';
 
 class App extends PureComponent {
     render() {
         return (
-            <div>
-                <Main />
-            </div>
+            <section className="main">
+                <Sidebar />
+                {/*<Main />*/}
+            </section>
         );
     }
 }

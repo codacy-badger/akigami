@@ -32,8 +32,6 @@ module.exports = () => {
     const nodeEnv = config.get('enviroment');
     const isProd = nodeEnv === 'production';
 
-    let cssLoader;
-
     const plugins = [
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
@@ -45,7 +43,7 @@ module.exports = () => {
         new webpack.DefinePlugin({
             'process.env': { NODE_ENV: JSON.stringify(nodeEnv) },
         }),
-        new ExtractTextPlugin('style.css'),
+        new ExtractTextPlugin('assets/style.css'),
         new PreloadWebpackPlugin(),
     ];
 
@@ -66,65 +64,11 @@ module.exports = () => {
                 },
             })
         );
-
-        cssLoader = ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: [
-                {
-                    loader: 'css-loader',
-                    options: {
-                        module: true,
-                        modules: true,
-                        importLoaders: 1,
-                        localIdentName: '[hash:base64:5]',
-                    },
-                },
-                {
-                    loader: 'postcss-loader',
-                    options: {
-                        sourceMap: true,
-                        plugins: loader => [
-                            require('postcss-import')({ root: loader.resourcePath }),
-                            require('postcss-nested'),
-                            require('postcss-simple-vars'),
-                            require('autoprefixer')(),
-                            require('cssnano')(),
-                        ],
-                    },
-                },
-            ],
-        });
     } else {
         plugins.push(
             new webpack.NamedModulesPlugin(),
             new webpack.NoEmitOnErrorsPlugin()
         );
-
-        cssLoader = [
-            {
-                loader: 'style-loader',
-            },
-            {
-                loader: 'css-loader',
-                options: {
-                    module: true,
-                    localIdentName: '[path][name]-[local]',
-                },
-            },
-            {
-                loader: 'postcss-loader',
-                options: {
-                    sourceMap: true,
-                    plugins: loader => [
-                        require('postcss-import')({ root: loader.resourcePath }),
-                        require('postcss-nested'),
-                        require('postcss-simple-vars'),
-                        require('autoprefixer')(),
-                        require('cssnano')(),
-                    ],
-                },
-            },
-        ];
     }
 
     const entryPoint = './index.js';
@@ -144,7 +88,7 @@ module.exports = () => {
         module: {
             rules: [
                 {
-                    test: /\.(html|svg|jpe?g|png|ttf|eot|woff2?)$/,
+                    test: /\.(html|svg|jpe?g|png|ttf|eot|woff2?)(\?.+)?$/,
                     exclude: /node_modules/,
                     use: {
                         loader: 'file-loader',
@@ -154,9 +98,37 @@ module.exports = () => {
                     },
                 },
                 {
-                    test: /\.pcss$/,
+                    test: /\.p?css$/,
                     exclude: /node_modules/,
-                    use: cssLoader,
+                    use: ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: [
+                            {
+                                loader: 'css-loader',
+                            },
+                            {
+                                loader: 'postcss-loader',
+                                options: {
+                                    sourceMap: true,
+                                    plugins: loader => [
+                                        require('postcss-import')({
+                                            addDependencyTo: loader,
+                                            path: [
+                                                path.join(__dirname, 'src', 'common'),
+                                                path.join(__dirname, 'node_modules'),
+                                            ],
+                                            root: loader.resourcePath,
+                                        }),
+                                        require('postcss-simple-vars')(),
+                                        require('postcss-color-function')(),
+                                        require('postcss-nested')(),
+                                        require('autoprefixer')(),
+                                        require('cssnano')(),
+                                    ],
+                                },
+                            },
+                        ],
+                    }),
                 },
                 {
                     test: /\.(js|jsx)$/,

@@ -1,0 +1,40 @@
+.button {
+    color: $button-default-color;
+    border: 1px solid $button-default-border;
+    background: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.2px;
+    line-height: 14px;
+    font-family: $font-family;
+    background-color: $button-default-background;
+    cursor: pointer;
+
+    &:hover,
+    &:focus,
+    &:active,
+    .active {
+        outline: none;
+    }
+
+    &:hover {
+        color: $button-default-hovered-color;
+        background-color: $button-default-hovered-background;
+        border-color: $button-default-hovered-border;
+    }
+
+    &:focus {
+        color: $button-default-focused-color;
+        background-color: $button-default-focused-background;
+        border-color: $button-default-focused-border;
+    }
+
+    &:active {
+        color: $button-default-active-color;
+        background-color: $button-default-active-background;
+        border-color: $button-default-active-border;
+    }
+
+}

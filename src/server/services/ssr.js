@@ -1,5 +1,4 @@
 import React from 'react';
-import config from 'config';
 import { Provider } from 'mobx-react';
 import ReactDOMServer from 'react-dom/server';
 
@@ -20,14 +19,8 @@ export default function (data = {}) {
                 </Provider>,
             )
         ),
-        css: (
-            config.get('enviroment') !== 'development'
-            ? '<link rel="stylesheet" href="/assets/style.css" />'
-            : ''
-        ),
-        js: (
-            '<script type="text/javascript" src="/assets/app.js"></script>'
-        ),
+        css: '<link rel="stylesheet" href="/assets/style.css" />',
+        js: '<script type="text/javascript" src="/assets/app.js"></script>',
         title: 'Акигами',
     }, data);
 

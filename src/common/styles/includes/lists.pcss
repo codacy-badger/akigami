@@ -1,0 +1,26 @@
+.dots-list {
+    font-size: 11px;
+    text-align: center;
+    word-break: break-word;
+    padding: 5px;
+
+    .dots-item {
+        display: inline-block;
+        padding: 1px;
+
+        > a {
+            color: $text-secondary;
+
+            &:hover {
+                color: $text-default;
+            }
+        }
+
+        &:not(:last-child):after {
+            content: '\22C5';
+            padding-left: 3px;
+        }
+
+    }
+
+}
