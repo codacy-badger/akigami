@@ -1,7 +1,16 @@
-require('babel-register')({
-    presets: ['stage-0', 'react'],
-    plugins: ['transform-decorators-legacy'],
-});
-require('babel-polyfill');
+require('../styles/index.pcss');
+const ReactDOM = require('react-dom');
+const Provider = require('mobx-react').Provider;
+const AppStore = require('./stores/AppStore');
+const App = require('./App');
 
-require('./App');
+const stores = {
+    app: new AppStore(),
+};
+
+ReactDOM.render(
+    <Provider {...stores}>
+        <App />
+    </Provider>,
+    document.getElementById('root'),
+);

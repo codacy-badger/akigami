@@ -1,20 +1,14 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'mobx-react';
-
-import AppStore from '../stores/AppStore';
-
+import React, { PureComponent } from 'react';
 import Main from '../pages/Main';
 
-import '../../styles/index.pcss';
+class App extends PureComponent {
+    render() {
+        return (
+            <div>
+                <Main />
+            </div>
+        );
+    }
+}
 
-const stores = {
-    app: new AppStore(),
-};
-
-render(
-    <Provider {...stores}>
-        <Main />
-    </Provider>,
-    document.getElementById('root'),
-);
+export default App;
