@@ -1,5 +1,7 @@
 export default (app) => {
     app.get('/', (req, res) => {
-        res.render('index', { title: 'Express' });
+        res.ssr({
+            title: 'Главная - Акигами',
+        });
     });
 };

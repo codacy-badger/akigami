@@ -7,24 +7,23 @@ import favicon from 'serve-favicon';
 import config from 'config';
 
 import { normalizePort, requireFiles } from './utils';
-import './services/handlebars';
+import ssr from './services/ssr';
 
 const app = express();
 const port = normalizePort(config.get('server.port'));
-
-app.set('port', port);
-
-app.set('views', path.join(__dirname, '..', '..', 'views'));
-app.set('view options', { layout: false });
-app.set('view engine', 'hbs');
-
 const icon = path.join(__dirname, '..', '..', 'public', 'favicon.ico');
 
+app.set('port', port);
 if (icon) app.use(favicon(icon));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '..', '..', 'public')));
+
+app.use((req, res, next) => {
+    res.ssr = ssr;
+    next();
+});
 
 requireFiles('routes', app);
 
