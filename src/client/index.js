@@ -1,2 +1,2 @@
-require('../styles/index.pcss');
+require('../common/styles/index.pcss');
 require('./main');
