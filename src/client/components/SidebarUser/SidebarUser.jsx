@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import Avatar from '../Avatar';
+import Icon from '../Icon';
 
 class SidebarUser extends PureComponent {
     static propTypes = {
@@ -16,7 +17,9 @@ class SidebarUser extends PureComponent {
                     <a href={user.link}>{user.username}</a>
                     <small>Мой аккаунт</small>
                 </div>
-                <a href="/settings"></a>
+                <a href="/settings">
+                    <Icon type="settings" />
+                </a>
             </div>
         );
     }

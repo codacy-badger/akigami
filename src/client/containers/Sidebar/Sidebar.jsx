@@ -1,41 +1,50 @@
 import React, { PureComponent } from 'react';
 
 import Logo from '../../components/Logo';
-import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
 import DotsList from '../../components/DotsList';
+import SidebarUser from '../../components/SidebarUser';
+import SidebarMenu from '../../components/SidebarMenu';
 
-const Item = DotsList.Item;
+const DotsItem = DotsList.Item;
+const SidebarItem = SidebarMenu.Item;
 
 class Sidebar extends PureComponent {
     render() {
         return (
-            <nav className="nav-sidebar">
+            <aside className="nav-sidebar">
                 <div className="logo">
                     <Logo />
                 </div>
                 <div className="user">
-                    <Avatar
-                        src="https://pp.userapi.com/c638020/v638020296/38174/B5tk5K4xzaM.jpg"
-                        size={40}
+                    <SidebarUser
+                        user={{
+                            avatar: 'https://pp.userapi.com/c638020/v638020296/38174/B5tk5K4xzaM.jpg',
+                            username: 'Yukioru',
+                            link: '/@yukioru',
+                        }}
                     />
                 </div>
-                <div className="menu">
-                    menu
-                </div>
-                <div className="list">
+                <SidebarMenu>
+                    <SidebarItem active href="/feed" title="Лента" />
+                    <SidebarItem href="/overview" title="Обзор" />
+                    <SidebarItem href="/news" title="Новости" />
+                    <SidebarItem href="/clubs" title="Клубы" />
+                    <SidebarItem href="/radio" title="Радио" />
+                </SidebarMenu>
+                {/*<div className="list">
                     list
-                </div>
+                </div>*/}
                 <div className="nav-footer">
                     <Button>Выход</Button>
                     <DotsList>
-                        <Item><a href="#">О нас</a></Item>
-                        <Item><a href="#">Поддержка</a></Item>
-                        <Item><a href="#">Правообладателям</a></Item>
+                        <DotsItem><a href="#">О нас</a></DotsItem>
+                        <DotsItem><a href="#">Поддержка</a></DotsItem>
+                        <DotsItem><a href="#">Правообладателям</a></DotsItem>
                     </DotsList>
                     <p className="copyright">Акигами &copy; {`${new Date().getFullYear()} г.`}</p>
                 </div>
-            </nav>
+            </aside>
         );
     }
 }
