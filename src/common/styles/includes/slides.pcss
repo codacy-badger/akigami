@@ -1,0 +1,57 @@
+.feature-slide {
+    height: 480px;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    transition: .2s ease;
+    @media screen and (min-width: 992px) {
+        height: 600px;
+    }
+    @media screen and (min-width: 1200px) {
+        height: 800px;
+    }
+}
+
+.feature-side-inner {
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+    padding: 0 20px;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: .2s ease;
+
+
+    h1 {
+        color: white;
+        text-transform: uppercase;
+        font-size: 2.4rem;
+        font-weight: 900;
+        text-shadow: 0 4px 0 rgba(45, 45, 45, 0.2);
+        margin-bottom: 3rem;
+        transition: .2s ease;
+        @media screen and (min-width: 992px) {
+            font-size: 3rem;
+        }
+    }
+}
+
+
+.feature-slide-buttons {
+    margin: 0;
+    transition: .2s ease;
+    @media screen and (min-width: 492px) {
+        margin: 0 -10px;
+    }
+    > a {
+        width: 100%;
+        margin: 5px 0;
+        display: inline-block;
+        @media screen and (min-width: 492px) {
+            width: auto;
+            margin: 0 10px;
+        }
+    }
+}

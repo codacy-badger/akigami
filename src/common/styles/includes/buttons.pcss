@@ -1,40 +1,65 @@
-.button {
-    color: $button-default-color;
-    border: 2px solid $button-default-border;
+.btn-no-style {
     background: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    font-size: 12px;
-    letter-spacing: 0.2px;
-    line-height: 14px;
-    font-family: $font-family;
-    background-color: $button-default-background;
+    border: none;
+    outline: none;
     cursor: pointer;
+    font-family: inherit;
+    &:hover,
+    &:focus,
+    &:active {
+        outline: none;
+    }
+}
+
+.arrow-button {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid #2a2a2a;
+    border-radius: 50%;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    cursor: pointer;
+    transition: .2s ease;
 
     &:hover,
     &:focus,
-    &:active,
-    .active {
+    &:active {
         outline: none;
     }
 
     &:hover {
-        color: $button-default-hovered-color;
-        background-color: $button-default-hovered-background;
-        border-color: $button-default-hovered-border;
+        background-color: rgba(255, 255, 255, 0.4);
     }
 
-    &:focus {
-        color: $button-default-focused-color;
-        background-color: $button-default-focused-background;
-        border-color: $button-default-focused-border;
-    }
+    &.arrow-feature {
+        font-size: 1.7em;
 
-    &:active {
-        color: $button-default-active-color;
-        background-color: $button-default-active-background;
-        border-color: $button-default-active-border;
+        &.arrow-left {
+            display: flex;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 5%;
+            margin: auto;
+            z-index: 1;
+            padding-right: 9px;
+        }
+
+        &.arrow-right {
+            display: flex;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 5%;
+            margin: auto;
+            z-index: 1;
+            padding-left: 7px;
+        } 
+
     }
 
 }
