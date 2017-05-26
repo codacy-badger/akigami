@@ -62,6 +62,7 @@ class Header extends PureComponent {
                                 <DropdownMenu>
                                     <DropdownItem href="/anime">Аниме</DropdownItem>
                                     <DropdownItem href="/manga">Манга</DropdownItem>
+                                    <DropdownItem href="/ranobe">Ранобэ</DropdownItem>
                                     <DropdownItem divider />
                                     <DropdownItem href="/theater">Кинотеатр</DropdownItem>
                                     <DropdownItem href="/collections">Подборки</DropdownItem>

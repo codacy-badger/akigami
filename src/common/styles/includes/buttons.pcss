@@ -35,6 +35,33 @@
         background-color: rgba(255, 255, 255, 0.4);
     }
 
+    &.arrow-block {
+        font-size: 1.7em;
+        
+        &.arrow-left {
+            display: flex;
+            top: 0;
+            bottom: 130px;
+            margin: auto;
+            left: -4%;
+            position: absolute;
+            z-index: 1;
+            padding-right: 9px;
+        }
+        
+        &.arrow-right {
+            display: flex;
+            top: 0;
+            bottom: 130px;
+            margin: auto;
+            right: -4%;
+            position: absolute;
+            z-index: 1;
+            padding-left: 7px;
+        }
+
+    }
+
     &.arrow-feature {
         font-size: 1.7em;
 
@@ -46,7 +73,7 @@
             left: 5%;
             margin: auto;
             z-index: 1;
-            padding-right: 9px;
+            padding-right: 8px;
         }
 
         &.arrow-right {

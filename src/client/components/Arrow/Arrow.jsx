@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import omit from 'lodash/omit';
 import cx from 'classnames';
 
 import Icon from '../Icon';
@@ -12,7 +11,7 @@ class Arrow extends PureComponent {
     }
     static propTypes = {
         direction: PropTypes.oneOf(['top', 'right', 'left', 'bottom']).isRequired,
-        type: PropTypes.oneOf(['feature']),
+        type: PropTypes.oneOf(['feature', 'block']),
         onClick: PropTypes.func,
     }
     render() {

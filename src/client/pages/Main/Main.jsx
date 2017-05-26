@@ -11,6 +11,8 @@ import FeatureSlide from '../../components/FeatureSlide';
 import Arrow from '../../components/Arrow';
 import Block from '../../components/Block';
 
+import Ongoings from '../../containers/Ongoings';
+
 const slides = [
     {
         id: 1,
@@ -58,9 +60,7 @@ class Main extends PureComponent {
                 <Container className="with-top">
                     <Row>
                         <Col xs="12">
-                            <Block title="Новинки">
-                                Контент
-                            </Block>
+                            <Ongoings />
                         </Col>
                     </Row>
                 </Container>

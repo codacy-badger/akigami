@@ -5,7 +5,7 @@ import omit from 'lodash/omit';
 
 class Carousel extends PureComponent {
     static defaultProps = {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 500,
         slidesToShow: 1,
