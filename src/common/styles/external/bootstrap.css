@@ -5465,6 +5465,7 @@ button.close {
           background-clip: padding-box;
   border: 2px solid #2a2a2a;
   border-radius: 0;
+  padding: 20px;
   outline: 0;
 }
 
@@ -5557,7 +5558,7 @@ button.close {
 
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 500px;
+    max-width: 550px;
     margin: 30px auto;
   }
   .modal-sm {
