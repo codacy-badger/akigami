@@ -11,7 +11,6 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    Input,
 } from 'reactstrap';
 
 import AuthModal from '../AuthModal';
@@ -90,7 +89,7 @@ class Header extends PureComponent {
                         </Nav>
                     </Collapse>
                 </div>
-                <AuthModal modal={auth} onHide={() => this.onAuth(false)} />
+                <AuthModal step={null} backdrop={null} modal={auth} onHide={() => this.onAuth(false)} />
             </Navbar>
         );
     }
