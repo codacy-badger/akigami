@@ -3973,12 +3973,14 @@ tbody.collapse.show {
   font-size: 1.25rem;
   line-height: 1;
   background: transparent;
-  border: 1px solid transparent;
+  border: none;
+  top: 8px;
   border-radius: 0;
 }
 
 .navbar-toggler:focus, .navbar-toggler:hover {
   text-decoration: none;
+  outline: none;
 }
 
 .navbar-toggler-icon {
@@ -3994,12 +3996,12 @@ tbody.collapse.show {
 
 .navbar-toggler-left {
   position: absolute;
-  left: 1rem;
+  left: 0;
 }
 
 .navbar-toggler-right {
   position: absolute;
-  right: 1rem;
+  right: 0;
 }
 
 @media (max-width: 767px) {

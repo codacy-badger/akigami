@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import {
     Modal,
     ModalBody,
@@ -11,6 +12,10 @@ import {
 } from 'reactstrap';
 
 class AuthModal extends PureComponent {
+    static propTypes = {
+        onHide: PropTypes.func.isRequired,
+        modal: PropTypes.bool.isRequired,
+    }
     state = {
         email: '',
     };
@@ -25,7 +30,7 @@ class AuthModal extends PureComponent {
         const { email } = this.state;
         const { modal, onHide } = this.props;
         return (
-            <Modal isOpen={modal} toggle={onHide}>
+            <Modal modalClassName="centered" isOpen={modal} toggle={onHide}>
                 <ModalHeader toggle={this.toggle} style={{ justifyContent: 'center' }}>
                     Авторизация
                 </ModalHeader>

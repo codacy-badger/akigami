@@ -4,32 +4,27 @@ import {
     Row,
     Col,
 } from 'reactstrap';
-import truncate from 'lodash/truncate';
 
 import Carousel from '../../components/Carousel';
 import FeatureSlide from '../../components/FeatureSlide';
 import Arrow from '../../components/Arrow';
 
-const opts = {
-    length: 32,
-    separator: /,? +/,
-};
-
 const slides = [
     {
         id: 1,
         image: 'http://i.imgur.com/SIlmR6k.jpg',
-        title: truncate('Shingeki no Kyojin Season 2', opts),
+        title: 'Shingeki no Kyojin Season 2',
+        description: 'Люди и гиганты. Кто из них охотник, а кто жертва? Для того, чтобы понять это, был создан корпус разведки под командованием Эрвина Смита. Но последние загадочные события, во многих из которых были замешаны кадеты 104 корпуса, поставили командира разведки в трудное положение.',
     },
     {
         id: 2,
         image: 'http://i.imgur.com/hwXD4G5.jpg',
-        title: truncate('Shuumatsu Nani Shitemasu ka? Isogashii desu ka? Sukutte Moratte Ii desu ka?', opts),
+        title: 'Shuumatsu Nani Shitemasu ka? Isogashii desu ka? Sukutte Moratte Ii desu ka?',
     },
     {
         id: 3,
         image: 'http://i.imgur.com/IHAffhR.jpg',
-        title: truncate('Little Witch Academia (TV)', opts),
+        title: 'Little Witch Academia (TV)',
     },
 ];
 

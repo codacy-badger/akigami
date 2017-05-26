@@ -73,9 +73,9 @@ class Header extends PureComponent {
                             </NavItem>
                         </Nav>
                         <Nav className="ml-auto" navbar>
-                            <NavItem style={{ alignSelf: 'center', marginRight: 10 }}>
-                                <NavLink style={{ fontSize: 20, padding: '0 5px', color: '#d54343' }} href="/search">
-                                    <Icon type="magnify" />
+                            <NavItem className="navbar-search">
+                                <NavLink className="navbar-search-link" href="/search">
+                                    <Icon type="magnify" /><span className="navbar-search-title">Поиск</span>
                                 </NavLink>
                             </NavItem>
                             <NavItem>

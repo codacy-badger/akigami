@@ -3,15 +3,28 @@ import PropTypes from 'prop-types';
 import {
     Button,
 } from 'reactstrap';
+import truncate from 'lodash/truncate';
 
 class FeatureSlide extends PureComponent {
+    static defaultProps = {
+        description: null,
+    }
     static propTypes = {
         image: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
+        description: PropTypes.string,
         id: PropTypes.number.isRequired,
     }
     render() {
-        const { image, title, id } = this.props;
+        const { image, title, description, id } = this.props;
+        const titleOptions = {
+            length: 32,
+            separator: /,? +/,
+        };
+        const descOptions = {
+            length: 270,
+            separator: /,? +/,
+        };
         return (
             <div
                 className="feature-slide"
@@ -25,7 +38,10 @@ class FeatureSlide extends PureComponent {
                 }}
             >
                 <div className="feature-side-inner">
-                    <h1>{title}</h1>
+                    <div className="feature-slide-content">
+                        <h1>{truncate(title, titleOptions)}</h1>
+                        {description && <p>{truncate(description, descOptions)}</p>}
+                    </div>
                     <div className="feature-slide-buttons">
                         <Button color="primary" href={`/theater/${id}`}>Смотреть онлайн</Button>
                         <Button color="danger" href={`/anime/${id}`}>Узнать подробнее</Button>

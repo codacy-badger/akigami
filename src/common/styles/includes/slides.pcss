@@ -14,44 +14,90 @@
 
 .feature-side-inner {
     display: flex;
-    flex-direction: column;
-    max-width: 700px;
-    padding: 0 20px;
+    max-width: 100%;
+    padding: 0 20%;
+    width: 100%;
+    margin-bottom: 150px;
     align-self: center;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
     transition: .2s ease;
+    flex-direction: column;
+    @media screen and (min-width: 768px) {
+        flex-direction: row;
+        max-width: 560px;
+        padding: 0 20px;
+    }
+    @media screen and (min-width: 992px) {
+        max-width: 720px;
+    }
+    @media screen and (min-width: 1200px) {
+        max-width: 900px;
+    }
+}
 
+.feature-slide-content {
+    max-width: 100%;
+    text-align: center;
+    width: 100%;
+    @media screen and (min-width: 768px) {
+        max-width: 300px;
+        text-align: left;
+    }
+    @media screen and (min-width: 992px) {
+        max-width: 430px;
+    }
+    @media screen and (min-width: 1200px) {
+        max-width: 540px;
+    }
 
     h1 {
         color: white;
         text-transform: uppercase;
-        font-size: 2.4rem;
+        font-size: 2rem;
         font-weight: 900;
         text-shadow: 0 4px 0 rgba(45, 45, 45, 0.2);
-        margin-bottom: 3rem;
         transition: .2s ease;
+        cursor: default;
+        user-select: none;
+        @media screen and (min-width: 768px) {
+            font-size: 2.4rem;
+        }
         @media screen and (min-width: 992px) {
-            font-size: 3rem;
+            font-size: 2.8rem;
+        }
+    }
+
+    p {
+        color: white;
+        opacity: 0.9;
+        font-size: 13px;
+        display: none;
+        cursor: default;
+        user-select: none;
+        @media screen and (min-width: 992px) {
+            display: block;
+        }
+        @media screen and (min-width: 992px) {
+            font-size: 14px;
         }
     }
 }
 
 
 .feature-slide-buttons {
+    display: flex;
+    flex-direction: column;
     margin: 0;
     transition: .2s ease;
     @media screen and (min-width: 492px) {
-        margin: 0 -10px;
+        margin: auto;
+    }
+    @media screen and (min-width: 768px) {
+        margin: auto 0 auto auto;
+    }
+    @media screen and (min-width: 992px) {
+        margin: 0 0 0 auto;
     }
     > a {
-        width: 100%;
         margin: 5px 0;
-        display: inline-block;
-        @media screen and (min-width: 492px) {
-            width: auto;
-            margin: 0 10px;
-        }
     }
 }
