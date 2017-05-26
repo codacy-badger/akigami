@@ -114,7 +114,7 @@ class AuthModal extends PureComponent {
     }
     renderNotLogged() {
         const { email, emailStatus } = this.state;
-        const { onHide } = this.state;
+        const { onHide } = this.props;
         return (
             <div>
                 <ModalHeader toggle={this.toggle} style={{ justifyContent: 'center' }}>
