@@ -14,10 +14,16 @@ class Carousel extends PureComponent {
     static propTypes = {
         children: PropTypes.any.isRequired,
     }
+    componentDidMount() {
+        this.initWidthFix();
+    }
+    initWidthFix = () => {
+        setTimeout(() => this.slider.innerSlider.onWindowResized(), 0);
+    }
     render() {
         const settings = omit(this.props, 'children');
         return (
-            <Slider {...settings}>
+            <Slider ref={(e) => { this.slider = e; }} {...settings}>
                 {this.props.children}
             </Slider>
         );
