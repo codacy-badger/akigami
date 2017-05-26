@@ -4,6 +4,7 @@ import {
     Row,
     Col,
 } from 'reactstrap';
+import Responsive from 'react-responsive';
 
 import Carousel from '../../components/Carousel';
 import FeatureSlide from '../../components/FeatureSlide';
@@ -31,6 +32,13 @@ const slides = [
 ];
 
 class Main extends PureComponent {
+    renderRightColumn() {
+        return (
+            <div>
+                <h3 style={{ borderTop: '3px solid #d54343' }}>123</h3>
+            </div>
+        );
+    }
     render() {
         return (
             <section>
@@ -44,11 +52,24 @@ class Main extends PureComponent {
                         </div>
                     ))}
                 </Carousel>
-                <Container>
+                <Container className="with-top">
                     <Row>
-                        <Col xs="12">
-                            123
+                        <Responsive minWidth={768}>
+                            <Col md="4" lg="3">
+                                <h3 style={{ borderTop: '3px solid #d54343' }}>123</h3>
+                                <Responsive maxWidth={991}>
+                                    {this.renderRightColumn()}
+                                </Responsive>
+                            </Col>
+                        </Responsive>
+                        <Col sm="12" md="8" lg="6">
+                            <h3 style={{ borderTop: '3px solid #d54343' }}>123</h3>
                         </Col>
+                        <Responsive minWidth={992}>
+                            <Col xs="12" lg="3">
+                                {this.renderRightColumn()}
+                            </Col>
+                        </Responsive>
                     </Row>
                 </Container>
             </section>
