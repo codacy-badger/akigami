@@ -43,7 +43,7 @@ class FeatureSlide extends PureComponent {
                         {description && <p>{truncate(description, descOptions)}</p>}
                     </div>
                     <div className="feature-slide-buttons">
-                        <Button color="primary" href={`/theater/${id}`}>Смотреть онлайн</Button>
+                        <Button color="warning" href={`/theater/${id}`}>Смотреть онлайн</Button>
                         <Button color="danger" href={`/anime/${id}`}>Узнать подробнее</Button>
                     </div>
                 </div>

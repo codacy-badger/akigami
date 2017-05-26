@@ -9,6 +9,7 @@ import Responsive from 'react-responsive';
 import Carousel from '../../components/Carousel';
 import FeatureSlide from '../../components/FeatureSlide';
 import Arrow from '../../components/Arrow';
+import Block from '../../components/Block';
 
 const slides = [
     {
@@ -35,7 +36,9 @@ class Main extends PureComponent {
     renderRightColumn() {
         return (
             <div>
-                <h3 style={{ borderTop: '3px solid #d54343' }}>123</h3>
+                <Block title="Новости">
+                    Контент
+                </Block>
             </div>
         );
     }
@@ -54,16 +57,31 @@ class Main extends PureComponent {
                 </Carousel>
                 <Container className="with-top">
                     <Row>
+                        <Col xs="12">
+                            <Block title="Новинки">
+                                Контент
+                            </Block>
+                        </Col>
+                    </Row>
+                </Container>
+                <Container>
+                    <Row>
                         <Responsive minWidth={768}>
                             <Col md="4" lg="3">
-                                <h3 style={{ borderTop: '3px solid #d54343' }}>123</h3>
+                                
+                                <Block title="Аккаунт">
+                                    Контент
+                                </Block>
+
                                 <Responsive maxWidth={991}>
                                     {this.renderRightColumn()}
                                 </Responsive>
                             </Col>
                         </Responsive>
                         <Col sm="12" md="8" lg="6">
-                            <h3 style={{ borderTop: '3px solid #d54343' }}>123</h3>
+                            <Block title="Лента">
+                                Контент
+                            </Block>
                         </Col>
                         <Responsive minWidth={992}>
                             <Col xs="12" lg="3">
