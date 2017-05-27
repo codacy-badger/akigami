@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class Poster extends PureComponent {
     static defaultProps = {
-        src: this.defaultImage,
+        src: null,
     }
     static propTypes = {
         src: PropTypes.string,
