@@ -11,7 +11,7 @@ class Arrow extends PureComponent {
     }
     static propTypes = {
         direction: PropTypes.oneOf(['top', 'right', 'left', 'bottom']).isRequired,
-        type: PropTypes.oneOf(['feature', 'block']),
+        type: PropTypes.oneOf(['feature', 'simple']),
         onClick: PropTypes.func,
     }
     render() {

@@ -1,7 +1,32 @@
 .entity {
-    width: 150px;
+    width: 120px;
     overflow: hidden;
     margin-bottom: 20px;
+    @media screen and (min-width: 380px) {
+        width: 150px;
+    }
+
+    &:hover {
+        .poster-link {
+            opacity: .8;
+        }
+        .entity-title {
+            > a {
+                 color: $color-primary-light;
+            }
+        }
+    }
+
+    &:active {
+        .poster-link {
+            opacity: .7;
+        }
+        .entity-title {
+            > a {
+                color: $color-primary;
+            }
+        }
+    }
 
     .poster-link {
         margin-bottom: 10px;
@@ -23,6 +48,7 @@
         text-overflow: ellipsis;
         letter-spacing: -0.2px;
         overflow: hidden;
+        transition: .2s ease;
 
         &:hover,
         &:focus,
@@ -38,9 +64,17 @@
 
     .entity-type {
         display: block;
-        padding: 3px;
         color: inherit;
         font-size: 13px;
+        transition: .2s ease;
+        &:hover {
+            color: #fff;
+        }
+        &:hover,
+        &:focus,
+        &:active {
+            text-decoration: none;
+        }
     }
 }
 
@@ -62,6 +96,7 @@
             color: inherit;
             display: block;
             text-decoration: none;
+            transition: .2s ease;
             border-bottom: 1px solid rgba(150, 150, 150, 0.3);
             margin-right: 3px;
 
@@ -102,9 +137,12 @@
 
 .entity-studio {
     display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-right: 5px;
     &:after {
         content: ',';
-        margin-right: 5px;
     }
 }
 

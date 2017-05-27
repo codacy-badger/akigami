@@ -1,10 +1,15 @@
 .poster-link {
-    width: 150px;
-    height: 220px;
+    width: 120px;
+    height: 190px;
     display: block;
     overflow: hidden;
     background-color: #232323;
     border: 1px solid $color-border;
+    transition: .2s ease;
+    @media screen and (min-width: 380px) {
+        width: 150px;
+        height: 220px;
+    }
 }
 
 .poster {

@@ -123,15 +123,37 @@ const entities = [
 ];
 
 class Ongoings extends PureComponent {
+    componentDidMount() {
+        Carousel.widthFix(this.carousel);
+    }
+    onRef = (ref) => {
+        this.carousel = ref.innerSlider;
+    }
     render() {
         return (
-            <Block title="Новинки">
+            <Block
+                title="Новинки"
+                buttons={(
+                    <div>
+                        <Arrow
+                            type="simple"
+                            direction="left"
+                            onClick={() => Carousel.prevSlide(this.carousel)}
+                        />
+                        <Arrow
+                            type="simple"
+                            direction="right"
+                            onClick={() => Carousel.nextSlide(this.carousel)}
+                        />
+                    </div>
+                )}
+            >
                 <Carousel
+                    carouselRef={this.onRef}
                     slidesToShow={6}
                     slidesToScroll={6}
                     arrows={false}
                     responsive={[
-                        { breakpoint: 389, settings: { slidesToShow: 1, slidesToScroll: 1 } },
                         { breakpoint: 689, settings: { slidesToShow: 2, slidesToScroll: 2 } },
                         { breakpoint: 767, settings: { slidesToShow: 3, slidesToScroll: 3 } },
                         { breakpoint: 991, settings: { slidesToShow: 4, slidesToScroll: 4 } },
