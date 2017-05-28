@@ -1,6 +1,7 @@
 import http from 'http';
 import express from 'express';
 import path from 'path';
+import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import favicon from 'serve-favicon';
@@ -15,6 +16,9 @@ const icon = path.join(__dirname, '..', '..', 'public', 'favicon.ico');
 
 app.set('port', port);
 if (icon) app.use(favicon(icon));
+app.use(logger('dev', {
+    skip: (req, res) => res.statusCode < 400,
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -33,12 +37,15 @@ app.use((req, res, next) => {
     next(err);
 });
 
-app.use((err, req, res) => {
+app.use((err, req, res, nextIgnored) => {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     res.status(err.status || 500);
-    res.render('error');
+    res.ssr({
+        title: 'Ошибка - Акигами',
+        layout: 'error',
+    });
 });
 
 const server = http.createServer(app);
@@ -50,28 +57,28 @@ function onError(error) {
     }
 
     const bind = typeof port === 'string'
-    ? `Pipe ${port}`
-    : `Port ${port}`;
+        ? `Pipe ${port}`
+        : `Port ${port}`;
 
     switch (error.code) {
-    case 'EACCES':
-        console.error(`${bind} requires elevated privileges`);
-        process.exit(1);
-        break;
-    case 'EADDRINUSE':
-        console.error(`${bind} is already in use`);
-        process.exit(1);
-        break;
-    default:
-        throw error;
+        case 'EACCES':
+            console.error(`${bind} requires elevated privileges`);
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(`${bind} is already in use`);
+            process.exit(1);
+            break;
+        default:
+            throw error;
     }
 }
 
 function onListening() {
     const addr = server.address();
     const bind = typeof addr === 'string'
-    ? `pipe ${addr}`
-    : `port ${addr.port}`;
+        ? `pipe ${addr}`
+        : `port ${addr.port}`;
 
     console.log(`Akigami Server listening on ${bind}`);
 }

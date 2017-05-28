@@ -37,8 +37,7 @@ module.exports = () => {
             name: 'vendor',
             filename: path.join('assets', 'modules.js'),
             async: false,
-            children: true,
-            minChunks: 2,
+            minChunks: (module, countIgnored) => module.context && module.context.includes('node_modules'),
         }),
         new webpack.DefinePlugin({
             'process.env': { NODE_ENV: JSON.stringify(nodeEnv) },
@@ -74,6 +73,7 @@ module.exports = () => {
     const entryPoint = './index.js';
 
     return {
+        performance: false,
         devtool: isProd ? 'source-map' : 'cheap-module-source-map',
         context: paths.source,
         entry: {
@@ -83,8 +83,9 @@ module.exports = () => {
             path: paths.build,
             publicPath: '/',
             filename: 'assets/app.js',
-            chunkFilename: 'assets/[name].[chunk].js',
+            chunkFilename: 'assets/[name].chunk.js',
         },
+        node: { Buffer: false },
         module: {
             rules: [
                 {

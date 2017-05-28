@@ -10,7 +10,10 @@
         "prefer-rest-params": 0,
         "import/no-extraneous-dependencies": 0,
         "react/forbid-prop-types": 0,
-        "react/prefer-stateless-function": 0
+        "react/prefer-stateless-function": 0,
+        "no-unused-vars": [1, {
+            "argsIgnorePattern": "[iI]gnored"
+        }]
     },
     "globals": {
         "document": true,

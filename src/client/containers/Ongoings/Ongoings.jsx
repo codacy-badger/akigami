@@ -127,7 +127,9 @@ class Ongoings extends PureComponent {
         Carousel.widthFix(this.carousel);
     }
     onRef = (ref) => {
-        this.carousel = ref.innerSlider;
+        if (ref) {
+            this.carousel = ref.innerSlider;
+        }
     }
     render() {
         return (

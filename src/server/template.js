@@ -1,4 +1,4 @@
-export default ({ body, title, css, js }) => (`
+export default ({ body, title, css, js, preload }) => (`
     <!DOCTYPE html>
     <html lang="ru">
 
@@ -12,8 +12,9 @@ export default ({ body, title, css, js }) => (`
 
     <body>
         <div id="root">${body}</div>
+        ${preload}
         ${js}
     </body>
 
     </html>
-`);
+`).trim();
