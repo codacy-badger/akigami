@@ -1,7 +1,6 @@
 import React from 'react';
 import superagent from 'superagent';
 import { observable } from 'mobx';
-import get from 'lodash/get';
 // перетащить в другой файл
 const routes = {
     index: {
@@ -14,7 +13,8 @@ const routes = {
 
 export default class Router {
     @observable container;
-    constructor() {
+    constructor(app) {
+        this.app = app;
         if (typeof window !== 'undefined') {
             this.initHandler();
         }
@@ -58,12 +58,18 @@ export default class Router {
         if (push) {
             history.pushState(null, null, href);
         }
+        this.app.topBar.setProgress(30);
         await this.requestAndInsert(href);
     }
     async requestAndInsert(href) {
-        const { body } = await superagent.get(`${href}?time=${Date.now()}`).set('X-PJAX', true).ok(res => res.status < 600);
+        const { body, status } = await superagent.get(`${href}?time=${Date.now()}`).set('X-PJAX', true).ok(res => res.status < 600);
         await this.setContainer(body);
         document.body.scrollTop = 0;
+        if (status > 400) {
+            this.app.topBar.error();
+        } else {
+            this.app.topBar.finish();
+        }
     }
     static async import(id) {
         const data = routes[id] || routes.error;
