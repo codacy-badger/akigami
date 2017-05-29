@@ -2870,9 +2870,9 @@ minimist@^1.2.0:
   dependencies:
     minimist "0.0.8"
 
-mobx-react@4.1.8:
-  version "4.1.8"
-  resolved "https://registry.yarnpkg.com/mobx-react/-/mobx-react-4.1.8.tgz#5b636c01c599bbee248c05c5aab6c77a41ab07f9"
+mobx-react@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/mobx-react/-/mobx-react-4.2.1.tgz#35324834b71ae27a7553d76ad413e5f96ba40db5"
   dependencies:
     hoist-non-react-statics "^1.2.0"
 
