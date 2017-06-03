@@ -1,17 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {
-    Modal,
-    ModalBody,
-    ModalFooter,
-    ModalHeader,
-    Button,
-    FormGroup,
-    Label,
-    Input,
-    FormFeedback,
-    FormText,
-} from 'reactstrap';
+import { Button, Modal, Form, Input, Select } from 'semantic-ui-react';
 
 const exampleRegisterCode = 'a9b5d377-3849-459c-9767-89237d659de6';
 const exampleLoginCode = 'c427af39-8259-4d95-a79e-77610b797194';
@@ -21,14 +10,14 @@ const isEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(
 
 class AuthModal extends PureComponent {
     static defaultProps = {
-        step: null,
-        backdrop: null,
+        step: 'notLogged',
+        closable: true,
     }
     static propTypes = {
         onHide: PropTypes.func.isRequired,
         modal: PropTypes.bool.isRequired,
         step: PropTypes.oneOf(['notLogged', 'confirm', 'register']),
-        backdrop: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['static'])]),
+        closable: PropTypes.bool,
     }
     constructor(props) {
         super(props);
@@ -39,16 +28,16 @@ class AuthModal extends PureComponent {
             username: '',
             birthday: '',
             gender: 'none',
-            usernameStatus: null,
-            emailStatus: null,
-            codeStatus: null,
-            backdrop: props.backdrop || true,
+            usernameError: false,
+            emailError: false,
+            codeError: false,
+            closable: props.closable || true,
         };
     }
     shouldComponentUpdate(nextProps, nextState) {
         const state = nextState;
         if (isCode.test(nextState.authCode)) {
-            state.codeStatus = null;
+            state.codeError = false;
             if (nextState.authCode === exampleLoginCode) {
                 this.handleConfirm();
             }
@@ -56,21 +45,21 @@ class AuthModal extends PureComponent {
                 state.step = 'register';
             }
         } else if (nextState.authCode.length === 0) {
-            state.codeStatus = null;
+            state.codeError = false;
         } else {
-            state.codeStatus = 'danger';
+            state.codeError = true;
         }
 
-        if (isEmail.test(nextState.email)) {
-            state.emailStatus = 'success';
+        if (!isEmail.test(nextState.email)) {
+            state.emailError = true;
         } else {
-            state.emailStatus = null;
+            state.emailError = false;
         }
 
         if (nextState.username.length > 3) {
-            state.usernameStatus = 'success';
+            state.usernameError = false;
         } else {
-            state.usernameStatus = null;
+            state.usernameError = true;
         }
 
         return state;
@@ -79,8 +68,8 @@ class AuthModal extends PureComponent {
         this.setState({ [action]: e.target.value });
     }
     handleRegister = () => {
-        const { usernameStatus } = this.state;
-        if (usernameStatus) {
+        const { usernameError } = this.state;
+        if (!usernameError) {
             this.reset();
         }
     }
@@ -90,175 +79,183 @@ class AuthModal extends PureComponent {
     }
     handleAuth = () => {
         alert('auth!');
-        const { emailStatus } = this.state;
-        if (emailStatus) {
+        const { emailError } = this.state;
+        if (!emailError) {
             this.setState({
                 step: 'confirm',
-                backdrop: 'static',
+                closable: false,
             });
         }
     }
     reset = () => {
         this.props.onHide();
         this.setState({
-            backdrop: true,
+            closable: true,
             step: 'notLogged',
             email: '',
             authCode: '',
             username: '',
-            usernameStatus: null,
-            emailStatus: null,
+            usernameError: false,
+            emailError: false,
             gender: 'none',
             birthday: '',
         });
     }
     renderNotLogged() {
-        const { email, emailStatus } = this.state;
+        const { email, emailError } = this.state;
         const { onHide } = this.props;
         return (
             <div>
-                <ModalHeader toggle={this.toggle} style={{ justifyContent: 'center' }}>
-                    Вход / Регистрация
-                </ModalHeader>
-                <ModalBody>
-                    <p>Введите свой электронный ящик, чтобы войти или зарегистрироваться</p>
-                    <FormGroup color={emailStatus}>
-                        <Label for="authEmail">Email</Label>
-                        <Input
-                            type="email"
-                            name="email"
-                            id="authEmail"
-                            value={email}
-                            state={emailStatus}
-                            onChange={this.onChange('email')}
-                            placeholder="Например: suzuki@chan.jp"
-                        />
-                    </FormGroup>
-                </ModalBody>
-                <ModalFooter style={{ justifyContent: 'center' }}>
-                    <Button color="link" onClick={onHide}>Закрыть</Button>
-                    <Button
-                        color="danger"
-                        onClick={this.handleAuth}
-                        style={{ width: '40%' }}
-                        disabled={!emailStatus}
-                    >
-                        Войти
-                    </Button>
-                </ModalFooter>
+                <Modal.Header>Вход / Регистрация</Modal.Header>
+                <Modal.Content>
+                    <Modal.Description>
+                        <p>Введите свой электронный ящик, чтобы войти или зарегистрироваться</p>
+                        <Form.Field>
+                            <label htmlFor="authEmail">Email</label>
+                            <Input
+                                type="email"
+                                name="email"
+                                id="authEmail"
+                                placeholder="Например: suzuki@chan.jp"
+                                value={email}
+                                error={emailError}
+                                onChange={this.onChange('email')}
+                            />
+                        </Form.Field>
+                    </Modal.Description>
+                    <Modal.Actions>
+                        <Button
+                            onClick={onHide}
+                        >
+                            Закрыть
+                        </Button>
+                        <Button
+                            primary
+                            disabled={!email && emailError}
+                            onClick={this.handleAuth}
+                        >
+                            Войти
+                        </Button>
+                    </Modal.Actions>
+                </Modal.Content>
             </div>
         );
     }
     renderConfirm() {
-        const { authCode, codeStatus } = this.state;
+        const { authCode, codeError } = this.state;
         return (
             <div>
-                <ModalHeader style={{ justifyContent: 'center' }}>
-                    Подтверждение входа
-                </ModalHeader>
-                <ModalBody>
-                    <p style={{ marginBottom: 0 }}>
-                        Проверьте свой электронный ящик. Вам пришло письмо с подтверждением авторизации.
-                    </p>
-                    <small style={{ display: 'inline-block', marginBottom: '1rem' }}>
-                        Перейдите по ссылке в письме или введите код авторизации ниже.
-                    </small>
-                    <FormGroup color={codeStatus}>
-                        <Label for="authCode">Код авторизации</Label>
-                        <Input
-                            type="text"
-                            name="text"
-                            id="authCode"
-                            value={authCode}
-                            state={codeStatus}
-                            onChange={this.onChange('authCode')}
-                            placeholder="Например: c427af39-8259-4d95-a79e-77610b797194"
-                        />
-                        {codeStatus === 'danger' && (
-                            <FormFeedback>Вы ввеели не код подтверждения</FormFeedback>
-                        )}
-                    </FormGroup>
-                </ModalBody>
-                <ModalFooter style={{ justifyContent: 'center' }}>
-                    <Button color="link" onClick={this.reset}>Отменить авторизацию</Button>
-                </ModalFooter>
+                <Modal.Header>Подтверждение входа</Modal.Header>
+                <Modal.Content>
+                    <Modal.Description>
+                        <p style={{ marginBottom: 0 }}>
+                            Проверьте свой электронный ящик.
+                            Вам пришло письмо с подтверждением авторизации.
+                        </p>
+                        <small style={{ display: 'inline-block', marginBottom: '1rem' }}>
+                            Перейдите по ссылке в письме или введите код авторизации ниже.
+                        </small>
+                        <Form.Field>
+                            <label htmlFor="authCode">Код авторизации</label>
+                            <Input
+                                type="text"
+                                name="text"
+                                id="authCode"
+                                placeholder="Например: a9b5d377-3849-459c-9767-89237d659de6"
+                                value={authCode}
+                                error={codeError}
+                                onChange={this.onChange('authCode')}
+                            />
+                        </Form.Field>
+                    </Modal.Description>
+                    <Modal.Actions>
+                        <Button
+                            onClick={this.reset}
+                        >
+                            Отменить авторизацию
+                        </Button>
+                    </Modal.Actions>
+                </Modal.Content>
             </div>
         );
     }
     renderRegister() {
-        const { birthday, gender, username, usernameStatus } = this.state;
+        const { birthday, gender, username, usernameError } = this.state;
         return (
             <div>
-                <ModalHeader style={{ justifyContent: 'center' }}>
-                    Регистрация
-                </ModalHeader>
-                <ModalBody>
-                    <p>Заполните информацию для аккаунта.</p>
-                    <FormGroup color={usernameStatus}>
-                        <Label for="username">Имя пользователя</Label>
-                        <Input
-                            type="text"
-                            name="text"
-                            id="username"
-                            value={username}
-                            state={usernameStatus}
-                            onChange={this.onChange('username')}
-                            placeholder="Например: Joker"
-                        />
-                        {usernameStatus === 'danger' && (
-                            <FormFeedback>Это поле не может быть пустым</FormFeedback>
-                        )}
-                        <FormText color="muted">* поле обязательно для заполнения</FormText>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="gender">Пол</Label>
-                        <Input
-                            type="select"
-                            name="select"
-                            id="gender"
-                            value={gender}
-                            onChange={this.onChange('gender')}
+                <Modal.Header>Регистрация</Modal.Header>
+                <Modal.Content>
+                    <Modal.Description>
+                        <p>Заполните информацию для аккаунта.</p>
+                        <Form.Field>
+                            <label htmlFor="username">Имя пользователя</label>
+                            <Input
+                                label={{ icon: 'asterisk' }}
+                                labelPosition="right corner"
+                                type="text"
+                                name="text"
+                                id="username"
+                                placeholder="Например: Joker"
+                                value={username}
+                                error={usernameError}
+                                onChange={this.onChange('username')}
+                            />
+                        </Form.Field>
+                        <Form.Field>
+                            <label htmlFor="gender">Пол</label>
+                            <Select
+                                id="gender"
+                                value={gender}
+                                placeholder="Укажите ваш пол"
+                                onChange={this.onChange('gender')}
+                                options={[
+                                    { key: 'none', value: 'none', text: 'Не определился' },
+                                    { key: 'male', value: 'male', text: 'Мужской' },
+                                    { key: 'female', value: 'female', text: 'Женский' },
+                                ]}
+                            />
+                        </Form.Field>
+                        <Form.Field>
+                            <label htmlFor="birthday">День рождения</label>
+                            <Input
+                                label={{ icon: 'asterisk' }}
+                                labelPosition="right corner"
+                                type="date"
+                                name="date"
+                                id="birthday"
+                                placeholder="Например: 01.01.1995"
+                                value={birthday}
+                                onChange={this.onChange('birthday')}
+                            />
+                        </Form.Field>
+                    </Modal.Description>
+                    <Modal.Actions>
+                        <Button
+                            onClick={this.reset}
                         >
-                            <option value="none">Не определился</option>
-                            <option value="male">Мужской</option>
-                            <option value="female">Женский</option>
-                        </Input>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="birthday">День рождения</Label>
-                        <Input
-                            type="date"
-                            name="date"
-                            id="birthday"
-                            value={birthday}
-                            onChange={this.onChange('birthday')}
-                            placeholder="Например: 01.01.1995"
-                        />
-                    </FormGroup>
-                </ModalBody>
-                <ModalFooter style={{ justifyContent: 'center' }}>
-                    <Button color="link" onClick={this.reset}>Отменить</Button>
-                    <Button
-                        color="success"
-                        onClick={this.handleRegister}
-                        disabled={!usernameStatus}
-                    >
-                        Зарегистрироваться
-                    </Button>
-                </ModalFooter>
+                            Отменить
+                        </Button>
+                        <Button
+                            primary
+                            onClick={this.handleRegister}
+                            disabled={!username && usernameError}
+                        >
+                            Войти
+                        </Button>
+                    </Modal.Actions>
+                </Modal.Content>
             </div>
         );
     }
     render() {
-        const { step, backdrop } = this.state;
+        const { step, closable } = this.state;
         const { modal, onHide } = this.props;
-        const isToggle = backdrop !== 'static';
         return (
             <Modal
-                modalClassName="centered"
-                isOpen={modal}
-                toggle={isToggle && onHide}
-                backdrop={backdrop}
+                open={modal}
+                onClose={closable && onHide}
+                closeIcon={closable}
+                closeOnDimmerClick={closable}
             >
                 {step === 'notLogged' && this.renderNotLogged()}
                 {step === 'confirm' && this.renderConfirm()}

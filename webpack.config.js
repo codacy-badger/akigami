@@ -124,7 +124,7 @@ module.exports = () => {
                                         require('postcss-color-function')(),
                                         require('postcss-nested')(),
                                         require('autoprefixer')(),
-                                        require('cssnano')(),
+                                        // require('cssnano')(),
                                     ],
                                 },
                             },

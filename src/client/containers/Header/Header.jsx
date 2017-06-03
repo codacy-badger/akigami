@@ -4,7 +4,9 @@ import { Grid, Dropdown } from 'semantic-ui-react';
 import Logo from '../../components/Logo';
 import Avatar from '../../components/Avatar';
 
-const logged = true;
+import AuthModal from '../AuthModal';
+
+const logged = false;
 
 const user = {
     avatar: 'https://pp.userapi.com/c638421/v638421296/67c1/E_xVha7Gyz0.jpg',
@@ -78,6 +80,10 @@ class Header extends PureComponent {
                         </div>
                     </Grid.Column>
                 </Grid>
+                <AuthModal
+                    onHide={() => this.onAuth(false)}
+                    modal={this.state.auth}
+                />
             </section>
         );
     }
