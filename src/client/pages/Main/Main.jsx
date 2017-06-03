@@ -68,7 +68,7 @@ class Main extends PureComponent {
                     <Row>
                         <Responsive minWidth={768}>
                             <Col md="4" lg="3">
-                                
+
                                 <Block title="Аккаунт">
                                     Контент
                                 </Block>

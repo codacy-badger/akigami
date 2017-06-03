@@ -1,15 +1,8 @@
 import React from 'react';
 import superagent from 'superagent';
 import { observable } from 'mobx';
-// перетащить в другой файл
-const routes = {
-    index: {
-        import: () => import(/* webpackChunkName: "index" */ '../pages/Main'),
-    },
-    error: {
-        import: () => import(/* webpackChunkName: "error" */ '../pages/Error'),
-    },
-};
+
+import routes from '../routes';
 
 export default class Router {
     @observable container;
@@ -19,6 +12,7 @@ export default class Router {
             this.initHandler();
         }
     }
+
     initHandler() {
         document.body.addEventListener('click', (event) => {
             if (event.defaultPrevented) {
@@ -35,6 +29,7 @@ export default class Router {
             }
         });
     }
+
     linkClickHandler(event, element) {
         const targetAttribute = element.getAttribute('target');
         if (targetAttribute) {
@@ -42,7 +37,11 @@ export default class Router {
         }
 
         // if middle mouse button was clicked
-        if (event.button !== 0 || event.ctrlKey || event.altKey || event.shiftKey || event.metaKey) {
+        if (event.button !== 0
+            || event.ctrlKey
+            || event.altKey
+            || event.shiftKey
+            || event.metaKey) {
             return;
         }
 
@@ -54,6 +53,7 @@ export default class Router {
 
         this.go(locationString);
     }
+
     async go(href, push = true) {
         if (push) {
             history.pushState(null, null, href);
@@ -61,8 +61,13 @@ export default class Router {
         this.app.topBar.setProgress(30);
         await this.requestAndInsert(href);
     }
+
     async requestAndInsert(href) {
-        const { body, status } = await superagent.get(`${href}?time=${Date.now()}`).set('X-PJAX', true).ok(res => res.status < 600);
+        const { body, status } = await superagent
+            .get(`${href}?time=${Date.now()}`)
+            .set('X-PJAX', true)
+            .ok(res => res.status < 600);
+
         await this.setContainer(body);
         document.body.scrollTop = 0;
         if (status > 400) {
@@ -71,11 +76,13 @@ export default class Router {
             this.app.topBar.finish();
         }
     }
+
     static async import(id) {
         const data = routes[id] || routes.error;
         const Module = await data.import();
         return Module.default;
     }
+
     async setContainer({ layout, title, props } = {}) {
         if (typeof window !== 'undefined') {
             document.title = title;

@@ -31,7 +31,7 @@ class FeatureSlide extends PureComponent {
                 style={{
                     backgroundImage: `
                         linear-gradient(to bottom, rgba(11,11,11,0.2) 0%,
-                        rgba(11,11,11,0.95) 90%,
+                        rgba(11,11,11,0.9) 70%,
                         rgba(11,11,11,1) 100%),
                         url(${image})
                     `,

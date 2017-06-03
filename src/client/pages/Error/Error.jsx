@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 
-export default class Error extends PureComponent {
+class Error extends PureComponent {
     render() {
         return (
             <div>
@@ -9,3 +9,5 @@ export default class Error extends PureComponent {
         );
     }
 }
+
+export default Error;
