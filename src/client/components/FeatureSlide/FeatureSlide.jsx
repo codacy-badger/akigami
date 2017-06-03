@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {
-    Button,
-} from 'reactstrap';
+import { Button } from 'semantic-ui-react';
 import truncate from 'lodash/truncate';
 
 class FeatureSlide extends PureComponent {
@@ -43,8 +41,8 @@ class FeatureSlide extends PureComponent {
                         {description && <p>{truncate(description, descOptions)}</p>}
                     </div>
                     <div className="feature-slide-buttons">
-                        <Button color="warning" href={`/theater/${id}`}>Смотреть онлайн</Button>
-                        <Button color="danger" href={`/anime/${id}`}>Узнать подробнее</Button>
+                        <Button as="a" inverted color="yellow" href={`/theater/${id}`}>Смотреть онлайн</Button>
+                        <Button as="a" inverted color="red" href={`/anime/${id}`}>Узнать подробнее</Button>
                     </div>
                 </div>
             </div>

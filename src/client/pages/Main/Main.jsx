@@ -1,16 +1,10 @@
 import React, { PureComponent } from 'react';
-import {
-    Container,
-    Row,
-    Col,
-} from 'reactstrap';
-import Responsive from 'react-responsive';
+import { Grid } from 'semantic-ui-react';
 
 import Carousel from '../../components/Carousel';
 import FeatureSlide from '../../components/FeatureSlide';
 import Arrow from '../../components/Arrow';
 import Block from '../../components/Block';
-
 import Ongoings from '../../containers/Ongoings';
 
 const slides = [
@@ -35,15 +29,6 @@ const slides = [
 ];
 
 class Main extends PureComponent {
-    renderRightColumn() {
-        return (
-            <div>
-                <Block title="Новости">
-                    Контент
-                </Block>
-            </div>
-        );
-    }
     render() {
         return (
             <section>
@@ -57,39 +42,28 @@ class Main extends PureComponent {
                         </div>
                     ))}
                 </Carousel>
-                <Container className="with-top">
-                    <Row>
-                        <Col xs="12">
-                            <Ongoings />
-                        </Col>
-                    </Row>
-                </Container>
-                <Container>
-                    <Row>
-                        <Responsive minWidth={768}>
-                            <Col md="4" lg="3">
-
-                                <Block title="Аккаунт">
-                                    Контент
-                                </Block>
-
-                                <Responsive maxWidth={991}>
-                                    {this.renderRightColumn()}
-                                </Responsive>
-                            </Col>
-                        </Responsive>
-                        <Col sm="12" md="8" lg="6">
-                            <Block title="Лента">
-                                Контент
-                            </Block>
-                        </Col>
-                        <Responsive minWidth={992}>
-                            <Col xs="12" lg="3">
-                                {this.renderRightColumn()}
-                            </Col>
-                        </Responsive>
-                    </Row>
-                </Container>
+                <Grid container className="with-top">
+                    <Grid.Column>
+                        <Ongoings />
+                    </Grid.Column>
+                </Grid>
+                <Grid container stackable columns={3}>
+                    <Grid.Column computer={4}>
+                        <Block title="Аккаунт">
+                            Контент
+                        </Block>
+                    </Grid.Column>
+                    <Grid.Column computer={8}>
+                        <Block title="Лента">
+                            Контент
+                        </Block>
+                    </Grid.Column>
+                    <Grid.Column computer={4}>
+                        <Block title="Новости">
+                            Контент
+                        </Block>
+                    </Grid.Column>
+                </Grid>
             </section>
         );
     }

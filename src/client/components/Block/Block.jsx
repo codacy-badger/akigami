@@ -17,7 +17,7 @@ class Block extends PureComponent {
     }
     render() {
         const { buttons, title, size, children } = this.props;
-        const Title = size === 'large' ? 'h3' : 'h4';
+        const Title = size === 'large' ? 'h1' : 'h2';
         return (
             <div className={cx({ block: true, [size]: size })}>
                 {title && (

@@ -1,7 +1,40 @@
+.navbar {
+    margin: 0 !important;
+
+    > .column {
+        display: flex !important;
+        align-items: center;
+        padding: 1.072rem 1rem !important
+
+        > a {
+            display: flex;
+        }
+    }
+}
+
+.navbar-menu {
+    margin-left: 20px;
+}
+
+.navbar-right {
+    display: flex;
+    margin-left: auto;
+}
+
 .menu-item {
     text-transform: uppercase;
     letter-spacing: -0.4px;
     font-weight: 500;
+    transition: .2s ease;
+    display: inline-flex !important;
+    align-items: center;
+    &:hover,
+    &:active {
+        color: white;
+    }
+    &:not(:last-child) {
+        margin-right: 15px;
+    }
 }
 
 .navbar-nav .nav-item {
