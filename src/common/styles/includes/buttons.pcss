@@ -87,22 +87,28 @@
             display: flex;
             position: absolute;
             top: 0;
-            bottom: 150px;
+            bottom: 200px;
             left: 5%;
             margin: auto;
             z-index: 1;
             padding-right: 8px;
+            @media screen and (min-width: 1200px) {
+                bottom: 300px;
+            }
         }
 
         &.arrow-right {
             display: flex;
             position: absolute;
             top: 0;
-            bottom: 150px;
+            bottom: 200px;
             right: 5%;
             margin: auto;
             z-index: 1;
             padding-left: 7px;
+            @media screen and (min-width: 1200px) {
+                bottom: 300px;
+            }
         } 
 
     }
