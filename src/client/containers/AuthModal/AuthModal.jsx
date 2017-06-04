@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Modal, Form, Input, Select } from 'semantic-ui-react';
+import { Step, Button, Modal, Form, Input, Select } from 'semantic-ui-react';
 
 const exampleRegisterCode = 'a9b5d377-3849-459c-9767-89237d659de6';
 const exampleLoginCode = 'c427af39-8259-4d95-a79e-77610b797194';
@@ -206,18 +206,21 @@ class AuthModal extends PureComponent {
     render() {
         const { step, closable, email, emailError, username, usernameError } = this.state;
         const { modal, onHide } = this.props;
+        const steps = [
+            { active: step === 'notLogged', title: 'Вход / Регистрация' },
+            { active: step === 'confirm', title: 'Подтверждение входа' },
+        ];
+        if (step === 'register') steps.push({ active: step === 'register', title: 'Регистрация' });
         return (
             <Modal
                 size="small"
                 open={modal}
-                onClose={closable && onHide}
+                onClose={closable ? onHide : null}
                 closeIcon={closable}
                 closeOnDimmerClick={closable}
             >
-                <Modal.Header>
-                    {step === 'notLogged' && 'Вход / Регистрация'}
-                    {step === 'confirm' && 'Подтверждение входа'}
-                    {step === 'register' && 'Регистрация'}
+                <Modal.Header className="stepped-header">
+                    <Step.Group fluid size="small" items={steps} />
                 </Modal.Header>
                 {step === 'notLogged' && this.renderNotLogged()}
                 {step === 'confirm' && this.renderConfirm()}

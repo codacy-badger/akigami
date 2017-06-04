@@ -15,7 +15,7 @@ class BackgroundCover extends PureComponent {
                 className="bg-cover"
                 style={{
                     backgroundImage: `
-                        linear-gradient(to bottom, rgba(11,11,11,0.5) 0%,
+                        linear-gradient(to bottom, rgba(11,11,11,0.4) 0%,
                         rgba(11,11,11,0.9) 70%,
                         rgba(11,11,11,1) 100%),
                         url(${src})
