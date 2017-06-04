@@ -12,7 +12,7 @@ class Avatar extends PureComponent {
     }
     static propTypes = {
         src: PropTypes.string,
-        size: PropTypes.number,
+        size: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf(['auto'])]),
         href: PropTypes.string,
         online: PropTypes.bool,
         onClick: PropTypes.func,
@@ -30,6 +30,16 @@ class Avatar extends PureComponent {
             props.onClick = onClick;
         }
         const onlineTarget = typeof online === 'object';
+        const style = {
+            backgroundImage: `url(${src})`,
+            width: size,
+            height: size,
+        };
+        if (size === 'auto') {
+            style.width = '100%';
+            style.height = 0;
+            style.paddingBottom = '100%';
+        }
         return (
             <Tag
                 {...props}
@@ -38,11 +48,7 @@ class Avatar extends PureComponent {
                     offline: !onlineTarget && !online,
                     online: !onlineTarget && online,
                 })}
-                style={{
-                    backgroundImage: `url(${src})`,
-                    width: size,
-                    height: size,
-                }}
+                style={style}
             />
         );
     }

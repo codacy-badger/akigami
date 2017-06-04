@@ -21716,7 +21716,8 @@ Floated Menu / Item
   border: none;
   padding: 0.78571429em 0.92857143em;
   margin: 0em 0.35714286em;
-  background: none;
+  background: rgba(138, 138, 138, 0.15);
+  color: rgba(255, 255, 255, 0.87);
   -webkit-transition: color 0.1s ease;
   transition: color 0.1s ease;
   border-radius: 0.28571429rem;
@@ -21747,16 +21748,16 @@ Floated Menu / Item
 .ui.secondary.menu .dropdown.item:hover,
 .ui.secondary.menu .link.item:hover,
 .ui.secondary.menu a.item:hover {
-  background: rgba(0, 0, 0, 0.05);
-  color: rgba(0, 0, 0, 0.95);
+  background: rgba(138, 138, 138, 0.9);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 /* Active */
 
 .ui.secondary.menu .active.item {
   box-shadow: none;
-  background: rgba(0, 0, 0, 0.05);
-  color: rgba(0, 0, 0, 0.95);
+  background: rgba(138, 138, 138, 0.7);
+  color: #fff;
   border-radius: 0.28571429rem;
 }
 
@@ -21764,8 +21765,8 @@ Floated Menu / Item
 
 .ui.secondary.menu .active.item:hover {
   box-shadow: none;
-  background: rgba(0, 0, 0, 0.05);
-  color: rgba(0, 0, 0, 0.95);
+  background: rgba(138, 138, 138, 0.9);
+  color: #fff;
 }
 
 /* Inverted */
@@ -29358,7 +29359,7 @@ body.dimmable > .dimmer {
 
 .ui.dropdown .menu > .header {
   margin: 0.8rem 0rem 0.3rem;
-  padding: 0em 1.14285714rem;
+  padding: 0em 1.54285714rem;
   color: #fff;
   font-size: 0.78571429em;
   font-weight: bold;
