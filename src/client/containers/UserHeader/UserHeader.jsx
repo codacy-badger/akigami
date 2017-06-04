@@ -51,6 +51,12 @@ class UserHeader extends PureComponent {
                                 active={tab === 'followers'}
                                 onClick={this.handleChangeTab}
                             />
+                            <Menu.Item
+                                name="клубы"
+                                value="clubs"
+                                active={tab === 'clubs'}
+                                onClick={this.handleChangeTab}
+                            />
                             <Menu.Menu position="right">
                                 <Menu.Item
                                     name="Подписаться"

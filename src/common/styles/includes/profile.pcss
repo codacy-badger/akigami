@@ -27,12 +27,12 @@
 
     .ui.secondary.menu {
         margin: 0.5em -0.35714286em 0 !important;
-        @media screen and (max-width: 610px) {
+        @media screen and (max-width: 767px) {
             flex-direction: column !important;
         }
 
         .right.menu {
-            @media screen and (max-width: 610px) {
+            @media screen and (max-width: 767px) {
                 margin-left: 0 !important;
                 order: -1 !important;
                 margin-bottom: 10px !important;
@@ -45,7 +45,7 @@
             font-size: 0.9rem !important;
             font-weight: 500 !important;
             padding: 0.8em !important;
-            @media screen and (max-width: 610px) {
+            @media screen and (max-width: 767px) {
                 width: 100%;
                 justify-content: center;
                 margin: 0 !important;
@@ -55,4 +55,15 @@
             }
         }
     }
+}
+
+.profile-meta-line {
+    letter-spacing: .2px;
+    &:not(:last-child) {
+        margin-bottom: 10px;
+    }
+}
+
+.profile-about {
+    white-space: pre-line;
 }
