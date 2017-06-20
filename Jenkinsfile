@@ -1,17 +1,24 @@
-pipeline
-    agent
+pipeline {
+    agent {
         docker 'mhart/alpine-node:latest'
+    }
 
-    stages
-        stage 'check tools'
-            steps
+    stages {
+        stage('check tools') {
+            steps {
                 sh 'node --version'
                 sh 'yarn --version'
-        
-        stage 'install deps'
-            steps
+            }
+        }
+        stage('install deps') {
+            steps {
                 sh 'NODE_ENV=development yarn install'
-
-        stage 'build client'
-            steps
+            }
+        }
+        stage('build client') {
+            steps {
                 sh 'NODE_ENV=production node_modules/.bin/webpack'
+            }
+        }
+    }
+}
