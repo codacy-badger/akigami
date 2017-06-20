@@ -6,7 +6,6 @@ pipeline {
     stages {
         stage('check tools') {
             steps {
-                sh 'node --version'
                 sh 'yarn --version'
             }
         }
