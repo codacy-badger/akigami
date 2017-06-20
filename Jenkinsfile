@@ -12,12 +12,12 @@ pipeline {
         }
         stage('install deps') {
             steps {
-                sh 'NODE_ENV=development yarn install'
+                sh 'NODE_ENV=development sudo yarn install'
             }
         }
         stage('build client') {
             steps {
-                sh 'NODE_ENV=production node_modules/.bin/webpack'
+                sh 'NODE_ENV=production sudo node_modules/.bin/webpack'
             }
         }
     }
