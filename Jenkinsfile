@@ -11,7 +11,7 @@ pipeline {
         }
         stage('install deps') {
             steps {
-                sh 'sudo chmod 0777 *'
+                sh 'chmod 0777 *'
                 sh 'NODE_ENV=development yarn install'
             }
         }
