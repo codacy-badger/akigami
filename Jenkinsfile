@@ -1,17 +1,17 @@
 pipeline {
     agent {
-        docker 'mhart/alpine-node:latest'
+        docker 'node:latest'
     }
 
     stages {
         stage('check tools') {
             steps {
+                sh 'node --version'
                 sh 'yarn --version'
             }
         }
         stage('install deps') {
             steps {
-                sh 'chmod 0777 *'
                 sh 'NODE_ENV=development yarn install'
             }
         }
