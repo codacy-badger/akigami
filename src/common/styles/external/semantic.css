@@ -1739,16 +1739,16 @@ input::selection {
   content: 'or';
   top: 50%;
   left: 50%;
-  background-color: #FFFFFF;
+  background-color: #0b0b0b;
   text-shadow: none;
-  margin-top: -0.89285714em;
-  margin-left: -0.89285714em;
-  width: 1.78571429em;
-  height: 1.78571429em;
-  line-height: 1.78571429em;
-  color: rgba(0, 0, 0, 0.4);
+  margin-top: -1.155em;
+  margin-left: -1.2em;
+  width: 2.3em;
+  height: 2.3em;
+  line-height: 2.2em;
+  color: white;
   font-style: normal;
-  font-weight: bold;
+  font-size: 0.8em;
   box-shadow: 0px 0px 0px 1px transparent inset;
 }
 
@@ -6348,7 +6348,7 @@ i.flag.zimbabwe:before {
   font-weight: bold;
   line-height: 1.28571429em;
   text-transform: none;
-  color: rgba(0, 0, 0, 0.87);
+  color: white;
 }
 
 .ui.header:first-child {
