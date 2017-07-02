@@ -19,6 +19,7 @@
         "document": true,
         "module": true,
         "alert": true,
-        "history": true
+        "history": true,
+        "location": true,
     }
 }

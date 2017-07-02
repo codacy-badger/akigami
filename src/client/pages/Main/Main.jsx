@@ -45,6 +45,7 @@ class Main extends PureComponent {
                         </div>
                     ))}
                 </Carousel>
+                <a href="/?m=login">memi</a>
                 <Grid container className="with-top">
                     <Grid.Column>
                         <Ongoings />

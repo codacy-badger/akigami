@@ -1,12 +1,11 @@
 import Router from './Router';
 import TopBar from './TopBar';
-
-const socket = typeof window !== 'undefined' ? require('socket.io-client')({ transports: ['websocket'], upgrade: false }).connect() : null;
+import Modal from './Modal';
 
 export default class AppStore {
     constructor() {
-        this.socket = socket;
         this.topBar = new TopBar();
+        this.modal = new Modal();
         this.router = new Router(this);
     }
 }

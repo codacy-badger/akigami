@@ -1,16 +1,10 @@
 import Server from 'socket.io';
+import connect from '../sockets/connect';
 
 export default (server) => {
-    const io = new Server(server/*, {
-        transports: ['websockets'],
-        wsEngine: 'uws',
-    }*/);
+    const io = new Server(server);
 
-    io.on('connection', (socket) => {
-        console.log(`Socket ${socket.conn.id} connected`);
+    io.on('connection', connect);
 
-        socket.on('disconnect', () => {
-            console.log(`Socket ${socket.conn.id} disconnected`);
-        });
-    });
+    return io;
 };

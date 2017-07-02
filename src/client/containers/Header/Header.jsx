@@ -5,8 +5,6 @@ import Responsive from 'react-responsive';
 import Logo from '../../components/Logo';
 import Avatar from '../../components/Avatar';
 
-import AuthModal from '../AuthModal';
-
 const logged = true;
 
 const user = {
@@ -92,7 +90,7 @@ class Header extends PureComponent {
                             ) : (
                                 <Dropdown
                                     icon={false}
-                                    text={<Avatar src={user.avatar} />}
+                                    trigger={<Avatar src={user.avatar} />}
                                     className="menu-item"
                                 >
                                     <Dropdown.Menu style={{ marginTop: 10, left: 'auto', right: 0 }}>
@@ -117,10 +115,6 @@ class Header extends PureComponent {
                         </div>
                     </Grid.Column>
                 </Grid>
-                <AuthModal
-                    onHide={() => this.onAuth(false)}
-                    modal={this.state.auth}
-                />
             </section>
         );
     }

@@ -9,6 +9,7 @@ import config from 'config';
 
 import { normalizePort, requireFiles } from './utils';
 import ssr from './services/ssr';
+import './services//database';
 
 const app = express();
 const port = normalizePort(config.get('server.port'));

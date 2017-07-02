@@ -3,5 +3,14 @@
         "host": "localhost",
         "port": 3000
     },
-    "enviroment": "development"
+    "database": {
+        "host": "", // host:port/dbName
+        "options": {
+            "user": "",
+            "pass": "",
+            "autoIndex": false,
+            "autoReconnect": true
+        }
+    },
+    "enviroment": "default"
 }

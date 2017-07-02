@@ -1,131 +1,36 @@
 import React, { PureComponent } from 'react';
+import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
-import { Step, Button, Modal, Form, Input, Select } from 'semantic-ui-react';
+import { Modal, Form, Input, Select } from 'semantic-ui-react';
 
-const exampleRegisterCode = 'a9b5d377-3849-459c-9767-89237d659de6';
-const exampleLoginCode = 'c427af39-8259-4d95-a79e-77610b797194';
-
-const isCode = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
-const isEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
+@observer
 class AuthModal extends PureComponent {
-    static defaultProps = {
-        step: 'notLogged',
-        closable: true,
-    }
     static propTypes = {
-        onHide: PropTypes.func.isRequired,
-        modal: PropTypes.bool.isRequired,
-        step: PropTypes.oneOf(['notLogged', 'confirm', 'register']),
-        closable: PropTypes.bool,
+        store: PropTypes.object.isRequired,
     }
-    constructor(props) {
-        super(props);
-        this.state = {
-            step: props.step || 'notLogged',
-            email: '',
-            authCode: '',
-            username: '',
-            birthday: '',
-            gender: 'none',
-            usernameError: false,
-            emailError: false,
-            codeError: false,
-            closable: props.closable || true,
-        };
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        const state = nextState;
-        if (isCode.test(nextState.authCode)) {
-            state.codeError = false;
-            if (nextState.authCode === exampleLoginCode) {
-                this.handleConfirm();
-            }
-            if (nextState.authCode === exampleRegisterCode) {
-                state.step = 'register';
-            }
-        } else if (nextState.authCode.length === 0) {
-            state.codeError = false;
-        } else {
-            state.codeError = true;
-        }
-
-        if (!isEmail.test(nextState.email)) {
-            state.emailError = true;
-        } else {
-            state.emailError = false;
-        }
-
-        if (nextState.username.length > 3) {
-            state.usernameError = false;
-        } else {
-            state.usernameError = true;
-        }
-
-        return state;
-    }
-    onChange = action => (e) => {
-        this.setState({ [action]: e.target.value });
-    }
-    handleRegister = () => {
-        const { usernameError } = this.state;
-        if (!usernameError) {
-            this.reset();
-        }
-    }
-    handleConfirm = () => {
-        alert('confirmed login!');
-        this.reset();
-    }
-    handleAuth = () => {
-        alert('auth!');
-        const { emailError } = this.state;
-        if (!emailError) {
-            this.setState({
-                step: 'confirm',
-                closable: false,
-            });
-        }
-    }
-    reset = () => {
-        this.props.onHide();
-        this.setState({
-            closable: true,
-            step: 'notLogged',
-            email: '',
-            authCode: '',
-            username: '',
-            usernameError: false,
-            emailError: false,
-            gender: 'none',
-            birthday: '',
-        });
-    }
-    renderNotLogged() {
-        const { email } = this.state;
+    renderNotLogged = () => {
+        const { email, handleChange } = this.props.store;
         return (
-            <Modal.Content>
-                <Modal.Description>
-                    <p>Введите свой электронный ящик, чтобы войти или зарегистрироваться</p>
-                    <Form>
-                        <Form.Field>
-                            <label htmlFor="authEmail">Email</label>
-                            <Input
-                                type="email"
-                                name="email"
-                                id="authEmail"
-                                placeholder="Например: suzuki@chan.jp"
-                                value={email}
-                                onChange={this.onChange('email')}
-                            />
-                        </Form.Field>
-                    </Form>
-                </Modal.Description>
-            </Modal.Content>
+            <Modal.Description>
+                <p>Введите свой электронный ящик, чтобы войти или зарегистрироваться</p>
+                <Form>
+                    <Form.Field>
+                        <label htmlFor="authEmail">Email</label>
+                        <Input
+                            type="email"
+                            name="email"
+                            id="authEmail"
+                            placeholder="Например: suzuki@chan.jp"
+                            value={email}
+                            onChange={(e) => handleChange('email', e.target.value)}
+                        />
+                    </Form.Field>
+                </Form>
+            </Modal.Description>
         );
     }
     renderConfirm() {
-        const { authCode } = this.state;
+        const { authCode, handleChange } = this.props.store;
         return (
             <Modal.Content>
                 <Modal.Description>
@@ -145,7 +50,7 @@ class AuthModal extends PureComponent {
                                 id="authCode"
                                 placeholder="Например: a9b5d377-3849-459c-9767-89237d659de6"
                                 value={authCode}
-                                onChange={this.onChange('authCode')}
+                                onChange={(e) => handleChange('authCode', e.target.value)}
                             />
                         </Form.Field>
                     </Form>
@@ -154,7 +59,7 @@ class AuthModal extends PureComponent {
         );
     }
     renderRegister() {
-        const { birthday, gender, username } = this.state;
+        const { birthday, gender, username, handleChange } = this.props.store;
         return (
             <Modal.Content>
                 <Modal.Description>
@@ -170,7 +75,7 @@ class AuthModal extends PureComponent {
                                 id="username"
                                 placeholder="Например: Joker"
                                 value={username}
-                                onChange={this.onChange('username')}
+                                onChange={(e) => handleChange('username', e.target.value)}
                             />
                         </Form.Field>
                         <Form.Field>
@@ -179,7 +84,7 @@ class AuthModal extends PureComponent {
                                 id="gender"
                                 value={gender}
                                 placeholder="Укажите ваш пол"
-                                onChange={this.onChange('gender')}
+                                onChange={(e, data) => handleChange('gender', data.value)}
                                 options={[
                                     { key: 'none', value: 'none', text: 'Не определился' },
                                     { key: 'male', value: 'male', text: 'Мужской' },
@@ -195,7 +100,7 @@ class AuthModal extends PureComponent {
                                 id="birthday"
                                 placeholder="Например: 01.01.1995"
                                 value={birthday}
-                                onChange={this.onChange('birthday')}
+                                onChange={(e) => handleChange('birthday', e.target.value)}
                             />
                         </Form.Field>
                     </Form>
@@ -204,82 +109,12 @@ class AuthModal extends PureComponent {
         );
     }
     render() {
-        const { step, closable, email, emailError, username, usernameError } = this.state;
-        const { modal, onHide } = this.props;
-        const steps = [
-            { active: step === 'notLogged', title: 'Вход / Регистрация' },
-            { active: step === 'confirm', title: 'Подтверждение входа' },
-        ];
-        if (step === 'register') steps.push({ active: step === 'register', title: 'Регистрация' });
-        return (
-            <Modal
-                size="small"
-                open={modal}
-                onClose={closable ? onHide : null}
-                closeIcon={closable}
-                closeOnDimmerClick={closable}
-            >
-                <Modal.Header className="stepped-header">
-                    <Step.Group fluid size="small" items={steps} />
-                </Modal.Header>
-                {step === 'notLogged' && this.renderNotLogged()}
-                {step === 'confirm' && this.renderConfirm()}
-                {step === 'register' && this.renderRegister()}
-                <Modal.Actions style={{ textAlign: 'center' }}>
-                    {step === 'notLogged' && (
-                        <div>
-                            <Button
-                                inverted
-                                basic
-                                color="grey"
-                                onClick={onHide}
-                            >
-                                Закрыть
-                            </Button>
-                            <Button
-                                inverted
-                                color="red"
-                                disabled={!isEmail.test(email) && emailError}
-                                onClick={this.handleAuth}
-                                style={{ width: '30%' }}
-                            >
-                                Войти
-                            </Button>
-                        </div>
-                    )}
-                    {step === 'confirm' && (
-                        <Button
-                            inverted
-                            basic
-                            color="grey"
-                            onClick={this.reset}
-                        >
-                            Отменить авторизацию
-                        </Button>
-                    )}
-                    {step === 'register' && (
-                        <div>
-                            <Button
-                                inverted
-                                basic
-                                color="grey"
-                                onClick={this.reset}
-                            >
-                                Отменить
-                            </Button>
-                            <Button
-                                inverted
-                                color="red"
-                                onClick={this.handleRegister}
-                                disabled={!username && usernameError}
-                            >
-                                Зарегистрироваться
-                            </Button>
-                        </div>
-                    )}
-                </Modal.Actions>
-            </Modal>
-        );
+        const { step } = this.props.store;
+        return (<div>
+            {step === 'notLogged' && this.renderNotLogged()}
+            {step === 'confirm' && this.renderConfirm()}
+            {step === 'register' && this.renderRegister()}
+        </div>);
     }
 }
 

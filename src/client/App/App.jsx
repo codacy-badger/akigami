@@ -4,6 +4,7 @@ import { observer, inject } from 'mobx-react';
 
 import Header from '../containers/Header';
 import TopBar from '../components/TopBar';
+import Modal from '../containers/Modal';
 
 @inject('app')
 @observer
@@ -15,6 +16,7 @@ class App extends PureComponent {
         const { router } = this.props.app;
         return (
             <section className="main">
+                <Modal />
                 <TopBar />
                 <Header />
                 {router.container}

@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const config = require('config');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+// const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
 
 const host = config.get('server.host');
@@ -44,11 +44,12 @@ module.exports = () => {
         }),
         new ExtractTextPlugin('assets/style.css'),
         new PreloadWebpackPlugin(),
+        // new webpack.optimize.ModuleConcatenationPlugin(),
     ];
 
     if (isProd) {
         plugins.push(
-            new UglifyJSPlugin({
+            /* new UglifyJSPlugin({
                 compress: {
                     warnings: false,
                     screw_ie8: true,
@@ -61,7 +62,7 @@ module.exports = () => {
                     if_return: true,
                     join_vars: true,
                 },
-            })
+            })*/
         );
     } else {
         plugins.push(
