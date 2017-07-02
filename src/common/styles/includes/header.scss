@@ -1,0 +1,45 @@
+header {
+    background-color: $primary-color;
+    color: $font-color-inverted;
+}
+
+header,
+header > div,
+header > div > div,
+.header-inner {
+    height: 60px;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    display: flex;
+    padding: 9px;
+}
+
+.header-right {
+    margin-left: auto;
+}
+
+.header-item {
+    color: $font-color-inverted;
+    padding: 22px 0;
+}
+
+.header-item:not(:last-child) {
+    margin-right: 10px;
+}
+
+.header-item:hover {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+}
+
+.header-item:focus,
+.header-item:active {
+    color: $font-color-inverted;
+    text-decoration: none;
+}

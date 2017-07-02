@@ -5,9 +5,6 @@ export default {
     user: {
         import: () => import(/* webpackChunkName: "user" */ './pages/User'),
     },
-    settings: {
-        import: () => import(/* webpackChunkName: "settings" */ './pages/Settings'),
-    },
     error: {
         import: () => import(/* webpackChunkName: "error" */ './pages/Error'),
     },

@@ -1,3 +1,2 @@
-// require('mdi/css/materialdesignicons.css');
-require('../common/styles/index.pcss');
+require('../common/styles/index.scss');
 require('./main');

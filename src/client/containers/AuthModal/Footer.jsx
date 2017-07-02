@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
-import { Button } from 'semantic-ui-react';
+
+import Button from 'react-bootstrap/lib/Button';
 
 @observer
 export default class Footer extends PureComponent {
@@ -13,16 +14,13 @@ export default class Footer extends PureComponent {
         return (
             <div style={{ textAlign: 'center' }}>
                 <Button
-                    inverted
-                    basic
-                    color="grey"
+                    bsStyle="link"
                 // onClick={onHide}
                 >
                     Закрыть
                     </Button>
                 <Button
-                    inverted
-                    color="red"
+                    bsStyle="primary"
                     disabled={!isValidEmail}
                     onClick={handleSend}
                     style={{ width: '30%' }}
@@ -36,9 +34,7 @@ export default class Footer extends PureComponent {
         return (
                 <div style={{ textAlign: 'center' }}>
                     <Button
-                        inverted
-                        basic
-                        color="grey"
+                        bsStyle="link"
                     // onClick={this.reset}
                     >
                         Отменить авторизацию
@@ -56,16 +52,13 @@ export default class Footer extends PureComponent {
             return (
                 <div style={{ textAlign: 'center' }}>
                     <Button
-                        inverted
-                        basic
-                        color="grey"
+                        bsStyle="link"
                     // onClick={this.reset}
                     >
                         Отменить
                     </Button>
                     <Button
-                        inverted
-                        color="red"
+                        bsStyle="primary"
                     // onClick={this.handleRegister}
                     // disabled={!username && usernameError}
                     >

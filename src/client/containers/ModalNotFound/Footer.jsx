@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 
-import { Button } from 'semantic-ui-react';
+import Button from 'react-bootstrap/lib/Button';
 
 @inject('app')
 @observer

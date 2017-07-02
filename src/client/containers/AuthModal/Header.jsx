@@ -11,13 +11,12 @@ export default class Header extends PureComponent {
     }
     render() {
         const { step } = this.props.store;
-        const steps = [
-            { active: step === 'notLogged', title: 'Вход / Регистрация' },
-            { active: step === 'confirm', title: 'Подтверждение входа' },
-        ];
-        if (step === 'register') steps.push({ active: step === 'register', title: 'Регистрация' });
         return (
-            <Step.Group fluid size="small" items={steps} />
+            <h4 style={{ margin: 0 }}>
+                {step === 'notLogged' && 'Вход / Регистрация'}
+                {step === 'confirm' && 'Подтверждение входа'}
+                {step === 'register' && 'Регистрация'}
+            </h4>
         );
     }
 }

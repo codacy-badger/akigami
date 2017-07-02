@@ -15,7 +15,7 @@ export default class Modal {
         style: {},
     };
     @observable className = '';
-    @observable size = 'small';
+    @observable size = 'medium';
     @observable footer = {
         className: '',
         component: null,

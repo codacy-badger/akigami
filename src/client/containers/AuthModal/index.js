@@ -14,6 +14,6 @@ export default (params) => ({
     footer: {
         component: Footer,
     },
-    size: 'small',
+    size: 'medium',
     store: new AuthModalStore(params),
 });

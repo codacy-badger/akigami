@@ -100,7 +100,7 @@ module.exports = () => {
                     },
                 },
                 {
-                    test: /\.p?css$/,
+                    test: /\.s?css$/,
                     exclude: /node_modules/,
                     use: ExtractTextPlugin.extract({
                         fallback: 'style-loader',
