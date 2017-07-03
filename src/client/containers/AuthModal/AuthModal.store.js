@@ -4,7 +4,7 @@ import { socket } from '../../lib/modules';
 const isCode = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
 
 export default class AuthModal {
-    @observable step = 'confirm'; // notLogged, confirm, register
+    @observable step = 'notLogged'; // notLogged, confirm, register
 
     @observable email = '';
 
