@@ -5,6 +5,8 @@ import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import FormControl from 'react-bootstrap/lib/FormControl';
+import DropdownButton from 'react-bootstrap/lib/DropdownButton';
+import MenuItem from 'react-bootstrap/lib/MenuItem';
 
 import Logo from '../../components/Logo';
 import Avatar from '../../components/Avatar';
@@ -49,14 +51,34 @@ class Header extends PureComponent {
                                 </a>
                             </div>
                             <div className="header-right">
+                                {/* <DropdownButton
+                                    noCaret
+                                    pullRight
+                                    bsStyle="link"
+                                    className="header-item-avatar"
+                                    id="user-dropdown"
+                                    title={(
+                                        <Avatar
+                                            size={32}
+                                            src="https://pp.userapi.com/c628529/v628529041/24c85/zRkseeHfRPs.jpg"
+                                        />
+                                    )}
+                                >
+                                    <MenuItem header>Профиль</MenuItem>
+                                    <MenuItem componentClass="a" href="/@ga2mer">
+                                        <strong>ga2mer</strong>
+                                    </MenuItem>
+                                    <MenuItem divider />
+                                    <MenuItem header>Списки</MenuItem>
+                                    <MenuItem disabled>Аниме</MenuItem>
+                                    <MenuItem disabled>Манга</MenuItem>
+                                    <MenuItem divider />
+                                    <MenuItem componentClass="a" href="/logout">Выход</MenuItem>
+                                </DropdownButton> */}
                                 <a href="/?m=login" className="header-item">
                                     <Icon type="login" />
                                     <span>Вход</span>
                                 </a>
-                                {/* <Avatar
-                                    size={32}
-                                    src="https://pp.userapi.com/c628529/v628529041/24c85/zRkseeHfRPs.jpg"
-                                /> */}
                             </div>
                         </Col>
                     </Row>
