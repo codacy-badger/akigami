@@ -41,6 +41,10 @@ header > div > div,
     align-items: center;
 }
 
+.header-item > span {
+    display: none;
+}
+
 .header-item:not(:last-child) {
     margin-right: 20px;
 }
@@ -69,7 +73,7 @@ header > div > div,
     padding: 8px;
     height: 30px;
     border-radius: 0;
-    width: 320px;
+    width: 160px;
 }
 
 .header-search:focus {
@@ -81,3 +85,18 @@ header > div > div,
 .header-search::-moz-placeholder          {color: rgba(255, 255, 255, 0.6);}/* Firefox 19+ */
 .header-search:-moz-placeholder           {color: rgba(255, 255, 255, 0.6);}/* Firefox 18- */
 .header-search:-ms-input-placeholder      {color: rgba(255, 255, 255, 0.6);}
+
+@media (min-width: 768px) {
+    .header-item > span {
+        display: inline;
+    }
+    .header-search {
+        width: 240px;
+    }
+}
+
+@media (min-width: 992px) {
+    .header-search {
+        width: 320px;
+    }
+}

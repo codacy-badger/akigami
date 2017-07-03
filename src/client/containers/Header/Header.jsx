@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import Responsive from 'react-responsive';
 
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
@@ -20,30 +21,37 @@ class Header extends PureComponent {
                                 <Logo width={32} height={32} oneColor="#fff" twoColor="#fff" />
                             </a>
                             <div className="header-left">
-                                <FormControl
-                                    type="text"
-                                    className="header-search"
-                                    placeholder="Поиск аниме, манги, музыки..."
-                                />
+                                <Responsive minWidth={460}>
+                                    <FormControl
+                                        type="text"
+                                        className="header-search"
+                                        placeholder="Поиск аниме, манги, музыки..."
+                                    />
+                                </Responsive>
+                                <Responsive maxWidth={459}>
+                                    <a href="/search" className="header-item">
+                                        <Icon type="magnify" />
+                                    </a>
+                                </Responsive>
                             </div>
                             <div className="header-menu">
                                 <a href="/overview" className="header-item">
                                     <Icon type="view-module" />
-                                    Обзор
+                                    <span>Обзор</span>
                                 </a>
                                 <a href="/news" className="header-item">
                                     <Icon type="newspaper" />
-                                    Новости
+                                    <span>Новости</span>
                                 </a>
                                 <a href="/radio" className="header-item">
                                     <Icon type="radio" />
-                                    Радио
+                                    <span>Радио</span>
                                 </a>
                             </div>
                             <div className="header-right">
                                 <a href="/?m=login" className="header-item">
                                     <Icon type="login" />
-                                    Вход
+                                    <span>Вход</span>
                                 </a>
                                 {/* <Avatar
                                     size={32}
