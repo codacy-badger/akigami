@@ -108,7 +108,7 @@ export default class Router {
 
     async setContainer({ layout, title, props } = {}) {
         if (typeof window !== 'undefined') {
-            document.title = title;
+            document.title = `${title} – Акигами`;
         }
         const Module = await Router.import(layout);
         this.container = React.createElement(Module, props);
@@ -117,13 +117,13 @@ export default class Router {
 
     static async importModal(path) {
         const params = {};
-        const data = find(modals, (i) => pathToRegexp(i.path).test(path)) || find(modals, { path: '404' });
+        const data = find(modals, i => pathToRegexp(i.path).test(path)) || find(modals, { path: '404' });
         if (data.path !== '404') {
             const keys = [];
             const result = pathToRegexp(data.path, keys).exec(path) || [];
-            result.shift()
+            result.shift();
             result.forEach((i, index) => {
-                params[keys[index].name] = i
+                params[keys[index].name] = i;
             });
         }
         const Module = await data.import();
