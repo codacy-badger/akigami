@@ -37,7 +37,7 @@ class Header extends PureComponent {
                                 </Responsive>
                             </div>
                             <div className="header-menu">
-                                <a href="/overview" className="header-item">
+                                <a href="/overview" className="header-item header-item-module">
                                     <Icon type="view-module" />
                                     <span>Обзор</span>
                                 </a>
