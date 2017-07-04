@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Step } from 'semantic-ui-react';
-
 import { observer } from 'mobx-react';
 
 @observer
