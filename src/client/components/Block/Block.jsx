@@ -8,18 +8,20 @@ class Block extends PureComponent {
         size: 'large',
         children: null,
         buttons: null,
+        flex: false,
     }
     static propTypes = {
         title: PropTypes.string,
         buttons: PropTypes.any,
+        flex: PropTypes.bool,
         size: PropTypes.oneOf(['large', 'small']),
         children: PropTypes.any,
     }
     render() {
-        const { buttons, title, size, children } = this.props;
+        const { buttons, title, size, children, flex } = this.props;
         const Title = size === 'large' ? 'h1' : 'h2';
         return (
-            <div className={cx({ block: true, [size]: size })}>
+            <div className={cx({ block: true, size, flex })}>
                 {title && (
                     <div className="block-header">
                         <Title className="block-title">{title}</Title>

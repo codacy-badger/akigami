@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import truncate from 'lodash/truncate';
 import Countdown from 'react-countdown-now';
 
 import Entity from '../Entity';
@@ -13,28 +14,34 @@ export default class TimelineItem extends PureComponent {
         const day = days !== 0 && `${days} дней`;
         const hour = hours !== 0 && `${hours} часов`;
         const minute = minutes !== 0 && `${minutes} минут`;
-        const complete = completed && 'Следующая серия уже в эфире!';
-        const text = 'Следующая серия через';
+        const complete = completed && <strong>Уже в эфире!</strong>;
         if (day) {
-            return `${text} ${day}`;
+            return <span>Через <strong>{day}</strong></span>;
         } else if (hour) {
-            return `${text} ${hour}`;
+            return <span>Через <strong>{hour}</strong></span>;
         } else if (minute) {
-            return `${text} ${minute}`;
+            return <span>Через <strong>{minute}</strong></span>;
         }
-        return complete;
+        return <span>{complete}</span>;
     }
     render() {
         const { type, entity } = this.props;
+        if (typeof window === 'undefined') return false;
         return (
             <div className="timeline">
                 <Entity noTitle type={type} item={entity} />
                 <div className="timeline-info">
                     <a href={`/${type}/${entity.id}`}>
-                        {entity.title.romaji}
+                        {truncate(entity.title.romaji, { length: 50, separator: /,? +/ })}
                     </a>
+                    <div className="timeline-genres">
+                        {entity.genres.map(genre => <span>{genre.title}</span>)}
+                    </div>
                     <div className="timeline-next">
-                        <Countdown date={entity.nextEpisode} renderer={this.renderer} />
+                        <Countdown
+                            date={entity.nextEpisode}
+                            renderer={this.renderer}
+                        />
                     </div>
                 </div>
             </div>
