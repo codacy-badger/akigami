@@ -22,7 +22,7 @@ class Block extends PureComponent {
             <div className={cx({ block: true, [size]: size })}>
                 {title && (
                     <div className="block-header">
-                        <Title>{title}</Title>
+                        <Title className="block-title">{title}</Title>
                         {buttons && <div className="block-buttons">{buttons}</div>}
                     </div>
                 )}

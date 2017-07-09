@@ -1,0 +1,25 @@
+.timeline {
+    display: flex;
+    width: 370px;
+    padding: 12px;
+    border: 1px solid $border-color;
+    box-shadow: inset 0 64px #f6f5f3;
+    
+    .entity {
+        margin-right: 16px;
+        flex-shrink: 0;
+        width: 36%;
+    }
+}
+
+
+.timeline-info {
+    display: flex;
+    flex-direction: column;
+
+    a {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 12px;
+    }
+}

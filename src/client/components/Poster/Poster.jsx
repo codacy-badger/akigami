@@ -16,12 +16,14 @@ class Poster extends PureComponent {
         const { src = this.defaultImage, type, id, title } = this.props;
         return (
             <a href={`/${type}/${id}`} className="poster-link">
-                <img
-                    className="poster"
-                    src={src}
-                    title={title}
-                    alt={title}
-                />
+                <div className="embed-responsive embed-poster">
+                    <img
+                        className="embed-responsive-item"
+                        src={src}
+                        title={title}
+                        alt={title}
+                    />
+                </div>
             </a>
         );
     }

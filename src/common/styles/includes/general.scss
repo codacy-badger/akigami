@@ -11,6 +11,28 @@ body {
     color: $font-color;
 }
 
+a {
+    color: $font-color;
+}
+
+a:hover {
+    color: $primary-color;
+}
+
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+}
+
 :focus {
     outline: none;
+}
+
+.embed-poster {
+    padding-bottom: 140%;
+}
+
+.embed-poster > img {
+    object-fit: cover;
 }

@@ -1,0 +1,18 @@
+.block {
+    margin-bottom: 32px;
+}
+
+.block-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.block-title {
+    margin: 0;
+    text-shadow: 0 0 1px rgba(0,0,0,0.15);
+}
+
+.block-buttons {
+    margin-left: auto;
+}
