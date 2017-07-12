@@ -9,7 +9,8 @@
             "user": "",
             "pass": "",
             "autoIndex": false,
-            "autoReconnect": true
+            "autoReconnect": true,
+            // "useMongoClient": true
         }
     },
     "enviroment": "default"
