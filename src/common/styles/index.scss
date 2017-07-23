@@ -1,4 +1,6 @@
+/* Буцтрап не удалять. Он кастомизирован напрямую! */
 @import "external/bootstrap.css";
+
 @import "external/materialdesignicons.css";
 @import "external/slick.min.css";
 @import "external/slick-theme.min.css";
@@ -15,3 +17,4 @@
 @import "includes/blocks.scss";
 @import "includes/entity.scss";
 @import "includes/timeline.scss";
+@import "includes/hello.scss";
