@@ -5,12 +5,11 @@
     },
     "database": {
         "host": "", // host:port/dbName
-        "options": {
+        "config": {
             "user": "",
             "pass": "",
             "autoIndex": false,
-            "autoReconnect": true,
-            // "useMongoClient": true
+            "autoReconnect": true
         }
     },
     "enviroment": "default"
