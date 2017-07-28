@@ -1,6 +1,17 @@
 header {
     background-color: $primary-color;
     color: $font-color-inverted;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transition: background-color .2s ease;
+    will-change: background-color;
+}
+
+header.transparent {
+    background-color: transparent;
 }
 
 header,

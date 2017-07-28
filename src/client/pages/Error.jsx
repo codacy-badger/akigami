@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/lib/Col';
 class Error extends PureComponent {
     render() {
         return (
-            <Grid>
+            <Grid className="opaque">
                 <Row>
                     <Col xs={12}>
                         Страница ошибки

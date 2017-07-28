@@ -36,3 +36,13 @@ a:active {
 .embed-poster > img {
     object-fit: cover;
 }
+
+.transparented {
+    > div:first-child {
+        padding-top: 48px;
+    }
+}
+
+.opaque {
+    padding-top: 48px;
+}

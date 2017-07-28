@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react';
+import { inject, observer } from 'mobx-react';
 import Responsive from 'react-responsive';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
@@ -12,10 +15,34 @@ import Logo from '../../components/Logo';
 import Avatar from '../../components/Avatar';
 import Icon from '../../components/Icon';
 
+@inject(s => ({
+    ui: s.app.ui,
+}))
+@observer
 class Header extends PureComponent {
+    static propTypes = {
+        ui: PropTypes.object.isRequired,
+    }
+    componentDidMount() {
+        this.scrollEventer();
+        document.addEventListener('scroll', this.scrollEventer);
+    }
+    componentWillUnmount() {
+        document.removeEventListener('scroll', this.scrollEventer);
+    }
+    scrollEventer = () => {
+        const { ui } = this.props;
+        const isTop = document.body.scrollTop <= 130;
+        if (ui.transparented) {
+            if (!ui.transparent && isTop) ui.changeTransparent(true);
+            if (ui.transparent && !isTop) ui.changeTransparent(false);
+        }
+    }
     render() {
+        const { ui } = this.props;
+        const transparent = ui.transparented ? ui.transparent : false;
         return (
-            <header>
+            <header className={cx({ transparent })}>
                 <Grid>
                     <Row>
                         <Col xs={12} className="header-inner">

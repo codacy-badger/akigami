@@ -32,7 +32,7 @@ const categories = [{
 class Main extends PureComponent {
     render() {
         return (
-            <div>
+            <div className="opaque">
                 <Timeline />
                 <Threed inverse>
                     <Left>
