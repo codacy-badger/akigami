@@ -1,16 +1,26 @@
 import React, { PureComponent } from 'react';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
-
-import { Grid, Row, Col, Tabs, Tab, Button } from 'react-bootstrap';
+import range from 'lodash/range';
 import Chart from 'react-highcharts';
 import HighchartsMore from 'highcharts-more';
 import SolidGauge from 'highcharts/modules/solid-gauge';
+import {
+    Grid,
+    Row,
+    Col,
+    Tabs,
+    Tab,
+    Button,
+    OverlayTrigger,
+    Tooltip,
+} from 'react-bootstrap';
 
 import Favorites from '../containers/Favorites';
 import Threed from '../containers/Threed';
 import Block from '../components/Block';
 import Track from '../components/Track';
+import Follows from '../components/Follows';
 
 import entitiesChart from '../charts/entities';
 import activityChart from '../charts/activity';
@@ -22,10 +32,11 @@ if (typeof window !== 'undefined') {
     SolidGauge(Chart.Highcharts);
 }
 
-const demo = {
+const user = {
     cover: 'http://i.imgur.com/ycHP6KX.jpg',
     avatar: 'https://pp.userapi.com/c639416/v639416296/2bfdb/XE8roc1owEs.jpg',
     displayName: 'Yukioru',
+    username: 'yukioru',
     status: 'Какие-то мемы',
     about: 'Здесь должна быть информация обо мне но, так как это текст-заглушка, её здесь нет.\n\nНо у вас этот блок точно будет заполнен, или его не будет видно(или он будет пустой) если вы не заполните информацию.',
 };
@@ -187,7 +198,7 @@ class User extends PureComponent {
                 <div
                     className="user-header"
                     style={{
-                        backgroundImage: `url(${demo.cover})`,
+                        backgroundImage: `url(${user.cover})`,
                     }}
                 >
                     <Grid className="user-header-inner">
@@ -196,12 +207,12 @@ class User extends PureComponent {
                                 <div className="user-header-bottom">
                                     <img
                                         className="user-avatar"
-                                        src={demo.avatar}
-                                        alt={demo.displayName}
+                                        src={user.avatar}
+                                        alt={user.displayName}
                                     />
                                     <div className="user-header-info">
-                                        <h2>{demo.displayName}</h2>
-                                        {demo.status && <p>{demo.status}</p>}
+                                        <h2>{user.displayName}</h2>
+                                        {user.status && <p>{user.status}</p>}
                                     </div>
                                 </div>
                             </Col>
@@ -257,6 +268,36 @@ class User extends PureComponent {
                                     </Tab>
                                     <Tab eventKey={2} title="Манга">
                                         <Chart config={activityChart} />
+                                        <div className="activity-legend">
+                                            <div className="activity-legend-item">
+                                                <div
+                                                    className="activity-legend-dot"
+                                                    style={{ backgroundColor: '#ffbd88' }}
+                                                />
+                                                <span>Запланировано</span>
+                                            </div>
+                                            <div className="activity-legend-item">
+                                                <div
+                                                    className="activity-legend-dot"
+                                                    style={{ backgroundColor: '#008cf0' }}
+                                                />
+                                                <span>Читаю</span>
+                                            </div>
+                                            <div className="activity-legend-item">
+                                                <div
+                                                    className="activity-legend-dot"
+                                                    style={{ backgroundColor: '#00a86b' }}
+                                                />
+                                                <span>Завершено</span>
+                                            </div>
+                                            <div className="activity-legend-item">
+                                                <div
+                                                    className="activity-legend-dot"
+                                                    style={{ backgroundColor: '#d54343' }}
+                                                />
+                                                <span>Брошено</span>
+                                            </div>
+                                        </div>
                                     </Tab>
                                 </Tabs>
                             </div>
@@ -274,10 +315,21 @@ class User extends PureComponent {
                                 album={album}
                             />
                         </Block>
+                        <Block
+                            title="Клубы"
+                            buttons={(
+                                <Button bsSize="sm">Ещё</Button>
+                            )}
+                        >
+                            <Follows
+                                entities={range(6).map(_id => ({ _id, ...user }))}
+                                blankText="Вы не состоите ни в каком клубе."
+                            />
+                        </Block>
                     </Left>
                     <Center>
                         <Block title="О себе">
-                            <div className="user-about">{demo.about}</div>
+                            <div className="user-about">{user.about}</div>
                         </Block>
                         <Block title="Лента">
                             Здесь будет ваша лента
@@ -292,11 +344,27 @@ class User extends PureComponent {
                         >
                             <Favorites entities={favorites} />
                         </Block>
-                        <Block title="Подписки">
-                            Мои подписки
+                        <Block
+                            title="Подписки"
+                            buttons={(
+                                <Button bsSize="sm">Ещё</Button>
+                            )}
+                        >
+                            <Follows
+                                entities={range(10).map(_id => ({ _id, ...user }))}
+                                blankText="У вас пока нет подписок."
+                            />
                         </Block>
-                        <Block title="Подписчики">
-                            Мои подписчики
+                        <Block
+                            title="Подписчики"
+                            buttons={(
+                                <Button bsSize="sm">Ещё</Button>
+                            )}
+                        >
+                            <Follows
+                                entities={range(15).map(_id => ({ _id, ...user }))}
+                                blankText="У вас пока нет подписчиков. Подружитесь с кем нибудь ;)"
+                            />
                         </Block>
                     </Right>
                 </Threed>

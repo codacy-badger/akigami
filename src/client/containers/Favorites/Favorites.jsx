@@ -58,7 +58,11 @@ class Favorites extends PureComponent {
                                 <OverlayTrigger
                                     key={`${type}-${item._id}`}
                                     placement="top"
-                                    overlay={(<Tooltip>{this.renderTitle(type, item)}</Tooltip>)}
+                                    overlay={(
+                                        <Tooltip id={`${type}-${item._id}`}>
+                                            {this.renderTitle(type, item)}
+                                        </Tooltip>
+                                    )}
                                 >
                                     <a
                                         href={`/${type}/${item.entity._id}`}

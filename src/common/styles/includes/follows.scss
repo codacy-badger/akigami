@@ -1,0 +1,25 @@
+.follows-wrapper {
+    margin: -3px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.follow-item {
+    width: 14%;
+    margin: 3px;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity .2s ease;
+    will-change: opacity;
+
+    img {
+        width: 100%;
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+    &:active {
+        opacity: 1;
+    }
+}
