@@ -14,6 +14,9 @@
         "jsx-a11y/href-no-hash": 0,
         "no-unused-vars": [1, {
             "argsIgnorePattern": "[iI]gnored"
+        }],
+        "no-underscore-dangle": [2, {
+            "allow": ["_id"]
         }]
     },
     "globals": {
@@ -21,6 +24,6 @@
         "module": true,
         "alert": true,
         "history": true,
-        "location": true,
+        "location": true
     }
 }

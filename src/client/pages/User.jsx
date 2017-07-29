@@ -7,9 +7,9 @@ import Chart from 'react-highcharts';
 import HighchartsMore from 'highcharts-more';
 import SolidGauge from 'highcharts/modules/solid-gauge';
 
-
 import Threed from '../containers/Threed';
 import Block from '../components/Block';
+import Track from '../components/Track';
 
 import entitiesChart from '../charts/entities';
 import activityChart from '../charts/activity';
@@ -26,7 +26,34 @@ const demo = {
     avatar: 'https://pp.userapi.com/c639416/v639416296/2bfdb/XE8roc1owEs.jpg',
     displayName: 'Yukioru',
     status: 'Какие-то мемы',
-    about: 'Знаю NodeJS, React, ECMAScript 6. Программирую на JavaScript.\nУвлекаюсь музыкой и японской мультипликацией.',
+    about: 'Здесь должна быть информация обо мне но, так как это текст-заглушка, её здесь нет.\n\nНо у вас этот блок точно будет заполнен, или его не будет видно(или он будет пустой) если вы не заполните информацию.',
+};
+
+const track = {
+    type: 'Эндинг',
+    title: 'ANGELNOIR',
+};
+
+const album = {
+    cover: {
+        small: 'https://c.okmusic.jp/news_details/images/45441638/large.jpg',
+    },
+};
+
+const artist = {
+    firstName: {
+        romaji: 'Aoba',
+    },
+    lastName: {
+        romaji: 'Ichiko',
+    },
+};
+
+const anime = {
+    _id: 1,
+    title: {
+        romaji: '18if',
+    },
 };
 
 @inject(s => ({
@@ -74,7 +101,7 @@ class User extends PureComponent {
                     <Left>
                         <Block title="Статистика">
                             <div className="stats-block">
-                                <h5 className="block-subtitle">По предпочтениям</h5>
+                                <h5 className="block-subtitle" style={{ marginBottom: '-4px' }}>По предпочтениям</h5>
                                 <Chart config={entitiesChart} />
                             </div>
                             <div className="stats-block">
@@ -124,7 +151,12 @@ class User extends PureComponent {
                             </div>
                         </Block>
                         <Block title="Музыка">
-                            Здесь будте музыка
+                            <Track
+                                track={track}
+                                anime={anime}
+                                artist={artist}
+                                album={album}
+                            />
                         </Block>
                     </Left>
                     <Center>

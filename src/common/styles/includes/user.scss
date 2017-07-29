@@ -62,10 +62,11 @@
 }
 
 .user-about {
-    
+    white-space: pre-line;
 }
 
 #activity-tabs {
+    width: 100%;
     .nav-tabs {
         border-bottom: none;
         display: flex;

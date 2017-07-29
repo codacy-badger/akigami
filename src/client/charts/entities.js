@@ -17,6 +17,7 @@ export default {
         borderRadius: 0,
         style: {
             color: 'white',
+            fontFamily: "'Gotham Pro', sans-serif",
         },
     },
     credits: {
