@@ -9,6 +9,9 @@
             opacity: 1;
         }
     }
+    &:not(:last-child) {
+        margin-bottom: 12px;
+    }
 }
 
 .track-cover-wrapper {

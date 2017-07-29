@@ -1,0 +1,48 @@
+.favorites-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+}
+
+.favorites-category {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+
+    h5 {
+        margin-top: 0;
+        margin-bottom: 8px;
+        font-size: 12px;
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+}
+
+.favorites-items {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    margin: -3px;
+}
+
+.favorite {
+    margin: 3px;
+    width: 20%;
+    transition: opacity .2s ease;
+    will-change: opacity;
+    opacity: 1;
+
+    &:hover {
+        opacity: 0.8;
+    }
+    &:active {
+        opacity: 1;
+    }
+}
+
+.favorite-image {
+    width: 100%;
+}

@@ -2,11 +2,12 @@ import React, { PureComponent } from 'react';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 
-import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
+import { Grid, Row, Col, Tabs, Tab, Button } from 'react-bootstrap';
 import Chart from 'react-highcharts';
 import HighchartsMore from 'highcharts-more';
 import SolidGauge from 'highcharts/modules/solid-gauge';
 
+import Favorites from '../containers/Favorites';
 import Threed from '../containers/Threed';
 import Block from '../components/Block';
 import Track from '../components/Track';
@@ -30,6 +31,7 @@ const demo = {
 };
 
 const track = {
+    _id: 1,
     type: 'Эндинг',
     title: 'ANGELNOIR',
 };
@@ -41,6 +43,7 @@ const album = {
 };
 
 const artist = {
+    _id: 1,
     firstName: {
         romaji: 'Aoba',
     },
@@ -55,6 +58,114 @@ const anime = {
         romaji: '18if',
     },
 };
+
+const favorites = [{
+    _id: 1,
+    type: 'character',
+    entity: {
+        _id: 1,
+        firstName: {
+            romaji: 'Freyja',
+        },
+        lastName: {
+            romaji: 'Wion',
+        },
+        photo: {
+            small: 'https://myanimelist.cdn-dena.com/images/characters/6/306722.jpg',
+        },
+    },
+}, {
+    _id: 2,
+    type: 'character',
+    entity: {
+        _id: 2,
+        firstName: {
+            romaji: 'Nagisa',
+        },
+        lastName: {
+            romaji: 'Motomiya',
+        },
+        photo: {
+            small: 'https://myanimelist.cdn-dena.com/images/characters/7/167279.jpg',
+        },
+    },
+}, {
+    _id: 3,
+    type: 'track',
+    entity: {
+        _id: 3,
+        album,
+        track,
+        artist,
+        anime,
+    },
+}, {
+    _id: 4,
+    type: 'anime',
+    entity: {
+        _id: 1,
+        title: {
+            romaji: 'Amanchu',
+        },
+        poster: {
+            small: 'https://myanimelist.cdn-dena.com/images/anime/6/80810.jpg',
+        },
+    },
+}, {
+    _id: 5,
+    type: 'anime',
+    entity: {
+        _id: 2,
+        title: {
+            romaji: 'Macross Δ',
+        },
+        poster: {
+            small: 'https://myanimelist.cdn-dena.com/images/anime/5/79376.jpg',
+        },
+    },
+}, {
+    _id: 6,
+    type: 'anime',
+    entity: {
+        _id: 3,
+        title: {
+            romaji: 'Aria The Origination',
+        },
+        poster: {
+            small: 'https://myanimelist.cdn-dena.com/images/anime/6/77623.jpg',
+        },
+    },
+}, {
+    _id: 7,
+    type: 'people',
+    entity: {
+        _id: 1,
+        firstName: {
+            romaji: 'Aki',
+        },
+        lastName: {
+            romaji: 'Toyosaki',
+        },
+        photo: {
+            small: 'https://myanimelist.cdn-dena.com/images/voiceactors/2/34661.jpg',
+        },
+    },
+}, {
+    _id: 8,
+    type: 'people',
+    entity: {
+        _id: 1,
+        firstName: {
+            romaji: 'Minori',
+        },
+        lastName: {
+            romaji: 'Suzuki',
+        },
+        photo: {
+            small: 'https://myanimelist.cdn-dena.com/images/voiceactors/3/42334.jpg',
+        },
+    },
+}];
 
 @inject(s => ({
     ui: s.app.ui,
@@ -150,7 +261,12 @@ class User extends PureComponent {
                                 </Tabs>
                             </div>
                         </Block>
-                        <Block title="Музыка">
+                        <Block
+                            title="Музыка"
+                            buttons={(
+                                <Button bsSize="sm">Все песни</Button>
+                            )}
+                        >
                             <Track
                                 track={track}
                                 anime={anime}
@@ -168,8 +284,13 @@ class User extends PureComponent {
                         </Block>
                     </Center>
                     <Right>
-                        <Block title="Избранное">
-                            Избранная анима, манга, люди, персонажи.
+                        <Block
+                            title="Избранное"
+                            buttons={(
+                                <Button bsSize="sm">Ещё</Button>
+                            )}
+                        >
+                            <Favorites entities={favorites} />
                         </Block>
                         <Block title="Подписки">
                             Мои подписки
