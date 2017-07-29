@@ -33,7 +33,11 @@
     width: 100%;
     display: flex;
     align-self: flex-end;
+    align-items: flex-end;
+    flex-direction: row;
     margin-bottom: 32px;
+    transition: flex-direction .2s ease, align-items .2s ease;
+    will-change: flex-direction, align-items;
 }
 
 .user-avatar {
@@ -41,6 +45,8 @@
     height: 160px;
     outline: 4px solid white;
     padding: 4px;
+    transition: width .2s ease, height .2s ease;
+    will-change: width, height;
 }
 
 .user-header-info {
@@ -49,6 +55,8 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    transition: margin-left .2s ease;
+    will-change: margin-left;
 
     h2 {
         font-weight: 600;
@@ -100,5 +108,22 @@
                 display: flex;
             }
         }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .user-avatar {
+        width: 130px;
+        height: 130px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .user-header-bottom {
+        flex-direction: column;
+        align-items: center;
+    }
+    .user-header-info {
+        margin-left: 0;
     }
 }
