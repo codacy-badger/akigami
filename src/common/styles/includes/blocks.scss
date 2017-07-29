@@ -50,6 +50,12 @@
     }
 }
 
+.blank-block {
+    background-color: #f6f5f3;
+    padding: 16px;
+    text-align: center;
+}
+
 @media screen and (max-width: 650px) {
     .block-title {
         font-size: 20px;
