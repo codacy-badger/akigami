@@ -2,13 +2,24 @@ import React, { PureComponent } from 'react';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 
-import Grid from 'react-bootstrap/lib/Grid';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
+import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
+import Chart from 'react-highcharts';
+import HighchartsMore from 'highcharts-more';
+import SolidGauge from 'highcharts/modules/solid-gauge';
+
 
 import Threed from '../containers/Threed';
+import Block from '../components/Block';
+
+import entitiesChart from '../charts/entities';
+import activityChart from '../charts/activity';
 
 const { Left, Right, Center } = Threed;
+
+if (typeof window !== 'undefined') {
+    HighchartsMore(Chart.Highcharts);
+    SolidGauge(Chart.Highcharts);
+}
 
 const demo = {
     cover: 'http://i.imgur.com/ycHP6KX.jpg',
@@ -60,6 +71,58 @@ class User extends PureComponent {
                 </div>
                 <Threed>
                     <Left>
+                        <Block title="Статистика">
+                            <div className="stats-block">
+                                <h5 className="block-subtitle">По предпочтениям</h5>
+                                <Chart config={entitiesChart} />
+                            </div>
+
+                            <div className="stats-block">
+                                <h5 className="block-subtitle">Активность за неделю</h5>
+                                <Tabs
+                                    defaultActiveKey={1}
+                                    animation={false}
+                                    id="activity-tabs"
+                                >
+                                    <Tab eventKey={1} title="Аниме">
+                                        <Chart config={activityChart} />
+                                        <div className="activity-legend">
+                                            <div className="activity-legend-item">
+                                                <div
+                                                    className="activity-legend-dot"
+                                                    style={{ backgroundColor: '#ffbd88' }}
+                                                />
+                                                <span>Запланировано</span>
+                                            </div>
+                                            <div className="activity-legend-item">
+                                                <div
+                                                    className="activity-legend-dot"
+                                                    style={{ backgroundColor: '#008cf0' }}
+                                                />
+                                                <span>Смотрю</span>
+                                            </div>
+                                            <div className="activity-legend-item">
+                                                <div
+                                                    className="activity-legend-dot"
+                                                    style={{ backgroundColor: '#00a86b' }}
+                                                />
+                                                <span>Завершено</span>
+                                            </div>
+                                            <div className="activity-legend-item">
+                                                <div
+                                                    className="activity-legend-dot"
+                                                    style={{ backgroundColor: '#d54343' }}
+                                                />
+                                                <span>Брошено</span>
+                                            </div>
+                                        </div>
+                                    </Tab>
+                                    <Tab eventKey={2} title="Манга">
+                                        <Chart config={activityChart} />
+                                    </Tab>
+                                </Tabs>
+                            </div>
+                        </Block>
                         Статистика, музыка ещё что-то
                     </Left>
                     <Center>
