@@ -2,6 +2,7 @@ import Router from './Router';
 import TopBar from './TopBar';
 import Modal from './Modal';
 import UI from './UI';
+import User from './User';
 
 export default class AppStore {
     constructor() {
@@ -9,5 +10,6 @@ export default class AppStore {
         this.topBar = new TopBar();
         this.modal = new Modal();
         this.router = new Router(this);
+        this.user = new User(this);
     }
 }

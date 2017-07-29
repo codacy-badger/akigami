@@ -115,8 +115,10 @@ export default class Router {
         return true;
     }
 
-    static async importModal(path) {
-        const params = {};
+    async importModal(path, modal) {
+        const params = {
+            app: this.app,
+        };
         const data = find(modals, i => pathToRegexp(i.path).test(path)) || find(modals, { path: '404' });
         if (data.path !== '404') {
             const keys = [];
@@ -127,7 +129,7 @@ export default class Router {
             });
         }
         const Module = await data.import();
-        return Module.default(params);
+        return Module.default(params, modal);
     }
 
     async setModal(query) {
@@ -135,7 +137,7 @@ export default class Router {
             const { m } = qs.parse(query);
             if (m) {
                 const modal = this.app.modal.show();
-                const Module = await Router.importModal(m);
+                const Module = await this.importModal(m, modal);
                 this.app.modal.setSettings(modal.id, Module);
             }
         }

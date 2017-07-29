@@ -24,6 +24,7 @@
         "module": true,
         "alert": true,
         "history": true,
-        "location": true
+        "location": true,
+        "fetch": true,
     }
 }

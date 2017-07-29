@@ -1,15 +1,21 @@
 import http from 'http';
 import express from 'express';
 import path from 'path';
+import lusca from 'lusca';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import favicon from 'serve-favicon';
 import config from 'config';
+import passport from 'passport';
+import session from 'express-session';
+
 
 import { normalizePort, requireFiles } from './utils';
 import ssr from './services/ssr';
+import io from './services/websockets';
 import './services/database';
+import redisStore from './config/store';
 
 const app = express();
 const port = normalizePort(config.get('server.port'));
@@ -23,7 +29,42 @@ app.use(logger('dev', {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(session({
+    name: 'sid',
+    secret: 'secret',
+    store: redisStore,
+    cookie: {
+        httpOnly: true,
+        maxAge: 1000 * 2630000 * 5, // 5 months
+    },
+    resave: true,
+    saveUninitialized: true,
+}));
+
+app.use(lusca({
+    csrf: false, 
+    csp: false, 
+    xframe: 'DENY', // or SAMEORIGIN
+    p3p: false,
+    hsts: {
+        maxAge: 31536000,
+        includeSubDomains: true,
+    },
+    xssProtection: true,
+}));
+
 app.use(express.static(path.join(__dirname, '..', '..', 'public')));
+
+app.use(passport.initialize());
+app.use(passport.session());
+require('./services/passport');
+
+app.use((req, res, next) => {
+    res.locals.user = req.isAuthenticated() ? req.user : null;
+    console.log(`hi ${req.user ? req.user.username : 'guest'}`);
+    next();
+});
 
 app.use((req, res, next) => {
     res.ssr = ssr;
@@ -50,7 +91,8 @@ app.use((err, req, res, nextIgnored) => {
 });
 
 const server = http.createServer(app);
-require('./services/websockets').default(server);
+io.attach(server);
+io.set('transports', ['websocket']);
 
 function onError(error) {
     if (error.syscall !== 'listen') {

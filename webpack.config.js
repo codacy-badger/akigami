@@ -75,7 +75,7 @@ module.exports = () => {
 
     return {
         performance: false,
-        devtool: isProd ? 'source-map' : 'cheap-module-source-map',
+        devtool: isProd ? 'source-map' : 'cheap-source-map',
         context: paths.source,
         entry: {
             main: entryPoint,

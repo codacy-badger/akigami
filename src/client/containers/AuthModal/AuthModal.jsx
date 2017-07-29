@@ -23,6 +23,9 @@ class AuthModal extends PureComponent {
     static propTypes = {
         store: PropTypes.object.isRequired,
     }
+    componentWillUnmount() {
+        this.props.store.removeListener();
+    }
     renderNotLogged = () => {
         const { email, handleChange } = this.props.store;
         return (
@@ -68,20 +71,18 @@ class AuthModal extends PureComponent {
         );
     }
     renderRegister() {
-        const { birthday, gender, username, handleChange } = this.props.store;
+        const { birthday, gender, email, username, handleChange } = this.props.store;
         return (
             <div>
                 <p>Заполните информацию для аккаунта.</p>
                 <Form>
                     <FieldGroup
-                        id="username"
+                        id="email"
                         type="text"
                         name="text"
-                        label="Имя пользователя"
-                        placeholder="Например: Joker"
-                        value={username}
-                        onChange={e => handleChange('username', e.target.value)}
-                        help="Поле обязательно для заполнения"
+                        label="E-Mail"
+                        value={email}
+                        disabled
                     />
                     <FieldGroup
                         id="username"

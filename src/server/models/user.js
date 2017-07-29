@@ -4,6 +4,7 @@ class User extends MongooseClass {
     username = { type: String, required: true };
     displayName = { type: String, required: true };
     email = { type: String, required: true };
+    birthday = { type: Date };
     avatar = { type: String };
     status = { type: String };
     online = { type: Boolean, default: false };

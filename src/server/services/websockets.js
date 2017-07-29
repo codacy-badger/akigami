@@ -1,10 +1,7 @@
-import Server from 'socket.io';
 import connect from '../sockets/connect';
 
-export default (server) => {
-    const io = new Server(server);
+const io = require('socket.io')();
 
-    io.on('connection', connect);
+io.on('connection', connect);
 
-    return io;
-};
+export default io;

@@ -1,4 +1,4 @@
-export default ({ body, title, css, js, preload }) => (`
+export default ({ body, title, css, user, js, preload }) => (`
     <!DOCTYPE html>
     <html lang="ru">
 
@@ -10,7 +10,7 @@ export default ({ body, title, css, js, preload }) => (`
         ${css}
     </head>
 
-    <body>
+    <body data-user=${user}>
         <div id="root">${body}</div>
         ${preload}
         ${js}

@@ -18,7 +18,7 @@ export default class Footer extends PureComponent {
                 // onClick={onHide}
                 >
                     Закрыть
-                    </Button>
+                </Button>
                 <Button
                     bsStyle="primary"
                     disabled={!isValidEmail}
@@ -43,7 +43,7 @@ export default class Footer extends PureComponent {
             );
     }
     render() {
-        const { step } = this.props.store;
+        const { step, handleRegister } = this.props.store;
         if (step === 'notLogged') {
             return this.renderNotLogged();
         } else if (step === 'confirm') {
@@ -59,7 +59,7 @@ export default class Footer extends PureComponent {
                     </Button>
                     <Button
                         bsStyle="primary"
-                    // onClick={this.handleRegister}
+                        onClick={handleRegister}
                     // disabled={!username && usernameError}
                     >
                         Зарегистрироваться

@@ -3,7 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import AuthModalStore from './AuthModal.store';
 
-export default (params) => ({
+export default (params, modal) => ({
     header: {
         component: Header,
         className: 'stepped-header',
@@ -15,5 +15,5 @@ export default (params) => ({
         component: Footer,
     },
     size: 'medium',
-    store: new AuthModalStore(params),
+    store: new AuthModalStore(params, modal),
 });

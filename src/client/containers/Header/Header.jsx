@@ -17,11 +17,13 @@ import Icon from '../../components/Icon';
 
 @inject(s => ({
     ui: s.app.ui,
+    user: s.app.user,
 }))
 @observer
 class Header extends PureComponent {
     static propTypes = {
         ui: PropTypes.object.isRequired,
+        user: PropTypes.object.isRequired,
     }
     componentDidMount() {
         this.scrollEventer();
@@ -39,7 +41,7 @@ class Header extends PureComponent {
         }
     }
     render() {
-        const { ui } = this.props;
+        const { ui, user } = this.props;
         const transparent = ui.transparented ? ui.transparent : false;
         return (
             <header className={cx({ transparent })}>
@@ -78,7 +80,7 @@ class Header extends PureComponent {
                                 </a>
                             </div>
                             <div className="header-right">
-                                {/* <DropdownButton
+                                {user.isAuth && <DropdownButton
                                     noCaret
                                     pullRight
                                     bsStyle="link"
@@ -92,20 +94,20 @@ class Header extends PureComponent {
                                     )}
                                 >
                                     <MenuItem header>Профиль</MenuItem>
-                                    <MenuItem componentClass="a" href="/@ga2mer">
-                                        <strong>ga2mer</strong>
+                                    <MenuItem componentClass="a" href={`/@${user.username}`}>
+                                        <strong>{user.displayName}</strong>
                                     </MenuItem>
                                     <MenuItem divider />
                                     <MenuItem header>Списки</MenuItem>
                                     <MenuItem disabled>Аниме</MenuItem>
                                     <MenuItem disabled>Манга</MenuItem>
                                     <MenuItem divider />
-                                    <MenuItem componentClass="a" href="/logout">Выход</MenuItem>
-                                </DropdownButton> */}
-                                <a href="/?m=login" className="header-item">
+                                    <MenuItem onClick={user.logout}>Выход</MenuItem>
+                                </DropdownButton>}
+                                {!user.isAuth && <a href="/signin" className="header-item">
                                     <Icon type="login" />
                                     <span>Вход</span>
-                                </a>
+                                </a>}
                             </div>
                         </Col>
                     </Row>
