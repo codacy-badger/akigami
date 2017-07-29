@@ -26,6 +26,7 @@ const demo = {
     avatar: 'https://pp.userapi.com/c639416/v639416296/2bfdb/XE8roc1owEs.jpg',
     displayName: 'Yukioru',
     status: 'Какие-то мемы',
+    about: 'Знаю NodeJS, React, ECMAScript 6. Программирую на JavaScript.\nУвлекаюсь музыкой и японской мультипликацией.',
 };
 
 @inject(s => ({
@@ -76,7 +77,6 @@ class User extends PureComponent {
                                 <h5 className="block-subtitle">По предпочтениям</h5>
                                 <Chart config={entitiesChart} />
                             </div>
-
                             <div className="stats-block">
                                 <h5 className="block-subtitle">Активность за неделю</h5>
                                 <Tabs
@@ -123,13 +123,28 @@ class User extends PureComponent {
                                 </Tabs>
                             </div>
                         </Block>
-                        Статистика, музыка ещё что-то
+                        <Block title="Музыка">
+                            Здесь будте музыка
+                        </Block>
                     </Left>
                     <Center>
-                        О себе, что-то в центре, наверное фид
+                        <Block title="О себе">
+                            <div className="user-about">{demo.about}</div>
+                        </Block>
+                        <Block title="Лента">
+                            Здесь будет ваша лента
+                        </Block>
                     </Center>
                     <Right>
-                        Избранное, друзья ещё что-то
+                        <Block title="Избранное">
+                            Избранная анима, манга, люди, персонажи.
+                        </Block>
+                        <Block title="Подписки">
+                            Мои подписки
+                        </Block>
+                        <Block title="Подписчики">
+                            Мои подписчики
+                        </Block>
                     </Right>
                 </Threed>
             </div>

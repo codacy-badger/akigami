@@ -61,8 +61,11 @@
     }
 }
 
-#activity-tabs {
+.user-about {
+    
+}
 
+#activity-tabs {
     .nav-tabs {
         border-bottom: none;
         display: flex;
@@ -88,7 +91,6 @@
             }
         }
     }
-
     .tab-content {
         > .tab-pane {
             flex-direction: column;
