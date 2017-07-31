@@ -1,4 +1,7 @@
-import { observable } from 'mobx';
+import { computed, observable } from 'mobx';
+import set from 'lodash/set';
+
+const defaultAvatar = '/no-photo.jpg';
 
 class Profile {
     @observable username = null;
@@ -7,9 +10,13 @@ class Profile {
 
 
     constructor(data) {
-        Object.assign(data).map((key) => {
-            this[key] = data[key];
+        Object.keys(data).map((key) => {
+            set(this, key, data[key]);
         });
+    }
+
+    @computed get getAvatar() {
+        return !this.avatar ? defaultAvatar : this.avatar;
     }
 }
 

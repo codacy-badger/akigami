@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
-import range from 'lodash/range';
 import Chart from 'react-highcharts';
 import HighchartsMore from 'highcharts-more';
 import SolidGauge from 'highcharts/modules/solid-gauge';
@@ -14,14 +13,16 @@ import {
     Button,
 } from 'react-bootstrap';
 
-import Favorites from '../containers/Favorites';
-import Threed from '../containers/Threed';
-import Block from '../components/Block';
-import Track from '../components/Track';
-import Follows from '../components/Follows';
+import Favorites from '../../containers/Favorites';
+import Threed from '../../containers/Threed';
+import Block from '../../components/Block';
+import Track from '../../components/Track';
+import Follows from '../../components/Follows';
 
-import entitiesChart from '../charts/entities';
-import activityChart from '../charts/activity';
+import entitiesChart from '../../charts/entities';
+import activityChart from '../../charts/activity';
+
+import ProfileStore from '../../stores/Profile';
 
 const { Left, Right, Center } = Threed;
 
@@ -169,13 +170,18 @@ const favorites = [{
 
 @inject(s => ({
     ui: s.app.ui,
-    user: s.app.user,
+    myUser: s.app.user,
 }))
 @observer
-class User extends PureComponent {
+class Profile extends PureComponent {
     static propTypes = {
         ui: PropTypes.object.isRequired,
         user: PropTypes.object.isRequired,
+        myUser: PropTypes.object.isRequired,
+    }
+    constructor(props) {
+        super(props);
+        this.store = new ProfileStore(props.user);
     }
     componentDidMount() {
         this.props.ui.changeTransparented(true);
@@ -184,13 +190,13 @@ class User extends PureComponent {
         this.props.ui.changeTransparented(false);
     }
     render() {
-        const { user } = this.props;
+        const { myUser } = this.props;
         return (
             <div className="transparented">
                 <div
                     className="user-header"
                     style={{
-                        backgroundImage: `url(${user.cover})`,
+                        backgroundImage: `url(${this.store.cover})`,
                     }}
                 >
                     <Grid className="user-header-inner">
@@ -199,12 +205,12 @@ class User extends PureComponent {
                                 <div className="user-header-bottom">
                                     <img
                                         className="user-avatar"
-                                        src={user.getAvatar}
-                                        alt={user.displayName}
+                                        src={this.store.getAvatar}
+                                        alt={this.store.displayName}
                                     />
                                     <div className="user-header-info">
-                                        <h2>{user.displayName}</h2>
-                                        {user.status && <p>{user.status}</p>}
+                                        <h2>{this.store.displayName}</h2>
+                                        {this.store.status && <p>{this.store.status}</p>}
                                     </div>
                                 </div>
                             </Col>
@@ -316,14 +322,14 @@ class User extends PureComponent {
                             )}
                         >
                             <Follows
-                                entities={range(6).map(_id => ({ _id, ...user }))}
+                                entities={[1].map(() => this.store)}
                                 blankText="Вы не состоите ни в каком клубе."
                             />
                         </Block>
                     </Left>
                     <Center>
                         <Block title="О себе">
-                            <div className="user-about">{user.about}</div>
+                            <div className="user-about">{this.store.about}</div>
                         </Block>
                         <Block title="Лента">
                             Здесь будет ваша лента
@@ -345,7 +351,7 @@ class User extends PureComponent {
                             )}
                         >
                             <Follows
-                                entities={range(10).map(_id => ({ _id, ...user }))}
+                                entities={[1].map(() => this.store)}
                                 blankText="У вас пока нет подписок."
                             />
                         </Block>
@@ -356,7 +362,7 @@ class User extends PureComponent {
                             )}
                         >
                             <Follows
-                                entities={range(15).map(_id => ({ _id, ...user }))}
+                                entities={[1].map(() => this.store)}
                                 blankText="У вас пока нет подписчиков. Подружитесь с кем нибудь ;)"
                             />
                         </Block>
@@ -367,4 +373,4 @@ class User extends PureComponent {
     }
 }
 
-export default User;
+export default Profile;

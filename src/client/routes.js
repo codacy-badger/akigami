@@ -8,8 +8,8 @@ export default {
     signup: {
         import: () => import(/* webpackChunkName: "signup" */ './pages/SignUp'),
     },
-    user: {
-        import: () => import(/* webpackChunkName: "user" */ './pages/User'),
+    profile: {
+        import: () => import(/* webpackChunkName: "profile" */ './pages/Profile'),
     },
     error: {
         import: () => import(/* webpackChunkName: "error" */ './pages/Error'),

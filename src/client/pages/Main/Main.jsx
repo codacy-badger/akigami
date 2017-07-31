@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 
-import Timeline from '../containers/Timeline';
-import Threed from '../containers/Threed';
-import Hello from '../components/Hello';
-import Categories from '../components/Categories';
+import Timeline from '../../containers/Timeline';
+import Threed from '../../containers/Threed';
+import Hello from '../../components/Hello';
+import Categories from '../../components/Categories';
 
 const { Left, Right, Center } = Threed;
 
