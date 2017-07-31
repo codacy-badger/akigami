@@ -12,8 +12,6 @@ import {
     Tabs,
     Tab,
     Button,
-    OverlayTrigger,
-    Tooltip,
 } from 'react-bootstrap';
 
 import Favorites from '../containers/Favorites';
@@ -31,15 +29,6 @@ if (typeof window !== 'undefined') {
     HighchartsMore(Chart.Highcharts);
     SolidGauge(Chart.Highcharts);
 }
-
-const user = {
-    cover: 'http://i.imgur.com/ycHP6KX.jpg',
-    avatar: 'https://pp.userapi.com/c639416/v639416296/2bfdb/XE8roc1owEs.jpg',
-    displayName: 'Yukioru',
-    username: 'yukioru',
-    status: 'Какие-то мемы',
-    about: 'Здесь должна быть информация обо мне но, так как это текст-заглушка, её здесь нет.\n\nНо у вас этот блок точно будет заполнен, или его не будет видно(или он будет пустой) если вы не заполните информацию.',
-};
 
 const track = {
     _id: 1,
@@ -180,11 +169,13 @@ const favorites = [{
 
 @inject(s => ({
     ui: s.app.ui,
+    user: s.app.user,
 }))
 @observer
 class User extends PureComponent {
     static propTypes = {
         ui: PropTypes.object.isRequired,
+        user: PropTypes.object.isRequired,
     }
     componentDidMount() {
         this.props.ui.changeTransparented(true);
@@ -193,6 +184,7 @@ class User extends PureComponent {
         this.props.ui.changeTransparented(false);
     }
     render() {
+        const { user } = this.props;
         return (
             <div className="transparented">
                 <div
@@ -207,7 +199,7 @@ class User extends PureComponent {
                                 <div className="user-header-bottom">
                                     <img
                                         className="user-avatar"
-                                        src={user.avatar}
+                                        src={user.getAvatar}
                                         alt={user.displayName}
                                     />
                                     <div className="user-header-info">
@@ -223,7 +215,9 @@ class User extends PureComponent {
                     <Left>
                         <Block title="Статистика">
                             <div className="stats-block">
-                                <h5 className="block-subtitle" style={{ marginBottom: '-4px' }}>По предпочтениям</h5>
+                                <h5 className="block-subtitle" style={{ marginBottom: '-4px' }}>
+                                    По предпочтениям
+                                </h5>
                                 <Chart config={entitiesChart} />
                             </div>
                             <div className="stats-block">

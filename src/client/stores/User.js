@@ -1,8 +1,11 @@
 import { computed, action, observable } from 'mobx';
 
+const defaultAvatar = '/no-photo.jpg';
+
 export default class User {
     @observable username = null;
     @observable displayName = null;
+    @observable avatar = null;
 
     constructor(app) {
         this.app = app;
@@ -34,7 +37,7 @@ export default class User {
     logout = () => {
         fetch('/api/logout', {
             method: 'POST',
-            credentials: 'same-origin'
+            credentials: 'same-origin',
         }).then(() => {
             this.clearUserData();
             this.app.router.go(document.location.href, false);
@@ -57,5 +60,9 @@ export default class User {
 
     @computed get isAuth() {
         return this.username != null && this.displayName != null;
+    }
+
+    @computed get getAvatar() {
+        return !this.avatar ? defaultAvatar : this.avatar;
     }
 }

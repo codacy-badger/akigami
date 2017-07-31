@@ -5,8 +5,8 @@ import { requireFiles } from '../utils';
 
 mongoose.Promise = global.Promise;
 
-const { config, host } = cfg.get('database');
-mongoose.connect(`mongodb://${host}`, { config });
+const { options, host } = cfg.get('database');
+mongoose.connect(`mongodb://${host}`, options);
 
 mongoose.connection.on('connected', () => console.log('Connected to DB'));
 mongoose.connection.on('error', () => console.log('DB error connection'));

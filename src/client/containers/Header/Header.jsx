@@ -89,7 +89,7 @@ class Header extends PureComponent {
                                     title={(
                                         <Avatar
                                             size={32}
-                                            src="https://pp.userapi.com/c628529/v628529041/24c85/zRkseeHfRPs.jpg"
+                                            src={user.getAvatar}
                                         />
                                     )}
                                 >
