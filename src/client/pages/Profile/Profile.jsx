@@ -18,6 +18,7 @@ import Threed from '../../containers/Threed';
 import Block from '../../components/Block';
 import Track from '../../components/Track';
 import Follows from '../../components/Follows';
+import Menu from '../../components/Menu';
 
 import entitiesChart from '../../charts/entities';
 import activityChart from '../../charts/activity';
@@ -217,6 +218,29 @@ class Profile extends PureComponent {
                         </Row>
                     </Grid>
                 </div>
+                <Menu
+                    sticky
+                    onSelect={e => console.log(e)}
+                    selected="activity"
+                    items={[{
+                        title: 'Активность',
+                        tab: 'activity',
+                    }, {
+                        title: 'Библиотека',
+                        tab: 'library',
+                    }, {
+                        title: 'Подписчики',
+                        tab: 'followers',
+                        count: 0,
+                    }, {
+                        title: 'Подписки',
+                        tab: 'following',
+                        count: 0,
+                    }, {
+                        title: 'Клубы',
+                        tab: 'clubs',
+                    }]}
+                />
                 <Threed>
                     <Left>
                         <Block title="Статистика">
@@ -227,7 +251,7 @@ class Profile extends PureComponent {
                                 <Chart config={entitiesChart} />
                             </div>
                             <div className="stats-block">
-                                <h5 className="block-subtitle">Активность за неделю</h5>
+                                <h5 className="block-subtitle">По типам</h5>
                                 <Tabs
                                     defaultActiveKey={1}
                                     animation={false}
@@ -314,6 +338,36 @@ class Profile extends PureComponent {
                                 artist={artist}
                                 album={album}
                             />
+                            <Track
+                                track={track}
+                                anime={anime}
+                                artist={artist}
+                                album={album}
+                            />
+                            <Track
+                                track={track}
+                                anime={anime}
+                                artist={artist}
+                                album={album}
+                            />
+                            <Track
+                                track={track}
+                                anime={anime}
+                                artist={artist}
+                                album={album}
+                            />
+                            <Track
+                                track={track}
+                                anime={anime}
+                                artist={artist}
+                                album={album}
+                            />
+                            <Track
+                                track={track}
+                                anime={anime}
+                                artist={artist}
+                                album={album}
+                            />
                         </Block>
                         <Block
                             title="Клубы"
@@ -328,9 +382,11 @@ class Profile extends PureComponent {
                         </Block>
                     </Left>
                     <Center>
-                        <Block title="О себе">
-                            <div className="user-about">{this.store.about}</div>
-                        </Block>
+                        {this.store.about && (
+                            <Block title="О себе">
+                                <div className="user-about">{this.store.about}</div>
+                            </Block>
+                        )}
                         <Block title="Лента">
                             Здесь будет ваша лента
                         </Block>

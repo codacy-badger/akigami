@@ -26,5 +26,6 @@
         "history": true,
         "location": true,
         "fetch": true,
+        "window": true
     }
 }

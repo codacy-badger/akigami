@@ -1,0 +1,49 @@
+.menu-wrapper {
+    height: 40px;
+    position: relative;
+}
+
+.menu {
+    background-color: #efeeeb;
+
+    &.sticky {
+        position: relative;
+        transform: translate3d(0,0,0);
+        width: 100%;
+        z-index: 5;
+
+        &.sticked {
+            position: fixed;
+            top: 48px;
+        }
+    }
+}
+
+.menu-item {
+    border: none;
+    background: transparent;
+    padding: 10px 14px;
+    transition: color .2s ease, background .2s ease;
+    will-change: color, background;
+
+    &:hover,
+    &.active {
+        color: aliceblue;
+    }
+
+    &:hover {
+        background: $primary-color;
+    }
+
+    &.active {
+        background: $primary-color-dark;
+    }
+}
+
+.menu-counter {
+    font-size: 12px;
+    margin-left: 6px;
+    background-color: rgba(0,0,0,.2);
+    padding: 3px 5px;
+    color: white;
+}
