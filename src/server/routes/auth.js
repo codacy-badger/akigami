@@ -6,16 +6,24 @@ import io from '../services/websockets';
 
 const User = mongoose.model('User');
 const EmailToken = mongoose.model('EmailToken');
+
 const getUsersByRoom = (room) => typeof io.of('/').adapter.rooms[room] !== 'undefined' ? io.of('/').adapter.rooms[room].length : 0;
 const removeUsersFromRoom = (room) => typeof io.of('/').adapter.rooms[room] != 'undefined' && Object.keys(io.sockets.adapter.rooms[room].sockets).forEach((s) => {
     io.sockets.sockets[s].leave(room);
 });
-export default (app) => {
 
+export default (app) => {
     app.get('/signin', (req, res) => {
         res.ssr({
             title: 'Вход',
             layout: 'login',
+        });
+    });
+
+    app.get('/recovery', (req, res) => {
+        res.ssr({
+            title: 'Восстановление',
+            layout: 'recovery',
         });
     });
 
@@ -37,13 +45,11 @@ export default (app) => {
 
     app.all('/email-verification/:token', async (req, res, next) => {
         const token = req.params.token;
-        if (!token) {
-            return next();
-        }
+        if (!token) return next();
+
         const emailToken = await EmailToken.findOne({ token });
-        if (!emailToken) {
-            return next();
-        }
+        if (!emailToken) return next();
+
         const hasUser = await User.findOne({ email: emailToken.email }).select('id');
         if (!hasUser) {
             const room = `sign:${emailToken.listenToken}`;
@@ -60,13 +66,11 @@ export default (app) => {
             return res.redirect(`/signup/${token}`);
         }
         passport.authenticate('passwordless', (err, user, listen) => {
-            if (err) {
-                return next();
-            }
-            req.login(user, (err) => {
-                if (err) {
-                    return next(err);
-                }
+            if (err) return next();
+
+            req.login(user, (e) => {
+                if (e) return next(e);
+
                 emailToken.remove();
                 const pickedUser = pick(user, ['id', 'avatar', 'username', 'displayName', 'link']);
                 const room = `sign:${listen}`;

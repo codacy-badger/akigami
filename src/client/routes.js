@@ -8,6 +8,9 @@ export default {
     signup: {
         import: () => import(/* webpackChunkName: "signup" */ './pages/SignUp'),
     },
+    recovery: {
+        import: () => import(/* webpackChunkName: "recovery" */ './pages/Recovery'),
+    },
     profile: {
         import: () => import(/* webpackChunkName: "profile" */ './pages/Profile'),
     },

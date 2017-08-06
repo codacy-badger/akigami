@@ -41,10 +41,10 @@
 }
 
 .user-avatar {
-    width: 160px;
-    height: 160px;
-    outline: 4px solid white;
-    padding: 4px;
+    width: 120px;
+    height: 120px;
+    outline: 2px solid white;
+    padding: 2px;
     transition: width .2s ease, height .2s ease;
     will-change: width, height;
 }
@@ -113,8 +113,8 @@
 
 @media screen and (max-width: 991px) {
     .user-avatar {
-        width: 130px;
-        height: 130px;
+        width: 100px;
+        height: 100px;
     }
 }
 
