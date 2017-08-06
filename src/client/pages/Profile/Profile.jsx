@@ -12,6 +12,7 @@ import {
     Tab,
     Button,
 } from 'react-bootstrap';
+import { addStyle } from 'react-bootstrap/lib/utils/bootstrapUtils';
 
 import Favorites from '../../containers/Favorites';
 import Threed from '../../containers/Threed';
@@ -26,6 +27,8 @@ import activityChart from '../../charts/activity';
 import ProfileStore from '../../stores/Profile';
 
 const { Left, Right, Center } = Threed;
+
+addStyle(Button, 'transparent');
 
 if (typeof window !== 'undefined') {
     HighchartsMore(Chart.Highcharts);
@@ -190,6 +193,10 @@ class Profile extends PureComponent {
     componentWillUnmount() {
         this.props.ui.changeTransparented(false);
     }
+    isOwner = () => {
+        const { myUser } = this.props;
+        return this.store.id === myUser.id;
+    }
     render() {
         const { myUser } = this.props;
         return (
@@ -212,6 +219,16 @@ class Profile extends PureComponent {
                                     <div className="user-header-info">
                                         <h2>{this.store.displayName}</h2>
                                         {this.store.status && <p>{this.store.status}</p>}
+                                        {this.isOwner() && (
+                                            <Button
+                                                bsSize="sm"
+                                                bsStyle="transparent"
+                                                componentClass="a"
+                                                href="/settings"
+                                            >
+                                                Настройки
+                                            </Button>
+                                        )}
                                     </div>
                                 </div>
                             </Col>

@@ -102,6 +102,9 @@ class Header extends PureComponent {
                                     <MenuItem disabled>Аниме</MenuItem>
                                     <MenuItem disabled>Манга</MenuItem>
                                     <MenuItem divider />
+                                    <MenuItem componentClass="a" href="/settings">
+                                        Настройки
+                                    </MenuItem>
                                     <MenuItem onClick={user.logout}>Выход</MenuItem>
                                 </DropdownButton>}
                                 {!user.isAuth && <a href="/signin" className="header-item">

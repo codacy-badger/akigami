@@ -3202,6 +3202,55 @@ fieldset[disabled] .btn-primary.focus {
   background-color: #1a1a1a;
   border-color: #111;
 }
+
+
+
+
+.btn-transparent {
+  color: white;
+  background-color: rgba(64, 64, 64, 0.2);
+  border-color: #dadada;
+  border-style: dashed;
+}
+.btn-transparent:hover {
+  color: white;
+  background-color: rgba(64, 64, 64, 0.6);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 12px rgba(40, 40, 40, 0.3);
+}
+.btn-transparent:focus,
+.btn-transparent.focus {
+  color: white;
+  background-color: rgba(64, 64, 64, 0.8);
+  border-color: white;
+  box-shadow: 0 2px 12px rgba(40, 40, 40, 0.3);
+}
+.btn-transparent:active,
+.btn-transparent.active,
+.open > .dropdown-toggle.btn-transparent {
+  color: #fff;
+  background-color: rgba(64, 64, 64, 0.8);
+  border-color: white;
+  box-shadow: 0 4px 24px rgba(40, 40, 40, 0.4);
+}
+.btn-transparent:active:hover,
+.btn-transparent.active:hover,
+.open > .dropdown-toggle.btn-transparent:hover,
+.btn-transparent:active:focus,
+.btn-transparent.active:focus,
+.open > .dropdown-toggle.btn-transparent:focus,
+.btn-transparent:active.focus,
+.btn-transparent.active.focus,
+.open > .dropdown-toggle.btn-transparent.focus {
+  color: #fff;
+  background-color: rgba(64, 64, 64, 0.8);
+  border-color: white;
+  box-shadow: 0 4px 24px rgba(40, 40, 40, 0.4);
+}
+
+
+
+
 .btn-success {
   color: #fff;
   background-color: #5cb85c;

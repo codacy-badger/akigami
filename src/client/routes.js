@@ -17,4 +17,7 @@ export default {
     error: {
         import: () => import(/* webpackChunkName: "error" */ './pages/Error'),
     },
+    settings: {
+        import: () => import(/* webpackChunkName: "settings" */ './pages/Settings'),
+    },
 };
