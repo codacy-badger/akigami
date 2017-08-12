@@ -18,7 +18,6 @@ function FieldGroup({ id, label, help, ...props }) {
     );
 }
 
-
 FieldGroup.propTypes = {
     id: PropTypes.any.isRequired,
     label: PropTypes.string.isRequired,
@@ -30,21 +29,14 @@ FieldGroup.defaultProps = {
 };
 
 @inject(s => ({
-    ui: s.app.ui,
     user: s.app.user,
 }))
 @observer
 class Settings extends PureComponent {
-    componentDidMount() {
-        this.props.ui.changeTransparented(true);
-    }
-    componentWillUnmount() {
-        this.props.ui.changeTransparented(false);
-    }
     render() {
         const { user } = this.props;
         return (
-            <div className="transparented">
+            <div className="opaque">
                 <div className="default-header">
                     <Grid className="content">
                         <Row>
