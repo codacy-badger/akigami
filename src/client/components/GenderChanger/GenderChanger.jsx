@@ -8,18 +8,20 @@ class GenderChanger extends PureComponent {
     static defaultProps = {
         selected: null,
         onSelect: () => {},
+        style: {},
     }
     static propTypes = {
         selected: PropTypes.oneOf(['', 'none', 'male', 'female']),
         onSelect: PropTypes.func,
+        style: PropTypes.object,
     }
     selectGender = (gender) => {
         this.props.onSelect(gender);
     }
     render() {
-        const { selected } = this.props;
+        const { selected, style } = this.props;
         return (
-            <div className="gender-changer">
+            <div className="gender-changer" style={style}>
                 <button
                     onClick={() => this.selectGender('male')}
                     className={cx({

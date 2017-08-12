@@ -108,6 +108,12 @@ header > div > div,
 .header-search:-moz-placeholder           {color: rgba(255, 255, 255, 0.6);}/* Firefox 18- */
 .header-search:-ms-input-placeholder      {color: rgba(255, 255, 255, 0.6);}
 
+.default-header {
+    background-color: $primary-color;
+    padding: 16px;
+    color: white;
+}
+
 @media (min-width: 768px) {
     .header-item > span {
         display: inline;

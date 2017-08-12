@@ -204,7 +204,7 @@ class Profile extends PureComponent {
                 <div
                     className="user-header"
                     style={{
-                        backgroundImage: `url(${this.store.cover})`,
+                        backgroundImage: `url(${this.store.getCover})`,
                     }}
                 >
                     <Grid className="user-header-inner">
@@ -346,7 +346,7 @@ class Profile extends PureComponent {
                         <Block
                             title="Музыка"
                             buttons={(
-                                <Button bsSize="sm">Все песни</Button>
+                                <Button bsSize="xs">Все песни</Button>
                             )}
                         >
                             <Track
@@ -389,7 +389,7 @@ class Profile extends PureComponent {
                         <Block
                             title="Клубы"
                             buttons={(
-                                <Button bsSize="sm">Ещё</Button>
+                                <Button bsSize="xs">Ещё</Button>
                             )}
                         >
                             <Follows
@@ -412,7 +412,7 @@ class Profile extends PureComponent {
                         <Block
                             title="Избранное"
                             buttons={(
-                                <Button bsSize="sm">Ещё</Button>
+                                <Button bsSize="xs">Ещё</Button>
                             )}
                         >
                             <Favorites entities={favorites} />
@@ -420,7 +420,7 @@ class Profile extends PureComponent {
                         <Block
                             title="Подписки"
                             buttons={(
-                                <Button bsSize="sm">Ещё</Button>
+                                <Button bsSize="xs">Ещё</Button>
                             )}
                         >
                             <Follows
@@ -431,7 +431,7 @@ class Profile extends PureComponent {
                         <Block
                             title="Подписчики"
                             buttons={(
-                                <Button bsSize="sm">Ещё</Button>
+                                <Button bsSize="xs">Ещё</Button>
                             )}
                         >
                             <Follows
