@@ -51,6 +51,10 @@ class PostCreator extends PureComponent {
                 <Textarea
                     minRows={1}
                     maxRows={1}
+                    readOnly
+                    style={{
+                        cursor: 'text',
+                    }}
                     value="Расскажите что нового?"
                     placeholder="Расскажите что нового?"
                 />
@@ -97,6 +101,11 @@ class PostCreator extends PureComponent {
         return (
             <section
                 className="post-creator"
+                style={{
+                    cursor: this.store.collapsed
+                        ? 'default'
+                        : 'text',
+                }}
                 onClick={this.toFull}
             >
                 {this.store.collapsed
