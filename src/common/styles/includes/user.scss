@@ -1,8 +1,8 @@
 .user-header {
     height: 400px;
+    background-size: cover;
     background-repeat: no-repeat;
     position: relative;
-    background-size: auto calc(100% + 60px);
 
     &:after {
         content: '';
