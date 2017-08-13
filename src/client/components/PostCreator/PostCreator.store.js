@@ -27,6 +27,7 @@ class PostCreator {
 
     @action
     getFromStorage() {
+        if (typeof window === 'undefined') return;
         const content = localStorage.getItem(this.contentStorageKey);
         const attachments = localStorage.getItem(this.attachmentsStorageKey);
         if (attachments) this.attachments = JSON.parse(attachments);
@@ -35,12 +36,14 @@ class PostCreator {
 
     @action
     saveToStorage() {
+        if (typeof window === 'undefined') return;
         const attachments = JSON.stringify(toJS(this.attachments));
         localStorage.setItem(this.contentStorageKey, this.content);
         localStorage.setItem(this.attachmentsStorageKey, attachments);
     }
 
     clearStorage() {
+        if (typeof window === 'undefined') return;
         localStorage.removeItem(this.contentStorageKey);
         localStorage.removeItem(this.attachmentsStorageKey);
     }
@@ -52,7 +55,9 @@ class PostCreator {
     }
 
     changeCollapse(data) {
-        this.collapsed = data;
+        if (typeof data === 'boolean') {
+            this.collapsed = data;
+        }
     }
 
     @action
@@ -65,6 +70,7 @@ class PostCreator {
         alert('func. create');
         this.clearStorage();
         this.clearData();
+        this.changeCollapse(false);
     }
 
     @computed get isExistsData() {
