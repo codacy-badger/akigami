@@ -198,11 +198,24 @@ class Profile extends PureComponent {
         const { myUser } = this.props;
         return this.store.id === myUser.id;
     }
+    parallaxBg = (e) => {
+        if (typeof window === 'undefined') return;
+        const movementStrength = 10;
+        const height = movementStrength / 400;
+        const width = movementStrength / window.innerWidth;
+        const pageX = e.pageX - (window.innerWidth / 2);
+        const pageY = e.pageY - (400 / 2);
+        const newvalueX = ((width * pageX) * -1) - 25;
+        const newvalueY = ((height * pageY) * -1) - 50;
+        this.bg.style.backgroundPosition = `${newvalueX}px ${newvalueY}px`;
+    }
     render() {
         const { myUser } = this.props;
         return (
             <div className="transparented">
                 <div
+                    ref={(c) => { this.bg = c; }}
+                    onMouseMove={this.parallaxBg}
                     className="user-header"
                     style={{
                         backgroundImage: `url(${this.store.getCover})`,
