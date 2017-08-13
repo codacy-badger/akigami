@@ -20,6 +20,7 @@ import Block from '../../components/Block';
 import Track from '../../components/Track';
 import Follows from '../../components/Follows';
 import Menu from '../../components/Menu';
+import PostCreator from '../../components/PostCreator';
 
 import entitiesChart from '../../charts/entities';
 import activityChart from '../../charts/activity';
@@ -405,7 +406,7 @@ class Profile extends PureComponent {
                             </Block>
                         )}
                         <Block title="Лента">
-                            Здесь будет ваша лента
+                            {this.isOwner() && <PostCreator />}
                         </Block>
                     </Center>
                     <Right>

@@ -12,6 +12,7 @@
         "react/forbid-prop-types": 0,
         "react/prefer-stateless-function": 0,
         "jsx-a11y/href-no-hash": 0,
+        "jsx-a11y/no-static-element-interactions": 0,
         "no-unused-vars": [1, {
             "argsIgnorePattern": "[iI]gnored"
         }],
@@ -26,6 +27,7 @@
         "history": true,
         "location": true,
         "fetch": true,
-        "window": true
+        "window": true,
+        "localStorage": true
     }
 }

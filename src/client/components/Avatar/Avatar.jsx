@@ -9,6 +9,7 @@ class Avatar extends PureComponent {
         href: null,
         online: null,
         onClick: null,
+        className: null,
     }
     static propTypes = {
         src: PropTypes.string,
@@ -16,9 +17,10 @@ class Avatar extends PureComponent {
         href: PropTypes.string,
         online: PropTypes.bool,
         onClick: PropTypes.func,
+        className: PropTypes.string,
     }
     render() {
-        const { src, href, onClick, size, online } = this.props;
+        const { src, href, onClick, size, online, className } = this.props;
         const props = {};
         let Tag = 'div';
         if (href) {
@@ -47,6 +49,7 @@ class Avatar extends PureComponent {
                     avatar: true,
                     offline: !onlineTarget && !online,
                     online: !onlineTarget && online,
+                    [className]: className,
                 })}
                 style={style}
             />
