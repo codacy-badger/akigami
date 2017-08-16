@@ -19,6 +19,11 @@ class Post extends MongooseClass {
         default: 'post',
         enum: ['post', 'comment'],
     };
+
+    async populateUser() {
+        const user = await this.model('User').findById(this.user);
+        this.user = user;
+    }
 }
 
 export default Post.schema();

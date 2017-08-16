@@ -1,4 +1,5 @@
 import { computed, toJS, observable, action } from 'mobx';
+import { socket } from '../../lib/modules';
 
 class PostCreator {
     @observable collapsed = false;
@@ -67,7 +68,14 @@ class PostCreator {
     }
 
     createPost() {
-        alert('func. create');
+        socket.emit('feed:create', {
+            userId: this.app.user.id,
+            content: this.content,
+            attachments: this.attachments,
+        }, (result) => {
+            console.log(result);
+        });
+
         this.clearStorage();
         this.clearData();
         this.changeCollapse(false);

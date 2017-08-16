@@ -27,6 +27,13 @@ class User extends MongooseClass {
     }];
     createdAt = { type: Date, default: Date.now() };
     visitedAt = { type: Date, default: Date.now() };
+
+
+    static async findById(id) {
+        const user = await this.model('User').findOne({ id });
+        if (!user) throw new Error('User not found');
+        return user;
+    }
 }
 
 export default User.schema();
