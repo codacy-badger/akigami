@@ -1,31 +1,31 @@
 import MongooseClass from '../utils/mongooseClass';
 
 class People extends MongooseClass {
-    firstName: {
+    firstName = {
         russian: { type: String },
         romaji: { type: String },
         japanese: { type: String },
     };
-    lastName: {
+    lastName = {
         russian: { type: String },
         romaji: { type: String },
         japanese: { type: String },
     };
-    photo: {
+    photo = {
         small: { type: String },
         medium: { type: String },
         large: { type: String },
         original: { type: String },
     };
-    biography: {
+    biography = {
         russian: { type: String },
         english: { type: String },
     };
-    stats: {
+    stats = {
         favorites: { type: Number, default: 0 },
     };
-    birthday: { type: Date };
-    website: { type: String };
+    birthday = { type: Date };
+    website = { type: String };
 }
 
 export default People.schema();

@@ -21,6 +21,7 @@ import Track from '../../components/Track';
 import Follows from '../../components/Follows';
 import Menu from '../../components/Menu';
 import PostCreator from '../../components/PostCreator';
+import Post from '../../components/Post';
 
 import entitiesChart from '../../charts/entities';
 import activityChart from '../../charts/activity';
@@ -190,9 +191,12 @@ class Profile extends PureComponent {
     }
     componentDidMount() {
         this.props.ui.changeTransparented(true);
+        this.store.getFeed();
+        this.store.addFeedListener();
     }
     componentWillUnmount() {
         this.props.ui.changeTransparented(false);
+        this.store.removeFeedListener();
     }
     isOwner = () => {
         const { myUser } = this.props;
@@ -407,6 +411,7 @@ class Profile extends PureComponent {
                         )}
                         <Block title="Лента">
                             {this.isOwner() && <PostCreator />}
+                            {this.store.feed.map(post => <Post key={post.id} post={post} />)}
                         </Block>
                     </Center>
                     <Right>

@@ -100,7 +100,7 @@ class PostCreator extends PureComponent {
     render() {
         return (
             <section
-                className="post-creator"
+                className="post"
                 style={{
                     cursor: this.store.collapsed
                         ? 'default'

@@ -1,70 +1,70 @@
 import MongooseClass from '../utils/mongooseClass';
 
 class Anime extends MongooseClass {
-    title: {
+    title = {
         russian: { type: String },
         romaji: { type: String },
         english: { type: String },
     };
-    descriptopn: {
+    descripton = {
         russian: { type: String },
         english: { type: String },
     };
-    type: {
+    type = {
         type: String,
         required: true,
         enum: ['tv', 'movie', 'ova', 'ona', 'special'],
     };
-    episodes: { type: Number };
-    status: {
+    episodes = { type: Number };
+    status = {
         type: String,
         default: 'announced',
         enum: ['announced', 'not aried', 'airing', 'aired'],
     };
-    airing: {
+    airing = {
         start: { type: Date },
         finish: { type: Date },
     };
-    season: {
+    season = {
         type: String,
         required: true,
         enum: ['winter', 'spring', 'summer', 'fall'],
     };
-    source: {
+    source = {
         type: String,
         default: 'original',
         enum: ['original', 'manga', 'novel', 'game'],
     };
-    genres: [Number];
-    duration: { type: Number };
-    rating: {
+    genres = [Number];
+    duration = { type: Number };
+    rating = {
         type: String,
         default: 'g',
         enum: ['g', 'pg', 'pg-13', 'r', 'rplus', 'rx'],
     };
-    stats: {
+    stats = {
         score: { type: Number },
         ranked: { type: Number },
         members: { type: Number },
     };
-    videos: [{
+    videos = [{
         title: { type: String },
         url: { type: String, required: true },
         thumbnail: { type: String, required: true },
     }];
-    poster: {
+    poster = {
         small: { type: String },
         medium: { type: String },
         large: { type: String },
         original: { type: String },
     };
-    cover: {
+    cover = {
         small: { type: String },
         medium: { type: String },
         large: { type: String },
         original: { type: String },
     };
-    externalLinks: [{
+    externalLinks = [{
         title: { type: String, required: true },
         url: { type: String, required: true },
         type: {

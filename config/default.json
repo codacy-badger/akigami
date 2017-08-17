@@ -23,5 +23,6 @@
             "password": ""
         }
     },
+    "sessionSecret": "",
     "enviroment": "default"
 }
