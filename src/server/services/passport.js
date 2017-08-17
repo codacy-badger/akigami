@@ -22,7 +22,7 @@ passport.use('passwordless', new CustomStrategy(async (req, callback) => {
     if (!emailToken) {
         return callback(null, false);
     }
-    const user = await User.findOne({ email: emailToken.email }).select('-_id username avatar displayName');
+    const user = await User.findOne({ email: emailToken.email }).select('-_id id username avatar displayName');
     callback(null, user, emailToken.listenToken);
 }
 ));

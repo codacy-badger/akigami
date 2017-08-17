@@ -22,7 +22,7 @@ class Post extends MongooseClass {
     };
     createdAt = {
         type: Date,
-        default: Date.now(),
+        default: Date.now,
     }
 
     async populateUser() {
