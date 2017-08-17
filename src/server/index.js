@@ -32,7 +32,7 @@ app.use(cookieParser());
 
 app.use(session({
     name: 'sid',
-    secret: 'secret',
+    secret: config.get('sessionSecret'),
     store: redisStore,
     cookie: {
         httpOnly: true,

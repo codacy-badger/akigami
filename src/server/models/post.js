@@ -1,11 +1,11 @@
 import MongooseClass from '../utils/mongooseClass';
 
 class Post extends MongooseClass {
-    user: { type: Number, required: true };
-    content: { type: String, required: true };
-    likes: [Number];
-    repost: [Number];
-    attachments: [{
+    user = { type: Number, required: true };
+    content = { type: String, required: true };
+    likes = [Number];
+    repost = [Number];
+    attachments = [{
         type: {
             type: String,
             required: true,
@@ -14,7 +14,7 @@ class Post extends MongooseClass {
         url: { type: String, required: true },
         title: { type: String },
     }];
-    type: {
+    type = {
         type: String,
         default: 'post',
         enum: ['post', 'comment'],

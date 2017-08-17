@@ -11,7 +11,7 @@ export default async function ({ title, layout, props = {}, ...data } = {}) {
     try {
         if (!this.req.get('x-pjax')) {
             const app = new AppStore();
-            const user = pick(this.req.user, ['username', 'displayName']);
+            const user = pick(this.req.user, ['username', 'displayName', 'id']);
             app.user.setUser(user);
             await app.router.setContainer({ title, layout, props });
             const render = Object.assign({

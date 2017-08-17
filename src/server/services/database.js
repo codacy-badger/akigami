@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import autoIncrement from 'mongoose-auto-increment';
 import cfg from 'config';
 
 import { requireFiles } from '../utils';
@@ -6,7 +7,9 @@ import { requireFiles } from '../utils';
 mongoose.Promise = global.Promise;
 
 const { options, host } = cfg.get('database');
-mongoose.connect(`mongodb://${host}`, options);
+const connection = mongoose.connect(`mongodb://${host}`, options);
+
+autoIncrement.initialize(connection);
 
 mongoose.connection.on('connected', () => console.log('Connected to DB'));
 mongoose.connection.on('error', () => console.log('DB error connection'));

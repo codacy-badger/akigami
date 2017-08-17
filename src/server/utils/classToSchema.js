@@ -15,6 +15,7 @@ function getAllProps(obj) {
         staticMethods: {},
         attributes: {},
         staticAttributes: {},
+        system: {},
     };
 
     const usedNames = new Set();
@@ -46,7 +47,9 @@ function getAllProps(obj) {
 
         temp.forEach((value) => {
             const pValue = obj[value];
-            if (typeof pValue === 'function' && !isAttribute(pValue)) {
+            if (value === 'plugins') {
+                props.system[value] = pValue;
+            } else if (typeof pValue === 'function' && !isAttribute(pValue)) {
                 props.methods[value] = pValue;
             } else {
                 props.attributes[value] = pValue;
@@ -66,6 +69,9 @@ export default function classToSchema(obj, options) {
 
     schema.statics = props.staticMethods;
     schema.methods = props.methods;
+    props.system.plugins.forEach((item) => {
+        schema.plugin(...item);
+    });
 
     return schema;
 }

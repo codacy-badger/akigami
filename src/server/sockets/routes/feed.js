@@ -6,12 +6,12 @@ const Post = mongoose.model('Post');
 
 export default (socket) => {
     socket.on('feed:create', async (data, callback) => {
+        socket.utils.check('user');
         if (!data.userId) throw new Error('User not submitted');
-        const user = await User.findById(data.userId);
 
         const props = {
-            ...omit(data, 'userId'),
-            user: user.id,
+            ...data,
+            user: socket.request.user.id,
         };
         const post = new Post(props);
         await post.save();

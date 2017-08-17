@@ -28,7 +28,7 @@ export default class TimelineItem extends PureComponent {
                     <h1>{entity.title.romaji}</h1>
                     <div className="timeline-tags">
                         {entity.genres.map((item, index) => (
-                            <span>{item.title}</span>
+                            <span key={item.title}>{item.title}</span>
                         ))}
                     </div>
                     <p>{this.getTime()}</p>

@@ -1,3 +1,4 @@
+import autoIncrement from 'mongoose-auto-increment';
 import MongooseClass from '../utils/mongooseClass';
 
 class User extends MongooseClass {
@@ -34,6 +35,16 @@ class User extends MongooseClass {
         if (!user) throw new Error('User not found');
         return user;
     }
+
+    plugins = [
+        [
+            autoIncrement.plugin, {
+                model: 'User',
+                startAt: 1,
+                field: 'id',
+            },
+        ],
+    ];
 }
 
 export default User.schema();

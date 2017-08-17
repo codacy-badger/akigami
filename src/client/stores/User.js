@@ -1,9 +1,12 @@
 import { computed, action, observable } from 'mobx';
 
+import { socket } from '../lib/modules';
+
 const defaultAvatar = '/no-photo.jpg';
 const defaultCover = '/no-cover.jpg';
 
 export default class User {
+    @observable id = null;
     @observable username = null;
     @observable displayName = null;
     @observable avatar = null;
@@ -14,16 +17,15 @@ export default class User {
 
     constructor(app) {
         this.app = app;
-        // if (typeof window != 'undefined') {
-        //     this.lang = Cookies.get('lang') || 'ru';
-        //     if (this.isAuth) {
-        //         this.setSocket();
-        //     }
-        // }
+        if (typeof window != 'undefined') {
+            socket.on('test', () => {
+
+            });
+        }
     }
 
     setUser = ({
-        // id = this.id,
+        id = this.id,
         username = this.username,
         displayName = this.displayName,
         avatar = defaultAvatar,
@@ -34,6 +36,7 @@ export default class User {
         // link = this.link
     } = {}) => {
         this.setUserData({
+            id,
             username,
             displayName,
             avatar,
@@ -42,10 +45,11 @@ export default class User {
             gender,
             birthday,
         });
-        //this.setSocket();
+        // this.setSocket();
     }
 
     @action clearUserData = () => {
+        this.id = null;
         this.username = null;
         this.displayName = null;
         this.avatar = null;
@@ -66,7 +70,7 @@ export default class User {
     }
 
     @action setUserData = ({
-        // id = this.id,
+        id = this.id,
         username = this.username,
         displayName = this.displayName,
         avatar = defaultAvatar,
@@ -76,7 +80,7 @@ export default class User {
         birthday = this.birthday,
         // link = this.link
     } = {}) => {
-        // this.id = id;
+        this.id = id;
         this.username = username;
         this.displayName = displayName;
         this.avatar = avatar;
@@ -88,7 +92,7 @@ export default class User {
     }
 
     @computed get isAuth() {
-        return this.username != null && this.displayName != null;
+        return this.id != null && this.username != null && this.displayName != null;
     }
 
     @computed get getAvatar() {
