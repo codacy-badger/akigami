@@ -102,4 +102,8 @@ export default class User {
     @computed get getCover() {
         return !this.cover ? defaultCover : this.cover;
     }
+
+    @computed get link() {
+        return `/@${this.username}`;
+    }
 }

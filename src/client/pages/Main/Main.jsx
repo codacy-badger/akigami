@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 
+import Feed from '../../containers/Feed';
 import Timeline from '../../containers/Timeline';
 import Threed from '../../containers/Threed';
 import Hello from '../../components/Hello';
@@ -43,6 +44,7 @@ class Main extends PureComponent {
                     </Left>
                     <Center>
                         <Hello user={demo} />
+                        <Feed />
                     </Center>
                     <Right>
                         123

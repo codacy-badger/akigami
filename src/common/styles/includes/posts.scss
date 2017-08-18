@@ -8,6 +8,7 @@
 .post-creator-short {
     display: flex;
     width: 100%;
+    cursor: text;
 
     textarea {
         height: 30px;
@@ -74,7 +75,6 @@
     display: flex;
     align-items: center;
     position: relative;
-    padding-bottom: 12px;
 }
 
 .post-header .avatar {

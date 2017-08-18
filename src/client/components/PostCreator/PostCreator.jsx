@@ -18,13 +18,8 @@ class PostCreator extends PureComponent {
         super(props);
         this.store = new Store(props.app);
     }
-    componentWillMount() {
+    componentDidMount() {
         this.store.initStorageState();
-    }
-    toShort = () => {
-        if (!this.store.collapsed) return false;
-        this.store.changeCollapse(false);
-        return true;
     }
     toFull = () => {
         if (this.store.collapsed) return false;
@@ -33,7 +28,6 @@ class PostCreator extends PureComponent {
     }
     handleCreatePost = () => {
         this.store.createPost();
-        this.toShort();
     }
     handleChangeContent = (e) => {
         this.store.changeContent(e.target.value);
@@ -41,7 +35,7 @@ class PostCreator extends PureComponent {
     renderShortView() {
         const { user } = this.props.app;
         return (
-            <div className="post-creator-short">
+            <div className="post-creator-short" onClick={this.toFull}>
                 <Avatar
                     size={30}
                     className="post-creator-avatar"
@@ -101,12 +95,6 @@ class PostCreator extends PureComponent {
         return (
             <section
                 className="post"
-                style={{
-                    cursor: this.store.collapsed
-                        ? 'default'
-                        : 'text',
-                }}
-                onClick={this.toFull}
             >
                 {this.store.collapsed
                     ? this.renderFullView()

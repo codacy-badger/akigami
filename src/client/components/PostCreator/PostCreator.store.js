@@ -67,13 +67,12 @@ class PostCreator {
         this.saveToStorage();
     }
 
+    @action
     createPost() {
         socket.emit('feed:create', {
             userId: this.app.user.id,
             content: this.content,
             attachments: this.attachments,
-        }, (result) => {
-            console.log(result);
         });
 
         this.clearStorage();
