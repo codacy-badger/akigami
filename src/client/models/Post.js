@@ -60,7 +60,7 @@ class Post {
             content: this.content,
             attachments: this.attachments,
         }, () => {
-            this.edit = false;
+            this.changeEdit(false);
         });
         this.clearBackup();
     }

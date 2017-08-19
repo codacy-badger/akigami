@@ -3,43 +3,39 @@ import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
 import { Button } from 'react-bootstrap';
 import Textarea from 'react-textarea-autosize';
-import Select from 'react-select';
 
 import Avatar from '../Avatar';
 import Icon from '../Icon';
-import Store from './PostCreator.store';
+import Store from './CommentCreator.store';
 
 @inject(({ app }) => ({ app }))
 @observer
-class PostCreator extends PureComponent {
+class CommentCreator extends PureComponent {
+    static defaultProps = {
+        reply: null,
+    }
     static propTypes = {
         app: PropTypes.object.isRequired,
     }
     constructor(props) {
         super(props);
-        this.store = new Store(props.app);
-    }
-    componentDidMount() {
-        this.store.initStorageState();
+        this.store = new Store(props);
     }
     toFull = () => {
         if (this.store.collapsed) return false;
         this.store.changeCollapse(true);
         return true;
     }
-    handleCreatePost = () => {
-        this.store.createPost();
+    handleCreateComment = () => {
+        this.store.createComment();
     }
     handleChangeContent = (e) => {
         this.store.changeContent(e.target.value);
     }
-    handleChangeNamespace = (e) => {
-        console.log(e);
-    }
     renderShortView() {
         const { user } = this.props.app;
         return (
-            <div className="post-creator-short" onClick={this.toFull}>
+            <div className="comment-creator-short" onClick={this.toFull}>
                 <Avatar
                     size={30}
                     className="post-creator-avatar"
@@ -53,8 +49,8 @@ class PostCreator extends PureComponent {
                     style={{
                         cursor: 'text',
                     }}
-                    value="Расскажите что нового?"
-                    placeholder="Расскажите что нового?"
+                    value="Написать комментарий..."
+                    placeholder="Написать комментарий..."
                 />
             </div>
         );
@@ -62,7 +58,7 @@ class PostCreator extends PureComponent {
     renderFullView() {
         const { user } = this.props.app;
         return (
-            <div className="post-creator-full">
+            <div className="comment-creator-full">
                 <div className="post-creator-header">
                     <Avatar
                         size={30}
@@ -71,11 +67,10 @@ class PostCreator extends PureComponent {
                         title={user.displayName}
                     />
                     <Textarea
-                        minRows={3}
+                        minRows={2}
                         autoFocus
                         value={this.store.content}
                         onChange={this.handleChangeContent}
-                        placeholder="Расскажите что нового?"
                     />
                 </div>
                 <div className="post-creator-footer">
@@ -83,33 +78,13 @@ class PostCreator extends PureComponent {
                         <Button bsStyle="link" bsSize="xs">
                             <Icon type="image" />
                         </Button>
-                        <Select
-                            className="post-namespace-selector"
-                            name="post-namespace-selector"
-                            value="global"
-                            options={[{
-                                value: 'global',
-                                label: 'Глобально',
-                            }, {
-                                value: 'followers',
-                                label: 'Подписчики',
-                                disabled: true,
-                            }, {
-                                value: 'clubs',
-                                label: 'Клуб',
-                                disabled: true,
-                            }]}
-                            searchable={false}
-                            clearable={false}
-                            onChange={this.handleChangeNamespace}
-                        />
                     </div>
                     <Button
-                        bsStyle="warning"
+                        bsStyle="danger"
                         bsSize="sm"
-                        onClick={this.handleCreatePost}
+                        onClick={this.handleCreateComment}
                     >
-                        Опубликовать
+                        Отправить
                     </Button>
                 </div>
             </div>
@@ -117,15 +92,13 @@ class PostCreator extends PureComponent {
     }
     render() {
         return (
-            <section
-                className="post"
-            >
+            <div className="comment-creator">
                 {this.store.collapsed
                     ? this.renderFullView()
                     : this.renderShortView()}
-            </section>
+            </div>
         );
     }
 }
 
-export default PostCreator;
+export default CommentCreator;

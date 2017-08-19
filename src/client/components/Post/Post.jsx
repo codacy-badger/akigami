@@ -14,6 +14,7 @@ import {
 } from 'react-bootstrap';
 
 import Avatar from '../Avatar';
+import CommentCreator from '../CommentCreator';
 import Icon from '../Icon';
 
 @inject(({ app }) => ({ user: app.user }))
@@ -44,15 +45,32 @@ class Post extends PureComponent {
     finishEditPost = () => {
         this.props.post.editPost();
     }
+    switchNamespace = (namespace) => {
+        switch (namespace) {
+        case 'followers': return {
+            icon: 'account-star',
+            text: 'Пост виден подписчикам',
+        };
+        case 'clubs': return {
+            icon: 'hexagon-multiple',
+            text: 'Пост виден участникам клуба',
+        };
+        default: return {
+            icon: 'earth',
+            text: 'Пост виден всем на сайте',
+        };
+        }
+    }
     renderHeader() {
         const { post, user } = this.props;
+        const namespace = this.switchNamespace(post.namespace);
         const tooltip = (
             <Tooltip id="post-type">
-                Пост виден всем на сайте.
+                {namespace.text}
             </Tooltip>
         );
         return (
-            <div className="post-header">
+            <div className="post-header with-padding">
                 <Avatar
                     size={45}
                     href={post.user.link}
@@ -70,7 +88,7 @@ class Post extends PureComponent {
                         {m(post.createdAt).locale('ru').fromNow()}
                         <OverlayTrigger placement="top" overlay={tooltip}>
                             <span className="post-header-type">
-                                <Icon type="earth" />
+                                <Icon type={namespace.icon} />
                             </span>
                         </OverlayTrigger>
                     </span>
@@ -96,7 +114,7 @@ class Post extends PureComponent {
     renderEditableBody() {
         const { post } = this.props;
         return (
-            <div className="post-body">
+            <div className="post-body with-padding">
                 <div className="post-content">
                     <Textarea
                         minRows={3}
@@ -136,7 +154,7 @@ class Post extends PureComponent {
     renderDefaultBody() {
         const { post } = this.props;
         return (
-            <div className="post-body">
+            <div className="post-body with-padding">
                 <div className="post-content">
                     {post.content}
                 </div>
@@ -151,13 +169,16 @@ class Post extends PureComponent {
         );
     }
     render() {
-        const { post } = this.props;
+        const { post, user } = this.props;
         return (
-            <article className="post" style={{ boxShadow: post.edit ? '-6px 0 0 #ffbb07' : 'none' }}>
+            <article className="post no-padding" style={{ boxShadow: post.edit ? '-6px 0 0 #ffbb07' : 'none' }}>
                 {this.renderHeader()}
                 {post.edit
                     ? this.renderEditableBody()
                     : this.renderDefaultBody()}
+                {user.isAuth && (
+                    <CommentCreator />
+                )}
             </article>
         );
     }

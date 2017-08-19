@@ -1,15 +1,12 @@
 import autoIncrement from 'mongoose-auto-increment';
 import MongooseClass from '../utils/mongooseClass';
 
-class Post extends MongooseClass {
+class Comment extends MongooseClass {
     user = { type: MongooseClass.Types.Mixed, required: true };
     content = { type: String, required: true };
     attachments = [Number];
-    namespace = {
-        type: String,
-        default: 'global',
-        enum: ['global', 'followers', 'clubs'],
-    }
+    post = { type: Number, required: true }
+    reply = { type: Number, required: true }
     createdAt = {
         type: Date,
         default: Date.now,
@@ -20,18 +17,10 @@ class Post extends MongooseClass {
         this.user = user;
     }
 
-    static async getByUserId(user) {
-        const posts = await this.model('Post').find({ user }).sort({ createdAt: -1 });
-        await Promise.all(posts.map(async (post) => {
-            await post.populateUser();
-        }));
-        return posts;
-    }
-
     plugins = [
         [
             autoIncrement.plugin, {
-                model: 'Post',
+                model: 'Comment',
                 startAt: 1,
                 field: 'id',
             },
@@ -39,4 +28,4 @@ class Post extends MongooseClass {
     ];
 }
 
-export default Post.schema();
+export default Comment.schema();

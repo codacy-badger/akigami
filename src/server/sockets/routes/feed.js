@@ -4,7 +4,7 @@ import io from '../../services/websockets';
 const Post = mongoose.model('Post');
 
 export default (socket) => {
-    socket.on('feed:create', async (data) => {
+    socket.on('feed:create', async (data, callback) => {
         socket.utils.check('user');
         const props = {
             ...data,
@@ -17,6 +17,7 @@ export default (socket) => {
 
         io.sockets.emit('feed:getOnce', post);
         io.sockets.emit(`feed:getOnceUser-${socket.request.user.id}`, post);
+        callback?.();
     });
 
     socket.on('feed:getByUser', async (data, callback) => {
@@ -37,7 +38,7 @@ export default (socket) => {
         const post = await Post.findOne({ id });
         if (!post) throw new Error('Post not found');
         if (post.user !== socket.request.user.id) throw new Error('Edit not permitted');
-        
+
         const editedPost = {};
 
         if (content) editedPost.content = content;

@@ -13,10 +13,11 @@
     cursor: text;
 
     textarea {
-        height: 30px;
         width: 100%;
         border: none;
         resize: none;
+        padding: 0;
+        margin-top: 5px;
     }
 
     .post-short-attachments {
@@ -26,6 +27,8 @@
 
 .post-short-attachments {
     display: flex;
+    width: 100%;
+    margin-right: 12px;
 
     button {
         padding: 0 8px;
@@ -55,6 +58,7 @@
         border: none;
         resize: none;
         padding: 0;
+        margin-top: 5px;
     }
 }
 
@@ -78,6 +82,10 @@
     display: flex;
     align-items: center;
     position: relative;
+
+    &.with-padding {
+        padding: 12px 12px 0 12px;
+    }
 }
 
 .post-header .avatar {
@@ -103,6 +111,10 @@
     display: flex;
     flex-direction: column;
     position: relative;
+
+    &.with-padding {
+        padding: 0 12px 12px;
+    }
 }
 
 .post-content {
@@ -141,4 +153,48 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 6px;
+}
+
+.post-namespace-selector {
+    width: 120px;
+    margin-left: auto;
+
+    .Select-control {
+        height: 30px;
+        border-radius: 0;
+        font-size: 12px;
+        border-color: #ccc;
+    }
+
+    .Select-value {
+        line-height: 28px !important;
+    }
+
+    .Select-input {
+        height: 28px;
+    }
+
+    .Select-option {
+        font-size: 12px;
+        padding: 6px 10px 7px;
+    }
+    
+    &.is-focused:not(.is-open) > .Select-control {
+        border-color: #ccc;
+        box-shadow: none;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .post-creator-footer {
+        flex-direction: column;
+
+        > button {
+            width: 100%;
+            margin-top: 6px;
+        }
+    }
+    .post-short-attachments {
+        margin-right: 0;
+    }
 }

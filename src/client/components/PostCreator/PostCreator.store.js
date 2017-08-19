@@ -5,6 +5,7 @@ class PostCreator {
     @observable collapsed = false;
     @observable content = '';
     @observable attachments = [];
+    @observable namespace = 'global';
 
     constructor(app) {
         this.app = app;
@@ -16,6 +17,7 @@ class PostCreator {
         this.storageKey = `${user.username}_post`;
         this.contentStorageKey = `${this.storageKey}-content`;
         this.attachmentsStorageKey = `${this.storageKey}-attachments`;
+        this.namespaceStorageKey = `${this.storageKey}-namespace`;
     }
 
     @action
@@ -31,7 +33,9 @@ class PostCreator {
         if (typeof window === 'undefined') return;
         const content = localStorage.getItem(this.contentStorageKey);
         const attachments = localStorage.getItem(this.attachmentsStorageKey);
+        const namespace = localStorage.getItem(this.namespaceStorageKey);
         if (attachments) this.attachments = JSON.parse(attachments);
+        if (namespace) this.namespace = namespace;
         if (content) this.content = content;
     }
 
@@ -41,18 +45,21 @@ class PostCreator {
         const attachments = JSON.stringify(toJS(this.attachments));
         localStorage.setItem(this.contentStorageKey, this.content);
         localStorage.setItem(this.attachmentsStorageKey, attachments);
+        localStorage.setItem(this.namespaceStorageKey, this.namespace);
     }
 
     clearStorage() {
         if (typeof window === 'undefined') return;
         localStorage.removeItem(this.contentStorageKey);
         localStorage.removeItem(this.attachmentsStorageKey);
+        localStorage.removeItem(this.namespaceStorageKey);
     }
 
     @action
     clearData() {
         this.content = '';
         this.attachments = [];
+        this.namespace = 'global';
     }
 
     changeCollapse(data) {
@@ -70,9 +77,9 @@ class PostCreator {
     @action
     createPost() {
         socket.emit('feed:create', {
-            userId: this.app.user.id,
             content: this.content,
             attachments: this.attachments,
+            namespace: this.namespace,
         });
 
         this.clearStorage();
