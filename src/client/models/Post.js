@@ -59,6 +59,8 @@ class Post {
             id: this.id,
             content: this.content,
             attachments: this.attachments,
+        }, () => {
+            this.edit = false;
         });
         this.clearBackup();
     }

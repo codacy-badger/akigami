@@ -32,15 +32,19 @@ export default (socket) => {
         callback(posts);
     });
 
-    socket.on('feed:edit', async ({ id, content, attachments }) => {
+    socket.on('feed:edit', async ({ id, content, attachments }, callback) => {
         socket.utils.check('user');
         const post = await Post.findOne({ id });
         if (!post) throw new Error('Post not found');
         if (post.user !== socket.request.user.id) throw new Error('Edit not permitted');
+        
+        const editedPost = {};
 
-        if (content) post.content = content;
-        if (attachments) post.attachments = attachments;
+        if (content) editedPost.content = content;
+        if (attachments) editedPost.attachments = attachments;
 
-        await post.update();
+        await post.update(editedPost);
+
+        callback?.();
     });
 };
