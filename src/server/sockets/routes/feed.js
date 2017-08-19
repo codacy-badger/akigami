@@ -31,4 +31,16 @@ export default (socket) => {
         }));
         callback(posts);
     });
+
+    socket.on('feed:edit', async ({ id, content, attachments }) => {
+        socket.utils.check('user');
+        const post = await Post.findOne({ id });
+        if (!post) throw new Error('Post not found');
+        if (post.user !== socket.request.user.id) throw new Error('Edit not permitted');
+
+        if (content) post.content = content;
+        if (attachments) post.attachments = attachments;
+
+        await post.update();
+    });
 };

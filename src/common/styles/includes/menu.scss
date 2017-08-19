@@ -10,7 +10,7 @@
         position: relative;
         transform: translate3d(0,0,0);
         width: 100%;
-        z-index: 5;
+        z-index: 1100;
 
         &.sticked {
             position: fixed;
