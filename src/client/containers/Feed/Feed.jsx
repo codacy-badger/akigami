@@ -26,10 +26,10 @@ class Feed extends PureComponent {
     }
     componentDidMount() {
         this.store.getFeed();
-        this.store.addFeedListener();
+        this.store.addListener();
     }
     componentWillUnmount() {
-        this.store.removeFeedListener();
+        this.store.removeListener();
     }
     render() {
         return (

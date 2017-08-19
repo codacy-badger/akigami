@@ -6,7 +6,7 @@ class Comment extends MongooseClass {
     content = { type: String, required: true };
     attachments = [Number];
     post = { type: Number, required: true }
-    reply = { type: Number, required: true }
+    reply = { type: Number }
     createdAt = {
         type: Date,
         default: Date.now,

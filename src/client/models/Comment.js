@@ -4,11 +4,9 @@ import set from 'lodash/set';
 import { socket } from '../lib/modules';
 import User from '../stores/User';
 
-class Post {
+class Comment {
     @observable user = null;
     @observable content = null;
-    @observable likes = 0;
-    @observable repost = 0;
     @observable attachments = [];
 
     @observable edit = false;
@@ -66,4 +64,4 @@ class Post {
     }
 }
 
-export default Post;
+export default Comment;

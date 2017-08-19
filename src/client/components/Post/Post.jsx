@@ -14,7 +14,7 @@ import {
 } from 'react-bootstrap';
 
 import Avatar from '../Avatar';
-import CommentCreator from '../CommentCreator';
+import Comments from '../../containers/Comments';
 import Icon from '../Icon';
 
 @inject(({ app }) => ({ user: app.user }))
@@ -176,9 +176,7 @@ class Post extends PureComponent {
                 {post.edit
                     ? this.renderEditableBody()
                     : this.renderDefaultBody()}
-                {user.isAuth && (
-                    <CommentCreator />
-                )}
+                <Comments postId={post.id} />
             </article>
         );
     }

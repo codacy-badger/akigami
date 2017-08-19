@@ -13,6 +13,7 @@ import Store from './CommentCreator.store';
 class CommentCreator extends PureComponent {
     static defaultProps = {
         reply: null,
+        post: null,
     }
     static propTypes = {
         app: PropTypes.object.isRequired,
@@ -20,6 +21,9 @@ class CommentCreator extends PureComponent {
     constructor(props) {
         super(props);
         this.store = new Store(props);
+    }
+    componentWillReceiveProps(nextProps) {
+        this.store.updateProps(nextProps);
     }
     toFull = () => {
         if (this.store.collapsed) return false;
@@ -31,6 +35,10 @@ class CommentCreator extends PureComponent {
     }
     handleChangeContent = (e) => {
         this.store.changeContent(e.target.value);
+    }
+    clearReplyState = () => {
+        this.store.updateReply();
+        this.store.changeCollapse(true);
     }
     renderShortView() {
         const { user } = this.props.app;
@@ -78,6 +86,18 @@ class CommentCreator extends PureComponent {
                         <Button bsStyle="link" bsSize="xs">
                             <Icon type="image" />
                         </Button>
+                        {this.store.reply && (
+                            <div className="comment-replyed-user">
+                                {`Ответить ${this.store.reply.user.displayName}`}
+                                <Button
+                                    bsSize="xs"
+                                    bsStyle="link"
+                                    onClick={this.clearReplyState}
+                                >
+                                    <Icon type="close" />
+                                </Button>
+                            </div>
+                        )}
                     </div>
                     <Button
                         bsStyle="danger"

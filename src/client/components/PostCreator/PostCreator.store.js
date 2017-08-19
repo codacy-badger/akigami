@@ -76,6 +76,7 @@ class PostCreator {
 
     @action
     createPost() {
+        if (!this.isExistsData) return;
         socket.emit('feed:create', {
             content: this.content,
             attachments: this.attachments,
@@ -88,7 +89,7 @@ class PostCreator {
     }
 
     @computed get isExistsData() {
-        return this.content.length > 0 || this.attachments.length > 0;
+        return (this.content.trim()).length > 0 || this.attachments.length > 0;
     }
 }
 

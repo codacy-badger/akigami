@@ -18,16 +18,16 @@ class Feed {
         this.userId = userId;
     }
 
-    feedListener = (post) => {
+    listener = (post) => {
         this.list.unshift(new Post(post));
     }
 
-    addFeedListener() {
-        socket.on(this.listenerKey, this.feedListener);
+    addListener() {
+        socket.on(this.listenerKey, this.listener);
     }
 
-    removeFeedListener() {
-        socket.removeListener(this.listenerKey, this.feedListener);
+    removeListener() {
+        socket.removeListener(this.listenerKey, this.listener);
     }
 
     getFeed() {
