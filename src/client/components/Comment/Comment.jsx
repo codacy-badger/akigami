@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import m from 'moment';
 
-import { Button, ButtonToolbar } from 'react-bootstrap';
+import { Button, ButtonToolbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import Icon from '../Icon';
 import Avatar from '../Avatar';
@@ -78,6 +78,12 @@ class Comment extends PureComponent {
     }
     renderDefaultBody() {
         const { comment, user, onReply } = this.props;
+        const editTooltip = (
+            <Tooltip id="edit">Редактировать</Tooltip>
+        );
+        const delTooltip = (
+            <Tooltip id="delete">Удалить</Tooltip>
+        );
         return (
             <div>
                 <div className="comment-body">
@@ -104,23 +110,27 @@ class Comment extends PureComponent {
                     </span>
                     {(user.id === comment.user.id && !comment.edit) && (
                         <div className="comment-edit">
-                            <Button
-                                bsSize="xs"
-                                bsStyle="link"
-                                className="comment-reply"
-                                onClick={this.startEditComment}
-                            >
-                                <Icon type="lead-pencil" />
-                            </Button>
-                            <Button
-                                bsSize="xs"
-                                bsStyle="link"
-                                className="comment-reply"
-                                style={{ fontSize: 14, marginLeft: 6 }}
-                                onClick={() => {}}
-                            >
-                                <Icon type="close" />
-                            </Button>
+                            <OverlayTrigger placement="top" overlay={editTooltip}>
+                                <Button
+                                    bsSize="xs"
+                                    bsStyle="link"
+                                    className="comment-reply"
+                                    onClick={this.startEditComment}
+                                >
+                                    <Icon type="lead-pencil" />
+                                </Button>
+                            </OverlayTrigger>
+                            <OverlayTrigger placement="top" overlay={delTooltip}>
+                                <Button
+                                    bsSize="xs"
+                                    bsStyle="link"
+                                    className="comment-reply"
+                                    style={{ fontSize: 14, marginLeft: 6 }}
+                                    onClick={() => {}}
+                                >
+                                    <Icon type="close" />
+                                </Button>
+                            </OverlayTrigger>
                         </div>
                     )}
                 </div>

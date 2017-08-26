@@ -26,7 +26,7 @@ class Track extends PureComponent {
                 <div className="track-cover-wrapper">
                     <OverlayTrigger placement="top" overlay={tooltip}>
                         <button onClick={() => onRequest(track)} className="track-cover-overlay">
-                            <Icon type="play-box-outline" />
+                            <Icon type="play" />
                         </button>
                     </OverlayTrigger>
                     <img className="track-cover" src={album.cover.small} alt={track.title} />
