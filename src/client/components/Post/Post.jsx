@@ -171,7 +171,14 @@ class Post extends PureComponent {
     render() {
         const { post, user } = this.props;
         return (
-            <article className="post no-padding" style={{ boxShadow: post.edit ? '-6px 0 0 #ffbb07' : 'none' }}>
+            <article
+                className="post no-padding"
+                style={{
+                    boxShadow: post.edit
+                        ? '0 4px 8px rgba(0,0,0,0.05), -6px 0 0 #ffbb07'
+                        : '0 4px 8px rgba(0,0,0,0.05)',
+                }}
+            >
                 {this.renderHeader()}
                 {post.edit
                     ? this.renderEditableBody()

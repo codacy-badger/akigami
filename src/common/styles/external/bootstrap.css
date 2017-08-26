@@ -2557,6 +2557,7 @@ output {
   background-color: #fff;
   background-image: none;
   border: 1px solid #ddd;
+  border-radius: 100px;
   
   -webkit-transition: border-color ease-in-out .15s;
        -o-transition: border-color ease-in-out .15s;
@@ -3000,6 +3001,7 @@ select[multiple].input-lg {
   display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
+  border-radius: 100px;
   font-size: 14px;
   font-weight: normal;
   line-height: 1.42857143;
@@ -3528,7 +3530,7 @@ fieldset[disabled] .btn-link:focus {
 }
 .btn-xs,
 .btn-group-xs > .btn {
-  padding: 1px 5px;
+  padding: 2px 12px;
   font-size: 12px;
   line-height: 1.5;
   
@@ -3615,6 +3617,7 @@ tbody.collapse.in {
   -webkit-background-clip: padding-box;
           background-clip: padding-box;
   border: 1px solid #ddd;
+  border-radius: 3px;
   
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
           box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
@@ -5037,10 +5040,10 @@ a.badge:focus {
 }
 .jumbotron {
   color: inherit;
-  background-color: white;
   border: 2px dashed #bbb;
   padding: 18px;
   margin-bottom: 18px;
+  border-radius: 3px;
 }
 .jumbotron h1,
 .jumbotron .h1 {
@@ -6102,8 +6105,8 @@ button.close {
   padding: 3px 8px;
   color: #fff;
   text-align: center;
-  background-color: #000;
-  
+  background-color: #882222;
+  border-radius: 100px;
 }
 .tooltip-arrow {
   position: absolute;
@@ -6117,56 +6120,56 @@ button.close {
   left: 50%;
   margin-left: -5px;
   border-width: 5px 5px 0;
-  border-top-color: #000;
+  border-top-color: #882222;
 }
 .tooltip.top-left .tooltip-arrow {
   right: 5px;
   bottom: 0;
   margin-bottom: -5px;
   border-width: 5px 5px 0;
-  border-top-color: #000;
+  border-top-color: #882222;
 }
 .tooltip.top-right .tooltip-arrow {
   bottom: 0;
   left: 5px;
   margin-bottom: -5px;
   border-width: 5px 5px 0;
-  border-top-color: #000;
+  border-top-color: #882222;
 }
 .tooltip.right .tooltip-arrow {
   top: 50%;
   left: 0;
   margin-top: -5px;
   border-width: 5px 5px 5px 0;
-  border-right-color: #000;
+  border-right-color: #882222;
 }
 .tooltip.left .tooltip-arrow {
   top: 50%;
   right: 0;
   margin-top: -5px;
   border-width: 5px 0 5px 5px;
-  border-left-color: #000;
+  border-left-color: #882222;
 }
 .tooltip.bottom .tooltip-arrow {
   top: 0;
   left: 50%;
   margin-left: -5px;
   border-width: 0 5px 5px;
-  border-bottom-color: #000;
+  border-bottom-color: #882222;
 }
 .tooltip.bottom-left .tooltip-arrow {
   top: 0;
   right: 5px;
   margin-top: -5px;
   border-width: 0 5px 5px;
-  border-bottom-color: #000;
+  border-bottom-color: #882222;
 }
 .tooltip.bottom-right .tooltip-arrow {
   top: 0;
   left: 5px;
   margin-top: -5px;
   border-width: 0 5px 5px;
-  border-bottom-color: #000;
+  border-bottom-color: #882222;
 }
 .popover {
   position: absolute;

@@ -7,8 +7,8 @@ class Hello extends PureComponent {
         return (
             <Jumbotron className="hello">
                 <h4>{`Приветствуем на Акигами, ${user.displayName}!`}</h4>
-                <small>Начни свой путь уже сейчас:</small>
-                <ol>
+                <small>Начни свой путь уже сейчас!</small>
+                {/* <ol>
                     <li className="completed">
                         <span>
                             <a href="/overview">Добавь</a> или <a href="/settings">импортируй</a> аниме/мангу в свою библиотеку
@@ -34,7 +34,7 @@ class Hello extends PureComponent {
                             Поставь лайк понравившемуся посту
                         </span>
                     </li>
-                </ol>
+                </ol> */}
             </Jumbotron>
         );
     }

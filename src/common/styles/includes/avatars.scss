@@ -2,12 +2,13 @@
     background-size: cover;
     background-position: center;
     background-color: $font-color;
-    border-radius: 0;
+    border-radius: 100px;
 }
 
 .avatar-uploader-wrapper {
+    border-radius: 100px;
     padding: 2px;
-    outline: 2px solid #666;
+    box-shadow: 0 0 0 2px #666;
     margin-bottom: 24px;
     position: relative;
 }
@@ -44,6 +45,9 @@
     position: absolute;
     left: 2px;
     top: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border-radius: 100px;
     border: none;
     background-color: rgba(213, 67, 67, 0.4);
     transition: background-color .2s ease;

@@ -261,7 +261,7 @@ class Profile extends PureComponent {
                 />
                 <Threed>
                     <Left>
-                        <Block title="Статистика">
+                        <Block bordered shadow title="Статистика">
                             <div className="stats-block">
                                 <h5 className="block-subtitle" style={{ marginBottom: '-4px' }}>
                                     По предпочтениям
@@ -345,6 +345,8 @@ class Profile extends PureComponent {
                             </div>
                         </Block>
                         <Block
+                            bordered
+                            shadow
                             title="Музыка"
                             buttons={(
                                 <Button bsSize="xs">Все песни</Button>
@@ -388,6 +390,8 @@ class Profile extends PureComponent {
                             />
                         </Block>
                         <Block
+                            bordered
+                            shadow
                             title="Клубы"
                             buttons={(
                                 <Button bsSize="xs">Ещё</Button>
@@ -401,16 +405,18 @@ class Profile extends PureComponent {
                     </Left>
                     <Center>
                         {this.store.about && (
-                            <Block title="О себе">
+                            <Block bordered shadow title="О себе">
                                 <div className="user-about">{this.store.about}</div>
                             </Block>
                         )}
-                        <Block title="Лента">
+                        <Block>
                             <Feed userId={this.store.id} />
                         </Block>
                     </Center>
                     <Right>
                         <Block
+                            bordered
+                            shadow
                             title="Избранное"
                             buttons={(
                                 <Button bsSize="xs">Ещё</Button>
@@ -419,6 +425,8 @@ class Profile extends PureComponent {
                             <Favorites entities={favorites} />
                         </Block>
                         <Block
+                            bordered
+                            shadow
                             title="Подписки"
                             buttons={(
                                 <Button bsSize="xs">Ещё</Button>
@@ -430,6 +438,8 @@ class Profile extends PureComponent {
                             />
                         </Block>
                         <Block
+                            bordered
+                            shadow
                             title="Подписчики"
                             buttons={(
                                 <Button bsSize="xs">Ещё</Button>

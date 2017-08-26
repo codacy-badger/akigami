@@ -82,7 +82,7 @@
 
 .comment-user {
     color: $primary-color;
-    font-weight: 500;
+    font-size: 13px;
     margin-right: 6px;
     transition: color .2s ease;
     will-change: color;
@@ -94,6 +94,7 @@
 
 .comment-content {
     white-space: pre-line;
+    font-size: 13px;
 
     textarea {
         width: 100%;

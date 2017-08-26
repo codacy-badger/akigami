@@ -17,7 +17,7 @@ class Categories extends PureComponent {
     render() {
         const { items, onSelect } = this.props;
         return (
-            <Block size="tiny" title="Фильтр">
+            <Block bordered shadow size="tiny" title="Фильтр">
                 <div className="categories">
                     {items.map(item => (
                         <Button
