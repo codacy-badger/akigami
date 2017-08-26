@@ -52,8 +52,8 @@ class Comment {
         this.content = value;
     }
 
-    editPost = () => {
-        socket.emit('feed:edit', {
+    editComment = () => {
+        socket.emit('comment:edit', {
             id: this.id,
             content: this.content,
             attachments: this.attachments,

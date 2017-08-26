@@ -94,11 +94,18 @@
 
 .comment-content {
     white-space: pre-line;
+
+    textarea {
+        width: 100%;
+        border: 1px solid #ddd;
+        resize: none;
+        padding: 8px 12px;
+    }
 }
 
 .comment-meta {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     font-size: 10px;
     margin-top: 4px;
     font-size: 75%;
@@ -178,4 +185,19 @@
     .avatar {
         outline: 4px solid #f6f5f3;
     }
+}
+
+
+.comment-edit {
+    margin-left: auto;
+    opacity: 0;
+    transition: opacity .2s ease;
+    will-change: opacity;
+    > button {
+        color: #9b9b9b;
+    }
+}
+
+.comment:hover .comment-edit {
+    opacity: 1;
 }
