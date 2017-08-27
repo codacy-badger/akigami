@@ -11,7 +11,7 @@ export default {
         borderWidth: 0,
         backgroundColor: 'none',
         shadow: false,
-        pointFormat: '<span style="font-size:1.8em;color: {point.color};font-weight: bold;font-family: \'Gotham Pro\', sans-serif;">{point.y}%</span>',
+        pointFormat: '<span style="font-size:1.8em;color: {point.color};font-weight: bold;font-family: \'Proxima Nova\', sans-serif;">{point.y}%</span>',
         positioner: labelWidth => ({
             x: 115 - (labelWidth / 2),
             y: 95,

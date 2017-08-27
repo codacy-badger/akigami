@@ -1,5 +1,5 @@
 .block {
-    margin-bottom: 32px;
+    margin-bottom: 22px;
 }
 
 .block.bordered {
@@ -10,7 +10,7 @@
 }
 
 .block.shadow {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 12px rgba(155, 155, 155, 0.2);
 }
 
 .flex .block-content {
@@ -26,7 +26,16 @@
 
 .block-title {
     margin: 0;
-    text-shadow: 0 0 1px rgba(0,0,0,0.15);
+    font-weight: bold;
+    
+    &:after {
+        content: '';
+        width: 40px;
+        margin-top: 4px;
+        height: 4px;
+        background-color: #9b9b9b;
+        display: block;
+    }
 }
 
 .block-buttons {

@@ -7,7 +7,7 @@ class Poster extends PureComponent {
     }
     static propTypes = {
         src: PropTypes.string,
-        type: PropTypes.oneOf(['anime', 'manga', 'ranobe']).isRequired,
+        type: PropTypes.oneOf(['anime', 'manga', 'novel']).isRequired,
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
     }

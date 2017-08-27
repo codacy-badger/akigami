@@ -12,12 +12,13 @@ export default {
         headerFormat: '<table>',
         pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>',
         footerFormat: '</table>',
-        backgroundColor: '#2d2d2d',
+        backgroundColor: '#404040',
         borderWidth: 0,
-        borderRadius: 0,
+        borderRadius: 15,
+        shadow: 0,
         style: {
             color: 'white',
-            fontFamily: "'Gotham Pro', sans-serif",
+            fontFamily: "'Proxima Nova', sans-serif",
         },
     },
     credits: {
@@ -37,7 +38,7 @@ export default {
         margin: -5,
         itemDistance: 10,
         itemStyle: {
-            fontFamily: "'Gotham Pro', sans-serif",
+            fontFamily: "'Proxima Nova', sans-serif",
         },
     },
     series: [{

@@ -41,7 +41,7 @@ class Settings extends PureComponent {
                     <Grid className="content">
                         <Row>
                             <Col xs={12}>
-                                <h1 style={{ margin: '0 0 32px' }}>Настройки профиля</h1>
+                                <h1 style={{ margin: '0 0 32px', fontWeight: 800 }}>Настройки профиля</h1>
                             </Col>
                         </Row>
                     </Grid>

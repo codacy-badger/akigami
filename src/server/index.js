@@ -85,7 +85,7 @@ app.use((err, req, res, nextIgnored) => {
 
     res.status(err.status || 500);
     res.ssr({
-        title: 'Ошибка - Акигами',
+        title: 'Ошибка',
         layout: 'error',
     });
 });

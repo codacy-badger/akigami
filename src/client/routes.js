@@ -20,4 +20,7 @@ export default {
     settings: {
         import: () => import(/* webpackChunkName: "settings" */ './pages/Settings'),
     },
+    explore: {
+        import: () => import(/* webpackChunkName: "explore" */ './pages/Explore'),
+    },
 };

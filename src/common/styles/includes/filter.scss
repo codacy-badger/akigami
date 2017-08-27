@@ -1,0 +1,144 @@
+.filter-wrapper {
+    height: calc(100vh - 48px);
+    background-color: $font-color;
+    margin-left: -100vw;
+    padding-left: 100vw;
+    padding-right: 22px;
+    color: white;
+    position: relative;
+}
+
+.filter-header {
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+}
+
+.filter-close {
+    margin-left: auto;
+    color: white;
+    padding: 0 6px 1px;
+    font-size: 22px;
+
+    &:hover {
+        color: #eee;
+    }
+}
+
+.filter-item {
+    margin-bottom: 32px;
+    h5 {
+        margin-top: 0;
+        margin-bottom: 12px;
+        font-size: 13px;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: white;
+    }
+}
+
+.filter-item-inner {
+    
+}
+
+.filter-box {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #9b9b9b;
+    border-radius: 3px;
+}
+
+.filter-box-item {
+    display: flex;
+    background-color: transparent;
+    transition: background-color, .2s ease;
+    will-change: background-color;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid #9b9b9b;
+    }
+
+    &.positive-hover {
+        background-color: rgba(72, 166, 38, 0.3);
+        &:active {
+            background-color: rgba(72, 166, 38, 0.5);
+        }
+    }
+    
+    &.negative-hover {
+        background-color: rgba(166, 38, 38, 0.5);
+        &:active {
+            background-color: rgba(166, 38, 38, 0.5);
+        }
+    }
+
+    &.positive-active {
+        background-color: rgba(72, 166, 38, 0.3);
+    }
+    
+    &.negative-active {
+        background-color: rgba(166, 38, 38, 0.3);
+    }
+}
+
+.filter-box-add {
+    width: 100%;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 6px 12px;
+}
+
+.filter-box-del {
+    margin-left: auto;
+    background-color: transparent;
+    border: none;
+    padding: 6px 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 991px) {
+    .filter-wrapper {
+        width: 280px;
+        margin-left: 0;
+        padding-left: 22px;
+        padding-right: 22px;
+        position: fixed;
+        left: 0;
+        top: 48px;
+        z-index: 2;
+        transform: translateX(-280px);
+        transition: transform .2s ease;
+        will-change: transform;
+        
+        &.open {
+            transform: translateX(0);
+        }
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .filter-header h3 {
+        padding-top: 32px !important;
+    }
+}
+
+@media screen and (max-width: 459px) {
+    .filter-wrapper {
+        width: 100%;
+    }
+}

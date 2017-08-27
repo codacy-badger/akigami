@@ -19,6 +19,7 @@ class Avatar extends PureComponent {
         onClick: PropTypes.func,
         className: PropTypes.string,
     }
+
     render() {
         const { src, href, onClick, size, online, className } = this.props;
         const props = {};
