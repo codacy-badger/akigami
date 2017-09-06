@@ -1,10 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
-import cx from 'classnames';
-
 import Block from '../Block';
-import Icon from '../Icon';
+import { List, Item, Icon, Title } from './Categories.styled';
 
 class Categories extends PureComponent {
     static defaultProps = {
@@ -17,19 +14,19 @@ class Categories extends PureComponent {
     render() {
         const { items, onSelect } = this.props;
         return (
-            <Block bordered shadow size="tiny" title="Фильтр">
-                <div className="categories">
+            <Block bordered shadow title="Фильтр">
+                <List>
                     {items.map(item => (
-                        <Button
+                        <Item
                             key={item.id}
-                            className={cx({ 'category-item': true, active: item.active })}
+                            active={item.active}
                             onClick={() => onSelect(item)}
                         >
                             {item.icon && <Icon type={item.icon} />}
-                            <span>{item.title}</span>
-                        </Button>
+                            <Title>{item.title}</Title>
+                        </Item>
                     ))}
-                </div>
+                </List>
             </Block>
         );
     }

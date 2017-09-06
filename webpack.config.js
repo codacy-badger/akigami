@@ -100,13 +100,53 @@ module.exports = () => {
                     },
                 },
                 {
-                    test: /\.s?css$/,
+                    test: /\.css$/,
+                    exclude: [/node_modules/, /emotion\.css$/],
+                    use: ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: [
+                            {
+                                loader: 'css-loader',
+                                options: {
+                                    sourceMap: true,
+                                },
+                            },
+                            {
+                                loader: 'postcss-loader',
+                                options: {
+                                    sourceMap: true,
+                                    plugins: loader => [
+                                        require('postcss-import')({
+                                            addDependencyTo: loader,
+                                            path: [
+                                                path.join(__dirname, 'src', 'common'),
+                                                path.join(__dirname, 'node_modules'),
+                                            ],
+                                            root: loader.resourcePath,
+                                        }),
+                                        require('postcss-simple-vars')(),
+                                        require('postcss-color-function')(),
+                                        require('postcss-nested')(),
+                                        require('autoprefixer')(),
+                                        // require('cssnano')(),
+                                    ],
+                                },
+                            },
+                        ],
+                    }),
+                },
+                {
+                    test: /emotion\.css$/,
                     exclude: /node_modules/,
                     use: ExtractTextPlugin.extract({
                         fallback: 'style-loader',
                         use: [
                             {
                                 loader: 'css-loader',
+                                options: {
+                                    sourceMap: true,
+                                    modules: true,
+                                },
                             },
                             {
                                 loader: 'postcss-loader',
@@ -139,7 +179,7 @@ module.exports = () => {
                         loader: 'babel-loader',
                         options: {
                             presets: ['stage-0', 'react'],
-                            plugins: ['transform-decorators-legacy'],
+                            plugins: ['transform-decorators-legacy', 'emotion'],
                         },
                     },
                 },

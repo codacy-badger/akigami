@@ -1,8 +1,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
-
-import Icon from '../Icon';
+import {
+    Wrapper,
+    Button,
+    Icon,
+    Text,
+    Divider,
+    Line,
+    DividerText,
+} from './GenderChanger.styled';
 
 class GenderChanger extends PureComponent {
     static defaultProps = {
@@ -21,32 +27,28 @@ class GenderChanger extends PureComponent {
     render() {
         const { selected, style } = this.props;
         return (
-            <div className="gender-changer" style={style}>
-                <button
+            <Wrapper style={style}>
+                <Button
+                    gender="male"
+                    active={selected === 'male'}
                     onClick={() => this.selectGender('male')}
-                    className={cx({
-                        'gender-changer-male': true,
-                        active: selected === 'male',
-                    })}
                 >
                     <Icon type="gender-male" />
-                    <p>Парень</p>
-                </button>
-                <div className="gender-divider">
-                    <div className="gender-divider-line" />
-                    <p className="gender-divider-text">или</p>
-                </div>
-                <button
+                    <Text>Парень</Text>
+                </Button>
+                <Divider>
+                    <Line />
+                    <DividerText>или</DividerText>
+                </Divider>
+                <Button
+                    gender="female"
+                    active={selected === 'female'}
                     onClick={() => this.selectGender('female')}
-                    className={cx({
-                        'gender-changer-female': true,
-                        active: selected === 'female',
-                    })}
                 >
                     <Icon type="gender-female" />
-                    <p>Девушка</p>
-                </button>
-            </div>
+                    <Text>Девушка</Text>
+                </Button>
+            </Wrapper>
         );
     }
 }

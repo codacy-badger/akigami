@@ -1,12 +1,21 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
-import { Button } from 'react-bootstrap';
-import Textarea from 'react-textarea-autosize';
-
-import Avatar from '../Avatar';
-import Icon from '../Icon';
 import Store from './CommentCreator.store';
+import {
+    Creator,
+    Short,
+    Full,
+    Textarea,
+    Avatar,
+    Header,
+    Footer,
+    Action,
+    Replied,
+    Clear,
+    Attach,
+    Icon,
+} from './CommentCreator.styled';
 
 @inject(({ app }) => ({ app }))
 @observer
@@ -43,10 +52,9 @@ class CommentCreator extends PureComponent {
     renderShortView() {
         const { user } = this.props.app;
         return (
-            <div className="comment-creator-short" onClick={this.toFull}>
+            <Short onClick={this.toFull}>
                 <Avatar
                     size={30}
-                    className="post-creator-avatar"
                     src={user.getAvatar}
                     title={user.displayName}
                 />
@@ -54,23 +62,19 @@ class CommentCreator extends PureComponent {
                     minRows={1}
                     maxRows={1}
                     readOnly
-                    style={{
-                        cursor: 'text',
-                    }}
                     value="Написать комментарий..."
                     placeholder="Написать комментарий..."
                 />
-            </div>
+            </Short>
         );
     }
     renderFullView() {
         const { user } = this.props.app;
         return (
-            <div className="comment-creator-full">
-                <div className="post-creator-header">
+            <Full>
+                <Header>
                     <Avatar
                         size={30}
-                        className="post-creator-avatar"
                         src={user.getAvatar}
                         title={user.displayName}
                     />
@@ -80,43 +84,43 @@ class CommentCreator extends PureComponent {
                         value={this.store.content}
                         onChange={this.handleChangeContent}
                     />
-                </div>
-                <div className="post-creator-footer">
+                </Header>
+                <Footer>
                     <div className="post-short-attachments">
-                        <Button bsStyle="link" bsSize="xs">
+                        <Attach bsStyle="link" bsSize="xs">
                             <Icon type="image" />
-                        </Button>
+                        </Attach>
                         {this.store.reply && (
-                            <div className="comment-replyed-user">
+                            <Replied>
                                 {`Ответить ${this.store.reply.user.displayName}`}
-                                <Button
+                                <Clear
                                     bsSize="xs"
                                     bsStyle="link"
                                     onClick={this.clearReplyState}
                                 >
                                     <Icon type="close" />
-                                </Button>
-                            </div>
+                                </Clear>
+                            </Replied>
                         )}
                     </div>
-                    <Button
+                    <Action
                         bsStyle="danger"
                         bsSize="sm"
                         onClick={this.handleCreateComment}
                     >
                         Отправить
-                    </Button>
-                </div>
-            </div>
+                    </Action>
+                </Footer>
+            </Full>
         );
     }
     render() {
         return (
-            <div className="comment-creator">
+            <Creator>
                 {this.store.collapsed
                     ? this.renderFullView()
                     : this.renderShortView()}
-            </div>
+            </Creator>
         );
     }
 }

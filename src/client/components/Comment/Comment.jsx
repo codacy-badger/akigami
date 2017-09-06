@@ -1,14 +1,29 @@
 import React, { PureComponent } from 'react';
 import { inject, observer } from 'mobx-react';
-import Textarea from 'react-textarea-autosize';
+
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 import m from 'moment';
 
 import { Button, ButtonToolbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import Icon from '../Icon';
-import Avatar from '../Avatar';
+import {
+    Wrapper,
+    Main,
+    Info,
+    Avatar,
+    Replies,
+    Body,
+    User,
+    Content,
+    Textarea,
+    Meta,
+    Reply,
+    Date,
+    Actions,
+    Action,
+} from './Comment.styled';
+
 
 @inject(({ app }) => ({ user: app.user }))
 @observer
@@ -45,8 +60,8 @@ class Comment extends PureComponent {
         const { comment } = this.props;
         return (
             <div>
-                <div className="comment-body">
-                    <span className="comment-content">
+                <Body>
+                    <Content>
                         <Textarea
                             minRows={1}
                             autoFocus
@@ -54,8 +69,8 @@ class Comment extends PureComponent {
                             onChange={this.handleChangeContent}
                             placeholder="Расскажите что нового?"
                         />
-                    </span>
-                </div>
+                    </Content>
+                </Body>
                 <div className="post-edit-actions">
                     <ButtonToolbar>
                         <Button
@@ -86,81 +101,76 @@ class Comment extends PureComponent {
         );
         return (
             <div>
-                <div className="comment-body">
-                    <a className="comment-user" href={comment.user.link}>
+                <Body>
+                    <User href={comment.user.link}>
                         {comment.user.displayName}
-                    </a>
-                    <span className="comment-content">
+                    </User>
+                    <Content>
                         {comment.content}
-                    </span>
-                </div>
-                <div className="comment-meta">
+                    </Content>
+                </Body>
+                <Meta>
                     {onReply && (
-                        <Button
+                        <Reply
                             bsSize="xs"
                             bsStyle="link"
-                            className="comment-reply"
                             onClick={() => onReply(comment)}
                         >
                             Ответить
-                        </Button>
+                        </Reply>
                     )}
-                    <span className="comment-date">
+                    <Date>
                         {m(comment.createdAt).locale('ru').fromNow()}
-                    </span>
+                    </Date>
                     {(user.id === comment.user.id && !comment.edit) && (
-                        <div className="comment-edit">
+                        <Actions>
                             <OverlayTrigger placement="top" overlay={editTooltip}>
-                                <Button
+                                <Action
                                     bsSize="xs"
                                     bsStyle="link"
-                                    className="comment-reply"
                                     onClick={this.startEditComment}
                                 >
                                     <Icon type="lead-pencil" />
-                                </Button>
+                                </Action>
                             </OverlayTrigger>
                             <OverlayTrigger placement="top" overlay={delTooltip}>
-                                <Button
+                                <Action
                                     bsSize="xs"
                                     bsStyle="link"
-                                    className="comment-reply"
                                     style={{ fontSize: 14, marginLeft: 6 }}
                                     onClick={() => {}}
                                 >
                                     <Icon type="close" />
-                                </Button>
+                                </Action>
                             </OverlayTrigger>
-                        </div>
+                        </Actions>
                     )}
-                </div>
+                </Meta>
             </div>
         );
     }
     render() {
         const { comment, replies, replied, user } = this.props;
         return (
-            <article
-                className={cx({
-                    comment: true,
-                    'comment-replies': replies.length > 0,
-                    'comment-replied': replied,
-                })}
+            <Wrapper
+                replies={replies.length > 0}
+                replied={replied}
             >
-                <div className="comment-inits">
+                <Main>
                     <Avatar
                         size={30}
+                        replied={replied}
                         src={comment.user.getAvatar}
                         title={comment.user.displayName}
                     />
-                    <div className="comment-info">
+                    <Info>
                         {comment.edit
                             ? this.renderEditableBody()
                             : this.renderDefaultBody()}
-                    </div>
-                </div>
+                    </Info>
+                </Main>
                 {replies.length > 0 && (
-                    <div className="comment-replies-wrapper">
+                    <Replies>
                         {replies.map(reply => (
                             <Comment
                                 user={user}
@@ -169,9 +179,9 @@ class Comment extends PureComponent {
                                 replied
                             />
                         ))}
-                    </div>
+                    </Replies>
                 )}
-            </article>
+            </Wrapper>
         );
     }
 }

@@ -1,4 +1,4 @@
-export default ({ body, title, css, user, js, preload }) => (`
+export default ({ criticalCss, hydrateIds, body, title, css, user, js, preload }) => (`
     <!DOCTYPE html>
     <html lang="ru">
 
@@ -8,12 +8,18 @@ export default ({ body, title, css, user, js, preload }) => (`
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
         ${css}
+        <style type="text/css">
+            ${criticalCss}
+        </style>
     </head>
 
     <body data-user=${user}>
         <div id="root">${body}</div>
         ${preload}
         ${js}
+        <script>
+            window.hydrate = ${hydrateIds}
+        </script>
     </body>
 
     </html>

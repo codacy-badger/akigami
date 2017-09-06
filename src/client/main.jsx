@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
+import { hydrate } from 'emotion';
 import AppStore from './stores/AppStore';
 import App from './App';
 
 (async () => {
+    hydrate(JSON.parse(window.hydrate));
     const raw = document.querySelector('#preload-data');
     const userData = JSON.parse(document.body.dataset.user);
     const app = new AppStore();

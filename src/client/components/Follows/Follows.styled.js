@@ -1,10 +1,12 @@
-.follows-wrapper {
+import styled from 'emotion/react';
+
+export const Wrapper = styled('div')`
     margin: -3px;
     display: flex;
     flex-wrap: wrap;
-}
+`;
 
-.follow-item {
+export const Item = styled('a')`
     width: 14%;
     margin: 3px;
     cursor: pointer;
@@ -12,14 +14,14 @@
     transition: opacity .2s ease;
     will-change: opacity;
 
-    img {
-        width: 100%;
-    }
-
     &:hover {
         opacity: 0.8;
     }
     &:active {
         opacity: 1;
     }
-}
+`;
+
+export const Avatar = styled('img')`
+    width: 100%;
+`;

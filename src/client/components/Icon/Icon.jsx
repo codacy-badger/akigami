@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 class Icon extends PureComponent {
     static propTypes = {
-        type: PropTypes.string.isRequired,
+        type: PropTypes.string,
     }
     render() {
         const { type } = this.props;

@@ -1,8 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
-
 import Icon from '../Icon';
+import {
+    Box,
+    Item,
+    Add,
+    Del,
+} from './FilterCheckbox.styled';
 
 class FilterCheckbox extends PureComponent {
     static defaultProps = {
@@ -49,39 +53,34 @@ class FilterCheckbox extends PureComponent {
             return e;
         });
         return (
-            <div className="filter-box">
+            <Box>
                 {merged.map(opt => (
-                    <div
+                    <Item
                         key={opt.value}
-                        className={cx({
-                            'filter-box-item': true,
-                            'positive-hover': this.state[`p_hover-${opt.value}`],
-                            'negative-hover': this.state[`n_hover-${opt.value}`],
-                            'positive-active': opt.active === 'positive',
-                            'negative-active': opt.active === 'negative',
-                        })}
+                        positiveHover={this.state[`p_hover-${opt.value}`]}
+                        negativeHover={this.state[`n_hover-${opt.value}`]}
+                        positiveActive={opt.active === 'positive'}
+                        negativeActive={opt.active === 'negative'}
                     >
-                        <button
-                            className="filter-box-add"
+                        <Add
                             onMouseEnter={() => this.changeHoverable(opt.value, 'positive', true)}
                             onMouseLeave={() => this.changeHoverable(opt.value, 'positive', false)}
                             onClick={() => this.handleChange(opt, opt.active === 'positive' ? false : 'positive')}
                         >
                             {opt.label}
-                        </button>
+                        </Add>
                         {(negative || (!negative && opt.negative)) && (
-                            <button
-                                className="filter-box-del"
+                            <Del
                                 onMouseEnter={() => this.changeHoverable(opt.value, 'negative', true)}
                                 onMouseLeave={() => this.changeHoverable(opt.value, 'negative', false)}
                                 onClick={() => this.handleChange(opt, opt.active === 'negative' ? false : 'negative')}
                             >
                                 <Icon type="minus" />
-                            </button>
+                            </Del>
                         )}
-                    </div>
+                    </Item>
                 ))}
-            </div>
+            </Box>
         );
     }
 }

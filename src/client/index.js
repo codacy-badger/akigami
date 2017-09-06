@@ -1,2 +1,2 @@
-require('../common/styles/index.scss');
+require('../common/styles/index.css');
 require('./main');

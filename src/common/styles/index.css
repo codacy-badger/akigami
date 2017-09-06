@@ -7,10 +7,11 @@
 @import "external/react-datetime.css";
 @import "external/react-select.css";
 
+@import "includes/variables.css";
+@import "includes/fonts.css";
+@import "includes/general.css";
 
-@import "includes/variables.scss";
-@import "includes/fonts.scss";
-@import "includes/general.scss";
+/*
 
 
 @import "includes/header.scss";
@@ -33,4 +34,4 @@
 @import "includes/comments.scss";
 @import "includes/loading.scss";
 @import "includes/filter.scss";
-@import "includes/explore.scss";
+@import "includes/explore.scss";*/

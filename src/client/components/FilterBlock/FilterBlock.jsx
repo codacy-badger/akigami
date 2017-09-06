@@ -1,15 +1,25 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { Block, Title, Content } from './FilterBlock.styled';
 
 class FilterBlock extends PureComponent {
+    static defaultProps = {
+        title: null,
+        children: null,
+    }
+    static propTypes = {
+        title: PropTypes.string,
+        children: PropTypes.any,
+    }
     render() {
         const { title, children } = this.props;
         return (
-            <div className="filter-item">
-                {title && <h5>{title}</h5>}
-                <div className="filter-item-inner">
+            <Block>
+                {title && <Title>{title}</Title>}
+                <Content>
                     {children}
-                </div>
-            </div>
+                </Content>
+            </Block>
         );
     }
 }

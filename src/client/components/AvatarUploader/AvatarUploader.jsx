@@ -1,10 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Dropzone from 'react-dropzone';
-import cx from 'classnames';
-
 import Avatar from '../Avatar';
-import Icon from '../Icon';
+import { Wrapper, Replacer, Zone, Icon, Title } from './AvatarUploader.styled';
 
 class AvatarUploader extends PureComponent {
     static defaultProps = {
@@ -37,50 +34,35 @@ class AvatarUploader extends PureComponent {
     render() {
         const { size, className, style } = this.props;
         const { avatar } = this.state;
-        const styleWrapper = {
-            width: size + 4,
-            height: size + 4,
-            ...style,
-        };
         if (avatar) {
             return (
-                <div
-                    className={cx({
-                        'avatar-uploader-wrapper': true,
-                        [className]: className,
-                    })}
-                    style={styleWrapper}
+                <Wrapper
+                    size={size}
+                    className={className}
+                    style={style}
                 >
-                    <button
-                        onClick={this.clearFiles}
-                        className="avatar-uploader-replace"
-                    >
+                    <Replacer onClick={this.clearFiles}>
                         Выбрать другой
-                    </button>
+                    </Replacer>
                     <Avatar size={size} src={avatar.preview || avatar} />
-                </div>
+                </Wrapper>
             );
         }
         return (
-            <div
-                className={cx({
-                    'avatar-uploader-wrapper': true,
-                    [className]: className,
-                })}
-                style={styleWrapper}
+            <Wrapper
+                size={size}
+                className={className}
+                style={style}
             >
-                <Dropzone
+                <Zone
                     multiple={false}
                     onDrop={this.onDrop}
-                    className="avatar-uploader"
-                    ref={(e) => {
-                        this.zone = e;
-                    }}
+                    ref={(e) => { this.zone = e; }}
                 >
                     <Icon type="account-outline" />
-                    <p>Загрузить аватар</p>
-                </Dropzone>
-            </div>
+                    <Title>Загрузить аватар</Title>
+                </Zone>
+            </Wrapper>
         );
     }
 }

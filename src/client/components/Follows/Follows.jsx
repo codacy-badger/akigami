@@ -3,6 +3,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 import Blank from '../Blank';
+import { Wrapper, Item, Avatar } from './Follows.styled';
 
 class Follows extends PureComponent {
     static defaultProps = {
@@ -19,7 +20,7 @@ class Follows extends PureComponent {
             return <Blank>{blankText}</Blank>;
         }
         return (
-            <div className="follows-wrapper">
+            <Wrapper>
                 {entities.map(item => (
                     <OverlayTrigger
                         key={item._id}
@@ -30,15 +31,17 @@ class Follows extends PureComponent {
                             </Tooltip>
                         )}
                     >
-                        <a
+                        <Item
                             href={`/@${item.username}`}
-                            className="follow-item"
                         >
-                            <img src={item.avatar} alt={item.displayName} />
-                        </a>
+                            <Avatar
+                                src={item.avatar}
+                                alt={item.displayName}
+                            />
+                        </Item>
                     </OverlayTrigger>
                 ))}
-            </div>
+            </Wrapper>
         );
     }
 }
