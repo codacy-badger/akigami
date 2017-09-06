@@ -6,9 +6,9 @@ import AppStore from './stores/AppStore';
 import App from './App';
 
 (async () => {
-    hydrate(JSON.parse(window.hydrate));
     const raw = document.querySelector('#preload-data');
     const userData = JSON.parse(document.body.dataset.user);
+    const ids = JSON.parse(document.body.dataset.user);
     const app = new AppStore();
     app.user.setUser(userData);
     await app.router.setContainer({
@@ -16,6 +16,7 @@ import App from './App';
         props: raw.text ? JSON.parse(raw.text) : null,
         layout: raw.dataset.layout,
     });
+    hydrate(ids);
     ReactDOM.render(
         <Provider app={app}>
             <App />

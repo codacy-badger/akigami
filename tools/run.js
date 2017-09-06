@@ -2,7 +2,7 @@ const Promise = require('bluebird');
 
 require('babel-register').default({
     presets: ['stage-0', 'react'],
-    plugins: ['dynamic-import-node', 'transform-es2015-modules-commonjs', 'transform-decorators-legacy'],
+    plugins: ['dynamic-import-node', 'transform-es2015-modules-commonjs', 'transform-decorators-legacy', 'emotion'],
 });
 require('babel-polyfill');
 

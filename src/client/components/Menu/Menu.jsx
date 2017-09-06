@@ -1,7 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
-import cx from 'classnames';
+import {
+    Wrapper,
+    MenuInner,
+    Item,
+    Counter,
+    Title,
+} from './Menu.styled';
 
 class Menu extends PureComponent {
     static defaultProps = {
@@ -47,37 +53,31 @@ class Menu extends PureComponent {
         const { sticked } = this.state;
         const { items, selected, onSelect, sticky } = this.props;
         return (
-            <div className="menu-wrapper">
-                <div
-                    className={cx({
-                        menu: true,
-                        sticked,
-                        sticky,
-                    })}
+            <Wrapper>
+                <MenuInner
+                    sticky={sticky}
+                    sticked={sticked}
                 >
                     <Grid>
                         <Row>
                             <Col xs={12}>
                                 {items.map(item => (
-                                    <button
+                                    <Item
                                         key={item.tab}
+                                        active={selected === item.tab}
                                         onClick={() => onSelect(item)}
-                                        className={cx({
-                                            'menu-item': true,
-                                            active: selected === item.tab,
-                                        })}
                                     >
-                                        <span className="menu-title">{item.title}</span>
+                                        <Title>{item.title}</Title>
                                         {typeof item.count === 'number' && (
-                                            <span className="menu-counter">{item.count}</span>
+                                            <Counter>{item.count}</Counter>
                                         )}
-                                    </button>
+                                    </Item>
                                 ))}
                             </Col>
                         </Row>
                     </Grid>
-                </div>
-            </div>
+                </MenuInner>
+            </Wrapper>
         );
     }
 }

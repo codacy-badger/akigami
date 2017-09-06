@@ -1,21 +1,36 @@
 import React, { PureComponent } from 'react';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
-import Textarea from 'react-textarea-autosize';
 import m from 'moment';
 
 import {
     OverlayTrigger,
     Tooltip,
-    DropdownButton,
     MenuItem,
     Button,
     ButtonToolbar,
 } from 'react-bootstrap';
 
-import Avatar from '../Avatar';
+
 import Comments from '../../containers/Comments';
 import Icon from '../Icon';
+
+import {
+    Element,
+    Header,
+    Avatar,
+    Info,
+    User,
+    Date,
+    Type,
+    Menu,
+    Dropdown,
+    Body,
+    Content,
+    Textarea,
+    Attachments,
+    Actions,
+} from './Post.styled';
 
 @inject(({ app }) => ({ user: app.user }))
 @observer
@@ -70,32 +85,29 @@ class Post extends PureComponent {
             </Tooltip>
         );
         return (
-            <div className="post-header with-padding">
+            <Header paddings>
                 <Avatar
                     size={45}
                     href={post.user.link}
                     src={post.user.getAvatar}
                     title={post.user.displayName}
                 />
-                <div className="post-header-info">
-                    <a
-                        className="post-header-username"
-                        href={post.user.link}
-                    >
+                <Info>
+                    <User href={post.user.link}>
                         {post.user.displayName}
-                    </a>
-                    <span className="post-header-date">
+                    </User>
+                    <Date>
                         {m(post.createdAt).locale('ru').fromNow()}
                         <OverlayTrigger placement="top" overlay={tooltip}>
-                            <span className="post-header-type">
+                            <Type>
                                 <Icon type={namespace.icon} />
-                            </span>
+                            </Type>
                         </OverlayTrigger>
-                    </span>
-                </div>
+                    </Date>
+                </Info>
                 {(user.id === post.user.id && !post.edit) && (
-                    <div className="post-header-menu">
-                        <DropdownButton
+                    <Menu>
+                        <Dropdown
                             noCaret
                             pullRight
                             bsSize="xs"
@@ -105,17 +117,17 @@ class Post extends PureComponent {
                         >
                             <MenuItem eventKey="edit">Изменить</MenuItem>
                             <MenuItem eventKey="delete">Удалить</MenuItem>
-                        </DropdownButton>
-                    </div>
+                        </Dropdown>
+                    </Menu>
                 )}
-            </div>
+            </Header>
         );
     }
     renderEditableBody() {
         const { post } = this.props;
         return (
-            <div className="post-body with-padding">
-                <div className="post-content">
+            <Body paddings>
+                <Content>
                     <Textarea
                         minRows={3}
                         autoFocus
@@ -123,15 +135,15 @@ class Post extends PureComponent {
                         onChange={this.handleChangeContent}
                         placeholder="Расскажите что нового?"
                     />
-                </div>
+                </Content>
                 {post.attachments.length > 0 && (
-                    <div className="post-attachments">
+                    <Attachments>
                         {post.attachments.map((attach, i) => (
                             <div key={i}>123</div>
                         ))}
-                    </div>
+                    </Attachments>
                 )}
-                <div className="post-edit-actions">
+                <Actions>
                     <ButtonToolbar>
                         <Button
                             bsSize="sm"
@@ -147,44 +159,37 @@ class Post extends PureComponent {
                             Сохранить
                         </Button>
                     </ButtonToolbar>
-                </div>
-            </div>
+                </Actions>
+            </Body>
         );
     }
     renderDefaultBody() {
         const { post } = this.props;
         return (
-            <div className="post-body with-padding">
-                <div className="post-content">
+            <Body paddings>
+                <Content>
                     {post.content}
-                </div>
+                </Content>
                 {post.attachments.length > 0 && (
-                    <div className="post-attachments">
+                    <Attachments>
                         {post.attachments.map((attach, i) => (
                             <div key={i}>123</div>
                         ))}
-                    </div>
+                    </Attachments>
                 )}
-            </div>
+            </Body>
         );
     }
     render() {
         const { post, user } = this.props;
         return (
-            <article
-                className="post no-padding"
-                style={{
-                    boxShadow: post.edit
-                        ? '0 4px 8px rgba(0,0,0,0.05), -6px 0 0 #ffbb07'
-                        : '0 4px 8px rgba(0,0,0,0.05)',
-                }}
-            >
+            <Element>
                 {this.renderHeader()}
                 {post.edit
                     ? this.renderEditableBody()
                     : this.renderDefaultBody()}
                 <Comments postId={post.id} />
-            </article>
+            </Element>
         );
     }
 }

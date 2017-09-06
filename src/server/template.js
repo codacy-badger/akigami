@@ -13,13 +13,10 @@ export default ({ criticalCss, hydrateIds, body, title, css, user, js, preload }
         </style>
     </head>
 
-    <body data-user=${user}>
+    <body data-user=${user} data-ids=${hydrateIds}>
         <div id="root">${body}</div>
         ${preload}
         ${js}
-        <script>
-            window.hydrate = ${hydrateIds}
-        </script>
     </body>
 
     </html>
