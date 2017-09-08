@@ -40,6 +40,7 @@ class Header extends PureComponent {
         document.removeEventListener('scroll', this.scrollEventer);
     }
     scrollEventer = () => {
+        console.log(document.body.scrollTop);
         const { ui } = this.props;
         const isTop = document.body.scrollTop <= 130;
         if (ui.transparented) {
@@ -50,7 +51,6 @@ class Header extends PureComponent {
     render() {
         const { ui, user } = this.props;
         const transparent = ui.transparented ? ui.transparent : false;
-        console.log(transparent);
         return (
             <Head transparent={transparent}>
                 <Grid>

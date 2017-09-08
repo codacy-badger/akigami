@@ -9,7 +9,6 @@ import {
     Tab,
     Button,
 } from 'react-bootstrap';
-import { addStyle } from 'react-bootstrap/lib/utils/bootstrapUtils';
 
 import Favorites from '../../containers/Favorites';
 import Threed from '../../containers/Threed';
@@ -42,8 +41,6 @@ import {
 } from './Profile.styled';
 
 const { Left, Right, Center } = Threed;
-
-addStyle(Button, 'transparent');
 
 if (typeof window !== 'undefined') {
     HighchartsMore(Chart.Highcharts);

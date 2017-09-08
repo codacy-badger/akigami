@@ -3,6 +3,9 @@ import Grid from 'react-bootstrap/lib/Grid';
 import Button from 'react-bootstrap/lib/Button';
 import R from 'react-bootstrap/lib/Row';
 import C from 'react-bootstrap/lib/Col';
+import { addStyle } from 'react-bootstrap/lib/utils/bootstrapUtils';
+
+addStyle(Button, 'transparent');
 
 export const Header = styled('div')`
     height: 400px;
