@@ -1,7 +1,9 @@
 import React, { Children, PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import Responsive from 'react-responsive';
+
+import Content from '../../components/Content';
 
 const propTypes = {
     children: PropTypes.any,
@@ -34,7 +36,7 @@ class Threed extends PureComponent {
         const { inverse } = this.props;
         const { left, right, center } = this.makeComponents();
         return (
-            <Grid className="content">
+            <Content>
                 <Row>
                     <Col xs={12} sm={4} lg={3}>
                         <Responsive minWidth={1200}>
@@ -54,7 +56,7 @@ class Threed extends PureComponent {
                         </Col>
                     </Responsive>
                 </Row>
-            </Grid>
+            </Content>
         );
     }
 }

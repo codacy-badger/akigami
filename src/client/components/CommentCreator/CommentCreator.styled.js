@@ -43,6 +43,16 @@ export const Header = styled('div')`
     width: 100%;
 `;
 
+export const Attachments = styled('div')`
+    display: flex;
+    width: 100%;
+    margin-right: 12px;
+
+    @media screen and (max-width: 767px) {
+        margin-right: 0;
+    }
+`;
+
 export const Footer = styled('div')`
     display: flex;
     width: 100%;
@@ -65,13 +75,15 @@ export const Replied = styled('div')`
 
 export const Clear = styled(Button)`
     font-size: 16px;
-    margin-top: -3px;
+    margin-top: 0;
+    text-decoration: none !important;
 `;
 
 export const Attach = styled(Button)`
     font-size: 24px;
     padding: 0;
     margin: -4px 0;
+    text-decoration: none !important;
 `;
 
 export const Icon = styled(Ico)`

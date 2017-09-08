@@ -1,30 +1,6 @@
-.track {
-    display: flex;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
+import styled from 'emotion/react';
 
-    &:hover {
-        .track-cover-overlay {
-            opacity: 1;
-        }
-    }
-    &:not(:last-child) {
-        margin-bottom: 12px;
-    }
-}
-
-.track-cover-wrapper {
-    position: relative;
-    width: 45px;
-    height: 45px;
-    flex-shrink: 0;
-    margin-right: 12px;
-    overflow: hidden;
-    display: flex;
-}
-
-.track-cover-overlay {
+export const Overlay = styled('button')`
     position: absolute;
     flex: 1;
     width: 100%;
@@ -45,21 +21,47 @@
     &:active {
         background-color: rgba(171, 50, 50, 0.9);
     }
-}
+`;
 
-.track-cover {
+export const Item = styled('article')`
+    display: flex;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+        ${Overlay} {
+            opacity: 1;
+        }
+    }
+    &:not(:last-child) {
+        margin-bottom: 12px;
+    }
+`;
+
+export const Wrapper = styled('div')`
+    position: relative;
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+    margin-right: 12px;
+    overflow: hidden;
+    display: flex;
+`;
+
+export const Cover = styled('img')`
     width: 100%;
     border-radius: 3px;
-}
+`;
 
-.track-info {
+export const Info = styled('div')`
     display: flex;
     flex-direction: column;
     width: 100%;
     overflow: hidden;
-}
+`;
 
-.track-artist {
+export const Artist = styled('a')`
     font-size: 12px;
     color: #666;
     max-width: 40%;
@@ -67,9 +69,9 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     flex-shrink: 0;
-}
+`;
 
-.track-title {
+export const Title = styled('span')`
     font-size: 12px;
     font-weight: bold;
     max-width: 55%;
@@ -81,23 +83,22 @@
         font-weight: 400;
         margin: 0 4px;
     }
-}
+`;
 
-.track-info-header,
-.track-info-footer {
+export const Line = styled('div')`
     display: flex;
     align-items: center;
     flex: 1;
     width: 100%;
     overflow: hidden;
-}
+`;
 
-.track-anime {
+export const Anime = styled('a')`
     font-size: 13px;
     color: #666;
-}
+`;
 
-.track-type {
+export const Type = styled('span')`
     font-size: 13px;
     font-weight: 500;
     &:before {
@@ -105,4 +106,4 @@
         font-weight: 400;
         margin: 0 4px;
     }
-}
+`;

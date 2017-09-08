@@ -1,9 +1,19 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-
 import Icon from '../Icon';
+import {
+    Item,
+    Wrapper,
+    Overlay,
+    Cover,
+    Info,
+    Line,
+    Artist,
+    Title,
+    Anime,
+    Type,
+} from './Track.styled';
 
 class Track extends PureComponent {
     static defaultProps = {
@@ -22,30 +32,30 @@ class Track extends PureComponent {
             <Tooltip id={`request-${track._id}`}>Заказать песню</Tooltip>
         );
         return (
-            <article className="track">
-                <div className="track-cover-wrapper">
+            <Item>
+                <Wrapper>
                     <OverlayTrigger placement="top" overlay={tooltip}>
-                        <button onClick={() => onRequest(track)} className="track-cover-overlay">
+                        <Overlay onClick={() => onRequest(track)}>
                             <Icon type="play" />
-                        </button>
+                        </Overlay>
                     </OverlayTrigger>
-                    <img className="track-cover" src={album.cover.small} alt={track.title} />
-                </div>
-                <div className="track-info">
-                    <div className="track-info-header">
-                        <a href={`/people/${artist._id}`} className="track-artist">
+                    <Cover src={album.cover.small} alt={track.title} />
+                </Wrapper>
+                <Info>
+                    <Line>
+                        <Artist href={`/people/${artist._id}`}>
                             {`${artist.firstName.romaji} ${artist.lastName.romaji}`}
-                        </a>
-                        <span className="track-title">{track.title}</span>
-                    </div>
-                    <div className="track-info-footer">
-                        <a href={`/anime/${anime._id}`} className="track-anime">
+                        </Artist>
+                        <Title>{track.title}</Title>
+                    </Line>
+                    <Line>
+                        <Anime href={`/anime/${anime._id}`}>
                             {anime.title.romaji}
-                        </a>
-                        <span className="track-type">{track.type}</span>
-                    </div>
-                </div>
-            </article>
+                        </Anime>
+                        <Type>{track.type}</Type>
+                    </Line>
+                </Info>
+            </Item>
         );
     }
 }

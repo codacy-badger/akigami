@@ -38,19 +38,82 @@ a:active {
     object-fit: cover;
 }
 
-.transparented {
-    > div:first-child {
-        padding-top: 48px;
-    }
-}
-
-.opaque {
-    padding-top: 48px;
-}
-
 .loading {
     width: 100%;
     padding: 16px;
     margin: 0 auto;
     text-align: center;
+}
+
+.post-namespace-selector {
+    width: 120px;
+    margin-left: auto;
+
+    .Select-control {
+        height: 30px;
+        border-radius: 100px;
+        font-size: 12px;
+        border-color: #ccc;
+    }
+
+    .Select-value {
+        line-height: 28px !important;
+    }
+
+    .Select-input {
+        height: 28px;
+    }
+
+    .Select-option {
+        font-size: 12px;
+        padding: 6px 10px 7px;
+    }
+    
+    &.is-open .Select-control {
+        border-radius: 15px 15px 0 0;
+    }
+
+    &.is-focused:not(.is-open) > .Select-control {
+        border-color: #ccc;
+        box-shadow: none;
+    }
+}
+
+#activity-tabs {
+    width: 100%;
+    .nav-tabs {
+        border-bottom: none;
+        display: flex;
+
+        > li {
+            float: none;
+            margin-bottom: 0;
+            flex: 1;
+
+            > a {
+                border: 1px solid #ddd !important;
+                margin-right: 3px;
+                border-radius: 100px;
+                text-align: center;
+                padding: 4px;
+                font-size: 12px;
+            }
+
+            &.active {
+                > a {
+                    border-color: #d54343;
+                    color: #d54343;
+                }
+            }
+        }
+    }
+    .tab-content {
+        > .tab-pane {
+            flex-direction: column;
+            align-items: center;
+            &.active {
+                display: flex;
+            }
+        }
+    }
 }

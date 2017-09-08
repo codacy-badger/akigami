@@ -1,14 +1,19 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
+
 import { Scrollbars } from 'react-custom-scrollbars';
 import Responsive from 'react-responsive';
-import cx from 'classnames';
 import uniqBy from 'lodash/uniqBy';
 
 import FilterBlock from '../../components/FilterBlock';
 import FilterCheckbox from '../../components/FilterCheckbox';
 import Icon from '../../components/Icon';
+import {
+    Wrapper,
+    Title,
+    Header,
+    Close,
+} from './Filter.styled';
 
 class Filter extends PureComponent {
     static defaultProps = {
@@ -51,30 +56,23 @@ class Filter extends PureComponent {
         const { status, type } = this.state;
         const { open, onClose } = this.props;
         return (
-            <div
-                className={cx({
-                    'filter-wrapper': true,
-                    open,
-                })}
-            >
+            <Wrapper open={open}>
                 <Scrollbars universal autoHide>
-                    <div className="filter-header">
-                        <h3
-                            className="block-title"
+                    <Header>
+                        <Title
                             style={{ padding: '44px 0 32px' }}
                         >
                             Фильтр
-                        </h3>
+                        </Title>
                         <Responsive maxWidth={991}>
-                            <Button
+                            <Close
                                 bsStyle="link"
-                                className="filter-close"
                                 onClick={onClose}
                             >
                                 <Icon type="close" />
-                            </Button>
+                            </Close>
                         </Responsive>
-                    </div>
+                    </Header>
                     <FilterBlock title="Статус">
                         <FilterCheckbox
                             negative
@@ -103,7 +101,7 @@ class Filter extends PureComponent {
                         />
                     </FilterBlock>
                 </Scrollbars>
-            </div>
+            </Wrapper>
         );
     }
 }

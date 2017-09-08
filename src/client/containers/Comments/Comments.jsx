@@ -6,6 +6,7 @@ import CommentCreator from '../../components/CommentCreator';
 import Loading from '../../components/Loading';
 import Comment from '../../components/Comment';
 import Store from './Comments.store';
+import Wrapper from './Comments.styled';
 
 @inject(({ app }) => ({ app }))
 @observer
@@ -35,7 +36,7 @@ class Comments extends PureComponent {
     }
     render() {
         return (
-            <div className="comments">
+            <Wrapper>
                 {this.store.list.map(comment => (
                     <Comment
                         key={comment.id}
@@ -53,7 +54,7 @@ class Comments extends PureComponent {
                         reply={this.store.repliedComment}
                     />
                 )}
-            </div>
+            </Wrapper>
         );
     }
 }

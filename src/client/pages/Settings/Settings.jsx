@@ -1,12 +1,15 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col, Button, FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap';
+import { Row, Col, Button, FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap';
 import { inject, observer } from 'mobx-react';
 import Datetime from 'react-datetime';
 
 import AvatarUploader from '../../components/AvatarUploader';
 import GenderChanger from '../../components/GenderChanger';
 import Block from '../../components/Block';
+import Wrapper from '../../components/Wrapper';
+import Content from '../../components/Content';
+import Red from '../../components/Red';
 
 function FieldGroup({ id, label, help, ...props }) {
     return (
@@ -36,17 +39,17 @@ class Settings extends PureComponent {
     render() {
         const { user } = this.props;
         return (
-            <div className="opaque">
-                <div className="default-header">
-                    <Grid className="content">
+            <Wrapper opaque>
+                <Red>
+                    <Content>
                         <Row>
                             <Col xs={12}>
                                 <h1 style={{ margin: '0 0 32px', fontWeight: 800 }}>Настройки профиля</h1>
                             </Col>
                         </Row>
-                    </Grid>
-                </div>
-                <Grid className="content">
+                    </Content>
+                </Red>
+                <Content>
                     <Row>
                         <Col md={6}>
                             <Block title="Сменить аватар">
@@ -115,8 +118,8 @@ class Settings extends PureComponent {
                             </Button>
                         </Col>
                     </Row>
-                </Grid>
-            </div>
+                </Content>
+            </Wrapper>
         );
     }
 }

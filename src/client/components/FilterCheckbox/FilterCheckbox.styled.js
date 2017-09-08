@@ -35,7 +35,7 @@ const nActiveItem = css`
 `;
 
 export const Item = styled('div')`
-    compose: ${defaultItem}
+    composes: ${defaultItem}
         ${p => p.positiveHover && pHoverItem}
         ${p => p.negativeHover && nHoverItem}
         ${p => p.positiveActive && pActiveItem}

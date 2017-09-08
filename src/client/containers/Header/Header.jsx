@@ -2,18 +2,25 @@ import React, { PureComponent } from 'react';
 import { inject, observer } from 'mobx-react';
 import Responsive from 'react-responsive';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
-
-import Grid from 'react-bootstrap/lib/Grid';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import DropdownButton from 'react-bootstrap/lib/DropdownButton';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 
-import Logo from '../../components/Logo';
 import Avatar from '../../components/Avatar';
-import Icon from '../../components/Icon';
+import Logo from '../../components/Logo';
+import {
+    Head,
+    Grid,
+    Row,
+    Inner,
+    Logotype,
+    Left,
+    Right,
+    Menu,
+    Item,
+    Icon,
+    Title,
+    Dropdown,
+    Search,
+} from './Header.styled';
 
 @inject(s => ({
     ui: s.app.ui,
@@ -43,79 +50,82 @@ class Header extends PureComponent {
     render() {
         const { ui, user } = this.props;
         const transparent = ui.transparented ? ui.transparent : false;
+        console.log(transparent);
         return (
-            <header className={cx({ transparent })}>
+            <Head transparent={transparent}>
                 <Grid>
                     <Row>
-                        <Col xs={12} className="header-inner">
-                            <a href="/" className="header-logo">
+                        <Inner xs={12}>
+                            <Logotype href="/">
                                 <Logo width={32} height={32} oneColor="#fff" twoColor="#fff" />
-                            </a>
-                            <div className="header-left">
+                            </Logotype>
+                            <Left>
                                 <Responsive minWidth={460}>
-                                    <FormControl
+                                    <Search
                                         type="text"
-                                        className="header-search"
                                         placeholder="Поиск аниме, манги, музыки..."
                                     />
                                 </Responsive>
                                 <Responsive maxWidth={459}>
-                                    <a href="/search" className="header-item">
+                                    <Item href="/search">
                                         <Icon type="magnify" />
-                                    </a>
+                                    </Item>
                                 </Responsive>
-                            </div>
-                            <div className="header-menu">
-                                <a href="/explore" className="header-item header-item-module">
-                                    <Icon type="view-module" />
-                                    <span>Обзор</span>
-                                </a>
-                                <a href="/news" className="header-item">
+                            </Left>
+                            <Menu>
+                                <Item href="/explore">
+                                    <Icon large type="view-module" />
+                                    <Title>Обзор</Title>
+                                </Item>
+                                <Item href="/news">
                                     <Icon type="newspaper" />
-                                    <span>Новости</span>
-                                </a>
-                                <a href="/radio" className="header-item">
+                                    <Title>Новости</Title>
+                                </Item>
+                                <Item href="/radio">
                                     <Icon type="radio" />
-                                    <span>Радио</span>
-                                </a>
-                            </div>
-                            <div className="header-right">
-                                {user.isAuth && <DropdownButton
-                                    noCaret
-                                    pullRight
-                                    bsStyle="link"
-                                    className="header-item-avatar"
-                                    id="user-dropdown"
-                                    title={(
-                                        <Avatar
-                                            size={32}
-                                            src={user.getAvatar}
-                                        />
-                                    )}
-                                >
-                                    <MenuItem header>Профиль</MenuItem>
-                                    <MenuItem componentClass="a" href={`/@${user.username}`}>
-                                        <strong>{user.displayName}</strong>
-                                    </MenuItem>
-                                    <MenuItem divider />
-                                    <MenuItem header>Списки</MenuItem>
-                                    <MenuItem disabled>Аниме</MenuItem>
-                                    <MenuItem disabled>Манга</MenuItem>
-                                    <MenuItem divider />
-                                    <MenuItem componentClass="a" href="/settings">
-                                        Настройки
-                                    </MenuItem>
-                                    <MenuItem onClick={user.logout}>Выход</MenuItem>
-                                </DropdownButton>}
-                                {!user.isAuth && <a href="/signin" className="header-item">
-                                    <Icon type="login" />
-                                    <span>Вход</span>
-                                </a>}
-                            </div>
-                        </Col>
+                                    <Title>Радио</Title>
+                                </Item>
+                            </Menu>
+                            <Right>
+                                {user.isAuth && (
+                                    <Dropdown
+                                        noCaret
+                                        pullRight
+                                        bsStyle="link"
+                                        id="user-dropdown"
+                                        title={(
+                                            <Avatar
+                                                size={32}
+                                                src={user.getAvatar}
+                                            />
+                                        )}
+                                    >
+                                        <MenuItem header>Профиль</MenuItem>
+                                        <MenuItem componentClass="a" href={`/@${user.username}`}>
+                                            <strong>{user.displayName}</strong>
+                                        </MenuItem>
+                                        <MenuItem divider />
+                                        <MenuItem header>Списки</MenuItem>
+                                        <MenuItem disabled>Аниме</MenuItem>
+                                        <MenuItem disabled>Манга</MenuItem>
+                                        <MenuItem divider />
+                                        <MenuItem componentClass="a" href="/settings">
+                                            Настройки
+                                        </MenuItem>
+                                        <MenuItem onClick={user.logout}>Выход</MenuItem>
+                                    </Dropdown>
+                                )}
+                                {!user.isAuth && (
+                                    <Item href="/signin">
+                                        <Icon type="login" />
+                                        <Title>Вход</Title>
+                                    </Item>
+                                )}
+                            </Right>
+                        </Inner>
                     </Row>
                 </Grid>
-            </header>
+            </Head>
         );
     }
 }

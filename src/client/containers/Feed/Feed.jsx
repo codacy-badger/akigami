@@ -6,6 +6,7 @@ import Loading from '../../components/Loading';
 import PostCreator from '../../components/PostCreator';
 import Post from '../../components/Post';
 import Store from './Feed.store';
+import Wrapper from './Feed.styled';
 
 @inject(({ app }) => ({ app }))
 @observer
@@ -33,13 +34,13 @@ class Feed extends PureComponent {
     }
     render() {
         return (
-            <section className="feed">
+            <Wrapper>
                 {this.store.isOwner && <PostCreator />}
                 {this.store.list.map(post => <Post key={post.id} post={post} />)}
                 {this.store.loading && (
                     <Loading />
                 )}
-            </section>
+            </Wrapper>
         );
     }
 }

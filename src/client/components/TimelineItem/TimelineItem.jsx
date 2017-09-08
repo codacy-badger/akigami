@@ -2,6 +2,14 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import capitalize from 'lodash/capitalize';
 import m from 'moment';
+import {
+    Inner,
+    Tags,
+    Tag,
+    Item,
+    Title,
+    Time,
+} from './TimelineItem.styled';
 
 export default class TimelineItem extends PureComponent {
     static propTypes = {
@@ -17,23 +25,22 @@ export default class TimelineItem extends PureComponent {
     render() {
         const { entity } = this.props;
         return (
-            <a
+            <Item
                 href={`/anime/${entity.id}`}
-                className="timeline"
                 style={{
                     backgroundImage: `url(${entity.cover})`,
                 }}
             >
-                <div className="timeline-inner">
-                    <h1>{entity.title.romaji}</h1>
-                    <div className="timeline-tags">
+                <Inner>
+                    <Title>{entity.title.romaji}</Title>
+                    <Tags>
                         {entity.genres.map((item, index) => (
-                            <span key={item.title}>{item.title}</span>
+                            <Tag key={item.title}>{item.title}</Tag>
                         ))}
-                    </div>
-                    <p>{this.getTime()}</p>
-                </div>
-            </a>
+                    </Tags>
+                    <Time>{this.getTime()}</Time>
+                </Inner>
+            </Item>
         );
     }
 }

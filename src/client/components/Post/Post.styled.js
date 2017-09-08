@@ -29,7 +29,6 @@ export const Element = styled('div')`
         ? '0 4px 8px rgba(0,0,0,0.05), -6px 0 0 #ffbb07'
         : '0 4px 8px rgba(0,0,0,0.05)')};
     background-color: white;
-
 `;
 
 const normalHeader = css`

@@ -4,6 +4,7 @@ import { addStyle } from 'react-bootstrap/lib/utils/bootstrapUtils';
 
 import Block from '../../components/Block';
 import TimelineItem from '../../components/TimelineItem';
+import Wrapper from './Timeline.styled';
 
 addStyle(Button, 'dark');
 
@@ -60,7 +61,7 @@ const demo = [{
 class Timeline extends PureComponent {
     render() {
         return (
-            <section className="timeline-wrap">
+            <Wrapper>
                 <Grid className="content">
                     <Row>
                         <Col xs={12}>
@@ -85,7 +86,7 @@ class Timeline extends PureComponent {
                         </Col>
                     </Row>
                 </Grid>
-            </section>
+            </Wrapper>
         );
     }
 }

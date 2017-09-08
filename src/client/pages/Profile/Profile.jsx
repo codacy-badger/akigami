@@ -5,9 +5,6 @@ import Chart from 'react-highcharts';
 import HighchartsMore from 'highcharts-more';
 import SolidGauge from 'highcharts/modules/solid-gauge';
 import {
-    Grid,
-    Row,
-    Col,
     Tabs,
     Tab,
     Button,
@@ -21,11 +18,28 @@ import Block from '../../components/Block';
 import Track from '../../components/Track';
 import Follows from '../../components/Follows';
 import Menu from '../../components/Menu';
+import Wrapper from '../../components/Wrapper';
+import Legend from '../../components/Legend';
+import LegendItem from '../../components/LegendItem';
+import Stats from '../../components/Stats';
 
 import entitiesChart from '../../charts/entities';
 import activityChart from '../../charts/activity';
 
 import ProfileStore from '../../stores/Profile';
+import {
+    Header,
+    Inner,
+    Row,
+    Col,
+    Bottom,
+    Avatar,
+    Info,
+    User,
+    Status,
+    Settings,
+    About,
+} from './Profile.styled';
 
 const { Left, Right, Center } = Threed;
 
@@ -201,41 +215,41 @@ class Profile extends PureComponent {
     render() {
         const { myUser } = this.props;
         return (
-            <div className="transparented">
-                <div
-                    className="user-header"
+            <Wrapper transparented>
+                <Header
                     style={{
                         backgroundImage: `url(${this.store.getCover})`,
                     }}
                 >
-                    <Grid className="user-header-inner">
+                    <Inner>
                         <Row>
                             <Col xs={12}>
-                                <div className="user-header-bottom">
-                                    <img
-                                        className="user-avatar"
+                                <Bottom>
+                                    <Avatar
                                         src={this.store.getAvatar}
                                         alt={this.store.displayName}
                                     />
-                                    <div className="user-header-info">
-                                        <h2>{this.store.displayName}</h2>
-                                        {this.store.status && <p>{this.store.status}</p>}
+                                    <Info>
+                                        <User>{this.store.displayName}</User>
+                                        {this.store.status && (
+                                            <Status>{this.store.status}</Status>
+                                        )}
                                         {this.isOwner() && (
-                                            <Button
+                                            <Settings
                                                 bsSize="sm"
                                                 bsStyle="transparent"
                                                 componentClass="a"
                                                 href="/settings"
                                             >
                                                 Настройки
-                                            </Button>
+                                            </Settings>
                                         )}
-                                    </div>
-                                </div>
+                                    </Info>
+                                </Bottom>
                             </Col>
                         </Row>
-                    </Grid>
-                </div>
+                    </Inner>
+                </Header>
                 <Menu
                     sticky
                     onSelect={e => console.log(e)}
@@ -262,14 +276,13 @@ class Profile extends PureComponent {
                 <Threed>
                     <Left>
                         <Block bordered shadow title="Статистика">
-                            <div className="stats-block">
-                                <h5 className="block-subtitle" style={{ marginBottom: '-4px' }}>
-                                    По предпочтениям
-                                </h5>
+                            <Stats
+                                title="По предпочтениям"
+                                styleTitle={{ marginBottom: '-4px' }}
+                            >
                                 <Chart config={entitiesChart} />
-                            </div>
-                            <div className="stats-block">
-                                <h5 className="block-subtitle">По типам</h5>
+                            </Stats>
+                            <Stats title="По типам">
                                 <Tabs
                                     defaultActiveKey={1}
                                     animation={false}
@@ -277,72 +290,40 @@ class Profile extends PureComponent {
                                 >
                                     <Tab eventKey={1} title="Аниме">
                                         <Chart config={activityChart} />
-                                        <div className="activity-legend">
-                                            <div className="activity-legend-item">
-                                                <div
-                                                    className="activity-legend-dot"
-                                                    style={{ backgroundColor: '#ffbd88' }}
-                                                />
-                                                <span>Запланировано</span>
-                                            </div>
-                                            <div className="activity-legend-item">
-                                                <div
-                                                    className="activity-legend-dot"
-                                                    style={{ backgroundColor: '#008cf0' }}
-                                                />
-                                                <span>Смотрю</span>
-                                            </div>
-                                            <div className="activity-legend-item">
-                                                <div
-                                                    className="activity-legend-dot"
-                                                    style={{ backgroundColor: '#00a86b' }}
-                                                />
-                                                <span>Завершено</span>
-                                            </div>
-                                            <div className="activity-legend-item">
-                                                <div
-                                                    className="activity-legend-dot"
-                                                    style={{ backgroundColor: '#d54343' }}
-                                                />
-                                                <span>Брошено</span>
-                                            </div>
-                                        </div>
+                                        <Legend>
+                                            <LegendItem color="#ffbd88">
+                                                Запланировано
+                                            </LegendItem>
+                                            <LegendItem color="#008cf0">
+                                                Смотрю
+                                            </LegendItem>
+                                            <LegendItem color="#00a86b">
+                                                Завершено
+                                            </LegendItem>
+                                            <LegendItem color="#d54343">
+                                                Брошено
+                                            </LegendItem>
+                                        </Legend>
                                     </Tab>
                                     <Tab eventKey={2} title="Манга">
                                         <Chart config={activityChart} />
-                                        <div className="activity-legend">
-                                            <div className="activity-legend-item">
-                                                <div
-                                                    className="activity-legend-dot"
-                                                    style={{ backgroundColor: '#ffbd88' }}
-                                                />
-                                                <span>Запланировано</span>
-                                            </div>
-                                            <div className="activity-legend-item">
-                                                <div
-                                                    className="activity-legend-dot"
-                                                    style={{ backgroundColor: '#008cf0' }}
-                                                />
-                                                <span>Читаю</span>
-                                            </div>
-                                            <div className="activity-legend-item">
-                                                <div
-                                                    className="activity-legend-dot"
-                                                    style={{ backgroundColor: '#00a86b' }}
-                                                />
-                                                <span>Завершено</span>
-                                            </div>
-                                            <div className="activity-legend-item">
-                                                <div
-                                                    className="activity-legend-dot"
-                                                    style={{ backgroundColor: '#d54343' }}
-                                                />
-                                                <span>Брошено</span>
-                                            </div>
-                                        </div>
+                                        <Legend>
+                                            <LegendItem color="#ffbd88">
+                                                Запланировано
+                                            </LegendItem>
+                                            <LegendItem color="#008cf0">
+                                                Читаю
+                                            </LegendItem>
+                                            <LegendItem color="#00a86b">
+                                                Завершено
+                                            </LegendItem>
+                                            <LegendItem color="#d54343">
+                                                Брошено
+                                            </LegendItem>
+                                        </Legend>
                                     </Tab>
                                 </Tabs>
-                            </div>
+                            </Stats>
                         </Block>
                         <Block
                             bordered
@@ -406,7 +387,7 @@ class Profile extends PureComponent {
                     <Center>
                         {this.store.about && (
                             <Block bordered shadow title="О себе">
-                                <div className="user-about">{this.store.about}</div>
+                                <About>{this.store.about}</About>
                             </Block>
                         )}
                         <Block>
@@ -452,7 +433,7 @@ class Profile extends PureComponent {
                         </Block>
                     </Right>
                 </Threed>
-            </div>
+            </Wrapper>
         );
     }
 }

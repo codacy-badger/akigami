@@ -5,6 +5,14 @@ import cx from 'classnames';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import Blank from '../../components/Blank';
+import {
+    Wrapper,
+    Items,
+    Favorite,
+    Title,
+    Category,
+    Image,
+} from './Favorites.styled';
 
 class Favorites extends PureComponent {
     static defaultProps = {
@@ -49,11 +57,11 @@ class Favorites extends PureComponent {
         }
         const types = uniq(entities.map(e => e.type));
         return (
-            <div className="favorites-wrapper">
+            <Wrapper>
                 {types.map(type => (
-                    <div key={type} className="favorites-category">
-                        <h5>{this.humanizeType(type)}</h5>
-                        <div className="favorites-items">
+                    <Category key={type}>
+                        <Title>{this.humanizeType(type)}</Title>
+                        <Items>
                             {this.filterItems(type).map(item => (
                                 <OverlayTrigger
                                     key={`${type}-${item._id}`}
@@ -64,22 +72,18 @@ class Favorites extends PureComponent {
                                         </Tooltip>
                                     )}
                                 >
-                                    <a
-                                        href={`/${type}/${item.entity._id}`}
-                                        className="favorite"
-                                    >
-                                        <img
-                                            className={cx({ 'favorite-image': true, [type]: type })}
+                                    <Favorite href={`/${type}/${item.entity._id}`}>
+                                        <Image
                                             src={this.renderImage(type, item)}
                                             alt={this.renderTitle(type, item)}
                                         />
-                                    </a>
+                                    </Favorite>
                                 </OverlayTrigger>
                             ))}
-                        </div>
-                    </div>
+                        </Items>
+                    </Category>
                 ))}
-            </div>
+            </Wrapper>
         );
     }
 }

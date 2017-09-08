@@ -15,6 +15,7 @@ import {
     Clear,
     Attach,
     Icon,
+    Attachments,
 } from './CommentCreator.styled';
 
 @inject(({ app }) => ({ app }))
@@ -86,7 +87,7 @@ class CommentCreator extends PureComponent {
                     />
                 </Header>
                 <Footer>
-                    <div className="post-short-attachments">
+                    <Attachments>
                         <Attach bsStyle="link" bsSize="xs">
                             <Icon type="image" />
                         </Attach>
@@ -102,7 +103,7 @@ class CommentCreator extends PureComponent {
                                 </Clear>
                             </Replied>
                         )}
-                    </div>
+                    </Attachments>
                     <Action
                         bsStyle="danger"
                         bsSize="sm"

@@ -1,10 +1,17 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 import Responsive from 'react-responsive';
 
 import Filter from '../../containers/Filter';
 import Icon from '../../components/Icon';
+import Wrapper from '../../components/Wrapper';
+import {
+    Content,
+    Header,
+    Switch,
+    Title,
+} from './Explore.styled';
 
 class Explore extends PureComponent {
     static defaultProps = {
@@ -30,7 +37,7 @@ class Explore extends PureComponent {
         const { opennedFilter } = this.state;
         const { type } = this.props;
         return (
-            <div className="opaque">
+            <Wrapper opaque>
                 <Grid>
                     <Row>
                         <Responsive maxWidth={991}>
@@ -45,30 +52,26 @@ class Explore extends PureComponent {
                             </Col>
                         </Responsive>
                         <Col md={9}>
-                            <div className="explore-header">
+                            <Header>
                                 <Responsive maxWidth={991}>
-                                    <Button
+                                    <Switch
                                         bsStyle="link"
-                                        className="explore-filter"
                                         onClick={() => this.changeVisibilityFilter(true)}
                                     >
                                         <Icon type="tune" />
-                                    </Button>
+                                    </Switch>
                                 </Responsive>
-                                <h1
-                                    className="block-title"
-                                    style={{ margin: '32px 0' }}
-                                >
+                                <Title>
                                     {Explore.getTitle(type)}
-                                </h1>
-                            </div>
-                            <div className="explore-wrapper">
+                                </Title>
+                            </Header>
+                            <Content>
                                 456
-                            </div>
+                            </Content>
                         </Col>
                     </Row>
                 </Grid>
-            </div>
+            </Wrapper>
         );
     }
 }

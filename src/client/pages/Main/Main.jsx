@@ -8,6 +8,7 @@ import Threed from '../../containers/Threed';
 import Hello from '../../components/Hello';
 import Categories from '../../components/Categories';
 import Block from '../../components/Block';
+import Wrapper from '../../components/Wrapper';
 
 const { Left, Right, Center } = Threed;
 
@@ -37,7 +38,7 @@ class Main extends PureComponent {
     render() {
         const { user } = this.props;
         return (
-            <div className="opaque">
+            <Wrapper opaque>
                 <Timeline />
                 <Threed inverse>
                     <Left>
@@ -56,7 +57,7 @@ class Main extends PureComponent {
                         123
                     </Right>
                 </Threed>
-            </div>
+            </Wrapper>
         );
     }
 }

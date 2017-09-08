@@ -1,13 +1,22 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
-import { Button } from 'react-bootstrap';
-import Textarea from 'react-textarea-autosize';
 import Select from 'react-select';
-
-import Avatar from '../Avatar';
 import Icon from '../Icon';
 import Store from './PostCreator.store';
+import {
+    Post,
+    Short,
+    Avatar,
+    Textarea,
+    Full,
+    Header,
+    Footer,
+    Attachments,
+    Attach,
+    Action,
+} from './PostCreator.styled';
+
 
 @inject(({ app }) => ({ app }))
 @observer
@@ -39,7 +48,7 @@ class PostCreator extends PureComponent {
     renderShortView() {
         const { user } = this.props.app;
         return (
-            <div className="post-creator-short" onClick={this.toFull}>
+            <Short onClick={this.toFull}>
                 <Avatar
                     size={30}
                     className="post-creator-avatar"
@@ -56,17 +65,16 @@ class PostCreator extends PureComponent {
                     value="Расскажите что нового?"
                     placeholder="Расскажите что нового?"
                 />
-            </div>
+            </Short>
         );
     }
     renderFullView() {
         const { user } = this.props.app;
         return (
-            <div className="post-creator-full">
-                <div className="post-creator-header">
+            <Full>
+                <Header>
                     <Avatar
                         size={30}
-                        className="post-creator-avatar"
                         src={user.getAvatar}
                         title={user.displayName}
                     />
@@ -77,12 +85,12 @@ class PostCreator extends PureComponent {
                         onChange={this.handleChangeContent}
                         placeholder="Расскажите что нового?"
                     />
-                </div>
-                <div className="post-creator-footer">
-                    <div className="post-short-attachments">
-                        <Button bsStyle="link" bsSize="xs">
+                </Header>
+                <Footer>
+                    <Attachments>
+                        <Attach bsStyle="link" bsSize="xs">
                             <Icon type="image" />
-                        </Button>
+                        </Attach>
                         <Select
                             className="post-namespace-selector"
                             name="post-namespace-selector"
@@ -103,27 +111,25 @@ class PostCreator extends PureComponent {
                             clearable={false}
                             onChange={this.handleChangeNamespace}
                         />
-                    </div>
-                    <Button
+                    </Attachments>
+                    <Action
                         bsStyle="warning"
                         bsSize="sm"
                         onClick={this.handleCreatePost}
                     >
                         Опубликовать
-                    </Button>
-                </div>
-            </div>
+                    </Action>
+                </Footer>
+            </Full>
         );
     }
     render() {
         return (
-            <section
-                className="post"
-            >
+            <Post>
                 {this.store.collapsed
                     ? this.renderFullView()
                     : this.renderShortView()}
-            </section>
+            </Post>
         );
     }
 }
