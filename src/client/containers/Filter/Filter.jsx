@@ -119,6 +119,11 @@ class Filter extends PureComponent {
             ratingRx,
         } = this.state;
         const { open, onClose } = this.props;
+        if (open) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
         return (
             <Wrapper open={open}>
                 <Scrollbars
