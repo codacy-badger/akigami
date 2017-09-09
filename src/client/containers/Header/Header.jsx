@@ -40,9 +40,9 @@ class Header extends PureComponent {
         document.removeEventListener('scroll', this.scrollEventer);
     }
     scrollEventer = () => {
-        console.log(document.body.scrollTop);
         const { ui } = this.props;
-        const isTop = document.body.scrollTop <= 130;
+        const scroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const isTop = scroll <= 130;
         if (ui.transparented) {
             if (!ui.transparent && isTop) ui.changeTransparent(true);
             if (ui.transparent && !isTop) ui.changeTransparent(false);

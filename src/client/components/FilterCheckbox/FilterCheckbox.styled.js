@@ -4,8 +4,9 @@ import styled from 'emotion/react';
 export const Box = styled('div')`
     display: flex;
     flex-direction: column;
-    border: 1px solid #9b9b9b;
     border-radius: 3px;
+    background-color: white;
+    box-shadow: 0 5px 6px rgba(0,0,0,0.15);
 `;
 
 const defaultItem = css`
@@ -41,13 +42,10 @@ export const Item = styled('div')`
         ${p => p.positiveActive && pActiveItem}
         ${p => p.negativeActive && nActiveItem};
 
+    color: #424242;
     display: flex;
     transition: background-color, .2s ease;
     will-change: background-color;
-
-    &:not(:last-child) {
-        border-bottom: 1px solid #9b9b9b;
-    }
 `;
 
 export const Add = styled('button')`

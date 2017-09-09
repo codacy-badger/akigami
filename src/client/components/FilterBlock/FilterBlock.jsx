@@ -1,21 +1,26 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Block, Title, Content } from './FilterBlock.styled';
+import { Line, Action, Block, Title, Content } from './FilterBlock.styled';
 
 class FilterBlock extends PureComponent {
     static defaultProps = {
         title: null,
         children: null,
+        action: null,
     }
     static propTypes = {
         title: PropTypes.string,
         children: PropTypes.any,
+        action: PropTypes.any,
     }
     render() {
-        const { title, children } = this.props;
+        const { action, title, children } = this.props;
         return (
             <Block>
-                {title && <Title>{title}</Title>}
+                <Line>
+                    {title && <Title>{title}</Title>}
+                    {action && <Action>{action}</Action>}
+                </Line>
                 <Content>
                     {children}
                 </Content>

@@ -4,13 +4,13 @@ import { Button } from 'react-bootstrap';
 
 const openned = css`
     @media screen and (max-width: 991px) {
-        transform: translateX(0);
+        transform: translate3d(0, 0, 0);
     }
 `;
 
 const closed = css`
     @media screen and (max-width: 991px) {
-        transform: translateX(-280px);
+        transform: translate3d(-100%, 0, 0);
     }
 `;
 
@@ -20,7 +20,7 @@ export const Wrapper = styled('div')`
     background-color: #424242;
     margin-left: -100vw;
     padding-left: 100vw;
-    padding-right: 22px;
+    padding-right: 12px;
     color: white;
     position: relative;
 
@@ -28,7 +28,7 @@ export const Wrapper = styled('div')`
         width: 280px;
         margin-left: 0;
         padding-left: 22px;
-        padding-right: 22px;
+        padding-right: 12px;
         position: fixed;
         left: 0;
         top: 48px;

@@ -16,3 +16,12 @@ export const Title = styled('h5')`
 export const Content = styled('div')`
     position: relative;
 `;
+
+export const Line = styled('div')`
+    display: flex;
+`;
+
+export const Action = styled('div')`
+    margin-left: auto;
+    margin-top: -5px;
+`;

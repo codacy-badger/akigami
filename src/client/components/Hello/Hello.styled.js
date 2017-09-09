@@ -57,7 +57,6 @@ export const Item = styled('li')`
         counter-increment: hello-counter;
         font-size: 14px;
         font-weight: bold;
-        color: #d54343;
         border: 1px solid #d54343;
         margin-right: 10px;
         line-height: 24px;

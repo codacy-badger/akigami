@@ -40,11 +40,12 @@ class Menu extends PureComponent {
     scrollEventer = () => {
         const { offsetTop } = this.props;
         const { sticked } = this.state;
+        const scroll = document.body.scrollTop || document.documentElement.scrollTop;
         const state = {};
-        if (document.body.scrollTop >= offsetTop && !sticked) {
+        if (scroll >= offsetTop && !sticked) {
             state.sticked = true;
         }
-        if (document.body.scrollTop < offsetTop && sticked) {
+        if (scroll < offsetTop && sticked) {
             state.sticked = false;
         }
         this.setState(state);
