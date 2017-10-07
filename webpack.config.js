@@ -179,7 +179,7 @@ module.exports = () => {
                         loader: 'babel-loader',
                         options: {
                             presets: ['stage-0', 'react'],
-                            plugins: ['transform-decorators-legacy', 'emotion'],
+                            plugins: ['transform-decorators-legacy', 'transform-class-properties', 'emotion'],
                         },
                     },
                 },
