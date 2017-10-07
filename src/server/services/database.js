@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import autoIncrement from 'mongoose-auto-increment';
+import autoIncrement from '../utils/mongooseAutoIncrement';
 import cfg from 'config';
 
 import { requireFiles } from '../utils';

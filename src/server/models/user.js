@@ -1,4 +1,4 @@
-import autoIncrement from 'mongoose-auto-increment';
+import autoIncrement from '../utils/mongooseAutoIncrement';
 import MongooseClass from '../utils/mongooseClass';
 
 class User extends MongooseClass {

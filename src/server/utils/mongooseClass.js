@@ -1,8 +1,8 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 import classToSchema from './classToSchema';
 
 class MongooseSchema {
-    static Types = Schema.Types;
+    static Types = mongoose.Schema.Types;
     plugins = [];
     static model(...args) {
         return mongoose.model(args);
