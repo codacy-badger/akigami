@@ -8,7 +8,7 @@ import App from './App';
 (async () => {
     const raw = document.querySelector('#preload-data');
     const userData = JSON.parse(document.body.dataset.user);
-    const ids = JSON.parse(document.body.dataset.user);
+    const ids = JSON.parse(document.body.dataset.ids);
     const app = new AppStore();
     app.user.setUser(userData);
     await app.router.setContainer({

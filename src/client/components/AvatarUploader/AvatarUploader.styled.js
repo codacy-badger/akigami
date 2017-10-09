@@ -1,10 +1,10 @@
 import Dropzone from 'react-dropzone';
-import styled from 'emotion/react';
+import styled from 'react-emotion';
 import I from '../Icon';
 
 export const Wrapper = styled('div')`
-    width: ${({ size }) => size + 4};
-    height: ${({ size }) => size + 4};
+    width: ${({ size }) => size + 4}px;
+    height: ${({ size }) => size + 4}px;
     border-radius: 100px;
     padding: 2px;
     box-shadow: 0 0 0 2px #666;

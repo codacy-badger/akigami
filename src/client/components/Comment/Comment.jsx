@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 
 import PropTypes from 'prop-types';
@@ -27,7 +27,7 @@ import {
 
 @inject(({ app }) => ({ user: app.user }))
 @observer
-class Comment extends PureComponent {
+class Comment extends Component {
     static defaultProps = {
         replies: [],
         onReply: null,

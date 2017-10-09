@@ -1,4 +1,4 @@
-import styled from 'emotion/react';
+import styled from 'react-emotion';
 
 export default styled('div')`
     border-top: 1px solid #ddd;

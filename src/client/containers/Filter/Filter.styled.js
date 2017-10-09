@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import styled from 'emotion/react';
+import styled from 'react-emotion';
 import { Button } from 'react-bootstrap';
 
 const openned = css`
@@ -15,7 +15,7 @@ const closed = css`
 `;
 
 export const Wrapper = styled('div')`
-    composes: ${p => (p.open ? openned : closed)};
+    ${p => (p.open ? openned : closed)};
     height: calc(100vh - 48px);
     background-color: #424242;
     margin-left: -100vw;

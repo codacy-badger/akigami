@@ -1,6 +1,7 @@
-import styled from 'emotion/react';
+import { css } from 'emotion';
+import styled from 'react-emotion';
 
-export const Inner = styled('div')`
+const inner = css`
     width: 100%;
     color: white;
     padding: 42px;
@@ -11,10 +12,13 @@ export const Inner = styled('div')`
     @media screen and (max-width: 991px) {
         padding: 24px;
     }
-    
 `;
 
-export const Title = styled('h1')`
+export const Inner = styled('div')`
+    ${inner}
+`;
+
+const title = css`
     font-size: 28px;
     letter-spacing: 0.35px;
     margin: 0;
@@ -25,7 +29,11 @@ export const Title = styled('h1')`
     }
 `;
 
-export const Time = styled('p')`
+export const Title = styled('h1')`
+    ${title}
+`;
+
+const time = css`
     display: block;
     font-size: 24px;
     font-weight: bold;
@@ -38,7 +46,11 @@ export const Time = styled('p')`
     }
 `;
 
-export const Tags = styled('div')`
+export const Time = styled('p')`
+    ${time}
+`;
+
+const tags = css`
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -50,8 +62,11 @@ export const Tags = styled('div')`
         margin-top: 12px;
     }
 `;
+export const Tags = styled('div')`
+    ${tags}
+`;
 
-export const Tag = styled('span')`
+const tag = css`
     color: white;
     display: block;
     margin: 5px;
@@ -66,6 +81,9 @@ export const Tag = styled('span')`
     }
 `;
 
+export const Tag = styled('span')`
+    ${tag}
+`;
 
 export const Item = styled('a')`
     display: flex;
@@ -108,25 +126,25 @@ export const Item = styled('a')`
         width: 25%;
         height: 180px;
         
-        ${Inner} {
+        .${inner} {
             padding: 24px;
 
-            ${Title} {
+            .${title} {
                 font-size: 16px;
                 letter-spacing: 0.2px;
             }
 
-            ${Time} {
+            .${time} {
                 font-size: 18px;
                 margin-top: auto;
             }
         }
 
-        ${Tags} {
+        .${tags} {
             margin: -3px;
             margin-top: 12px;
 
-            ${Tag} {
+            .${tag} {
                 padding: 2px 6px;
                 font-size: 11px;
                 margin: 3px;

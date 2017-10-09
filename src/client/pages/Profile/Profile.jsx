@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import Chart from 'react-highcharts';
@@ -189,7 +189,7 @@ const favorites = [{
     myUser: s.app.user,
 }))
 @observer
-class Profile extends PureComponent {
+class Profile extends Component {
     static propTypes = {
         ui: PropTypes.object.isRequired,
         user: PropTypes.object.isRequired,

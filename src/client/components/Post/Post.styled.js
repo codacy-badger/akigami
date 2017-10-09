@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import styled from 'emotion/react';
+import styled from 'react-emotion';
 import Text from 'react-textarea-autosize';
 import { DropdownButton } from 'react-bootstrap';
 import Ava from '../Avatar';
@@ -13,7 +13,7 @@ const normalPost = css`
 `;
 
 export const Element = styled('div')`
-    composes: ${p => (p.paddings
+    ${p => (p.paddings
         ? normalPost
         : withoutPaddingsPost)};
     position: relative;
@@ -40,7 +40,7 @@ const withoutPaddingsHeader = css`
 `;
 
 export const Header = styled('div')`
-    composes: ${p => (p.paddings
+    ${p => (p.paddings
         ? normalHeader
         : withoutPaddingsHeader)};
     display: flex;
@@ -102,7 +102,7 @@ const normalBody = css`
 `;
 
 export const Body = styled('div')`
-    composes: ${p => (p.paddings
+    ${p => (p.paddings
         ? normalBody
         : withoutPaddingsBody)};
     display: flex;

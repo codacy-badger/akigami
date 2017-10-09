@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button, FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap';
 import { inject, observer } from 'mobx-react';
@@ -35,7 +35,7 @@ FieldGroup.defaultProps = {
     user: s.app.user,
 }))
 @observer
-class Settings extends PureComponent {
+class Settings extends Component {
     render() {
         const { user } = this.props;
         return (

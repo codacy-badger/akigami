@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import styled from 'emotion/react';
+import styled from 'react-emotion';
 
 export const Wrapper = styled('div')`
     display: flex;
@@ -18,7 +18,7 @@ const active = css`
 `;
 
 export const Rating = styled('button')`
-    composes: ${p => (p.active ? active : normal)};
+    ${p => (p.active ? active : normal)};
     padding: 12px 8px;
     margin: 4px;
     border-radius: 3px;

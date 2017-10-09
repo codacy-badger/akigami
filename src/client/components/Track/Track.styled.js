@@ -1,6 +1,7 @@
-import styled from 'emotion/react';
+import { css } from 'emotion';
+import styled from 'react-emotion';
 
-export const Overlay = styled('button')`
+const overlay = css`
     position: absolute;
     flex: 1;
     width: 100%;
@@ -23,6 +24,10 @@ export const Overlay = styled('button')`
     }
 `;
 
+export const Overlay = styled('button')`
+    ${overlay}
+`;
+
 export const Item = styled('article')`
     display: flex;
     width: 100%;
@@ -30,7 +35,7 @@ export const Item = styled('article')`
     overflow: hidden;
 
     &:hover {
-        ${Overlay} {
+        .${overlay} {
             opacity: 1;
         }
     }

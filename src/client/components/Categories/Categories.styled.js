@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import styled from 'emotion/react';
+import styled from 'react-emotion';
 import { Button } from 'react-bootstrap';
 import I from '../Icon';
 
@@ -18,7 +18,7 @@ const none = css`
 `;
 
 export const Item = styled(Button)`
-    composes: ${p => (p.active ? active : none)};
+    ${p => (p.active ? active : none)};
     display: flex;
     align-items: center;
     color: #666;

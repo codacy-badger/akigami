@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import styled from 'emotion/react';
+import styled from 'react-emotion';
 import { Jumbotron } from 'react-bootstrap';
 
 export const Wrapper = styled(Jumbotron)`
@@ -23,8 +23,12 @@ export const List = styled('ol')`
     counter-reset: hello-counter;
 `;
 
-export const Text = styled('span')`
+const text = css`
     text-decoration: none;
+`;
+
+export const Text = styled('span')`
+    ${text}
 `;
 
 const defaultItem = css`
@@ -44,7 +48,7 @@ const completedItem = css`
 `;
 
 export const Item = styled('li')`
-    composes: ${p => (p.completed ? completedItem : defaultItem)};
+    ${p => (p.completed ? completedItem : defaultItem)};
     font-weight: bold;
     font-size: 12px;
 
@@ -66,7 +70,7 @@ export const Item = styled('li')`
         text-align: center;
     }
 
-    ${Text} {
+    .${text} {
         text-decoration: ${p => (p.completed ? 'line-through' : 'none')};
     }
 `;

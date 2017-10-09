@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 
@@ -10,7 +10,7 @@ import Wrapper from './Comments.styled';
 
 @inject(({ app }) => ({ app }))
 @observer
-class Comments extends PureComponent {
+class Comments extends Component {
     static defaultProps = {
         postId: null,
     }

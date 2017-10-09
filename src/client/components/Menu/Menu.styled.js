@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import styled from 'emotion/react';
+import styled from 'react-emotion';
 
 export const Wrapper = styled('div')`
     height: 40px;
@@ -23,9 +23,8 @@ const sticked = css`
 `;
 
 export const MenuInner = styled('div')`
-    composes:
-        ${p => p.sticky && sticky}
-        ${p => p.sticked && sticked};
+    ${p => p.sticky && sticky};
+    ${p => p.sticked && sticked};
     background-color: #efeeeb;
 
     @media screen and (max-width: 767px) {
@@ -47,7 +46,7 @@ const active = css`
 `;
 
 export const Item = styled('button')`
-    composes: ${p => (p.active ? active : normal)};
+    ${p => (p.active ? active : normal)};
     border: none;
     padding: 10px 18px;
     transition: color .2s ease, background .2s ease;

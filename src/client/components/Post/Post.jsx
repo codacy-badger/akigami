@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import m from 'moment';
@@ -34,7 +34,7 @@ import {
 
 @inject(({ app }) => ({ user: app.user }))
 @observer
-class Post extends PureComponent {
+class Post extends Component {
     static propTypes = {
         post: PropTypes.object.isRequired,
         user: PropTypes.object.isRequired,

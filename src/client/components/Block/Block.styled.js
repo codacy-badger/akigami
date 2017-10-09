@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import styled from 'emotion/react';
+import styled from 'react-emotion';
 
 const bordered = css`
     padding: 16px;
@@ -13,9 +13,8 @@ const shadow = css`
 `;
 
 export const Wrapper = styled('div')`
-    composes:
-        ${p => p.bordered && bordered}
-        ${p => p.shadow && shadow};
+    ${p => p.bordered && bordered}
+    ${p => p.shadow && shadow};
     margin-bottom: 22px;
 `;
 

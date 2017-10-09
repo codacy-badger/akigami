@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import Responsive from 'react-responsive';
 import PropTypes from 'prop-types';
@@ -27,7 +27,7 @@ import {
     user: s.app.user,
 }))
 @observer
-class Header extends PureComponent {
+class Header extends Component {
     static propTypes = {
         ui: PropTypes.object.isRequired,
         user: PropTypes.object.isRequired,

@@ -1,11 +1,11 @@
-import styled from 'emotion/react';
+import styled, { css } from 'react-emotion';
 
 export const Block = styled('div')`
     width: 100%;
     position: relative;
 `;
 
-export const Overlay = styled('div')`
+const overlay = css`
     width: 100%;
     height: 100%;
     top: 0;
@@ -22,6 +22,10 @@ export const Overlay = styled('div')`
     will-change: opacity;
 `;
 
+export const Overlay = styled('div')`
+    ${overlay}
+`;
+
 export const Poster = styled('div')`
     display: block;
     width: 100%;
@@ -31,7 +35,7 @@ export const Poster = styled('div')`
     border-radius: 3px;
     position: relative;
     &:hover {
-        ${Overlay} {
+        .${overlay} {
             opacity: 1;
         }
     }

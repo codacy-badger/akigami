@@ -1,4 +1,4 @@
-import styled from 'emotion/react';
+import styled from 'react-emotion';
 import { Button } from 'react-bootstrap';
 import Text from 'react-textarea-autosize';
 import Ava from '../Avatar';

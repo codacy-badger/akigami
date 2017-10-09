@@ -1,4 +1,4 @@
-import styled from 'emotion/react';
+import styled from 'react-emotion';
 
 export default styled('div')`
     padding-top: ${p => (p.opaque ? '48px' : '0')};

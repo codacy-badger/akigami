@@ -1,14 +1,18 @@
 import { css } from 'emotion';
-import styled from 'emotion/react';
+import styled from 'react-emotion';
 import Text from 'react-textarea-autosize';
 import { Button } from 'react-bootstrap';
 import Ava from '../Avatar';
 
-export const Actions = styled('div')`
+const actions = css`
     margin-left: auto;
     opacity: 0;
     transition: opacity .2s ease;
     will-change: opacity;
+`;
+
+export const Actions = styled('div')`
+    ${actions}
 `;
 
 const replied = css`
@@ -40,9 +44,8 @@ const none = css`
 `;
 
 export const Wrapper = styled('article')`
-    composes:
-        ${p => (p.replied ? replied : none)}
-        ${p => p.replies && replies};
+    ${p => (p.replied ? replied : none)}
+    ${p => p.replies && replies};
 
     display: flex;
     flex-direction: column;
@@ -65,7 +68,7 @@ export const Wrapper = styled('article')`
     }
 
     &:hover {
-        ${Actions} {
+        .${actions} {
             opacity: 1;
         }
     }
@@ -89,7 +92,7 @@ const repliedAvatar = css`
 `;
 
 export const Avatar = styled(Ava)`
-    composes: ${p => (p.replied ? repliedAvatar : noneAvatar)};
+    ${p => (p.replied ? repliedAvatar : noneAvatar)};
     z-index: 2;
     margin-right: 12px;
     flex-shrink: 0;

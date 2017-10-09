@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
 import Select from 'react-select';
@@ -20,7 +20,7 @@ import {
 
 @inject(({ app }) => ({ app }))
 @observer
-class PostCreator extends PureComponent {
+class PostCreator extends Component {
     static propTypes = {
         app: PropTypes.object.isRequired,
     }

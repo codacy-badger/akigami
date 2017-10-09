@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 
@@ -10,7 +10,7 @@ import Wrapper from './Feed.styled';
 
 @inject(({ app }) => ({ app }))
 @observer
-class Feed extends PureComponent {
+class Feed extends Component {
     static defaultProps = {
         userId: null,
     }

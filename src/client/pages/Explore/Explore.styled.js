@@ -1,4 +1,4 @@
-import styled from 'emotion/react';
+import styled from 'react-emotion';
 import Button from 'react-bootstrap/lib/Button';
 
 export const Content = styled('div')`

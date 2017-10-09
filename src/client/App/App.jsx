@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
 
@@ -8,7 +8,7 @@ import Modal from '../containers/Modal';
 
 @inject('app')
 @observer
-class App extends PureComponent {
+class App extends Component {
     static propTypes = {
         app: PropTypes.object.isRequired,
     }
@@ -16,7 +16,7 @@ class App extends PureComponent {
         const { router } = this.props.app;
         return (
             <section className="main">
-                <Modal />
+                {/*<Modal />*/}
                 <TopBar />
                 <Header />
                 {router.container}

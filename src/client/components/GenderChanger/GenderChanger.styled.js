@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import styled from 'emotion/react';
+import styled from 'react-emotion';
 import Ico from '../Icon';
 
 export const Wrapper = styled('div')`
@@ -20,7 +20,7 @@ const defaultBtn = css`
 `;
 
 export const Button = styled('button')`
-    composes: ${(p) => {
+    ${(p) => {
         if (p.active) {
             if (p.gender === 'male') {
                 return maleBtn;

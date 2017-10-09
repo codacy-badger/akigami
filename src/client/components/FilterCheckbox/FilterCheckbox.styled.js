@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import styled from 'emotion/react';
+import styled from 'react-emotion';
 
 export const Box = styled('div')`
     display: flex;
@@ -36,11 +36,11 @@ const nActiveItem = css`
 `;
 
 export const Item = styled('div')`
-    composes: ${defaultItem}
-        ${p => p.positiveHover && pHoverItem}
-        ${p => p.negativeHover && nHoverItem}
-        ${p => p.positiveActive && pActiveItem}
-        ${p => p.negativeActive && nActiveItem};
+    ${defaultItem};
+    ${p => p.positiveHover && pHoverItem};
+    ${p => p.negativeHover && nHoverItem};
+    ${p => p.positiveActive && pActiveItem};
+    ${p => p.negativeActive && nActiveItem};
 
     color: #424242;
     display: flex;

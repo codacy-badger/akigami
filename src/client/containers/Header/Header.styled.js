@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import styled from 'emotion/react';
+import styled from 'react-emotion';
 import G from 'react-bootstrap/lib/Grid';
 import R from 'react-bootstrap/lib/Row';
 import C from 'react-bootstrap/lib/Col';
@@ -16,7 +16,7 @@ const transparent = css`
 `;
 
 export const Head = styled('header')`
-    composes: ${p => (p.transparent ? transparent : opaque)};
+    ${p => (p.transparent ? transparent : opaque)};
     color: white;
     position: fixed;
     width: 100%;
@@ -101,7 +101,7 @@ const large = css`
 `;
 
 export const Icon = styled(Ico)`
-    composes: ${p => (p.large ? large : normal)};
+    ${p => (p.large ? large : normal)};
     display: flex;
     margin-right: 4px;
 `;
