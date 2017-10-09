@@ -1,17 +1,20 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid as BsGrid, Row, Col } from 'react-bootstrap';
 import Responsive from 'react-responsive';
 
 import Filter from '../../containers/Filter';
 import Icon from '../../components/Icon';
 import Wrapper from '../../components/Wrapper';
+import Entity from '../../components/Entity';
 import {
     Content,
     Header,
     Switch,
     Title,
+    Grid,
 } from './Explore.styled';
+import data from './Explore.mock';
 
 class Explore extends PureComponent {
     static defaultProps = {
@@ -38,7 +41,7 @@ class Explore extends PureComponent {
         const { type } = this.props;
         return (
             <Wrapper opaque>
-                <Grid>
+                <BsGrid>
                     <Row>
                         <Responsive maxWidth={991}>
                             <Filter
@@ -66,11 +69,17 @@ class Explore extends PureComponent {
                                 </Title>
                             </Header>
                             <Content>
-                                456
+                                <Grid>
+                                    {data.map(item => (
+                                        <div key={item.id} style={{ width: 140 }}>
+                                            <Entity {...item} />
+                                        </div>
+                                    ))}
+                                </Grid>
                             </Content>
                         </Col>
                     </Row>
-                </Grid>
+                </BsGrid>
             </Wrapper>
         );
     }

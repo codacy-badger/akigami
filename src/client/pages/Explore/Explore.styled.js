@@ -47,3 +47,13 @@ export const Title = styled('h1')`
         font-size: 20px;
     }
 `;
+
+export const Grid = styled('div')`
+    display: flex;
+    flex-wrap: wrap;
+    margin: -12px;
+
+    > div {
+        margin: 12px;
+    }
+`;

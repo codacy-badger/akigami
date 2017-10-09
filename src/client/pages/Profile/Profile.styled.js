@@ -96,6 +96,7 @@ export const Status = styled('p')`
 
 export const Settings = styled(Button)`
     margin-top: 8px;
+    margin-right: auto;
 `;
 
 export const About = styled('div')`
