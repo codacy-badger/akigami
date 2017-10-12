@@ -70,9 +70,13 @@ class Explore extends PureComponent {
                             </Header>
                             <Content>
                                 <Grid>
-                                    {data.map(item => (
-                                        <div key={item.id} style={{ width: 140 }}>
-                                            <Entity {...item} />
+                                    {data.map((item, index) => (
+                                        <div key={index} style={{ width: 140 }}>
+                                            <Entity
+                                                type={item.type}
+                                                status={item.status}
+                                                entity={item.entity}
+                                            />
                                         </div>
                                     ))}
                                 </Grid>

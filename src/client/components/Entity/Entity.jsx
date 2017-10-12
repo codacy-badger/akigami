@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import Icon from '../Icon';
 
 import {
@@ -16,46 +17,89 @@ import {
     Link,
     MetaItem,
     Button,
+    Label,
 } from './Entity.styled';
 
 class Entity extends PureComponent {
     static defaultProps = {
-        image: null,
-        genres: [],
-        studio: null,
-        type: 'anime',
-        date: null,
-        animeType: null,
+        status: null,
     }
     static propTypes = {
-        id: PropTypes.number.isRequired,
-        image: PropTypes.string,
-        type: PropTypes.string,
-        title: PropTypes.string.isRequired,
-        genres: PropTypes.array,
-        studio: PropTypes.object,
-        date: PropTypes.number,
-        animeType: PropTypes.string,
+        type: PropTypes.oneOf(['anime', 'manga', 'novel']).isRequired,
+        status: PropTypes.oneOf([
+            'planned',
+            'watching',
+            'onhold',
+            'completed',
+            'dropped',
+        ]),
+        entity: PropTypes.object.isRequired,
+    }
+    static typeConverter(type) {
+        switch (type) {
+        case 'tv': return 'TV сериал';
+        case 'movie': return 'Фильм';
+        case 'ova': return 'OVA';
+        case 'ona': return 'ONA';
+        case 'special': return 'Спэшл';
+        default: return '';
+        }
+    }
+    static statusConverter(status) {
+        switch (status) {
+        case 'planned': return {
+            color: '#a2a2a2',
+            title: 'В планах',
+        };
+        case 'watching': return {
+            color: '#6fbb1c',
+            title: 'Смотрю',
+        };
+        case 'onhold': return {
+            color: '#e6b11a',
+            title: 'Отложено',
+        };
+        case 'completed': return {
+            color: '#1fbbbb',
+            title: 'Завершено',
+        };
+        case 'dropped': return {
+            color: '#d54343',
+            title: 'Брошено',
+        };
+        default: return {
+            color: '#2d2d2d',
+            title: 'Неизвестно',
+        };
+        }
     }
     renderOverlay = () => {
-        const { id, genres, type, date, animeType } = this.props;
-        const href = `/${type}/${id}`;
+        const { type, entity } = this.props;
+        const href = `/${type}/${entity.id}`;
         return (
             <Overlay>
                 <Link href={href} />
                 <Button><Icon type="playlist-plus" /></Button>
                 <Meta>
-                    <MetaItem>{`${animeType},`}</MetaItem>
-                    <MetaItem>{date}</MetaItem>
+                    {entity.type && (
+                        <MetaItem>
+                            {`${this.constructor.typeConverter(entity.type)},`}
+                        </MetaItem>
+                    )}
+                    {(entity.airing && entity.airing.start) && (
+                        <MetaItem>
+                            {moment(entity.airing.start).format('YYYY')}
+                        </MetaItem>
+                    )}
                 </Meta>
-                {genres.length > 0 && (
+                {(entity.genres && entity.genres.length > 0) && (
                     <Genres>
-                        {genres.slice(0, 3).map(item => (
+                        {entity.genres.slice(0, 3).map(item => (
                             <Genre
                                 key={item.id}
                                 href={`/explore/${type}?genres=${item.id}`}
                             >
-                                {item.name}
+                                {item.title}
                             </Genre>
                         ))}
                     </Genres>
@@ -64,26 +108,30 @@ class Entity extends PureComponent {
         );
     }
     render() {
-        const { id, image, title, genres, studio, type } = this.props;
-        const href = `/${type}/${id}`;
+        const { type, entity, status } = this.props;
+        const href = `/${type}/${entity.id}`;
+        const label = this.constructor.statusConverter(status);
         return (
             <Block>
                 <Poster>
+                    {status && (
+                        <Label color={label.color}>{label.title}</Label>
+                    )}
                     <Image
                         href={href}
-                        style={image && {
-                            backgroundImage: `url(${image})`,
+                        style={(entity.poster && entity.poster.medium) && {
+                            backgroundImage: `url(${entity.poster.medium})`,
                         }}
                     />
                     {this.renderOverlay()}
                 </Poster>
                 <Info>
                     <Title href={href}>
-                        {title}
+                        {entity.title.romaji || 'Неизвестное название'}
                     </Title>
-                    {(studio && studio.name && studio.id) && (
-                        <Studio href={`/studio/${studio.id}`}>
-                            {studio.name}
+                    {entity.studio && (
+                        <Studio href={`/studio/${entity.studio.id}`}>
+                            {entity.studio.title}
                         </Studio>
                     )}
                 </Info>

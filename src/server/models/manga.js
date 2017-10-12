@@ -6,7 +6,7 @@ class Manga extends MongooseClass {
         romaji: { type: String },
         english: { type: String },
     };
-    descriptopn = {
+    description = {
         russian: { type: String },
         english: { type: String },
     };

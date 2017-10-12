@@ -5,6 +5,32 @@ export const Block = styled('div')`
     position: relative;
 `;
 
+export const Label = styled('article')`
+    left: -8px;
+    width: 0;
+    border-radius: 3px 0 0 3px;
+    padding: 2px 0 2px 8px;
+
+    position: absolute;
+    color: #fff;
+    top: 14px;
+    left: -8px;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 3;
+    width: 0;
+    border-radius: 3px 0 0 3px;
+    padding: 2px 0 2px 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+
+    transition: width .1s ease, left .1s ease, border-radius .1s ease, padding .1s ease;
+    will-change: width, left, border-radius, padding;
+
+    background-color: ${e => (e.color ? e.color : '#2d2d2d')};
+`;
+
 const overlay = css`
     width: 100%;
     height: 100%;
@@ -37,6 +63,12 @@ export const Poster = styled('div')`
     &:hover {
         .${overlay} {
             opacity: 1;
+        }
+        > article {
+            left: 0;
+            width: auto;
+            border-radius: 0 3px 3px 0;
+            padding: 2px 8px;
         }
     }
 `;

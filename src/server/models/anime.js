@@ -6,7 +6,7 @@ class Anime extends MongooseClass {
         romaji: { type: String },
         english: { type: String },
     };
-    descripton = {
+    description = {
         russian: { type: String },
         english: { type: String },
     };
