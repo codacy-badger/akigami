@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import Icon from '../Icon';
 
 import {
@@ -74,12 +73,12 @@ class Entity extends PureComponent {
         }
     }
     renderOverlay = () => {
-        const { type, entity } = this.props;
+        const { type, entity, status } = this.props;
         const href = `/${type}/${entity.id}`;
         return (
             <Overlay>
                 <Link href={href} />
-                <Button><Icon type="playlist-plus" /></Button>
+                <Button><Icon type={`playlist-${status ? 'check' : 'plus'}`} /></Button>
                 <Meta>
                     {entity.type && (
                         <MetaItem>
@@ -88,7 +87,7 @@ class Entity extends PureComponent {
                     )}
                     {(entity.airing && entity.airing.start) && (
                         <MetaItem>
-                            {moment(entity.airing.start).format('YYYY')}
+                            {new Date(entity.airing.start).getFullYear()}
                         </MetaItem>
                     )}
                 </Meta>
