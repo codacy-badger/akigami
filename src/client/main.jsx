@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
 import { hydrate } from 'emotion';
+import ReactModal from 'react-modal';
 import AppStore from './stores/AppStore';
 import App from './App';
 
@@ -17,6 +18,10 @@ import App from './App';
         layout: raw.dataset.layout,
     });
     hydrate(ids);
+
+    if (typeof window !== 'undefined') {
+        ReactModal.setAppElement('#root');
+    }
     ReactDOM.render(
         <Provider app={app}>
             <App />

@@ -7,6 +7,7 @@ import Filter from '../../containers/Filter';
 import Icon from '../../components/Icon';
 import Wrapper from '../../components/Wrapper';
 import Entity from '../../components/Entity';
+import EntityModal from '../../components/EntityModal';
 import {
     Content,
     Header,
@@ -70,6 +71,7 @@ class Explore extends PureComponent {
                             </Header>
                             <Content>
                                 <Grid>
+                                    <EntityModal />
                                     {data.map((item, index) => (
                                         <div key={index} style={{ width: 140 }}>
                                             <Entity
