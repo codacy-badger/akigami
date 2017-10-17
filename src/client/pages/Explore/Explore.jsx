@@ -71,7 +71,7 @@ class Explore extends PureComponent {
                             </Header>
                             <Content>
                                 <Grid>
-                                    <EntityModal />
+                                    <EntityModal type="anime" id={1} />
                                     {data.map((item, index) => (
                                         <div key={index} style={{ width: 140 }}>
                                             <Entity

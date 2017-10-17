@@ -1,0 +1,86 @@
+.akg-modal {
+    display: flex;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 3px;
+    transform: translate3d(0, -100vw, 0);
+}
+
+.akg-overlay {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(45, 45, 45, 0.0);
+    z-index: 2000;
+    overflow-y: auto;
+    padding: 8vw 2.5vw;
+}
+
+.akg-strict {
+    overflow: hidden !important;
+}
+
+.akg-overlay-open {
+    background-color: rgba(45, 45, 45, 0.9);
+    animation-name: openModalOverlay;
+    animation-duration: .2s;
+}
+
+.akg-overlay-close {
+    background-color: rgba(45, 45, 45, 0.0);
+    animation-name: closeModalOverlay;
+    animation-duration: .2s;
+}
+
+.akg-modal-open {
+    transform: translate3d(0, 0, 0);
+    animation-name: openModal;
+    animation-duration: .2s;
+}
+
+.akg-modal-close {
+    transform: translate3d(0, -100vw, 0);
+    animation-name: closeModal;
+    animation-duration: .2s;
+}
+
+@keyframes openModalOverlay {
+    from {
+        background-color: rgba(45, 45, 45, 0.0);
+    }
+    to {
+        background-color: rgba(45, 45, 45, 0.9);
+    }
+}
+
+@keyframes closeModalOverlay {
+    from {
+        background-color: rgba(45, 45, 45, 0.9);
+    }
+    to {
+        background-color: rgba(45, 45, 45, 0.0);
+    }
+}
+
+@keyframes openModal {
+    from {
+        transform: translate3d(0, -100vw, 0);
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes closeModal {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+    to {
+        transform: translate3d(0, -100vw, 0);
+    }
+}

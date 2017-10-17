@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import ReactModal from 'react-modal';
+import { Poster, ModalContent } from './EntityModal.styled';
 
 class EntityModal extends PureComponent {
     constructor() {
@@ -15,18 +16,31 @@ class EntityModal extends PureComponent {
         this.setState({ showModal: false });
     }
     render() {
+        const { showModal } = this.state;
+        const { type, id } = this.props;
         return (
             <div>
                 <button onClick={this.handleOpenModal}>Trigger Modal</button>
                 <ReactModal
-                    isOpen={this.state.showModal}
-                    contentLabel="onRequestClose Example"
+                    isOpen={showModal}
+                    contentLabel={`${type}-${id}`}
                     onRequestClose={this.handleCloseModal}
-                    className="Modal"
-                    overlayClassName="Overlay"
+                    className={{
+                        base: 'akg-modal',
+                        afterOpen: 'akg-modal-open',
+                        beforeClose: 'akg-modal-close',
+                    }}
+                    overlayClassName={{
+                        base: 'akg-overlay',
+                        afterOpen: 'akg-overlay-open',
+                        beforeClose: 'akg-overlay-close',
+                    }}
+                    bodyOpenClassName="akg-strict"
                 >
-                    <p>Modal text!</p>
-                    <button onClick={this.handleCloseModal}>Close Modal</button>
+                    <ModalContent>
+                        <Poster src="https://kawai.shikimori.org/system/animes/original/34636.jpg" />
+                        <div>sample text</div>
+                    </ModalContent>
                 </ReactModal>
             </div>
         );
