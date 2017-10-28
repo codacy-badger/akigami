@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '../Icon';
+import EntityModal from '../EntityModal';
 
 import {
     Block,
@@ -77,7 +78,7 @@ class Entity extends PureComponent {
         const href = `/${type}/${entity.id}`;
         return (
             <Overlay>
-                <Link href={href} />
+                <EntityModal id={entity.id} entity={entity} type={type} status={status} />
                 <Button><Icon type={`playlist-${status ? 'check' : 'plus'}`} /></Button>
                 <Meta>
                     {entity.type && (
@@ -116,12 +117,7 @@ class Entity extends PureComponent {
                     {status && (
                         <Label color={label.color}>{label.title}</Label>
                     )}
-                    <Image
-                        href={href}
-                        style={(entity.poster && entity.poster.medium) && {
-                            backgroundImage: `url(${entity.poster.medium})`,
-                        }}
-                    />
+                    <Image src={entity.poster.medium} />
                     {this.renderOverlay()}
                 </Poster>
                 <Info>

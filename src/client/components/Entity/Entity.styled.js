@@ -8,7 +8,7 @@ export const Block = styled('div')`
 export const Label = styled('article')`
     left: -8px;
     width: 0;
-    border-radius: 3px 0 0 3px;
+    border-radius: 2px 0 0 2px;
     padding: 2px 0 2px 8px;
 
     position: absolute;
@@ -38,7 +38,7 @@ const overlay = css`
     left: 0;
     position: absolute;
     z-index: 2;
-    border-radius: 3px;
+    border-radius: 2px;
     background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
     color: #fff;
@@ -46,6 +46,15 @@ const overlay = css`
     flex-direction: column;
     transition: opacity .2s ease;
     will-change: opacity;
+
+    > div:first-child {
+        display: flex;
+        flex: 1;
+        > button {
+            display: flex;
+            flex: 1;
+        }
+    }
 `;
 
 export const Overlay = styled('div')`
@@ -58,7 +67,7 @@ export const Poster = styled('div')`
     height: 0;
     padding-bottom: 140%;
     margin-bottom: 10px;
-    border-radius: 3px;
+    border-radius: 2px;
     position: relative;
     &:hover {
         .${overlay} {
@@ -67,18 +76,19 @@ export const Poster = styled('div')`
         > article {
             left: 0;
             width: auto;
-            border-radius: 0 3px 3px 0;
+            border-radius: 0 2px 2px 0;
             padding: 2px 8px;
         }
     }
 `;
 
-export const Image = styled('a')`
+export const Image = styled('div')`
     width: 100%;
     height: 100%;
+    background-image: url(${props => props.src});
     background-size: cover;
     background-position: center;
-    border-radius: 3px;
+    border-radius: 2px;
     background-color: grey;
     position: absolute;
     z-index: 1;
@@ -100,6 +110,7 @@ export const Title = styled('a')`
     white-space: nowrap;
     text-overflow: ellipsis;
     color: #404040;
+    text-align: left;
 `;
 
 export const Genres = styled('div')`
@@ -114,7 +125,8 @@ export const Genre = styled('a')`
     color: #fff;
     font-weight: 600;
     opacity: .7;
-    &:hover {
+    &:hover,
+    &:focus {
         color: #fff;
         opacity: 1;
     }
@@ -128,6 +140,7 @@ export const Studio = styled('a')`
     font-size: 11px;
     color: #666;
     margin-right: auto;
+    text-align: left;
     &:hover {
         color: #d54343;
     }
@@ -136,6 +149,7 @@ export const Studio = styled('a')`
 export const Meta = styled('div')`
     width: 100%;
     padding: 0 8px;
+    text-align: left;
 `;
 
 export const Link = styled('a')`

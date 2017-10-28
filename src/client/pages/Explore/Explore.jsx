@@ -7,7 +7,6 @@ import Filter from '../../containers/Filter';
 import Icon from '../../components/Icon';
 import Wrapper from '../../components/Wrapper';
 import Entity from '../../components/Entity';
-import EntityModal from '../../components/EntityModal';
 import {
     Content,
     Header,
@@ -31,49 +30,25 @@ class Explore extends PureComponent {
         default: return 'Обзор аниме';
         }
     }
-    state = {
-        opennedFilter: false,
-    }
-    changeVisibilityFilter = (action) => {
-        this.setState({ opennedFilter: action });
-    }
     render() {
-        const { opennedFilter } = this.state;
         const { type } = this.props;
         return (
             <Wrapper opaque>
                 <BsGrid>
                     <Row>
-                        <Responsive maxWidth={991}>
-                            <Filter
-                                open={opennedFilter}
-                                onClose={() => this.changeVisibilityFilter(false)}
-                            />
-                        </Responsive>
-                        <Responsive minWidth={992}>
-                            <Col md={3}>
-                                <Filter />
-                            </Col>
-                        </Responsive>
-                        <Col md={9}>
+                        <Col xs={12}>
                             <Header>
-                                <Responsive maxWidth={991}>
-                                    <Switch
-                                        bsStyle="link"
-                                        onClick={() => this.changeVisibilityFilter(true)}
-                                    >
-                                        <Icon type="tune" />
-                                    </Switch>
-                                </Responsive>
                                 <Title>
                                     {Explore.getTitle(type)}
                                 </Title>
                             </Header>
                             <Content>
                                 <Grid>
-                                    <EntityModal type="anime" id={1} />
                                     {data.map((item, index) => (
-                                        <div key={index} style={{ width: 140 }}>
+                                        <div
+                                            key={index}
+                                            style={{ width: 140 }}
+                                        >
                                             <Entity
                                                 type={item.type}
                                                 status={item.status}
