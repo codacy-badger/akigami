@@ -10,18 +10,35 @@ export const Poster = styled('div')`
     background-color: grey;
     object-fit: cover;
     flex-shrink: 0;
+
+    @media screen and (max-width: 830px) {
+        width: 100%;
+        height: 220px;
+        opacity: .5;
+    }
 `;
 
 export const ModalContent = styled('div')`
     display: flex;
     width: 800px;
     height: 470px;
+
+    @media screen and (max-width: 830px) {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+    }
 `;
 
 export const Info = styled('div')`
     display: flex;
     flex-direction: column;
     width: 100%;
+    z-index: 1;
+
+    @media screen and (max-width: 830px) {
+        margin-top: -60px;
+    }
 `;
 
 export const Head = styled('div')`
@@ -33,6 +50,16 @@ export const Head = styled('div')`
     margin: 34px 52px 24px -32px;
     padding: 16px 24px;
     box-shadow: 0 12px 82px rgba(150, 150, 150, 0.25);
+
+    @media screen and (max-width: 830px) {
+        margin: 34px 52px 24px 0;
+        border-radius: 0 2px 2px 0;
+    }
+
+    @media screen and (max-width: 540px) {
+        margin: 34px 0 24px 0;
+        border-radius: 0;
+    }
 `;
 
 export const Title = styled('h1')`
@@ -43,11 +70,19 @@ export const Title = styled('h1')`
     color: #4a4a4a;
     line-height: 1.2;
     letter-spacing: 0.3px;
+
+    @media screen and (max-width: 830px) {
+        font-size: 18px;
+    }
 `;
 
 export const Meta = styled('div')`
     display: flex;
     flex-wrap: wrap;
+
+    @media screen and (max-width: 540px) {
+        flex-direction: column;
+    }
 `;
 
 export const Genres = styled('div')`
@@ -71,6 +106,10 @@ export const Genre = styled('a')`
 
     &:hover {
         border-color: #d3d3d3;
+    }
+    
+    @media screen and (max-width: 830px) {
+        font-size: 12px;
     }
 `;
 
@@ -97,6 +136,15 @@ export const Studio = styled('a')`
         background-color: #d54343;
         color: #fff;
     }
+
+    @media screen and (max-width: 830px) {
+        font-size: 12px;
+    }
+
+    @media screen and (max-width: 540px) {
+        margin-left: 0;
+        margin-top: 12px;
+    }
 `;
 
 export const Content = styled('div')`
@@ -109,11 +157,15 @@ export const Description = styled('p')`
     font-size: 16px;
     font-weight: 300;
     white-space: pre-wrap;
+
+    @media screen and (max-width: 830px) {
+        font-size: 14px;
+    }
 `;
 
 export const More = styled('a')`
     padding: 12px 24px;
-    display: flex;
+    display: inline-flex;
     font-size: 16px;
     align-items: center;
     color: #d48181;
@@ -128,6 +180,14 @@ export const More = styled('a')`
 
     &:hover {
         color: #d54343;
+    }
+
+    @media screen and (max-width: 830px) {
+        font-size: 14px;
+
+        > i {
+            font-size: 18px;
+        }
     }
 `;
 
