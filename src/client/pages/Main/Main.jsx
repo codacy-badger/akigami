@@ -49,6 +49,7 @@ class Main extends Component {
                     </Left>
                     <Center>
                         {user.isAuth && <Hello user={user} />}
+                        <a href='/?m=404'>умря</a>
                         <Block title="Лента">
                             <Feed />
                         </Block>

@@ -4,6 +4,8 @@ import merge from 'lodash/merge';
 
 export default class Modal {
     id;
+    @observable show = true;
+    @observable isOverlay = false;
     @observable header = {
         title: '',
         className: '',

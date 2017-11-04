@@ -1,12 +1,13 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
+import ReactModal from 'react-modal';
 
-import Modal from 'react-bootstrap/lib/Modal';
+import Icon from '../../components/Icon';
 
 @inject('app')
 @observer
-export default class ModalComponent extends PureComponent {
+export default class ModalComponent extends Component {
     static propTypes = {
         app: PropTypes.object.isRequired,
     }
@@ -21,9 +22,55 @@ export default class ModalComponent extends PureComponent {
                     if (!m.content.component) {
                         return false;
                     }
-                    const { id, header, content, footer, className } = m;
+                    const { id, show, header, content, footer, className, isOverlay } = m;
+                    const handleCloseModal = () => modal.close(id);
                     console.log('m', m);
                     return (
+                        <ReactModal
+                            key={id}
+                            isOpen={show}
+                            onRequestClose={handleCloseModal}
+                            closeTimeoutMS={300}
+                            className={{
+                                base: 'akg-modal',
+                                afterOpen: 'akg-modal-open',
+                                beforeClose: 'akg-modal-close',
+                            }}
+                            overlayClassName={{
+                                base: 'akg-overlay',
+                                afterOpen: 'akg-overlay-open',
+                                beforeClose: 'akg-overlay-close',
+                            }}
+                            bodyOpenClassName="akg-strict"
+                        >
+                            <div className="akg-modal-inner">
+                                <div className="akg-modal-bitmap-2" />
+                                <div className="akg-modal-bitmap-1" />
+                                <div className="akg-modal-content">
+                                    <button
+                                        type="button"
+                                        className="akg-modal-button"
+                                        onClick={handleCloseModal}
+                                    >
+                                        <Icon type="close" />
+                                    </button>
+                                    {React.createElement(content.component, {
+                                        id,
+                                        store: m.store,
+                                        ...m.props,
+                                    })}
+                                    {footer.component && (
+                                        React.createElement(footer.component, {
+                                            id,
+                                            store: m.store,
+                                            ...m.props,
+                                        })
+                                    )}
+                                </div>
+                            </div>
+                        </ReactModal>
+                    );
+                    /* return (
                         <Modal key={id} bsSize={m.size} show className={className}>
                             {(header.title || header.component) && (
                                 <Modal.Header closeButton className={header.className}>
@@ -53,7 +100,7 @@ export default class ModalComponent extends PureComponent {
                                 </Modal.Footer>
                             )}
                         </Modal>
-                    );
+                    ); */
                 })}
             </span>
         );

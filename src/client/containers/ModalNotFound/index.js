@@ -8,8 +8,8 @@ export default () => ({
     content: {
         component: Modal,
     },
-    footer: {
+    /* footer: {
         component: Footer,
-    },
+    }, */
     size: 'small',
 });

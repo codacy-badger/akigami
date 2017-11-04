@@ -16,7 +16,7 @@ class App extends Component {
         const { router } = this.props.app;
         return (
             <section className="main">
-                {/*<Modal />*/}
+                <Modal />
                 <TopBar />
                 <Header />
                 {router.container}

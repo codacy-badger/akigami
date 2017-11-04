@@ -24,10 +24,13 @@ export default class Modal {
 
     @action
     close = (id) => {
-        this.modals = this.modals.filter((i) => i.id !== id);
-        if (this.modals.length === 0) {
-            history.pushState(null, null, location.pathname);
-        }
+        this.modals.find(el => el.id === id)?.show = false;
+        setTimeout(() => {
+            this.modals = this.modals.filter(i => i.id !== id);
+            if (this.modals.length === 0) {
+                history.pushState(null, null, location.pathname);
+            }
+        }, 350);
     }
     hide = () => {
         this.showModal = false;

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 
@@ -6,17 +6,17 @@ import Button from 'react-bootstrap/lib/Button';
 
 @inject('app')
 @observer
-export default class Footer extends PureComponent {
+export default class Footer extends Component {
     static propTypes = {
         id: PropTypes.string.isRequired,
         app: PropTypes.object.isRequired,
     }
     constructor(props) {
         super(props);
-        this.timer = setInterval(this.handleClose, 2000);
+        this.timer = setTimeout(this.handleClose, 2000);
     }
     componentWillUnmount() {
-        clearInterval(this.timer);
+        clearTimeout(this.timer);
     }
     handleClose = () => {
         this.props.app.modal.close(this.props.id);
