@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import Icon from '../Icon';
@@ -23,7 +23,7 @@ import {
 
 @inject('app')
 @observer
-class Entity extends PureComponent {
+class Entity extends Component {
     static defaultProps = {
         status: null,
     }

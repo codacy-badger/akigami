@@ -45,17 +45,17 @@ class Filter extends PureComponent {
         const { fixed } = this.state;
         const height = document.body.scrollTop || document.documentElement.scrollTop;
         const state = {
-            fixed: false,
+            fixed,
         };
-        if (!fixed) {
-            this.offset = this.fixer.offsetTop;
-        }
-        if (height >= this.offset) {
-            state.fixed = true;
-        } else {
+        if (this.fixer.offsetTop >= height && fixed) {
             state.fixed = false;
+            console.log('<');
+            this.setState(state);
+        } else if (this.fixer.offsetTop < height && !fixed) {
+            state.fixed = true;
+            console.log('>=');
+            this.setState(state);
         }
-        this.setState(state);
     }
     handleExpandFilter = () => {
         const { onExpand } = this.props;
