@@ -61,9 +61,13 @@ class Filter extends PureComponent {
         const { onExpand } = this.props;
         this.setState({ expand: !this.state.expand }, () => onExpand?.(this.state.expand));
     }
+    handleChangeSearch = (e) => {
+        const { onSearch } = this.props;
+        this.setState({ search: e.target.value }, () => onSearch?.(this.state.search));
+    }
     render() {
         const { search, expand, fixed } = this.state;
-        const { type, onSearch } = this.props;
+        const { type } = this.props;
         return (
             <Fixer innerRef={(e) => { this.fixer = e; }} fixed={fixed}>
                 <Grid>
@@ -80,7 +84,7 @@ class Filter extends PureComponent {
                                     <Search
                                         value={search}
                                         placeholder={`Поиск по ${type}`}
-                                        onChange={e => onSearch(e.target.value)}
+                                        onChange={this.handleChangeSearch}
                                     />
                                 </Header>
                                 {expand && (
