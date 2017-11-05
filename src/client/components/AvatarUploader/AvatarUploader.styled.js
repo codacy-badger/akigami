@@ -24,7 +24,7 @@ export const Replacer = styled('button')`
     transition: background-color .2s ease;
     will-change: background-color;
     color: white;
-    font-size: 9px;
+    font-size: 12px;
     padding: 4px;
     width: calc(100% - 4px);
 
@@ -43,6 +43,7 @@ export const Zone = styled(Dropzone)`
     background-color: white;
     transition: color .2s ease;
     will-change: color;
+    border-radius: 100px;
     cursor: pointer;
 
     &:hover {

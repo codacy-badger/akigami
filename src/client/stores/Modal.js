@@ -30,7 +30,7 @@ export default class Modal {
             if (this.modals.length === 0) {
                 history.pushState(null, null, location.pathname);
             }
-        }, 350);
+        }, 300);
     }
     hide = () => {
         this.showModal = false;

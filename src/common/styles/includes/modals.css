@@ -124,6 +124,8 @@
 
     transition: color .2s ease;
     will-change: color;
+
+    z-index: 2;
 }
 
 .akg-modal-button:hover,

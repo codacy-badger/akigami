@@ -39,7 +39,6 @@ export const Button = styled('button')`
 `;
 
 export const Icon = styled(Ico)`
-    transform: rotate(${p => (p.gender === 'male' ? '-15deg' : '25deg')});
     display: block;
 `;
 

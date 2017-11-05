@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import Icon from '../Icon';
 import EntityModal from '../EntityModal';
@@ -14,12 +15,14 @@ import {
     Genre,
     Studio,
     Meta,
-    Link,
+    ModalTrigger,
     MetaItem,
     Button,
     Label,
 } from './Entity.styled';
 
+@inject('app')
+@observer
 class Entity extends PureComponent {
     static defaultProps = {
         status: null,
@@ -34,6 +37,7 @@ class Entity extends PureComponent {
             'dropped',
         ]),
         entity: PropTypes.object.isRequired,
+        app: PropTypes.object.isRequired,
     }
     static typeConverter(type) {
         switch (type) {
@@ -73,12 +77,30 @@ class Entity extends PureComponent {
         };
         }
     }
+    showModal = () => {
+        const {
+            app,
+            type,
+            entity,
+            status,
+        } = this.props;
+        app.modal.show({
+            content: {
+                component: EntityModal,
+            },
+            props: {
+                id: entity.id,
+                type,
+                entity,
+                status,
+            },
+        });
+    }
     renderOverlay = () => {
         const { type, entity, status } = this.props;
-        const href = `/${type}/${entity.id}`;
         return (
             <Overlay>
-                <EntityModal id={entity.id} entity={entity} type={type} status={status} />
+                <div><ModalTrigger onClick={this.showModal} /></div>
                 <Button><Icon type={`playlist-${status ? 'check' : 'plus'}`} /></Button>
                 <Meta>
                     {entity.type && (

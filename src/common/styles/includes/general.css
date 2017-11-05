@@ -51,7 +51,7 @@ a:active {
 
     .Select-control {
         height: 30px;
-        border-radius: 100px;
+        border-radius: 2px;
         font-size: 12px;
         border-color: #ccc;
     }
@@ -70,7 +70,7 @@ a:active {
     }
     
     &.is-open .Select-control {
-        border-radius: 15px 15px 0 0;
+        border-radius: 2px 2px 0 0;
     }
 
     &.is-focused:not(.is-open) > .Select-control {
@@ -93,7 +93,7 @@ a:active {
             > a {
                 border: 1px solid #ddd !important;
                 margin-right: 3px;
-                border-radius: 100px;
+                border-radius: 2px;
                 text-align: center;
                 padding: 4px;
                 font-size: 12px;

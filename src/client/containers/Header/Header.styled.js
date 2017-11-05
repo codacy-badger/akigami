@@ -116,13 +116,13 @@ export const Search = styled(FormControl)`
     border: 1px solid rgba(255, 255, 255, 0.6);
     padding: 8px 16px;
     height: 30px;
-    border-radius: 100px;
+    border-radius: 2px;
     width: 160px;
     box-shadow: none;
 
     &:focus {
         box-shadow: none;
-        border-color: $font-color-inverted;
+        border-color: #fff;
     }
 
     &::-webkit-input-placeholder {color: rgba(255, 255, 255, 0.6);}

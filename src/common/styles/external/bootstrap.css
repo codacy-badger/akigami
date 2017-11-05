@@ -2557,7 +2557,7 @@ output {
   background-color: #fff;
   background-image: none;
   border: 1px solid #ddd;
-  border-radius: 100px;
+  border-radius: 2px;
   
   -webkit-transition: border-color ease-in-out .15s;
        -o-transition: border-color ease-in-out .15s;
@@ -3001,7 +3001,7 @@ select[multiple].input-lg {
   display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
-  border-radius: 100px;
+  border-radius: 2px;
   font-size: 14px;
   font-weight: normal;
   line-height: 1.42857143;
@@ -3616,11 +3616,10 @@ tbody.collapse.in {
   background-color: #fff;
   -webkit-background-clip: padding-box;
           background-clip: padding-box;
-  border: 1px solid #ddd;
-  border-radius: 3px;
+  border-radius: 2px;
   
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
+  -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 10px 20px -5px rgba(0,0,0,0.15);
+          box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 10px 20px -5px rgba(0,0,0,0.15);
 }
 .dropdown-menu.pull-right {
   right: 0;
@@ -6106,7 +6105,7 @@ button.close {
   color: #fff;
   text-align: center;
   background-color: #882222;
-  border-radius: 100px;
+  border-radius: 2px;
 }
 .tooltip-arrow {
   position: absolute;

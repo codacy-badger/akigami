@@ -1,16 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Grid as BsGrid, Row, Col } from 'react-bootstrap';
-import Responsive from 'react-responsive';
 
-import Filter from '../../containers/Filter';
-import Icon from '../../components/Icon';
 import Wrapper from '../../components/Wrapper';
 import Entity from '../../components/Entity';
 import {
     Content,
     Header,
-    Switch,
     Title,
     Grid,
 } from './Explore.styled';

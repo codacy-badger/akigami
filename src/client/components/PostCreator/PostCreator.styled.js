@@ -9,7 +9,7 @@ export const Post = styled('section')`
     margin-bottom: 22px;
     transition: box-shadow .2s ease;
     will-change: box-shadow;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 10px 20px -5px rgba(0,0,0,0.4);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 10px 20px -5px rgba(0,0,0,0.15);
     border-radius: 2px;
     background-color: white;
 `;

@@ -69,7 +69,7 @@ export const Counter = styled('span')`
     background-color: rgba(0,0,0,.2);
     padding: 2px 6px;
     color: white;
-    border-radius: 9px;
+    border-radius: 2px;
 `;
 
 export const Title = styled('span')`

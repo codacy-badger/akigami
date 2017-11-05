@@ -3,6 +3,13 @@ import styled, { css } from 'react-emotion';
 export const Block = styled('div')`
     width: 100%;
     position: relative;
+
+    &:hover {
+        > div:first-child {
+            transform: scale(1.02);
+            box-shadow: 0 22px 50px rgba(14,21,47,.2), 0 8px 20px rgba(14,21,47,.2);
+        }
+    }
 `;
 
 export const Label = styled('article')`
@@ -61,6 +68,13 @@ export const Overlay = styled('div')`
     ${overlay}
 `;
 
+export const ModalTrigger = styled('button')`
+    background: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+`;
+
 export const Poster = styled('div')`
     display: block;
     width: 100%;
@@ -69,6 +83,8 @@ export const Poster = styled('div')`
     margin-bottom: 10px;
     border-radius: 2px;
     position: relative;
+    transition: box-shadow .2s ease, transform .2s ease;
+    will-change: box-shadow, transform;
     &:hover {
         .${overlay} {
             opacity: 1;
