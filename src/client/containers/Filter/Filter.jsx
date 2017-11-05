@@ -80,7 +80,7 @@ class Filter extends PureComponent {
                                     <Search
                                         value={search}
                                         placeholder={`Поиск по ${type}`}
-                                        onChange={e => onSearch(e.targer.value)}
+                                        onChange={e => onSearch(e.target.value)}
                                     />
                                 </Header>
                                 {expand && (
