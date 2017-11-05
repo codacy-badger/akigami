@@ -18,16 +18,12 @@ export const Element = styled('div')`
         : withoutPaddingsPost)};
     position: relative;
     
-    border: 1px solid #ddd;
     margin-bottom: 22px;
     transition: box-shadow .2s ease;
     will-change: box-shadow;
 
-    border-radius: 3px;
-    border: 1px solid #eee;
-    box-shadow: ${p => (p.edit
-        ? '0 4px 8px rgba(0,0,0,0.05), -6px 0 0 #ffbb07'
-        : '0 4px 8px rgba(0,0,0,0.05)')};
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 10px 20px -5px rgba(0,0,0,0.4);
     background-color: white;
 `;
 

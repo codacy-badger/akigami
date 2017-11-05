@@ -5040,10 +5040,10 @@ a.badge:focus {
 }
 .jumbotron {
   color: inherit;
-  border: 2px dashed #bbb;
+  border: 1px dashed #bbb;
   padding: 18px;
   margin-bottom: 18px;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 .jumbotron h1,
 .jumbotron .h1 {

@@ -3,13 +3,13 @@ import styled from 'react-emotion';
 
 const bordered = css`
     padding: 16px;
-    border-radius: 3px;
-    border: 1px solid #eee;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.06);
     background-color: white;
 `;
 
 const shadow = css`
-    box-shadow: 0 2px 12px rgba(155, 155, 155, 0.2);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 10px 20px -5px rgba(0,0,0,0.4);
 `;
 
 export const Wrapper = styled('div')`
