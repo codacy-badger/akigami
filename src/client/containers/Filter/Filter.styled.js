@@ -1,81 +1,60 @@
-import { css } from 'emotion';
-import styled from 'react-emotion';
-import { Button } from 'react-bootstrap';
-
-const openned = css`
-    @media screen and (max-width: 991px) {
-        transform: translate3d(0, 0, 0);
-    }
-`;
-
-const closed = css`
-    @media screen and (max-width: 991px) {
-        transform: translate3d(-100%, 0, 0);
-    }
-`;
+import styled, { css } from 'react-emotion';
+import { FormControl } from 'react-bootstrap';
 
 export const Wrapper = styled('div')`
-    ${p => (p.open ? openned : closed)};
-    height: calc(100vh - 48px);
-    background-color: #424242;
-    margin-left: -100vw;
-    padding-left: 100vw;
-    padding-right: 12px;
-    color: white;
-    position: relative;
+    background-color: #f7f7f7;
+    border-radius: 2px;
+    padding: ${props => (props.fixed ? '16px 0' : '16px')};
 
-    @media screen and (max-width: 991px) {
-        width: 280px;
-        margin-left: 0;
-        padding-left: 22px;
-        padding-right: 12px;
-        position: fixed;
-        left: 0;
-        top: 48px;
-        z-index: 2;
-        transition: transform .2s ease;
-        will-change: transform;
-    }
+    display: flex;
+    flex-direction: column;
 
-    @media screen and (max-width: 459px) {
-        width: 100%;
-    }
-`;
-
-export const Title = styled('h3')`
-    margin: 0;
-    font-weight: bold;
-
-    &:after {
-        content: '';
-        width: 40px;
-        margin-top: 4px;
-        height: 4px;
-        background-color: #9b9b9b;
-        display: block;
-        border-radius: 4px;
-    }
-
-    @media screen and (max-width: 650px) {
-        font-size: 20px;
-        padding-top: 32px !important;
-    }
+    transition: padding .2s ease;
+    will-change: padding;
 `;
 
 export const Header = styled('div')`
-    width: 100%;
     display: flex;
-    align-items: baseline;
+    align-items: center;
 `;
 
-export const Close = styled(Button)`
-    margin-left: auto;
-    color: white;
-    padding: 0 6px 1px;
-    font-size: 22px;
-
-    &:hover {
-        color: #eee;
-    }
+export const Trigger = styled('button')`
+    background: none;
+    border: none;
+    outline: none;
+    color: ${props => (props.active ? '#d54343' : '#4a4a4a')};
+    font-size: 24px;
 `;
 
+export const Search = styled(FormControl)`
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+`;
+
+export const Expand = styled('div')`
+    display: flex;
+    flex-direction: column;
+    padding: 22px 6px 8px;
+`;
+
+const defaultStyle = css`
+    position: relative;
+`;
+
+const fixedStyle = css`
+    position: fixed;
+    top: 48px;
+    left: 0;
+    background-color: #f7f7f7;
+`;
+
+export const Fixer = styled('div')`
+    ${props => (props.fixed ? fixedStyle : defaultStyle)};
+    z-index: 10;
+    width: 100%;
+    transition: .2s ease;
+    will-change: position, top, left, background-color;
+`;

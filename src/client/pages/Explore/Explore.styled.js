@@ -43,6 +43,10 @@ export const Title = styled('h1')`
         border-radius: 4px;
     }
 
+    > div {
+        margin-left: 24px;
+    }
+
     @media screen and (max-width: 650px) {
         font-size: 20px;
     }
@@ -56,4 +60,13 @@ export const Grid = styled('div')`
     > div {
         margin: 12px;
     }
+`;
+
+export const Fixer = styled('div')`
+    width: 140px;
+`;
+
+export const Settings = styled('div')`
+    margin: 8px -10px 42px;
+    min-height: 70px;
 `;

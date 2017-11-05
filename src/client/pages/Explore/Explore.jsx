@@ -1,33 +1,40 @@
 import React, { PureComponent } from 'react';
+import { inject } from 'mobx-react';
 import PropTypes from 'prop-types';
 import { Grid as BsGrid, Row, Col } from 'react-bootstrap';
 
 import Wrapper from '../../components/Wrapper';
 import Entity from '../../components/Entity';
+import Switcher from '../../components/Switcher';
+import Filter from '../../containers/Filter';
 import {
     Content,
     Header,
     Title,
     Grid,
+    Fixer,
+    Settings,
 } from './Explore.styled';
 import data from './Explore.mock';
 
+@inject('app')
 class Explore extends PureComponent {
     static defaultProps = {
         type: null,
     }
     static propTypes = {
         type: PropTypes.string,
+        app: PropTypes.object.isRequired,
     }
-    static getTitle(type) {
+    static convertToSearchType(type) {
         switch (type) {
-        case 'novel': return 'Обзор новелл';
-        case 'manga': return 'Обзор манги';
-        default: return 'Обзор аниме';
+        case 'manga': return 'манге';
+        case 'novel': return 'новеллам';
+        default: return 'аниме';
         }
     }
     render() {
-        const { type } = this.props;
+        const { type, app } = this.props;
         return (
             <Wrapper opaque>
                 <BsGrid>
@@ -35,22 +42,39 @@ class Explore extends PureComponent {
                         <Col xs={12}>
                             <Header>
                                 <Title>
-                                    {Explore.getTitle(type)}
+                                    Обзор
+                                    <Switcher
+                                        inline
+                                        options={[{
+                                            value: 'anime',
+                                            title: 'аниме',
+                                        }, {
+                                            value: 'manga',
+                                            title: 'манги',
+                                        }, {
+                                            value: 'novel',
+                                            title: 'новелл',
+                                        }]}
+                                        value={type}
+                                        onChange={async (newType) => {
+                                            await app.router.go(`/explore/${newType}`);
+                                        }}
+                                    />
                                 </Title>
                             </Header>
+                            <Settings>
+                                <Filter type={this.constructor.convertToSearchType(type)} />
+                            </Settings>
                             <Content>
                                 <Grid>
                                     {data.map((item, index) => (
-                                        <div
-                                            key={index}
-                                            style={{ width: 140 }}
-                                        >
+                                        <Fixer key={index}>
                                             <Entity
                                                 type={item.type}
                                                 status={item.status}
                                                 entity={item.entity}
                                             />
-                                        </div>
+                                        </Fixer>
                                     ))}
                                 </Grid>
                             </Content>
