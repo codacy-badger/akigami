@@ -7,6 +7,7 @@
   "author": "Yukioru <obt195@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "start": "concurrently \"yarn run client\" \"yarn run server\"",
     "server": "node tools/run",
     "client": "node_modules/.bin/webpack --watch"
   },
@@ -90,6 +91,7 @@
     "babel-preset-react": "7.0.0-beta.2",
     "babel-preset-stage-0": "7.0.0-beta.2",
     "babel-register": "7.0.0-beta.2",
+    "concurrently": "^3.5.0",
     "css-loader": "^0.28.5",
     "cssnano": "^3.10.0",
     "eslint": "^4.9.0",
