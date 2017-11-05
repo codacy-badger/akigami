@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
+import cx from 'classnames';
 
 import Icon from '../../components/Icon';
 
@@ -32,7 +33,7 @@ export default class ModalComponent extends Component {
                             onRequestClose={handleCloseModal}
                             closeTimeoutMS={300}
                             className={{
-                                base: 'akg-modal',
+                                base: `akg-modal ${isOverlay ? 'akg-noShadow' : ''}`,
                                 afterOpen: 'akg-modal-open',
                                 beforeClose: 'akg-modal-close',
                             }}
@@ -44,9 +45,14 @@ export default class ModalComponent extends Component {
                             bodyOpenClassName="akg-strict"
                         >
                             <div className="akg-modal-inner">
-                                <div className="akg-modal-bitmap-2" />
-                                <div className="akg-modal-bitmap-1" />
-                                <div className="akg-modal-content">
+                                {!isOverlay && <div className="akg-modal-bitmap-2" />}
+                                {!isOverlay && <div className="akg-modal-bitmap-1" />}
+                                <div
+                                    className={cx({
+                                        'akg-modal-content': !isOverlay,
+                                        'akg-modal-overlay': isOverlay,
+                                    })}
+                                >
                                     <button
                                         type="button"
                                         className="akg-modal-button"

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 
+import ConfirmModal from '../../components/ConfirmModal';
+
 import Feed from '../../containers/Feed';
 import Timeline from '../../containers/Timeline';
 import Threed from '../../containers/Threed';
@@ -29,14 +31,14 @@ const categories = [{
     active: true,
 }];
 
-@inject(({ app }) => ({ user: app.user }))
+@inject(({ app }) => ({ user: app.user, modal: app.modal }))
 @observer
 class Main extends Component {
     static propTypes = {
         user: PropTypes.object.isRequired,
     }
     render() {
-        const { user } = this.props;
+        const { user, modal } = this.props;
         return (
             <Wrapper opaque>
                 <Timeline />
@@ -49,7 +51,18 @@ class Main extends Component {
                     </Left>
                     <Center>
                         {user.isAuth && <Hello user={user} />}
-                        <a href='/?m=404'>умря</a>
+                        <button
+                            onClick={() => {
+                                modal.show({
+                                    content: {
+                                        component: ConfirmModal,
+                                    },
+                                    isOverlay: true,
+                                });
+                            }}
+                        >
+                            Test
+                        </button>
                         <Block title="Лента">
                             <Feed />
                         </Block>
