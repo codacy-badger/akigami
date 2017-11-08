@@ -178,7 +178,7 @@ module.exports = () => {
                     use: {
                         loader: 'babel-loader',
                         options: {
-                            presets: ['stage-0', 'react'],
+                            presets: ['@babel/preset-stage-0', '@babel/preset-react'],
                             plugins: ['transform-decorators-legacy', 'transform-class-properties', 'emotion'],
                         },
                     },
