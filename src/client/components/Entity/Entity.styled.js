@@ -6,7 +6,7 @@ export const Block = styled('div')`
 
     &:hover {
         > div:first-child {
-            transform: scale(1.02);
+            transform: scale(1.03);
             box-shadow: 0 22px 50px rgba(14,21,47,.2), 0 8px 20px rgba(14,21,47,.2);
         }
     }

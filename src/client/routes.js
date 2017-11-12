@@ -23,4 +23,7 @@ export default {
     explore: {
         import: () => import(/* webpackChunkName: "explore" */ './pages/Explore'),
     },
+    entity: {
+        import: () => import(/* webpackChunkName: "explore" */ './pages/Entity'),
+    },
 };
