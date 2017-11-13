@@ -24,24 +24,44 @@ class Entity extends Component {
         ui: PropTypes.object.isRequired,
         type: PropTypes.oneOf(['anime', 'manga', 'novel']).isRequired,
     }
+    state = {
+        offset: 0,
+    }
     componentDidMount() {
         this.props.ui.changeTransparented(true);
+        this.getOffset();
     }
     componentWillUnmount() {
         this.props.ui.changeTransparented(false);
     }
+    getOffset() {
+        if (typeof document !== 'undefined') {
+            const height = window.innerHeight
+                || document.body.clientHeight
+                || document.documentElement.clientHeight;
+
+            this.setState({
+                offset: height - 48,
+            });
+        }
+    }
     render() {
+        const { offset } = this.state;
         const { data, type } = this.props;
         return (
             <Wrapper transparented>
                 <EntityHeader data={data.entity} type={type} />
                 <Menu
                     sticky
+                    offsetTop={offset}
                     onSelect={e => console.log(e)}
                     selected="overview"
                     items={[{
                         title: 'Обзор',
                         tab: 'overview',
+                    }, {
+                        title: 'Смотреть',
+                        tab: 'watch',
                     }, {
                         title: 'Персонажи',
                         tab: 'characters',

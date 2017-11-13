@@ -6,7 +6,6 @@ export const Block = styled('div')`
 
     &:hover {
         > div:first-child {
-            transform: scale(1.03);
             box-shadow: 0 22px 50px rgba(14,21,47,.2), 0 8px 20px rgba(14,21,47,.2);
         }
     }
@@ -83,8 +82,8 @@ export const Poster = styled('div')`
     margin-bottom: 10px;
     border-radius: 2px;
     position: relative;
-    transition: box-shadow .2s ease, transform .2s ease;
-    will-change: box-shadow, transform;
+    transition: box-shadow .2s ease;
+    will-change: box-shadow;
     &:hover {
         .${overlay} {
             opacity: 1;

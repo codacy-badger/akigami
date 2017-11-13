@@ -50,5 +50,9 @@ export default {
             id: 10,
             title: 'Production I.G',
         },
+        stats: {
+            score: 8.6,
+            members: 881222,
+        },
     },
 };

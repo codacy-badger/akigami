@@ -1,16 +1,23 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+import Icon from '../../components/Icon';
+
 import {
     Block,
     Grid,
     Row,
     Col,
-    Content,
-    Left,
+    Footer,
     Title,
     Meta,
     MetaItem,
+    Stats,
+    Rating,
+    Column,
+    Score,
+    Members,
+    List,
 } from './EntityHeader.styled';
 
 class EntityHeader extends PureComponent {
@@ -33,20 +40,30 @@ class EntityHeader extends PureComponent {
                 <Grid>
                     <Row>
                         <Col xs={12}>
-                            <Content>
-                                <Left>
-                                    <Title size={this.constructor.detectSizeTitle(data.title.romaji)}>
-                                        {data.title.romaji}
-                                    </Title>
-                                    <Meta>
-                                        {data.genres.map(genre => (
-                                            <MetaItem key={genre.id} href={`/explore/${type}?genre=${genre.id}`}>
-                                                {genre.title}
-                                            </MetaItem>
-                                        ))}
-                                    </Meta>
-                                </Left>
-                            </Content>
+                            <Footer>
+                                <Title size={this.constructor.detectSizeTitle(data.title.romaji)}>
+                                    {data.title.romaji}
+                                </Title>
+                                <Meta>
+                                    {data.genres.map(genre => (
+                                        <MetaItem key={genre.id} href={`/explore/${type}?genre=${genre.id}`}>
+                                            {genre.title}
+                                        </MetaItem>
+                                    ))}
+                                </Meta>
+                                <Stats>
+                                    <Rating>
+                                        <Icon type="star-outline" />
+                                        <Column>
+                                            <Score>{data.stats.score}</Score>
+                                            <Members>{data.stats.members}</Members>
+                                        </Column>
+                                    </Rating>
+                                    <List>
+                                        <Icon type="playlist-plus" />
+                                    </List>
+                                </Stats>
+                            </Footer>
                         </Col>
                     </Row>
                 </Grid>

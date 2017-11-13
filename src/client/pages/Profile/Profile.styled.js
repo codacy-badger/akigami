@@ -20,7 +20,7 @@ export const Header = styled('div')`
         height: 100%;
         left: 0;
         top: 0;
-        background-color: rgba(45, 45, 45, 0.4);
+        background-color: rgba(45,45,45,.6);
     }
 `;
 
