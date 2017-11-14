@@ -29,15 +29,15 @@ class Menu extends PureComponent {
     }
     componentDidMount() {
         if (this.props.sticky) {
-            window.addEventListener('scroll', this.scrollEventer);
+            window.addEventListener('scroll', this.scrollEvent);
         }
     }
     componentWillUnmount() {
         if (this.props.sticky) {
-            window.removeEventListener('scroll', this.scrollEventer);
+            window.removeEventListener('scroll', this.scrollEvent);
         }
     }
-    scrollEventer = () => {
+    scrollEvent = () => {
         const { offsetTop } = this.props;
         const { sticked } = this.state;
         const scroll = document.body.scrollTop || document.documentElement.scrollTop;
