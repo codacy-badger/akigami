@@ -8,14 +8,21 @@ export const Wrapper = styled('div')`
 
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 
     transition: padding .2s ease;
     will-change: padding;
+
+    @media screen and (max-width: 650px) {
+        padding: ${props => (props.fixed ? '8px 0' : '8px')};
+    }
 `;
 
 export const Header = styled('div')`
     display: flex;
     align-items: center;
+    width: 100%;
 `;
 
 export const Trigger = styled('button')`
@@ -24,6 +31,17 @@ export const Trigger = styled('button')`
     outline: none;
     color: ${props => (props.active ? '#d54343' : '#4a4a4a')};
     font-size: 24px;
+    display: flex;
+    flex-shrink: 0;
+    width: 36px;
+    
+    transition: font-size .2s ease, width .2s ease;
+    will-change: font-size, width;
+    
+    @media screen and (max-width: 650px) {
+        width: 34px;
+        font-size: 22px;
+    }
 `;
 
 export const Search = styled(FormControl)`
@@ -32,12 +50,27 @@ export const Search = styled(FormControl)`
     font-size: 18px;
     font-weight: 600;
     letter-spacing: 0.2px;
+    display: flex;
+    
+    transition: font-size .2s ease;
+    will-change: font-size;
+
+    @media screen and (max-width: 650px) {
+        font-size: 14px;
+    }
 `;
 
 export const Expand = styled('div')`
     display: flex;
     flex-direction: column;
     padding: 22px 6px 8px;
+
+    transition: padding .2s ease;
+    will-change: padding;
+
+    @media screen and (max-width: 650px) {
+        padding: 18px 6px 8px;
+    }
 `;
 
 const defaultStyle = css`

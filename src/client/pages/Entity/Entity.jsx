@@ -28,11 +28,19 @@ class Entity extends Component {
         offset: 0,
     }
     componentDidMount() {
-        this.props.ui.changeTransparented(true);
+        if (this.getCover()) {
+            this.props.ui.changeTransparented(true);
+        }
         this.getOffset();
     }
     componentWillUnmount() {
-        this.props.ui.changeTransparented(false);
+        if (this.getCover()) {
+            this.props.ui.changeTransparented(false);
+        }
+    }
+    getCover() {
+        const { data } = this.props;
+        return !!data?.entity?.cover?.large;
     }
     getOffset() {
         if (typeof document !== 'undefined') {

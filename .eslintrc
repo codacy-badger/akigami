@@ -20,9 +20,7 @@
         "no-underscore-dangle": [2, {
             "allow": ["_id", "_d"]
         }],
-        "object-curly-newline": [2, {
-            "minProperties": 5
-        }]
+        "object-curly-newline": 0
     },
     "globals": {
         "document": true,

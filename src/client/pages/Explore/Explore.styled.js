@@ -55,10 +55,15 @@ export const Title = styled('h1')`
 export const Grid = styled('div')`
     display: flex;
     flex-wrap: wrap;
-    margin: -12px;
+    margin: -8px;
+    justify-content: space-between;
 
     > div {
-        margin: 12px;
+        margin: 8px;
+    }
+
+    @media screen and (max-width: 472px) {
+        justify-content: space-around;
     }
 `;
 
@@ -69,4 +74,11 @@ export const Fixer = styled('div')`
 export const Settings = styled('div')`
     margin: 8px -10px 42px;
     min-height: 70px;
+
+    transition: .2s ease;
+
+    @media screen and (max-width: 650px) {
+        margin: 0 -10px 32px;
+        min-height: 52px;
+    }
 `;

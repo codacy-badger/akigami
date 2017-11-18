@@ -26,8 +26,10 @@ class EntityHeader extends PureComponent {
         type: PropTypes.oneOf(['anime', 'manga', 'novel']).isRequired,
     }
     static detectSizeTitle(title) {
-        if (title.length > 25) {
+        if (title.length > 25 && title.length <= 50) {
             return 'medium';
+        } else if (title.length > 50 && title.length <= 85) {
+            return 'semi';
         } else if (title.length > 85) {
             return 'small';
         }
@@ -35,31 +37,32 @@ class EntityHeader extends PureComponent {
     }
     render() {
         const { data, type } = this.props;
+        const isCover = !!data.cover.large;
         return (
             <Block image={data.cover.large}>
                 <Grid>
                     <Row>
-                        <Col xs={12}>
+                        <Col xs={12} isCover={isCover}>
                             <Footer>
-                                <Title size={this.constructor.detectSizeTitle(data.title.romaji)}>
+                                <Title isCover={isCover} size={this.constructor.detectSizeTitle(data.title.romaji)}>
                                     {data.title.romaji}
                                 </Title>
-                                <Meta>
+                                <Meta isCover={isCover}>
                                     {data.genres.map(genre => (
-                                        <MetaItem key={genre.id} href={`/explore/${type}?genre=${genre.id}`}>
+                                        <MetaItem isCover={isCover} key={genre.id} href={`/explore/${type}?genre=${genre.id}`}>
                                             {genre.title}
                                         </MetaItem>
                                     ))}
                                 </Meta>
-                                <Stats>
-                                    <Rating>
+                                <Stats isCover={isCover}>
+                                    <Rating isCover={isCover}>
                                         <Icon type="star-outline" />
-                                        <Column>
+                                        <Column isCover={isCover}>
                                             <Score>{data.stats.score}</Score>
                                             <Members>{data.stats.members}</Members>
                                         </Column>
                                     </Rating>
-                                    <List>
+                                    <List isCover={isCover}>
                                         <Icon type="playlist-plus" />
                                     </List>
                                 </Stats>

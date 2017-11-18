@@ -1,3 +1,5 @@
+import sample from 'lodash/sample';
+
 export default {
     type: 'anime',
     status: 'watching',
@@ -7,7 +9,7 @@ export default {
             romaji: 'Ballroom e Youkoso',
         },
         cover: {
-            large: 'https://cdn.anilist.co/img/dir/anime/banner/98005-FOY9eMrcfDTY.png',
+            large: sample(['https://cdn.anilist.co/img/dir/anime/banner/98005-FOY9eMrcfDTY.png', null]),
         },
         type: 'tv',
         episodes: 24,
