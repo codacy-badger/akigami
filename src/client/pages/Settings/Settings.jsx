@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Button, FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap';
+import { Row, Col, FormControl, Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
 import { inject, observer } from 'mobx-react';
 import Datetime from 'react-datetime';
 
+import Field from '../../components/Field';
 import AvatarUploader from '../../components/AvatarUploader';
 import GenderChanger from '../../components/GenderChanger';
 import Block from '../../components/Block';
@@ -11,111 +12,106 @@ import Wrapper from '../../components/Wrapper';
 import Content from '../../components/Content';
 import Red from '../../components/Red';
 
-function FieldGroup({ id, label, help, ...props }) {
-    return (
-        <FormGroup controlId={id}>
-            <ControlLabel>{label}</ControlLabel>
-            <FormControl {...props} />
-            {help && <HelpBlock>{help}</HelpBlock>}
-        </FormGroup>
-    );
-}
-
-FieldGroup.propTypes = {
-    id: PropTypes.any.isRequired,
-    label: PropTypes.string.isRequired,
-    help: PropTypes.string,
-};
-
-FieldGroup.defaultProps = {
-    help: null,
-};
-
 @inject(s => ({
     user: s.app.user,
 }))
 @observer
 class Settings extends Component {
+    static propTypes = {
+        user: PropTypes.object.isRequired,
+    }
+    state = {
+        emailEdit: false,
+        usernameEdit: false,
+        displayNameEdit: false,
+    }
     render() {
+        const { emailEdit, usernameEdit, displayNameEdit } = this.state;
         const { user } = this.props;
+        console.log(user);
         return (
             <Wrapper opaque>
                 <Red>
                     <Content>
                         <Row>
                             <Col xs={12}>
-                                <h1 style={{ margin: '0 0 32px', fontWeight: 800 }}>Настройки профиля</h1>
+                                <h1 style={{ margin: '0 0 32px', fontWeight: 800 }}>Настройки</h1>
                             </Col>
                         </Row>
                     </Content>
                 </Red>
                 <Content>
                     <Row>
-                        <Col md={6}>
-                            <Block title="Сменить аватар">
-                                <AvatarUploader
-                                    size={120}
-                                    avatar={user.getAvatar}
+                        <Col xs={12} md={6}>
+                            <Block title="Email и уведомления" bordered>
+                                <Field
+                                    title="Ваш Email"
+                                    actions={(
+                                        <div>
+                                            {emailEdit ? (
+                                                <ButtonToolbar>
+                                                    <Button bsStyle="success" onClick={() => this.setState({ emailEdit: false })}>Сохранить</Button>
+                                                    <Button onClick={() => this.setState({ emailEdit: false })}>Отмена</Button>
+                                                </ButtonToolbar>
+                                            ) : (
+                                                <Button onClick={() => this.setState({ emailEdit: true })}>Изменить почту</Button>
+                                            )}
+                                        </div>
+                                    )}
+                                >
+                                    <FormControl bsSize="small" type="text" disabled={!emailEdit} />
+                                </Field>
+                                <Field
+                                    title="Упоминания"
+                                    description="Получать уведомления на электронную почту, когда кто-либо упоминает вас где-либо."
+                                    actions={(
+                                        <ButtonGroup>
+                                            <Button bsStyle="success">Вкл.</Button>
+                                            <Button>Выкл.</Button>
+                                        </ButtonGroup>
+                                    )}
                                 />
                             </Block>
                         </Col>
-                        <Col md={6}>
-                            <Block title="Сменить обложку">
-                                Здесь будет аплоадер
+                        <Col xs={12} md={6}>
+                            <Block title="Аккаунт" bordered>
+                                <Field
+                                    title="Юзернейм"
+                                    description="Виден в адресной строке вашего профиля."
+                                    actions={(
+                                        <div>
+                                            {usernameEdit ? (
+                                                <ButtonToolbar>
+                                                    <Button bsStyle="success" onClick={() => this.setState({ usernameEdit: false })}>Сохранить</Button>
+                                                    <Button onClick={() => this.setState({ usernameEdit: false })}>Отмена</Button>
+                                                </ButtonToolbar>
+                                            ) : (
+                                                <Button onClick={() => this.setState({ usernameEdit: true })}>Изменить юзернейм</Button>
+                                            )}
+                                        </div>
+                                    )}
+                                >
+                                    <FormControl defaultValue={user.username} bsSize="small" type="text" disabled={!usernameEdit} />
+                                </Field>
+                                <Field
+                                    title="Имя пользователя"
+                                    description="Будет видно всем пользователям в ваших постах/комментариях/рецензиях."
+                                    actions={(
+                                        <div>
+                                            {displayNameEdit ? (
+                                                <ButtonToolbar>
+                                                    <Button bsStyle="success" onClick={() => this.setState({ displayNameEdit: false })}>Сохранить</Button>
+                                                    <Button onClick={() => this.setState({ displayNameEdit: false })}>Отмена</Button>
+                                                </ButtonToolbar>
+                                            ) : (
+                                                <Button onClick={() => this.setState({ displayNameEdit: true })}>Изменить юзернейм</Button>
+                                            )}
+                                        </div>
+                                    )}
+                                >
+                                    <FormControl defaultValue={user.displayName} bsSize="small" type="text" disabled={!displayNameEdit} />
+                                </Field>
                             </Block>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={6}>
-                            <Block title="Настройка аккаунта">
-                                <FieldGroup
-                                    id="authEmail"
-                                    type="email"
-                                    name="email"
-                                    label="Email"
-                                    placeholder="Например: suzuki@chan.jp"
-                                    value={user.email || ''}
-                                />
-                                <FieldGroup
-                                    id="displayName"
-                                    type="text"
-                                    name="text"
-                                    label="Имя пользователя"
-                                    placeholder="Например: Joker"
-                                    value={user.displayName || ''}
-                                />
-                                <FormGroup controlId="birthday">
-                                    <ControlLabel>День рождения</ControlLabel>
-                                    <Datetime
-                                        locale="ru"
-                                        dateFormat="LL"
-                                        timeFormat={false}
-                                        placeholder="Например 01.01.1995"
-                                        value={user.birthday || ''}
-                                    />
-                                </FormGroup>
-                                <FormGroup controlId="gender">
-                                    <ControlLabel>Пол</ControlLabel>
-                                    <GenderChanger
-                                        style={{
-                                            justifyContent: 'flex-start',
-                                        }}
-                                        selected={user.gender || 'none'}
-                                    />
-                                </FormGroup>
-                            </Block>
-                        </Col>
-                        <Col md={6}>
-                            <Block title="Настройка сайта">
-                                Здесь будут настройки сайта
-                            </Block>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col xs={12} style={{ textAlign: 'center' }}>
-                            <Button bsStyle="danger">
-                                Сохранить настройки
-                            </Button>
                         </Col>
                     </Row>
                 </Content>

@@ -17,7 +17,7 @@ export const Actions = styled('div')`
 
 const replied = css`
     padding-bottom: 12px;
-    border-bottom: 1px solid #ddd !important;
+    border-bottom: 1px solid #e8e8e8 !important;
     margin-bottom: 12px !important;
 
     &:last-child {
@@ -32,14 +32,14 @@ const replies = css`
         position: absolute;
         width: 1px;
         height: 100%;
-        background: #ddd;
+        background: #e8e8e8;
         left: 2.6rem;
     }
 `;
 
 const none = css`
     padding-bottom: 12px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e8e8e8;
     margin-bottom: 12px;
 `;
 
@@ -128,7 +128,7 @@ export const Content = styled('span')`
 
 export const Textarea = styled(Text)`
     width: 100%;
-    border: 1px solid #ddd;
+    border: 1px solid #e8e8e8;
     resize: none;
     padding: 8px 12px;
 `;
