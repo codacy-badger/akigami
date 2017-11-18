@@ -15,50 +15,18 @@ class Menu extends PureComponent {
         selected: null,
         onSelect: e => console.log('unhandled control', e),
         sticky: false,
-        offsetTop: 352,
     }
     static propTypes = {
         items: PropTypes.array,
         selected: PropTypes.string,
         onSelect: PropTypes.func,
         sticky: PropTypes.bool,
-        offsetTop: PropTypes.number,
-    }
-    state = {
-        sticked: false,
-    }
-    componentDidMount() {
-        if (this.props.sticky) {
-            window.addEventListener('scroll', this.scrollEvent);
-        }
-    }
-    componentWillUnmount() {
-        if (this.props.sticky) {
-            window.removeEventListener('scroll', this.scrollEvent);
-        }
-    }
-    scrollEvent = () => {
-        const { offsetTop } = this.props;
-        const { sticked } = this.state;
-        const scroll = document.body.scrollTop || document.documentElement.scrollTop;
-        const state = {};
-        if (scroll >= offsetTop && !sticked) {
-            state.sticked = true;
-        }
-        if (scroll < offsetTop && sticked) {
-            state.sticked = false;
-        }
-        this.setState(state);
     }
     render() {
-        const { sticked } = this.state;
         const { items, selected, onSelect, sticky } = this.props;
         return (
-            <Wrapper>
-                <MenuInner
-                    sticky={sticky}
-                    sticked={sticked}
-                >
+            <Wrapper sticky={sticky}>
+                <MenuInner>
                     <Grid>
                         <Row>
                             <Col xs={12}>

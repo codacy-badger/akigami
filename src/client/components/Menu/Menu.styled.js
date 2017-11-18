@@ -1,30 +1,28 @@
 import { css } from 'emotion';
 import styled from 'react-emotion';
 
-export const Wrapper = styled('div')`
-    height: 40px;
+const wrapSticky = css`
+    position: sticky;
+    transform: translate3d(0,0,0);
+    width: 100%;
+    z-index: 10;
+    top: 48px;
+`;
+
+const wrapNormal = css`
     position: relative;
+`;
+
+export const Wrapper = styled('div')`
+    ${p => (p.sticky ? wrapSticky : wrapNormal)};
+    height: 40px;
 
     @media screen and (max-width: 991px) {
         height: 33px;
     }
 `;
 
-const sticky = css`
-    position: relative;
-    transform: translate3d(0,0,0);
-    width: 100%;
-    z-index: 1100;
-`;
-
-const sticked = css`
-    position: fixed;
-    top: 48px;
-`;
-
 export const MenuInner = styled('div')`
-    ${p => p.sticky && sticky};
-    ${p => p.sticked && sticked};
     background-color: #efeeeb;
 
     @media screen and (max-width: 767px) {

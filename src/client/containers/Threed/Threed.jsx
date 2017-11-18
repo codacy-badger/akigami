@@ -4,6 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 import Responsive from 'react-responsive';
 
 import Content from '../../components/Content';
+import Child from './Threed.styled';
 
 const propTypes = {
     children: PropTypes.any,
@@ -61,9 +62,9 @@ class Threed extends PureComponent {
     }
 }
 
-const Left = ({ children }) => <div>{children}</div>;
-const Right = ({ children }) => <div>{children}</div>;
-const Center = ({ children }) => <div>{children}</div>;
+const Left = ({ children }) => <Child>{children}</Child>;
+const Right = ({ children }) => <Child>{children}</Child>;
+const Center = ({ children }) => <Child>{children}</Child>;
 
 Left.propTypes = propTypes;
 Right.propTypes = propTypes;
