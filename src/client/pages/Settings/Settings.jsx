@@ -104,7 +104,7 @@ class Settings extends Component {
                                                     <Button onClick={() => this.setState({ displayNameEdit: false })}>Отмена</Button>
                                                 </ButtonToolbar>
                                             ) : (
-                                                <Button onClick={() => this.setState({ displayNameEdit: true })}>Изменить юзернейм</Button>
+                                                <Button onClick={() => this.setState({ displayNameEdit: true })}>Изменить имя</Button>
                                             )}
                                         </div>
                                     )}
