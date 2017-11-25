@@ -27,7 +27,7 @@ export const Header = styled('div')`
 export const Inner = styled(Grid)`
     height: 100%;
     position: relative;
-    z-index: 1;
+    z-index: 1101;
 `;
 
 export const Row = styled(R)`

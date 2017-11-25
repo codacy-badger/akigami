@@ -11,9 +11,16 @@ import template from '../template';
 
 export default async function ({ title, layout, props = {}, ...data } = {}) {
     try {
+        if (props) {
+            Object.keys(props).forEach((item) => {
+                if (props[item]?.constructor.name === 'model') {
+                    props[item] = props[item].toObject();
+                }
+            });
+        }
         if (!this.req.get('x-pjax')) {
             const app = new AppStore();
-            const user = pick(this.req.user, ['username', 'displayName', 'id']);
+            const user = pick(this.req.user, ['username', 'displayName', 'id', 'avatar']);
             app.user.setUser(user);
             await app.router.setContainer({ title, layout, props });
             const { html, ids, css } = extractCritical(renderToStaticMarkup(

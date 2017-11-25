@@ -14,7 +14,6 @@ export default class Modal {
         this.modals.push(modal);
         return modal;
     }
-
     setSettings = (id, settings) => {
         const modal = find(this.modals, { id });
         if (modal) {

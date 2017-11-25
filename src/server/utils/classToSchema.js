@@ -16,6 +16,7 @@ function getAllProps(obj) {
         attributes: {},
         staticAttributes: {},
         system: {},
+        pre: {},
     };
 
     const usedNames = new Set();
@@ -44,11 +45,12 @@ function getAllProps(obj) {
                 (i == 0 || value !== arr[i - 1]) &&
                 !usedNames.has(value),
             );
-
         temp.forEach((value) => {
             const pValue = obj[value];
             if (value === 'plugins') {
                 props.system[value] = pValue;
+            } else if (value === 'pre') {
+                props[value] = pValue;
             } else if (typeof pValue === 'function' && !isAttribute(pValue)) {
                 props.methods[value] = pValue;
             } else {
@@ -71,6 +73,9 @@ export default function classToSchema(obj, schemaOptions) {
     schema.methods = props.methods;
     props.system.plugins.forEach((item) => {
         schema.plugin(...item);
+    });
+    Object.entries(props.pre).forEach((item) => {
+        schema.pre(item[0], item[1]);
     });
 
     return schema;

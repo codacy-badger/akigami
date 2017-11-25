@@ -1,5 +1,5 @@
 import { computed, action, observable } from 'mobx';
-
+import set from 'lodash/set';
 import { socket } from '../lib/modules';
 
 const defaultAvatar = '/no-photo.jpg';
@@ -17,11 +17,6 @@ export default class User {
 
     constructor(app) {
         this.app = app;
-        if (typeof window != 'undefined') {
-            socket.on('test', () => {
-
-            });
-        }
     }
 
     setUser = ({
@@ -45,10 +40,10 @@ export default class User {
             gender,
             birthday,
         });
-        // this.setSocket();
     }
 
     @action clearUserData = () => {
+        socket.removeListener(`profile:${this.id}`, this.listener);
         this.id = null;
         this.username = null;
         this.displayName = null;
@@ -66,6 +61,12 @@ export default class User {
         }).then(() => {
             this.clearUserData();
             this.app.router.go(document.location.href, false);
+        });
+    }
+
+    listener = (data) => {
+        Object.keys(data).forEach((key) => {
+            set(this, key, data[key]);
         });
     }
 
@@ -88,6 +89,9 @@ export default class User {
         this.email = email;
         this.gender = gender;
         this.birthday = birthday;
+        if (typeof window !== 'undefined') {
+            socket.on(`profile:${this.id}`, this.listener);
+        }
         // this.link = link;
     }
 

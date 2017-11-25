@@ -1,3 +1,4 @@
+import config from 'config';
 import autoIncrement from '../utils/mongooseAutoIncrement';
 import MongooseClass from '../utils/mongooseClass';
 
@@ -34,6 +35,15 @@ class User extends MongooseClass {
             },
         ],
     ];
+
+    pre = {
+        init: (next, user) => {
+            if (user.avatar) {
+                user.avatar = config.get('cdn_address') + user.avatar;
+            }
+            next();
+        },
+    }
 }
 
 export default User.schema();

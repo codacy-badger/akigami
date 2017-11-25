@@ -5,7 +5,7 @@ const Post = mongoose.model('Post');
 
 export default (socket) => {
     socket.on('feed:create', async (data, callback) => {
-        socket.utils.check('user');
+        await socket.utils.check('user');
         const props = {
             ...data,
             user: socket.request.user.id,
@@ -34,7 +34,7 @@ export default (socket) => {
     });
 
     socket.on('feed:edit', async ({ id, content, attachments }, callback) => {
-        socket.utils.check('user');
+        await socket.utils.check('user');
         const post = await Post.findOne({ id });
         if (!post) throw new Error('Post not found');
         if (post.user !== socket.request.user.id) throw new Error('Edit not permitted');

@@ -5,7 +5,7 @@ const Comment = mongoose.model('Comment');
 
 export default (socket) => {
     socket.on('comment:create', async (data, callback) => {
-        socket.utils.check('user');
+        await socket.utils.check('user');
         const props = {
             ...data,
             user: socket.request.user.id,
@@ -28,7 +28,7 @@ export default (socket) => {
     });
 
     socket.on('comment:edit', async ({ id, content, attachments }, callback) => {
-        socket.utils.check('user');
+        await socket.utils.check('user');
         const comment = await Comment.findOne({ id });
         if (!comment) throw new Error('Comment not found');
         if (comment.user !== socket.request.user.id) throw new Error('Edit not permitted');

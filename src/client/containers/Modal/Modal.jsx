@@ -62,12 +62,14 @@ export default class ModalComponent extends Component {
                                     </button>
                                     {React.createElement(content.component, {
                                         id,
+                                        closeModal: handleCloseModal,
                                         store: m.store,
                                         ...m.props,
                                     })}
                                     {footer.component && (
                                         React.createElement(footer.component, {
                                             id,
+                                            closeModal: handleCloseModal,
                                             store: m.store,
                                             ...m.props,
                                         })

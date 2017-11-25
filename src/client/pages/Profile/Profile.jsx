@@ -8,6 +8,8 @@ import {
     Tabs,
     Tab,
     Button,
+    DropdownButton,
+    MenuItem,
 } from 'react-bootstrap';
 
 import Favorites from '../../containers/Favorites';
@@ -25,7 +27,8 @@ import Stats from '../../components/Stats';
 import entitiesChart from '../../charts/entities';
 import activityChart from '../../charts/activity';
 
-import ProfileStore from '../../stores/Profile';
+import ProfileStore from './Profile.store';
+
 import {
     Header,
     Inner,
@@ -39,6 +42,8 @@ import {
     Settings,
     About,
 } from './Profile.styled';
+
+import { Dropdown, DropdownItem } from '../../components/Dropdown';
 
 const { Left, Right, Center } = Threed;
 
@@ -185,19 +190,21 @@ const favorites = [{
 }];
 
 @inject(s => ({
+    app: s.app,
     ui: s.app.ui,
     myUser: s.app.user,
 }))
 @observer
 class Profile extends Component {
     static propTypes = {
+        app: PropTypes.object.isRequired,
         ui: PropTypes.object.isRequired,
         user: PropTypes.object.isRequired,
         myUser: PropTypes.object.isRequired,
     }
     constructor(props) {
         super(props);
-        this.store = new ProfileStore(props.user);
+        this.store = new ProfileStore(props.app, props.user);
     }
     componentDidMount() {
         this.props.ui.changeTransparented(true);
@@ -221,11 +228,23 @@ class Profile extends Component {
                     <Inner>
                         <Row>
                             <Col xs={12}>
+                                <div>
+                                    <button onClick={() => this.store.callUploader('cover')}>Загрузить</button>
+                                    <button onClick={() => this.store.removeImage('cover')}>Удалить</button>
+                                </div>
                                 <Bottom>
-                                    <Avatar
-                                        src={this.store.getAvatar}
-                                        alt={this.store.displayName}
-                                    />
+                                    <Dropdown
+                                        trigger={(
+                                            <Avatar
+                                                src={this.store.getAvatar}
+                                                alt={this.store.displayName}
+                                            />
+                                        )}
+                                    >
+                                        <DropdownItem onClick={() => this.store.callUploader('avatar')}>Изменить аватар</DropdownItem>
+                                        {this.store.getAvatar !== '/no-photo.jpg' && <DropdownItem onClick={() => this.store.removeImage('avatar')}>Удалить аватар</DropdownItem>}
+                                    </Dropdown>
+
                                     <Info>
                                         <User>{this.store.displayName}</User>
                                         {this.store.status && (
