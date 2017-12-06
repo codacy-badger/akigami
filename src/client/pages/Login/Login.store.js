@@ -17,7 +17,7 @@ export default class Login {
             this.app.router.go(response.data.pathname);
         } else if (response.action === 'login') {
             this.app.user.setUser(response.data.user);
-            this.app.router.go('/news');
+            this.app.router.go('/');
         }
     }
 
