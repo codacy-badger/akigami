@@ -23,7 +23,7 @@ export default (socket) => {
             }, {
                 [json.type]: json.url,
             });
-            address = config.get('cdn_address') + json.url;
+            address = config.get('cdn.address') + json.url;
         } else if (data.action === 'remove') {
             console.log(data);
             if (!availableTypes.includes(data.data.type)) return false;

@@ -30,9 +30,9 @@ export default (app) => {
             .resize(...getWH(type))
             .stream();
         const form = new FormData();
-        form.append('token', config.get('cdn_token'));
+        form.append('token', config.get('cdn.token'));
         form.append('file', test, 'filename.jpg');
-        const { body } = await got.post(`${config.get('cdn_address')}/api/upload`, { body: form });
+        const { body } = await got.post(`${config.get('cdn.address')}/api/upload`, { body: form });
         try {
             const url = JSON.parse(body).path;
             const uid = uuid.v4();

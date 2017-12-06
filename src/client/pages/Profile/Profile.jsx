@@ -12,6 +12,7 @@ import {
     MenuItem,
 } from 'react-bootstrap';
 
+import Tooltip from '../../components/Tooltip';
 import Favorites from '../../containers/Favorites';
 import Threed from '../../containers/Threed';
 import Feed from '../../containers/Feed';
@@ -23,6 +24,7 @@ import Wrapper from '../../components/Wrapper';
 import Legend from '../../components/Legend';
 import LegendItem from '../../components/LegendItem';
 import Stats from '../../components/Stats';
+import Icon from '../../components/Icon';
 
 import entitiesChart from '../../charts/entities';
 import activityChart from '../../charts/activity';
@@ -41,6 +43,8 @@ import {
     Status,
     Settings,
     About,
+    CoverActions,
+    CoverAction,
 } from './Profile.styled';
 
 import { Dropdown, DropdownItem } from '../../components/Dropdown';
@@ -228,10 +232,32 @@ class Profile extends Component {
                     <Inner>
                         <Row>
                             <Col xs={12}>
-                                <div>
-                                    <button onClick={() => this.store.callUploader('cover')}>Загрузить</button>
-                                    <button onClick={() => this.store.removeImage('cover')}>Удалить</button>
-                                </div>
+                                <CoverActions>
+                                    <Tooltip
+                                        id="cover-upload"
+                                        overlay="Изменить обложку"
+                                        place="bottom"
+                                    >
+                                        <CoverAction
+                                            onClick={() => this.store.callUploader('cover')}
+                                            bsSize="sm"
+                                        >
+                                            <Icon type="vector-difference-ba" />
+                                        </CoverAction>
+                                    </Tooltip>
+                                    <Tooltip
+                                        id="cover-remove"
+                                        overlay="Удалить обложку"
+                                        place="bottom"
+                                    >
+                                        <CoverAction
+                                            onClick={() => this.store.removeImage('cover')}
+                                            bsSize="sm"
+                                        >
+                                            <Icon type="selection-off" />
+                                        </CoverAction>
+                                    </Tooltip>
+                                </CoverActions>
                                 <Bottom>
                                     <Dropdown
                                         trigger={(

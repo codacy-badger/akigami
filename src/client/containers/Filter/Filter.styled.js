@@ -2,7 +2,7 @@ import styled, { css } from 'react-emotion';
 import { FormControl } from 'react-bootstrap';
 
 export const Wrapper = styled('div')`
-    background-color: #f7f7f7;
+    background-color: #fff;
     border-radius: 2px;
     padding: ${props => (props.fixed ? '16px 0' : '16px')};
 
@@ -81,7 +81,8 @@ const fixedStyle = css`
     position: fixed;
     top: 48px;
     left: 0;
-    background-color: #f7f7f7;
+    background-color: #fff;
+    border-bottom: 1px solid #e8e8e8;
 `;
 
 export const Fixer = styled('div')`

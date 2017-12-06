@@ -10,8 +10,8 @@ class Profile {
     @observable id = null;
     @observable username = null;
     @observable displayName = null;
-    @observable avatar = null;
-    @observable cover = null;
+    @observable avatar = defaultAvatar;
+    @observable cover = defaultCover;
 
     constructor(app, data) {
         this.app = app;
@@ -41,12 +41,13 @@ class Profile {
         input.onchange = () => {
             if (input.files.length > 0) {
                 console.log(input.files);
-                const ddata = {
+                const params = {
                     width: type === 'avatar' ? 200 : 1905,
                     height: type === 'avatar' ? 200 : 448,
+                    type,
                 };
                 import(/* webpackChunkName: "modal_cropper" */ '../../containers/ModalCropper').then((module) => {
-                    this.app.modal.show(module.default(input.files[0], ddata, (data) => this.upload(input.files[0], data, type)));
+                    this.app.modal.show(module.default(input.files[0], params, (data) => this.upload(input.files[0], data, type)));
                 });
             }
         };

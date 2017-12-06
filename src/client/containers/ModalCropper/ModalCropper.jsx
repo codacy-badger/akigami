@@ -3,7 +3,13 @@ import { observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import Cropper from 'react-cropper';
-import { PreviewImage } from './ModalCropper.styled';
+import {
+    PreviewImage,
+    Title,
+    Wrapper,
+    Sub,
+    Help,
+} from './ModalCropper.styled';
 
 @inject('app')
 @observer
@@ -14,6 +20,13 @@ export default class ModalCropper extends Component {
         store: PropTypes.object.isRequired,
         data: PropTypes.object.isRequired,
     }
+    static getTitle(type) {
+        switch (type) {
+        case 'cover': return 'обложки';
+        case 'avatar': return 'аватара';
+        default: return '';
+        }
+    }
     constructor(props) {
         super(props);
         props.store.setData(props.app, props.id);
@@ -22,31 +35,37 @@ export default class ModalCropper extends Component {
         URL.revokeObjectURL(this.props.store.img);
     }
     render() {
+        const { data, store } = this.props;
         return (
-            <div style={{
-                padding: '60px 60px 60px',
-            }}
-            >
+            <Wrapper>
+                <Title>{`Изменение ${ModalCropper.getTitle(data.type)}`}</Title>
+
+                <Sub>Предпросмотр</Sub>
+                <Help>Так будет выглядеть готовый результат</Help>
                 <PreviewImage
-                    className={'preview-img'}
-                    type={this.props.data.type}
+                    className="preview-img"
+                    type={data.type}
                 />
+
+                <Sub>Выберите область</Sub>
+                <Help>Укажите нужные размеры изображения</Help>
                 <Cropper
                     viewMode={1}
                     zoomable={false}
                     dragMode={'move'}
                     style={{
-                        height: 400,
-                        width: '100%',
+                        height: 300,
+                        width: 'calc(100% + 64px)',
+                        margin: '0 -32px',
                     }}
                     guides={false}
                     rotatable
-                    aspectRatio={this.props.data.width / this.props.data.height}
-                    preview={'.preview-img'}
-                    src={this.props.store.img}
-                    ref={this.props.store.setCropper}
+                    aspectRatio={data.width / data.height}
+                    preview=".preview-img"
+                    src={store.img}
+                    ref={store.setCropper}
                 />
-            </div>
+            </Wrapper>
         );
     }
 }

@@ -13,5 +13,8 @@ export default styled(Grid)`
         flex-direction: row;
         flex-wrap: wrap;
         flex: 1;
+        :before {
+            content: none;
+        }
     }
 `;

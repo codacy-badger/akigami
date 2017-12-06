@@ -103,3 +103,24 @@ export const About = styled('div')`
     white-space: pre-line;
 `;
 
+export const CoverActions = styled('div')`
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 16px 10px;
+    display: flex;
+
+    > *:not(:last-child) {
+        margin-right: 6px;
+    }
+`;
+
+export const CoverAction = styled(Button)`
+    padding: 5px 10px 3px;
+    background: rgba(0, 0, 0, .2);
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 22px;
+
+`;

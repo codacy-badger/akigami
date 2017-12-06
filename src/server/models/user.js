@@ -39,7 +39,10 @@ class User extends MongooseClass {
     pre = {
         init: (next, user) => {
             if (user.avatar) {
-                user.avatar = config.get('cdn_address') + user.avatar;
+                user.avatar = `${config.get('cdn.address')}${user.avatar}`;
+            }
+            if (user.cover) {
+                user.cover = `${config.get('cdn.address')}${user.cover}`;
             }
             next();
         },
