@@ -9,13 +9,13 @@ const bordered = css`
 `;
 
 const shadow = css`
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 10px 20px -5px rgba(0,0,0,0.15);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 7px 5px -5px rgba(0,0,0,0.1);
 `;
 
 export const Wrapper = styled('div')`
     ${p => p.bordered && bordered}
     ${p => p.shadow && shadow};
-    margin-bottom: 22px;
+    margin-bottom: 12px;
 `;
 
 export const Header = styled('div')`

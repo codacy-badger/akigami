@@ -2,14 +2,18 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 
+import Threed from '../../containers/Threed';
 import EntityHeader from '../../containers/EntityHeader';
 import Wrapper from '../../components/Wrapper';
 import Menu from '../../components/Menu';
+import Block from '../../components/Block';
 // import {
 //     Wrapper,
 // } from './Entity.styled';
 
 import mock from './Entity.mock';
+
+const { Left, Center, Right } = Threed;
 
 @inject(s => ({
     ui: s.app.ui,
@@ -81,7 +85,23 @@ class Entity extends Component {
                         tab: 'similar',
                     }]}
                 />
-                123
+                <Threed>
+                    <Left>
+                        <Block shadow>
+                            <img
+                                src={data.entity.poster.medium}
+                                alt={data.entity.title.romaji}
+                                width="100%"
+                            />
+                        </Block>
+                    </Left>
+                    <Center>
+                        123
+                    </Center>
+                    <Right>
+                        123
+                    </Right>
+                </Threed>
             </Wrapper>
         );
     }

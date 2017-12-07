@@ -17,7 +17,7 @@ export const Actions = styled('div')`
 
 const replied = css`
     padding-bottom: 12px;
-    border-bottom: 1px solid #e8e8e8 !important;
+    border-bottom: 1px solid rgba(0,0,0,.06) !important;
     margin-bottom: 12px !important;
 
     &:last-child {
@@ -32,14 +32,14 @@ const replies = css`
         position: absolute;
         width: 1px;
         height: 100%;
-        background: #e8e8e8;
+        background: rgba(0,0,0,.06);
         left: 2.6rem;
     }
 `;
 
 const none = css`
     padding-bottom: 12px;
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid rgba(0,0,0,.06);
     margin-bottom: 12px;
 `;
 
@@ -88,7 +88,7 @@ const noneAvatar = css`
 `;
 
 const repliedAvatar = css`
-    box-shadow: 0 0 0 4px #f6f5f3;
+    background-color: #fafafa;
 `;
 
 export const Avatar = styled(Ava)`
@@ -99,7 +99,7 @@ export const Avatar = styled(Ava)`
 `;
 
 export const Replies = styled('div')`
-    background-color: #f6f5f3;
+    background-color: #fbfbfb;
     margin-left: 30px;
     margin-top: 6px;
 `;
@@ -128,7 +128,7 @@ export const Content = styled('span')`
 
 export const Textarea = styled(Text)`
     width: 100%;
-    border: 1px solid #e8e8e8;
+    border: 1px solid rgba(0,0,0,.06);
     resize: none;
     padding: 8px 12px;
 `;

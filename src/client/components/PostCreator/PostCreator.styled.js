@@ -6,10 +6,10 @@ import Ava from '../Avatar';
 export const Post = styled('section')`
     position: relative;
     padding: 12px;
-    margin-bottom: 22px;
+    margin-bottom: 12px;
     transition: box-shadow .2s ease;
     will-change: box-shadow;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 10px 20px -5px rgba(0,0,0,0.15);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 7px 5px -5px rgba(0,0,0,0.1);
     border-radius: 2px;
     background-color: white;
 `;

@@ -49,6 +49,7 @@ export const Item = styled('button')`
     padding: 10px 18px;
     transition: color .2s ease, background .2s ease;
     will-change: color, background;
+    border-radius: 0;
 
     &:hover {
         color: aliceblue;

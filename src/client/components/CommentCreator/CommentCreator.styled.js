@@ -7,9 +7,10 @@ import Ico from '../Icon';
 export const Creator = styled('div')`
     position: relative;
     width: 100%;
-    border-top: 1px solid #ddd;
     padding: 12px;
-    background-color: #fafafa;
+
+    border-top: 1px solid rgba(0,0,0,.06);
+    background-color: #fefefe;
 `;
 
 export const Short = styled('div')`
@@ -58,7 +59,7 @@ export const Footer = styled('div')`
     width: 100%;
     margin-top: 8px;
     padding-top: 8px;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid rgba(0,0,0,.06);
 `;
 
 export const Action = styled(Button)`
