@@ -7,9 +7,10 @@
         "host": "", // host:port/dbName
         "options": {
             "user": "",
-            "pass": "",
+            "pass": "", // pass is obyazatelno
             "autoIndex": false,
-            "autoReconnect": true
+            "autoReconnect": true,
+            "useMongoClient": true
         }
     },
     "redis": {
@@ -22,6 +23,10 @@
             "email": "",
             "password": ""
         }
+    },
+    "cdn": {
+        "token": "",
+        "address": ""
     },
     "sessionSecret": "",
     "enviroment": "default"
