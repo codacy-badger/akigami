@@ -42,7 +42,7 @@ class User extends MongooseClass {
                 user.avatar = `${config.get('cdn.address')}${user.avatar}`;
             }
             if (user.cover) {
-                user.cover = `${config.get('cdn.address')}${user.cover}`;
+                user.cover = `${config.get('cdn.address')}${user.cover}`; 
             }
             next();
         },

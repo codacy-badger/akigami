@@ -22,6 +22,12 @@ class Profile {
             socket.on(`profile:${this.id}`, (newData) => {
                 Object.keys(newData).forEach((key) => {
                     set(this, key, newData[key]);
+                    if (key === 'displayName') {
+                        this.app.router.setTitle(newData[key]);
+                    }
+                    if (key === 'username') {
+                        this.app.router.setURL(`@${newData[key]}`);
+                    }
                 });
             });
         }

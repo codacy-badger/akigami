@@ -11,6 +11,7 @@ import Block from '../../components/Block';
 import Wrapper from '../../components/Wrapper';
 import Content from '../../components/Content';
 import Red from '../../components/Red';
+import Store from './Settings.store';
 
 @inject(s => ({
     user: s.app.user,
@@ -20,15 +21,17 @@ class Settings extends Component {
     static propTypes = {
         user: PropTypes.object.isRequired,
     }
+    constructor(props) {
+        super(props);
+        this.store = new Store(props);
+    }
     state = {
         emailEdit: false,
-        usernameEdit: false,
-        displayNameEdit: false,
     }
     render() {
-        const { emailEdit, usernameEdit, displayNameEdit } = this.state;
+        const { emailEdit } = this.state;
         const { user } = this.props;
-        console.log(user);
+        const { displayName, displayNameEdit, username, usernameEdit, usernameValidate } = this.store.viewModel;
         return (
             <Wrapper opaque>
                 <Red>
@@ -82,16 +85,16 @@ class Settings extends Component {
                                         <div>
                                             {usernameEdit ? (
                                                 <ButtonToolbar>
-                                                    <Button bsStyle="success" onClick={() => this.setState({ usernameEdit: false })}>Сохранить</Button>
-                                                    <Button onClick={() => this.setState({ usernameEdit: false })}>Отмена</Button>
+                                                    <Button bsStyle="success" onClick={() => this.store.handleSave('username')} disabled={!usernameValidate}>Сохранить</Button>
+                                                    <Button onClick={() => this.store.enableEdit('username', false)}>Отмена</Button>
                                                 </ButtonToolbar>
                                             ) : (
-                                                <Button onClick={() => this.setState({ usernameEdit: true })}>Изменить юзернейм</Button>
+                                                <Button onClick={() => this.store.enableEdit('username', true)}>Изменить юзернейм</Button>
                                             )}
                                         </div>
                                     )}
                                 >
-                                    <FormControl defaultValue={user.username} bsSize="small" type="text" disabled={!usernameEdit} />
+                                    <FormControl value={username} bsSize="small" type="text" onChange={(e) => this.store.handleChange('username', e.target.value)} disabled={!usernameEdit} />
                                 </Field>
                                 <Field
                                     title="Имя пользователя"
@@ -100,16 +103,16 @@ class Settings extends Component {
                                         <div>
                                             {displayNameEdit ? (
                                                 <ButtonToolbar>
-                                                    <Button bsStyle="success" onClick={() => this.setState({ displayNameEdit: false })}>Сохранить</Button>
-                                                    <Button onClick={() => this.setState({ displayNameEdit: false })}>Отмена</Button>
+                                                    <Button bsStyle="success" onClick={() => this.store.handleSave('displayName')}>Сохранить</Button>
+                                                    <Button onClick={() => this.store.enableEdit('displayName', false)}>Отмена</Button>
                                                 </ButtonToolbar>
                                             ) : (
-                                                <Button onClick={() => this.setState({ displayNameEdit: true })}>Изменить имя</Button>
+                                                <Button onClick={() => this.store.enableEdit('displayName', true)}>Изменить имя</Button>
                                             )}
                                         </div>
                                     )}
                                 >
-                                    <FormControl defaultValue={user.displayName} bsSize="small" type="text" disabled={!displayNameEdit} />
+                                    <FormControl value={displayName} onChange={(e) => this.store.handleChange('displayName', e.target.value)} bsSize="small" type="text" disabled={!displayNameEdit} />
                                 </Field>
                             </Block>
                         </Col>

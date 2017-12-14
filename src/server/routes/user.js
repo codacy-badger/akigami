@@ -7,7 +7,7 @@ export default (app) => {
 
         if (!user) return next();
 
-        return res.ssr({
+        res.ssr({
             title: user.displayName,
             layout: 'profile',
             props: {

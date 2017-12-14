@@ -142,4 +142,13 @@ export default class Router {
             }
         }
     }
+
+    setTitle(title) {
+        document.title = `${title} - Акигами`;
+    }
+
+    setURL(url) {
+        // сделать сохранение #, ? etc.
+        history.replaceState(null, null, url);
+    }
 }
