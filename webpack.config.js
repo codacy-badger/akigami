@@ -43,7 +43,12 @@ module.exports = () => {
             'process.env': { NODE_ENV: JSON.stringify(nodeEnv) },
         }),
         new ExtractTextPlugin('assets/style.css'),
-        new PreloadWebpackPlugin(),
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                context: process.cwd() // or the same value as `context`
+            }
+        })
+        // new PreloadWebpackPlugin(),
         // new webpack.optimize.ModuleConcatenationPlugin(),
     ];
 
@@ -62,7 +67,7 @@ module.exports = () => {
                     if_return: true,
                     join_vars: true,
                 },
-            })*/
+            }) */
         );
     } else {
         plugins.push(
@@ -74,6 +79,7 @@ module.exports = () => {
     const entryPoint = './index.js';
 
     return {
+        mode: 'development',
         performance: false,
         devtool: isProd ? 'source-map' : 'cheap-source-map',
         context: paths.source,
