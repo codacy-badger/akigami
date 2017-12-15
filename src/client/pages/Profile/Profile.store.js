@@ -70,6 +70,12 @@ class Profile {
                     hash: text,
                 },
             }, res);
+        }).then(() => {
+            this.app.notification.create({
+                title: 'Изменение внешнего вида',
+                message: `${type} успешно изменён.`,
+                level: 'success',
+            });
         });
     }
 
@@ -79,6 +85,12 @@ class Profile {
             data: {
                 type,
             },
+        }, () => {
+            this.app.notification.create({
+                title: 'Изменение внешнего вида',
+                message: `${type} успешно удалён.`,
+                level: 'success',
+            });
         });
     }
 }

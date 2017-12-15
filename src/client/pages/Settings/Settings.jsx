@@ -15,6 +15,7 @@ import Store from './Settings.store';
 
 @inject(s => ({
     user: s.app.user,
+    notification: s.app.notification,
 }))
 @observer
 class Settings extends Component {

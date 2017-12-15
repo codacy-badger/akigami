@@ -22,9 +22,9 @@ class Comments {
 
     listener = (comment) => {
         if (comment.reply) {
-            this.replies.push(new Comment(comment));
+            this.replies.push(new Comment(this.app, comment));
         } else {
-            this.list.push(new Comment(comment));
+            this.list.push(new Comment(this.app, comment));
         }
     }
 
@@ -45,8 +45,8 @@ class Comments {
             const replies = result.filter(e => !!e.reply);
             const inits = result.filter(e => !e.reply);
 
-            this.list = inits.map(e => new Comment(e));
-            this.replies = replies.map(e => new Comment(e));
+            this.list = inits.map(e => new Comment(this.app, e));
+            this.replies = replies.map(e => new Comment(this.app, e));
             this.loading = false;
         });
     }

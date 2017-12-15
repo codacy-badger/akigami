@@ -53,6 +53,12 @@ class CommentCreator {
             content: this.content,
             attachments: this.attachments,
             reply: this.reply?.id,
+        }, () => {
+            this.app.notification.create({
+                title: 'Создание данных',
+                message: 'Комментарий успешно оставлен.',
+                level: 'success',
+            });
         });
 
         this.clearData();

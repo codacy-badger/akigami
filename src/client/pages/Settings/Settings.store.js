@@ -27,7 +27,8 @@ class Settings {
     handleChange = (key, value) => {
         if (key === 'username') {
             // здесь будет асинхронная проверка
-            if (/^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/m.test(value)) {
+            if (/^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/m.test(value)
+                && this[key] !== value) {
                 this.viewModel[`${key}Validate`] = true;
             } else {
                 this.viewModel[`${key}Validate`] = false;
@@ -39,7 +40,14 @@ class Settings {
     handleSave = (key) => {
         this.submitProperty(key);
         this.enableEdit(key, false);
-        socket.emit('settings:edit', { [key]: this[key] });
+        socket.emit('settings:edit', { [key]: this[key] }, () => {
+            const isOld = typeof this[key] === 'undefined';
+            this.notification.create({
+                title: 'Изменение данных',
+                message: isOld ? `${key} не был изменён.` : `${key} успешно изменено на ${this[key]}.`,
+                level: isOld ? 'info' : 'success',
+            });
+        });
     }
     // maybe transfer to separate class
     submitProperty = (key) => {

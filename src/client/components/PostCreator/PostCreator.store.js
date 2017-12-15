@@ -81,6 +81,12 @@ class PostCreator {
             content: this.content,
             attachments: this.attachments,
             namespace: this.namespace,
+        }, () => {
+            this.app.notification.create({
+                title: 'Создание данных',
+                message: 'Пост успешно создан.',
+                level: 'success',
+            });
         });
 
         this.clearStorage();

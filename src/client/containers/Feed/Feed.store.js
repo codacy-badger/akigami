@@ -19,7 +19,7 @@ class Feed {
     }
 
     listener = (post) => {
-        this.list.unshift(new Post(post));
+        this.list.unshift(new Post(this.app, post));
     }
 
     addListener() {
@@ -34,7 +34,7 @@ class Feed {
         const data = {};
         if (this.type !== 'global') data.id = this.userId;
         socket.emit(this.feedKey, data, (result) => {
-            const feed = result.map(e => new Post(e));
+            const feed = result.map(e => new Post(this.app, e));
             this.list = feed;
             this.loading = false;
         });

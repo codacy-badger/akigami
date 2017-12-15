@@ -3,6 +3,7 @@ import TopBar from './TopBar';
 import Modal from './Modal';
 import UI from './UI';
 import User from './User';
+import Notification from './Notification';
 
 export default class AppStore {
     constructor() {
@@ -11,5 +12,6 @@ export default class AppStore {
         this.modal = new Modal();
         this.router = new Router(this);
         this.user = new User(this);
+        this.notification = new Notification();
     }
 }

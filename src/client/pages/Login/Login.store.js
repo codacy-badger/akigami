@@ -18,6 +18,11 @@ export default class Login {
         } else if (response.action === 'login') {
             this.app.user.setUser(response.data.user);
             this.app.router.go('/');
+            this.app.notification.create({
+                title: 'Добро пожаловать!',
+                message: 'Вы успешно авторизовались.',
+                level: 'success',
+            });
         }
     }
 

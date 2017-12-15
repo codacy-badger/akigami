@@ -12,7 +12,8 @@ class Comment {
     @observable edit = false;
     @observable backup = null;
 
-    constructor(data) {
+    constructor(app, data) {
+        this.app = app;
         Object.keys(data).forEach((key) => {
             if (key === 'user' && typeof data[key] === 'object') {
                 const user = new User();
@@ -59,6 +60,11 @@ class Comment {
             attachments: this.attachments,
         }, () => {
             this.changeEdit(false);
+            this.app.notification.create({
+                title: 'Изменение данных',
+                message: 'Комментарий успешно изменён.',
+                level: 'success',
+            });
         });
         this.clearBackup();
     }
