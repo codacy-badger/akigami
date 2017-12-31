@@ -11,6 +11,8 @@ class Block extends PureComponent {
         flex: false,
         bordered: false,
         shadow: false,
+        padded: false,
+        colored: false,
     }
     static propTypes = {
         title: PropTypes.string,
@@ -20,6 +22,8 @@ class Block extends PureComponent {
         className: PropTypes.string,
         bordered: PropTypes.bool,
         shadow: PropTypes.bool,
+        padded: PropTypes.bool,
+        colored: PropTypes.bool,
     }
     render() {
         const {
@@ -29,11 +33,15 @@ class Block extends PureComponent {
             flex,
             className,
             bordered,
+            padded,
             shadow,
+            colored,
         } = this.props;
         return (
             <Wrapper
                 bordered={bordered}
+                colored={colored}
+                padded={padded}
                 shadow={shadow}
                 className={className}
             >

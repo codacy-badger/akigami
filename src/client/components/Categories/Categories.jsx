@@ -14,7 +14,7 @@ class Categories extends PureComponent {
     render() {
         const { items, onSelect } = this.props;
         return (
-            <Block bordered shadow title="Фильтр">
+            <Block padded colored shadow title="Фильтр">
                 <List>
                     {items.map(item => (
                         <Item

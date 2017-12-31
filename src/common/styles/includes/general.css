@@ -30,6 +30,10 @@ a:active {
     outline: none;
 }
 
+img {
+    user-select: none;
+}
+
 .embed-poster {
     padding-bottom: 140%;
 }

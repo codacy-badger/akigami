@@ -4,7 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 import Responsive from 'react-responsive';
 
 import Content from '../../components/Content';
-import Child from './Threed.styled';
+import { Child, Sticker } from './Threed.styled';
 
 const propTypes = {
     children: PropTypes.any,
@@ -40,18 +40,20 @@ class Threed extends PureComponent {
             <Content>
                 <Row>
                     <Col xs={12} sm={4} lg={3}>
-                        <Responsive minWidth={1200}>
+                        <Responsive minWidth={1201}>
                             {left}
                         </Responsive>
-                        <Responsive maxWidth={1199}>
-                            {inverse ? right : left}
-                            {inverse ? left : right}
+                        <Responsive maxWidth={1200}>
+                            <Sticker>
+                                {inverse ? right : left}
+                                {inverse ? left : right}
+                            </Sticker>
                         </Responsive>
                     </Col>
                     <Col xs={12} sm={8} lg={6}>
                         {center}
                     </Col>
-                    <Responsive minWidth={1200}>
+                    <Responsive minWidth={1201}>
                         <Col xs={12} sm={4} lg={3}>
                             {right}
                         </Col>

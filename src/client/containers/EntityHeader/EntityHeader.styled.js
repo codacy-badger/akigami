@@ -87,7 +87,7 @@ function queriesSize(size, type) {
 
 export const Title = styled('h1')`
     margin: 0;
-    font-size: ${props => getFontSize(props.size)}px;
+    font-size: ${props => queriesSize(props.size, 'mobile')};
     font-weight: 700;
     color: ${props => (!props.isCover ? '#424242' : '#fff')};
     letter-spacing: -0.3px;
@@ -97,12 +97,13 @@ export const Title = styled('h1')`
     line-height: 1.2;
     overflow:hidden;
 
-    @media screen and (max-width: 991px) {
+    @media screen and (min-width: 992px) {
         font-size: ${props => queriesSize(props.size, 'tablet')};
     }
-    @media screen and (max-width: 768px) {
-        font-size: ${props => queriesSize(props.size, 'mobile')};
-    }
+
+    @media screen and (min-width: 1200px) {
+        font-size: ${props => getFontSize(props.size)}px;
+    }    
 `;
 
 export const Meta = styled('section')`

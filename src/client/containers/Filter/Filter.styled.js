@@ -82,7 +82,6 @@ const fixedStyle = css`
     top: 48px;
     left: 0;
     background-color: #fff;
-    border-bottom: 1px solid #e8e8e8;
 `;
 
 export const Fixer = styled('div')`

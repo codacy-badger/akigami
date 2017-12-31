@@ -2,10 +2,16 @@ import { css } from 'emotion';
 import styled from 'react-emotion';
 
 const bordered = css`
-    padding: 16px;
     border-radius: 2px;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.06);
+`;
+
+const colored = css`
     background-color: white;
+`;
+
+const padded = css`
+    padding: 16px;
 `;
 
 const shadow = css`
@@ -15,6 +21,8 @@ const shadow = css`
 export const Wrapper = styled('div')`
     ${p => p.bordered && bordered}
     ${p => p.shadow && shadow};
+    ${p => p.colored && colored};
+    ${p => p.padded && padded};
     margin-bottom: 12px;
 `;
 

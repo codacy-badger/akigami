@@ -8,8 +8,6 @@ import {
     Tabs,
     Tab,
     Button,
-    DropdownButton,
-    MenuItem,
 } from 'react-bootstrap';
 
 import Tooltip from '../../components/Tooltip';
@@ -317,7 +315,7 @@ class Profile extends Component {
                 />
                 <Threed>
                     <Left>
-                        <Block bordered shadow title="Статистика">
+                        <Block colored padded shadow title="Статистика">
                             <Stats
                                 title="По предпочтениям"
                                 styleTitle={{ marginBottom: '-4px' }}
@@ -368,7 +366,8 @@ class Profile extends Component {
                             </Stats>
                         </Block>
                         <Block
-                            bordered
+                            colored
+                            padded
                             shadow
                             title="Музыка"
                             buttons={(
@@ -413,7 +412,8 @@ class Profile extends Component {
                             />
                         </Block>
                         <Block
-                            bordered
+                            colored
+                            padded
                             shadow
                             title="Клубы"
                             buttons={(
@@ -428,7 +428,7 @@ class Profile extends Component {
                     </Left>
                     <Center>
                         {this.store.about && (
-                            <Block bordered shadow title="О себе">
+                            <Block colored padded bordered shadow title="О себе">
                                 <About>{this.store.about}</About>
                             </Block>
                         )}
@@ -438,7 +438,8 @@ class Profile extends Component {
                     </Center>
                     <Right>
                         <Block
-                            bordered
+                            colored
+                            padded
                             shadow
                             title="Избранное"
                             buttons={(
@@ -448,7 +449,8 @@ class Profile extends Component {
                             <Favorites entities={favorites} />
                         </Block>
                         <Block
-                            bordered
+                            colored
+                            padded
                             shadow
                             title="Подписки"
                             buttons={(
@@ -461,7 +463,8 @@ class Profile extends Component {
                             />
                         </Block>
                         <Block
-                            bordered
+                            colored
+                            padded
                             shadow
                             title="Подписчики"
                             buttons={(

@@ -47,7 +47,7 @@ class Settings extends Component {
                 <Content>
                     <Row>
                         <Col xs={12} md={6}>
-                            <Block title="Email и уведомления" bordered>
+                            <Block title="Email и уведомления" bordered padded colored>
                                 <Field
                                     title="Ваш Email"
                                     actions={(
@@ -78,7 +78,7 @@ class Settings extends Component {
                             </Block>
                         </Col>
                         <Col xs={12} md={6}>
-                            <Block title="Аккаунт" bordered>
+                            <Block title="Аккаунт" bordered padded colored>
                                 <Field
                                     title="Юзернейм"
                                     description="Виден в адресной строке вашего профиля."
