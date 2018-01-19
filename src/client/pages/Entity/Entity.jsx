@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import Responsive from 'react-responsive';
+import m from 'moment';
 
 import EntityHeader from '../../containers/EntityHeader';
 import Wrapper from '../../components/Wrapper';
@@ -18,6 +19,9 @@ import {
     AutoColumn,
     Poster,
     Description,
+    ListInfo,
+    ItemInfo,
+    KeyInfo,
 } from './Entity.styled';
 
 import mock from './Entity.mock';
@@ -35,6 +39,23 @@ class Entity extends Component {
         data: PropTypes.object,
         ui: PropTypes.object.isRequired,
         type: PropTypes.oneOf(['anime', 'manga', 'novel']).isRequired,
+    }
+    static typeConverter(type) {
+        switch (type) {
+        case 'tv': return 'TV сериал';
+        case 'movie': return 'Фильм';
+        case 'ova': return 'OVA';
+        case 'ona': return 'ONA';
+        case 'special': return 'Спэшл';
+        default: return '';
+        }
+    }
+    static getStatus(obj) {
+        if (!obj.start) return 'Анонсировано';
+        if (obj.start && !obj.finish) {
+            return 'Выходит сейчас';
+        }
+        if (obj.finish) return 'Закончено';
     }
     state = {
         offset: 0,
@@ -210,11 +231,51 @@ class Entity extends Component {
             />
         );
     }
-    renderInfo = () => (
-        <Block>
-            Здесь будет дополнительная информация о тайтле
-        </Block>
-    )
+    renderInfo = () => {
+        const { data } = this.props;
+        return (
+            <Block>
+                <ListInfo>
+                    <ItemInfo>
+                        <KeyInfo>По-русски</KeyInfo>
+                        {data.entity.title.russian}
+                    </ItemInfo>
+                    <ItemInfo>
+                        <KeyInfo>По-английски</KeyInfo>
+                        {data.entity.title.english}
+                    </ItemInfo>
+                    <ItemInfo>
+                        <KeyInfo>По-японски</KeyInfo>
+                        {data.entity.title.japanese}
+                    </ItemInfo>
+                    <ItemInfo>
+                        <KeyInfo>Другие названия</KeyInfo>
+                        <span>
+                            {(data.entity.title.other || []).map((e, i) => (
+                                <span>{e}{i < data.entity.title.other.length - 1 ? '; ' : '.'}</span>
+                            ))}
+                        </span>
+                    </ItemInfo>
+                    <ItemInfo>
+                        <KeyInfo>Тип</KeyInfo>
+                        {Entity.typeConverter(data.entity.type)}
+                    </ItemInfo>
+                    <ItemInfo>
+                        <KeyInfo>Эпизодов</KeyInfo>
+                        {data.entity.episodes}
+                    </ItemInfo>
+                    <ItemInfo>
+                        <KeyInfo>Статус</KeyInfo>
+                        {Entity.getStatus(data.entity.airing)}
+                    </ItemInfo>
+                    <ItemInfo>
+                        <KeyInfo>Выходило</KeyInfo>
+                        {`с ${m(data.entity.airing.start).format('DD.MM.YYYY')} по ${m(data.entity.airing.finish).format('DD.MM.YYYY')}`}
+                    </ItemInfo>
+                </ListInfo>
+            </Block>
+        );
+    }
     render() {
         const { offset } = this.state;
         const { data, type } = this.props;

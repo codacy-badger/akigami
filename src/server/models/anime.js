@@ -3,8 +3,9 @@ import MongooseClass from '../utils/mongooseClass';
 class Anime extends MongooseClass {
     title = {
         russian: { type: String },
-        romaji: { type: String },
+        romaji: { type: String, required: true },
         english: { type: String },
+        other: { type: Array, default: [] },
     };
     description = {
         russian: { type: String },

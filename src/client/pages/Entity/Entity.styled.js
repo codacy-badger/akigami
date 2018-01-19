@@ -79,3 +79,25 @@ export const Description = styled('div')`
 export const Poster = styled('img')`
     border-radius: 2px;
 `;
+
+export const ListInfo = styled('ul')`
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+`;
+
+export const ItemInfo = styled('li')`
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+`;
+
+export const KeyInfo = styled('strong')`
+    line-height: 1.35;
+`;
