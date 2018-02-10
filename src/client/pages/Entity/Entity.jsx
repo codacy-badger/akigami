@@ -56,6 +56,7 @@ class Entity extends Component {
             return 'Выходит сейчас';
         }
         if (obj.finish) return 'Закончено';
+        return '';
     }
     state = {
         offset: 0,
@@ -135,7 +136,7 @@ class Entity extends Component {
                 <Button bsSize="xs">Все</Button>
             )}
         >
-            Здесь будут друзья, в чьих списках присутствует данный тайтл 
+            Здесь будут друзья, в чьих списках присутствует данный тайтл
         </Block>
     )
     renderClubs = () => (

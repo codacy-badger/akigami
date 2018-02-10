@@ -78,9 +78,6 @@ export default class Login extends PureComponent {
                                     >
                                         Войти
                                     </Submit>
-                                    <Recover href="/recovery">
-                                        Забыли электронный ящик?
-                                    </Recover>
                                 </Card>
                             </Col>
                         </Row>

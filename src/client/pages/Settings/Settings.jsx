@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Row, Col, FormControl, Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
 import { inject, observer } from 'mobx-react';
-import Datetime from 'react-datetime';
+// import Datetime from 'react-datetime';
 
 import Field from '../../components/Field';
-import AvatarUploader from '../../components/AvatarUploader';
-import GenderChanger from '../../components/GenderChanger';
+// import AvatarUploader from '../../components/AvatarUploader';
+// import GenderChanger from '../../components/GenderChanger';
 import Block from '../../components/Block';
 import Wrapper from '../../components/Wrapper';
 import Content from '../../components/Content';
@@ -20,7 +20,7 @@ import Store from './Settings.store';
 @observer
 class Settings extends Component {
     static propTypes = {
-        user: PropTypes.object.isRequired,
+        // user: PropTypes.object.isRequired,
     }
     constructor(props) {
         super(props);
@@ -31,15 +31,28 @@ class Settings extends Component {
     }
     render() {
         const { emailEdit } = this.state;
-        const { user } = this.props;
-        const { displayName, displayNameEdit, username, usernameEdit, usernameValidate } = this.store.viewModel;
+        // const { user } = this.props;
+        const {
+            displayName,
+            displayNameEdit,
+            username,
+            usernameEdit,
+            usernameValidate,
+        } = this.store.viewModel;
         return (
             <Wrapper opaque>
                 <Red>
                     <Content>
                         <Row>
                             <Col xs={12}>
-                                <h1 style={{ margin: '0 0 32px', fontWeight: 800 }}>Настройки</h1>
+                                <h1
+                                    style={{
+                                        margin: '0 0 32px',
+                                        fontWeight: 800,
+                                    }}
+                                >
+                                    Настройки
+                                </h1>
                             </Col>
                         </Row>
                     </Content>
@@ -47,23 +60,51 @@ class Settings extends Component {
                 <Content>
                     <Row>
                         <Col xs={12} md={6}>
-                            <Block title="Email и уведомления" bordered padded colored>
+                            <Block
+                                title="Email и уведомления"
+                                bordered
+                                padded
+                                colored
+                            >
                                 <Field
                                     title="Ваш Email"
                                     actions={(
                                         <div>
                                             {emailEdit ? (
                                                 <ButtonToolbar>
-                                                    <Button bsStyle="success" onClick={() => this.setState({ emailEdit: false })}>Сохранить</Button>
-                                                    <Button onClick={() => this.setState({ emailEdit: false })}>Отмена</Button>
+                                                    <Button
+                                                        bsStyle="success"
+                                                        onClick={() => {
+                                                            this.setState({ emailEdit: false });
+                                                        }}
+                                                    >
+                                                        Сохранить
+                                                    </Button>
+                                                    <Button
+                                                        onClick={() => {
+                                                            this.setState({ emailEdit: false });
+                                                        }}
+                                                    >
+                                                        Отмена
+                                                    </Button>
                                                 </ButtonToolbar>
                                             ) : (
-                                                <Button onClick={() => this.setState({ emailEdit: true })}>Изменить почту</Button>
+                                                <Button
+                                                    onClick={() => {
+                                                        this.setState({ emailEdit: true });
+                                                    }}
+                                                >
+                                                    Изменить почту
+                                                </Button>
                                             )}
                                         </div>
                                     )}
                                 >
-                                    <FormControl bsSize="small" type="text" disabled={!emailEdit} />
+                                    <FormControl
+                                        bsSize="small"
+                                        type="text"
+                                        disabled={!emailEdit}
+                                    />
                                 </Field>
                                 <Field
                                     title="Упоминания"
@@ -78,7 +119,12 @@ class Settings extends Component {
                             </Block>
                         </Col>
                         <Col xs={12} md={6}>
-                            <Block title="Аккаунт" bordered padded colored>
+                            <Block
+                                title="Аккаунт"
+                                bordered
+                                padded
+                                colored
+                            >
                                 <Field
                                     title="Юзернейм"
                                     description="Виден в адресной строке вашего профиля."
@@ -86,8 +132,22 @@ class Settings extends Component {
                                         <div>
                                             {usernameEdit ? (
                                                 <ButtonToolbar>
-                                                    <Button bsStyle="success" onClick={() => this.store.handleSave('username')} disabled={!usernameValidate}>Сохранить</Button>
-                                                    <Button onClick={() => this.store.enableEdit('username', false)}>Отмена</Button>
+                                                    <Button
+                                                        bsStyle="success"
+                                                        onClick={() => {
+                                                            this.store.handleSave('username');
+                                                        }}
+                                                        disabled={!usernameValidate}
+                                                    >
+                                                        Сохранить
+                                                    </Button>
+                                                    <Button
+                                                        onClick={() => {
+                                                            this.store.enableEdit('username', false);
+                                                        }}
+                                                    >
+                                                        Отмена
+                                                    </Button>
                                                 </ButtonToolbar>
                                             ) : (
                                                 <Button onClick={() => this.store.enableEdit('username', true)}>Изменить юзернейм</Button>
@@ -95,7 +155,15 @@ class Settings extends Component {
                                         </div>
                                     )}
                                 >
-                                    <FormControl value={username} bsSize="small" type="text" onChange={(e) => this.store.handleChange('username', e.target.value)} disabled={!usernameEdit} />
+                                    <FormControl
+                                        value={username}
+                                        bsSize="small"
+                                        type="text"
+                                        onChange={(e) => {
+                                            this.store.handleChange('username', e.target.value);
+                                        }}
+                                        disabled={!usernameEdit}
+                                    />
                                 </Field>
                                 <Field
                                     title="Имя пользователя"
@@ -104,16 +172,43 @@ class Settings extends Component {
                                         <div>
                                             {displayNameEdit ? (
                                                 <ButtonToolbar>
-                                                    <Button bsStyle="success" onClick={() => this.store.handleSave('displayName')}>Сохранить</Button>
-                                                    <Button onClick={() => this.store.enableEdit('displayName', false)}>Отмена</Button>
+                                                    <Button
+                                                        bsStyle="success"
+                                                        onClick={() => {
+                                                            this.store.handleSave('displayName');
+                                                        }}
+                                                    >
+                                                        Сохранить
+                                                    </Button>
+                                                    <Button
+                                                        onClick={() => {
+                                                            this.store.enableEdit('displayName', false);
+                                                        }}
+                                                    >
+                                                        Отмена
+                                                    </Button>
                                                 </ButtonToolbar>
                                             ) : (
-                                                <Button onClick={() => this.store.enableEdit('displayName', true)}>Изменить имя</Button>
+                                                <Button
+                                                    onClick={() => {
+                                                        this.store.enableEdit('displayName', true);
+                                                    }}
+                                                >
+                                                    Изменить имя
+                                                </Button>
                                             )}
                                         </div>
                                     )}
                                 >
-                                    <FormControl value={displayName} onChange={(e) => this.store.handleChange('displayName', e.target.value)} bsSize="small" type="text" disabled={!displayNameEdit} />
+                                    <FormControl
+                                        value={displayName}
+                                        bsSize="small"
+                                        type="text"
+                                        onChange={(e) => {
+                                            this.store.handleChange('displayName', e.target.value);
+                                        }}
+                                        disabled={!displayNameEdit}
+                                    />
                                 </Field>
                             </Block>
                         </Col>

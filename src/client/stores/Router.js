@@ -15,7 +15,7 @@ export default class Router {
         this.app = app;
         if (typeof window !== 'undefined') {
             this.initHandler();
-            this.setModal(location.search);
+            this.setModal(window.location.search);
         }
     }
 
@@ -60,7 +60,8 @@ export default class Router {
             return;
         }
 
-        if (location.protocol !== element.protocol || location.hostname !== element.hostname) {
+        if (window.location.protocol !== element.protocol
+            || window.location.hostname !== element.hostname) {
             return;
         }
 
@@ -76,7 +77,7 @@ export default class Router {
     async go(href, push = true, skip = false) {
         const { href: h, query, ...other } = URL.parse(href);
         if (push) {
-            history.pushState(null, null, h);
+            window.history.pushState(null, null, h);
         }
         if (!skip) {
             this.app.topBar.setProgress(30);
@@ -119,7 +120,10 @@ export default class Router {
         const params = {
             app: this.app,
         };
-        const data = find(modals, i => pathToRegexp(i.path).test(path)) || find(modals, { path: '404' });
+        const data = find(modals, i => (
+            pathToRegexp(i.path).test(path)
+                || find(modals, { path: '404' })
+        ));
         if (data.path !== '404') {
             const keys = [];
             const result = pathToRegexp(data.path, keys).exec(path) || [];
@@ -149,6 +153,6 @@ export default class Router {
 
     setURL(url) {
         // сделать сохранение #, ? etc.
-        history.replaceState(null, null, url);
+        window.history.replaceState(null, null, url);
     }
 }
