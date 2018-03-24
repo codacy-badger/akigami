@@ -41,8 +41,8 @@ class Comments extends Component {
                     <Comment
                         key={comment.id}
                         comment={comment}
-                        replies={this.store.getRepliesOnComment(comment.id)}
-                        onReply={this.handleReply}
+                        // replies={this.store.getRepliesOnComment(comment.id)}
+                        // onReply={this.handleReply}
                     />
                 ))}
                 {this.store.loading && (

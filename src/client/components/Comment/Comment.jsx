@@ -6,6 +6,8 @@ import m from 'moment';
 
 import { Button, ButtonToolbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
+import CommentCreator from '../CommentCreator';
+
 import Icon from '../Icon';
 import {
     Wrapper,
@@ -92,7 +94,7 @@ class Comment extends Component {
         );
     }
     renderDefaultBody() {
-        const { comment, user, onReply } = this.props;
+        const { comment, user } = this.props;
         const editTooltip = (
             <Tooltip id="edit">Редактировать</Tooltip>
         );
@@ -106,19 +108,17 @@ class Comment extends Component {
                         {comment.user.displayName}
                     </User>
                     <Content>
-                        {comment.content}
+                        {comment.deleted ? <span>Комментарий удалён</span> : comment.content}
                     </Content>
                 </Body>
                 <Meta>
-                    {onReply && (
-                        <Reply
-                            bsSize="xs"
-                            bsStyle="link"
-                            onClick={() => onReply(comment)}
-                        >
-                            Ответить
-                        </Reply>
-                    )}
+                    <Reply
+                        bsSize="xs"
+                        bsStyle="link"
+                        onClick={() => comment.handleReply(comment)}
+                    >
+                        Ответить
+                    </Reply>
                     <Date>
                         {m(comment.createdAt).locale('ru').fromNow()}
                     </Date>
@@ -138,7 +138,7 @@ class Comment extends Component {
                                     bsSize="xs"
                                     bsStyle="link"
                                     style={{ fontSize: 14, marginLeft: 6 }}
-                                    onClick={() => {}}
+                                    onClick={comment.deleteComment}
                                 >
                                     <Icon type="close" />
                                 </Action>
@@ -150,10 +150,10 @@ class Comment extends Component {
         );
     }
     render() {
-        const { comment, replies, replied, user } = this.props;
+        const { comment, replied, user } = this.props;
         return (
             <Wrapper
-                replies={replies.length > 0}
+                replies={comment.children && comment.children.length > 0}
                 replied={replied}
             >
                 <Main>
@@ -169,9 +169,10 @@ class Comment extends Component {
                             : this.renderDefaultBody()}
                     </Info>
                 </Main>
-                {replies.length > 0 && (
+                {comment.replyObject && <CommentCreator post={comment.post} onCancel={comment.handleCancelReply} embed replyObject={comment.replyObject} />}
+                {comment.children && comment.children.length > 0 && (
                     <Replies>
-                        {replies.map(reply => (
+                        {comment.children.map(reply => (
                             <Comment
                                 user={user}
                                 key={reply.id}

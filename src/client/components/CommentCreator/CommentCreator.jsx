@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
+import Outside from 'react-outside-component';
 import Store from './CommentCreator.store';
 import {
     Creator,
@@ -31,6 +32,11 @@ class CommentCreator extends Component {
     constructor(props) {
         super(props);
         this.store = new Store(props);
+        if (props.embed) {
+            this.store.collapsed = props.embed;
+            this.store.replyObject = props.replyObject;
+            this.store.cancelReply = props.onCancel;
+        }
     }
     componentWillReceiveProps(nextProps) {
         this.store.updateProps(nextProps);
@@ -72,47 +78,56 @@ class CommentCreator extends Component {
     renderFullView() {
         const { user } = this.props.app;
         return (
-            <Full>
-                <Header>
-                    <Avatar
-                        size={30}
-                        src={user.getAvatar}
-                        title={user.displayName}
-                    />
-                    <Textarea
-                        minRows={2}
-                        autoFocus
-                        value={this.store.content}
-                        onChange={this.handleChangeContent}
-                    />
-                </Header>
-                <Footer>
-                    <Attachments>
-                        <Attach bsStyle="link" bsSize="xs">
-                            <Icon type="image" />
-                        </Attach>
-                        {this.store.reply && (
-                            <Replied>
-                                {`Ответить ${this.store.reply.user.displayName}`}
-                                <Clear
-                                    bsSize="xs"
-                                    bsStyle="link"
-                                    onClick={this.clearReplyState}
-                                >
-                                    <Icon type="close" />
-                                </Clear>
-                            </Replied>
-                        )}
-                    </Attachments>
-                    <Action
-                        bsStyle="danger"
-                        bsSize="sm"
-                        onClick={this.handleCreateComment}
-                    >
-                        Отправить
-                    </Action>
-                </Footer>
-            </Full>
+            <Outside isOpen={this.store.collapsed} onClickOutside={this.store.handleBlur}>
+                <Full>
+                    <Header>
+                        <Avatar
+                            size={30}
+                            src={user.getAvatar}
+                            title={user.displayName}
+                        />
+                        <Textarea
+                            minRows={2}
+                            autoFocus
+                            value={this.store.content}
+                            onChange={this.handleChangeContent}
+                        />
+                    </Header>
+                    <Footer>
+                        <Attachments>
+                            <Attach bsStyle="link" bsSize="xs">
+                                <Icon type="image" />
+                            </Attach>
+                            {this.store.reply && (
+                                <Replied>
+                                    {`Ответить ${this.store.reply.user.displayName}`}
+                                    <Clear
+                                        bsSize="xs"
+                                        bsStyle="link"
+                                        onClick={this.clearReplyState}
+                                    >
+                                        <Icon type="close" />
+                                    </Clear>
+                                </Replied>
+                            )}
+                        </Attachments>
+                        {this.props.embed && <Action
+                            bsStyle="link"
+                            bsSize="sm"
+                            onClick={this.props.onCancel}
+                        >
+                            Отменить
+                        </Action>}
+                        <Action
+                            bsStyle="danger"
+                            bsSize="sm"
+                            onClick={this.handleCreateComment}
+                        >
+                            Отправить
+                        </Action>
+                    </Footer>
+                </Full>
+            </Outside>
         );
     }
     render() {

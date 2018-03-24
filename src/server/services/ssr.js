@@ -34,7 +34,7 @@ export default async function ({ title, layout, props = {}, ...data } = {}) {
                 criticalCss: css,
                 hydrateIds: JSON.stringify(ids),
                 user: JSON.stringify(user || {}),
-                js: '<script type="text/javascript" src="/assets/modules.js"></script><script type="text/javascript" src="/assets/app.js"></script>',
+                js: '<script type="text/javascript" src="/assets/modules.chunk.js"></script><script type="text/javascript" src="/assets/app.js"></script>',
                 preload: `<script type="application/json" id="preload-data" data-layout="${layout}" data-title="${title}">${JSON.stringify(props)}</script>`,
                 title,
             }, data);

@@ -23,7 +23,10 @@ export default class Modal {
 
     @action
     close = (id) => {
-        this.modals.find(el => el.id === id)?.show = false;
+        const modal = this.modals.find(el => el.id === id);
+        if (modal) {
+            modal.show = false;
+        }
         setTimeout(() => {
             this.modals = this.modals.filter(i => i.id !== id);
             if (this.modals.length === 0) {

@@ -5,8 +5,11 @@ class CommentCreator {
     @observable collapsed = false;
     @observable content = '';
     @observable reply = null;
+    @observable replyObject = null;
     @observable post = null;
     @observable attachments = [];
+
+    cancelReply = null;
 
     constructor(props) {
         this.updateProps(props);
@@ -52,7 +55,8 @@ class CommentCreator {
             post: this.post,
             content: this.content,
             attachments: this.attachments,
-            reply: this.reply?.id,
+            reply: this.replyObject?.reply,
+            parent: this.replyObject?.parent,
         }, () => {
             this.app.notification.create({
                 title: 'Создание данных',
@@ -63,10 +67,17 @@ class CommentCreator {
 
         this.clearData();
         this.changeCollapse(false);
+        this.cancelReply?.();
     }
 
     @computed get isExistsData() {
         return (this.content.trim()).length > 0 || this.attachments.length > 0;
+    }
+
+    handleBlur = () => {
+        if (!this.content) {
+            this.collapsed = false;
+        }
     }
 }
 

@@ -5,7 +5,7 @@ import Comment from '../../models/Comment';
 
 class Comments {
     @observable list = [];
-    @observable replies = [];
+    // @observable replies = [];
     @observable loading = true;
     @observable repliedComment = null;
 
@@ -21,11 +21,7 @@ class Comments {
     }
 
     listener = (comment) => {
-        if (comment.reply) {
-            this.replies.push(new Comment(this.app, comment));
-        } else {
-            this.list.push(new Comment(this.app, comment));
-        }
+        this.push(this.list, new Comment(this.app, comment));
     }
 
     addListener() {
@@ -42,17 +38,36 @@ class Comments {
 
     getComments() {
         socket.emit(this.commentsKey, { post: this.postId }, (result) => {
-            const replies = result.filter(e => !!e.reply);
-            const inits = result.filter(e => !e.reply);
-
-            this.list = inits.map(e => new Comment(this.app, e));
-            this.replies = replies.map(e => new Comment(this.app, e));
+            this.list = this.unf(result);
             this.loading = false;
         });
     }
 
     get listenerKey() {
         return `comment:getOncePost-${this.postId}`;
+    }
+
+    push = (arr, item, outarr) => {
+        if (item.parent == null) {
+            // item.children = [];
+            if (outarr) {
+                outarr.push(item);
+            } else {
+                arr.push(item);
+            }
+        } else {
+            const parent = arr.find((i) => i.id == item.parent);
+            parent.children.push(item);
+        }
+    }
+    
+    unf = (arr) => {
+        const out = [];
+        const newArr = arr.map((item) => new Comment(this.app, item));
+        newArr.forEach((item) => {
+            this.push(newArr, item, out);
+        });
+        return out;
     }
 }
 

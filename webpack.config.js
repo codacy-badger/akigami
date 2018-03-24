@@ -3,7 +3,7 @@ const path = require('path');
 const config = require('config');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const PreloadWebpackPlugin = require('preload-webpack-plugin');
+// const PreloadWebpackPlugin = require('preload-webpack-plugin');
 
 const host = config.get('server.host');
 const port = config.get('server.port');
@@ -33,28 +33,28 @@ module.exports = () => {
     const isProd = nodeEnv === 'production';
 
     const plugins = [
-        new webpack.optimize.CommonsChunkPlugin({
+        /* new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: path.join('assets', 'modules.js'),
             async: false,
             minChunks: (module, countIgnored) => module.context && module.context.includes('node_modules'),
-        }),
+        }), */
         new webpack.DefinePlugin({
             'process.env': { NODE_ENV: JSON.stringify(nodeEnv) },
         }),
         new ExtractTextPlugin('assets/style.css'),
         new webpack.LoaderOptionsPlugin({
             options: {
-                context: process.cwd() // or the same value as `context`
-            }
-        })
+                context: process.cwd(), // or the same value as `context`
+            },
+        }),
         // new PreloadWebpackPlugin(),
         // new webpack.optimize.ModuleConcatenationPlugin(),
     ];
 
     if (isProd) {
-        plugins.push(
-            /* new UglifyJSPlugin({
+        /* plugins.push(
+            new UglifyJSPlugin({
                 compress: {
                     warnings: false,
                     screw_ie8: true,
@@ -67,12 +67,12 @@ module.exports = () => {
                     if_return: true,
                     join_vars: true,
                 },
-            }) */
-        );
+            })
+        ); */
     } else {
         plugins.push(
             new webpack.NamedModulesPlugin(),
-            new webpack.NoEmitOnErrorsPlugin()
+            new webpack.NoEmitOnErrorsPlugin(),
         );
     }
 
@@ -80,6 +80,17 @@ module.exports = () => {
 
     return {
         mode: 'development',
+        optimization: {
+            splitChunks: {
+                cacheGroups: {
+                    commons: {
+                        test: /[\\/]node_modules[\\/]/,
+                        name: 'modules',
+                        chunks: 'all',
+                    },
+                },
+            },
+        },
         performance: false,
         devtool: isProd ? 'source-map' : 'cheap-source-map',
         context: paths.source,
@@ -185,7 +196,7 @@ module.exports = () => {
                         loader: 'babel-loader',
                         options: {
                             presets: ['@babel/preset-stage-0', '@babel/preset-react'],
-                            plugins: ['transform-decorators-legacy', 'transform-class-properties', 'emotion'],
+                            plugins: ['@babel/plugin-proposal-decorators', ['@babel/plugin-proposal-class-properties', { loose: true }], 'emotion'],
                         },
                     },
                 },
@@ -198,11 +209,11 @@ module.exports = () => {
 
         plugins,
 
-        performance: isProd && {
+        /* performance: isProd && {
             maxAssetSize: 300000,
             maxEntrypointSize: 300000,
             hints: 'warning',
-        },
+        }, */
 
         stats,
 

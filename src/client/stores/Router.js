@@ -75,7 +75,7 @@ export default class Router {
     }
 
     async go(href, push = true, skip = false) {
-        const { href: h, query, ...other } = URL.parse(href);
+        const { href: h, query } = URL.parse(href);
         if (push) {
             window.history.pushState(null, null, h);
         }

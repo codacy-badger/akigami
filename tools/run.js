@@ -1,15 +1,15 @@
 const Promise = require('bluebird');
 
 Promise.config({
-    longStackTraces: true
+    longStackTraces: true,
 });
-process.on('unhandledRejection', (reason, promise) => {
+process.on('unhandledRejection', (reason, promiseIgnored) => {
     console.log(reason);
     // See Promise.onPossiblyUnhandledRejection for parameter documentation
 });
 require('@babel/register').default({
     presets: ['@babel/preset-stage-0', '@babel/preset-react'],
-    plugins: ['dynamic-import-node', 'transform-es2015-modules-commonjs', 'transform-decorators-legacy', 'transform-class-properties', 'emotion'],
+    plugins: ['dynamic-import-node', '@babel/plugin-transform-modules-commonjs', '@babel/plugin-proposal-decorators', ['@babel/plugin-proposal-class-properties', { loose: true }], 'emotion'],
 });
 require('@babel/polyfill');
 

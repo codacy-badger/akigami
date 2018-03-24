@@ -8,9 +8,13 @@ class Comment {
     @observable user = null;
     @observable content = null;
     @observable attachments = [];
+    @observable children = [];
 
     @observable edit = false;
     @observable backup = null;
+    @observable deleted = false;
+    @observable reply = null;
+    @observable replyObject = null;
 
     constructor(app, data) {
         this.app = app;
@@ -67,6 +71,21 @@ class Comment {
             });
         });
         this.clearBackup();
+    }
+
+    deleteComment = () => {
+        this.deleted = true;
+    }
+
+    handleReply = () => {
+        this.replyObject = {
+            reply: this.id,
+            parent: this.parent || this.id,
+        };
+    }
+
+    handleCancelReply = () => {
+        this.replyObject = null;
     }
 }
 
