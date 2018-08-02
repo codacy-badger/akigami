@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Categories snapshot 1`] = `
+<div
+  className="css-nczllq"
+>
+  <div
+    className="css-czr64w"
+  >
+    <h3
+      className="css-1r0b13k"
+    >
+      Фильтр
+    </h3>
+  </div>
+  <div
+    className="css-bqvltc"
+  >
+    <div
+      className="css-1iyoj2o"
+    >
+      <button
+        className="css-rpiht9 btn btn-default active"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        <i
+          className="mdi mdi-account-multiple css-end85d"
+        />
+        <span
+          className="css-1gjna6e"
+        >
+          Пользователи
+        </span>
+      </button>
+      <button
+        className="css-69fdvv btn btn-default"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        <i
+          className="mdi mdi-book-variant css-end85d"
+        />
+        <span
+          className="css-1gjna6e"
+        >
+          Закладки
+        </span>
+      </button>
+      <button
+        className="css-69fdvv btn btn-default"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        <i
+          className="mdi mdi-cupcake css-end85d"
+        />
+        <span
+          className="css-1gjna6e"
+        >
+          Маффины
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;

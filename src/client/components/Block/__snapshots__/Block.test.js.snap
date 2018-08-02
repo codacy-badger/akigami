@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Block bordered & padded snapshot 1`] = `
+<div
+  className="css-nczllq"
+>
+  <div
+    className="css-czr64w"
+  >
+    <h3
+      className="css-1r0b13k"
+    >
+      Заголовок
+    </h3>
+  </div>
+  <div
+    className="css-bqvltc"
+  >
+    lorem ipsum
+  </div>
+</div>
+`;
+
+exports[`Block bordered snapshot 1`] = `
+<div
+  className="css-nczllq"
+>
+  <div
+    className="css-czr64w"
+  >
+    <h3
+      className="css-1r0b13k"
+    >
+      Заголовок
+    </h3>
+  </div>
+  <div
+    className="css-bqvltc"
+  >
+    lorem ipsum
+  </div>
+</div>
+`;
+
+exports[`Block colored & padded & shadow snapshot 1`] = `
+<div
+  className="css-nczllq"
+>
+  <div
+    className="css-czr64w"
+  >
+    <h3
+      className="css-1r0b13k"
+    >
+      Заголовок
+    </h3>
+  </div>
+  <div
+    className="css-bqvltc"
+  >
+    lorem ipsum
+  </div>
+</div>
+`;
+
+exports[`Block colored & padded snapshot 1`] = `
+<div
+  className="css-nczllq"
+>
+  <div
+    className="css-czr64w"
+  >
+    <h3
+      className="css-1r0b13k"
+    >
+      Заголовок
+    </h3>
+  </div>
+  <div
+    className="css-bqvltc"
+  >
+    lorem ipsum
+  </div>
+</div>
+`;
+
+exports[`Block no title snapshot 1`] = `
+<div
+  className="css-nczllq"
+>
+  <div
+    className="css-czr64w"
+  >
+    <h3
+      className="css-1r0b13k"
+    >
+      Заголовок
+    </h3>
+  </div>
+  <div
+    className="css-bqvltc"
+  >
+    lorem ipsum
+  </div>
+</div>
+`;
+
+exports[`Block with title snapshot 1`] = `
+<div
+  className="css-nczllq"
+>
+  <div
+    className="css-czr64w"
+  >
+    <h3
+      className="css-1r0b13k"
+    >
+      Заголовок
+    </h3>
+  </div>
+  <div
+    className="css-bqvltc"
+  >
+    lorem ipsum
+  </div>
+</div>
+`;
