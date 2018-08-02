@@ -1307,6 +1307,10 @@ babel-core@^6.0.0, babel-core@^6.26.0, babel-core@^6.26.3:
     slash "^1.0.0"
     source-map "^0.5.7"
 
+babel-core@^7.0.0-0:
+  version "7.0.0-bridge.0"
+  resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-7.0.0-bridge.0.tgz#95a492ddd90f9b4e9a4a1da14eb335b87b634ece"
+
 babel-eslint@8.2.3:
   version "8.2.3"
   resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-8.2.3.tgz#1a2e6681cc9bc4473c32899e59915e19cd6733cf"
@@ -7826,6 +7830,15 @@ react-cosmos-state-proxy@^4.6.1:
     lodash.omit "^4.5.0"
     react-cosmos-shared "^4.6.1"
 
+react-cosmos-test@^4.6.4:
+  version "4.6.4"
+  resolved "https://registry.yarnpkg.com/react-cosmos-test/-/react-cosmos-test-4.6.4.tgz#cdaff3fb94506de91fb856380821a9cd46a3fcac"
+  dependencies:
+    react-cosmos-config "^4.6.1"
+    react-cosmos-loader "^4.6.4"
+    react-cosmos-shared "^4.6.1"
+    traverse "^0.6.6"
+
 react-cosmos-voyager2@^4.6.4:
   version "4.6.4"
   resolved "https://registry.yarnpkg.com/react-cosmos-voyager2/-/react-cosmos-voyager2-4.6.4.tgz#c0bcbd665ed5ba7390d9edae366c6c04790ffa6f"
@@ -7961,7 +7974,7 @@ react-input-autosize@^2.1.2:
   dependencies:
     prop-types "^15.5.8"
 
-react-is@^16.4.1:
+react-is@^16.4.1, react-is@^16.4.2:
   version "16.4.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.4.2.tgz#84891b56c2b6d9efdee577cc83501dfc5ecead88"
 
@@ -8039,6 +8052,15 @@ react-slick@0.23.1:
     json2mq "^0.2.0"
     lodash.debounce "^4.0.8"
     resize-observer-polyfill "^1.5.0"
+
+react-test-renderer@^16.4.2:
+  version "16.4.2"
+  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.4.2.tgz#4e03eca9359bb3210d4373f7547d1364218ef74e"
+  dependencies:
+    fbjs "^0.8.16"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
+    react-is "^16.4.2"
 
 react-textarea-autosize@^6.1.0:
   version "6.1.0"

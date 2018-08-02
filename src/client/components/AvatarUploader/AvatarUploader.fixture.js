@@ -1,9 +1,4 @@
-import random from 'lodash/random';
 import AvatarUploader from './AvatarUploader';
-
-const user = () => ({
-  avatar: `https://randomuser.me/api/portraits/men/${random(99)}.jpg`,
-});
 
 export default [
   {
@@ -18,7 +13,7 @@ export default [
     name: 'with avatar',
     props: {
       size: 100,
-      avatar: user().avatar,
+      avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
     },
   },
 ];

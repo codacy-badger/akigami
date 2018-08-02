@@ -18,6 +18,15 @@ module.exports = {
       },
     ],
     ['@babel/plugin-proposal-class-properties', { loose: true }],
-    'emotion',
   ],
+  env: {
+    production: {
+      plugins: [['emotion', { hoist: true }]],
+    },
+    development: {
+      plugins: [
+        ['emotion', { sourceMap: true, autoLabel: true }],
+      ],
+    },
+  },
 };

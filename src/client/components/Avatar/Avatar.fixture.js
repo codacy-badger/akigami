@@ -1,16 +1,11 @@
-import random from 'lodash/random';
 import Avatar from './Avatar';
-
-const user = () => ({
-  avatar: `https://randomuser.me/api/portraits/men/${random(99)}.jpg`,
-});
 
 export default [
   {
     component: Avatar,
     name: 'small',
     props: {
-      src: user().avatar,
+      src: 'https://randomuser.me/api/portraits/men/1.jpg',
       size: 24,
     },
   },
@@ -18,7 +13,7 @@ export default [
     component: Avatar,
     name: 'normal',
     props: {
-      src: user().avatar,
+      src: 'https://randomuser.me/api/portraits/men/1.jpg',
       size: 40,
     },
   },
@@ -26,7 +21,7 @@ export default [
     component: Avatar,
     name: 'large',
     props: {
-      src: user().avatar,
+      src: 'https://randomuser.me/api/portraits/men/1.jpg',
       size: 100,
     },
   },
