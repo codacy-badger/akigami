@@ -1,12 +1,10 @@
 {
   "name": "akigami",
-  "version": "0.1.0",
-  "description": "Anime & Manga social network",
+  "license": "OSL-3.0",
+  "private": true,
   "main": "tools/run.js",
-  "repository": "https://yukioru_k@bitbucket.org/akg-team/akigami.git",
-  "author": "Yukioru <obt195@gmail.com>",
-  "license": "MIT",
   "scripts": {
+    "test": "jest",
     "start": "concurrently \"yarn run client\" \"yarn run server\"",
     "server": "nodemon --ignore 'public' tools/run",
     "client": "node_modules/.bin/webpack --watch",
