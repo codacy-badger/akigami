@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const config = require('config');
+const babelConfig = require('./babelrc');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 // const PreloadWebpackPlugin = require('preload-webpack-plugin');
@@ -193,27 +194,7 @@ module.exports = () => {
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
-            options: {
-              presets: [
-                [
-                  '@babel/preset-stage-0',
-                  {
-                    decoratorsLegacy: true,
-                  },
-                ],
-                '@babel/preset-react',
-              ],
-              plugins: [
-                [
-                  '@babel/plugin-proposal-decorators',
-                  {
-                    legacy: true,
-                  },
-                ],
-                ['@babel/plugin-proposal-class-properties', { loose: true }],
-                'emotion',
-              ],
-            },
+            options: babelConfig,
           },
         },
       ],

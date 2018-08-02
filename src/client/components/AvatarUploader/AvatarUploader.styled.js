@@ -20,13 +20,13 @@ export const Replacer = styled('button')`
   height: calc(100% - 4px);
   border-radius: 100px;
   border: none;
+  cursor: pointer;
   background-color: rgba(213, 67, 67, 0.4);
   transition: background-color 0.2s ease;
   will-change: background-color;
   color: white;
   font-size: 12px;
-  padding: 4px;
-  width: calc(100% - 4px);
+  padding: 12px;
 
   &:hover {
     background-color: rgba(213, 67, 67, 1);
@@ -59,5 +59,9 @@ export const Icon = styled(I)`
 
 export const Title = styled('p')`
   margin: 0;
+  padding: 12px;
   font-size: 12px;
+  font-family: 'Proxima Nova', sans-serif;
+  text-align: center;
+  margin-bottom: -14px;
 `;

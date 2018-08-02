@@ -34,6 +34,7 @@ export const Header = styled('div')`
 export const Title = styled('h3')`
   margin: 0;
   font-weight: bold;
+  font-family: 'Proxima Nova', sans-serif;
 
   &:after {
     content: '';
@@ -58,4 +59,5 @@ export const Content = styled('div')`
   display: flex;
   flex-wrap: wrap;
   flex-direction: ${p => (p.flex ? 'row' : 'column')};
+  font-family: 'Proxima Nova', sans-serif;
 `;

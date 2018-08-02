@@ -9,7 +9,9 @@
     "server": "nodemon --ignore 'public' tools/run",
     "client": "node_modules/.bin/webpack --watch",
     "defaults": "webpack-defaults",
-    "webpack-defaults": "webpack-defaults"
+    "webpack-defaults": "webpack-defaults",
+    "cosmos": "cosmos",
+    "cosmos:export": "cosmos-export"
   },
   "dependencies": {
     "bluebird": "^3.5.0",
@@ -106,6 +108,8 @@
     "eslint-plugin-react": "^7.8.2",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
+    "html-webpack-include-assets-plugin": "^1.0.4",
+    "html-webpack-plugin": "^3.2.0",
     "jest": "^23.4.2",
     "nodemon": "^1.17.5",
     "postcss-color-function": "4.0.1",
@@ -114,6 +118,7 @@
     "postcss-nested": "^3.0.0",
     "postcss-simple-vars": "4.1.0",
     "preload-webpack-plugin": "^2.3.0",
+    "react-cosmos": "^4.6.4",
     "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.10.2",

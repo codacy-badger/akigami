@@ -22,9 +22,6 @@ class AvatarUploader extends PureComponent {
       avatar: props.avatar,
     };
   }
-  state = {
-    avatar: null,
-  };
   onDrop = files => {
     this.setState({ avatar: files[0] });
   };
@@ -38,7 +35,7 @@ class AvatarUploader extends PureComponent {
       return (
         <Wrapper size={size} className={className} style={style}>
           <Replacer onClick={this.clearFiles}>Выбрать другой</Replacer>
-          <Avatar size={size} src={avatar.preview || avatar} />
+          <Avatar size={size + 4} src={avatar.preview || avatar} />
         </Wrapper>
       );
     }

@@ -22,6 +22,9 @@ export const Item = styled(Button)`
   display: flex;
   align-items: center;
   color: #666;
+  border: 1px solid;
+  background-color: white;
+
 
   &:not(:last-child) {
     margin-bottom: 8px;
@@ -29,7 +32,6 @@ export const Item = styled(Button)`
 
   &:hover {
     border-color: #ddd;
-    background-color: white;
     color: inherit;
   }
 
