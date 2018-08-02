@@ -13,15 +13,19 @@ const sessionAsync = Promise.promisify(passport.session());
 const io = require('socket.io')();
 
 io.use(async (socket, next) => {
-    try {
-        const session = await redisStore.getAsync(cookieParser.signedCookie(cookie.parse(socket.request.headers.cookie).sid, config.get('sessionSecret')));
-        socket.request.session = session;
-        await initializeAsync(socket.request, {});
-        await sessionAsync(socket.request, {});
-        next(null, socket.request.user && true || false);
-    } catch (e) { };
+  try {
+    const session = await redisStore.getAsync(cookieParser.signedCookie(
+      cookie.parse(socket.request.headers.cookie).sid,
+      config.get('sessionSecret'),
+    ));
+    socket.request.session = session;
+    await initializeAsync(socket.request, {});
+    await sessionAsync(socket.request, {});
+    next(null, (socket.request.user && true) || false);
+  } catch (e) {
+    console.log(e);
+  }
 });
-
 
 io.on('connection', connect);
 

@@ -1,38 +1,44 @@
 {
-    "parser": "babel-eslint",
-    "extends": "airbnb",
-    "rules": {
-        "indent": [2, 4],
-        "arrow-parens": 0,
-        "react/jsx-indent": [2, 4],
-        "react/jsx-indent-props": [2, 4],
-        "global-require": 0,
-        "import/no-dynamic-require": 0,
-        "prefer-rest-params": 0,
-        "import/no-extraneous-dependencies": 0,
-        "react/forbid-prop-types": 0,
-        "react/prefer-stateless-function": 0,
-        "react/jsx-curly-brace-presence": 0,
-        "jsx-a11y/href-no-hash": 0,
-        "jsx-a11y/no-static-element-interactions": 0,
-        "jsx-a11y/anchor-has-content": 0,
-        "no-unused-vars": [1, {
-            "argsIgnorePattern": "[iI]gnored"
-        }],
-        "no-underscore-dangle": [2, {
-            "allow": ["_id", "_d"]
-        }],
-        "object-curly-newline": 0,
-        "max-len": 0
-    },
-    "globals": {
-        "document": true,
-        "module": true,
-        "alert": true,
-        "history": true,
-        "location": true,
-        "fetch": true,
-        "window": true,
-        "localStorage": true
-    }
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "rules": {
+    "indent": [2, 2],
+    "arrow-parens": 0,
+    "react/jsx-indent": [2, 2],
+    "react/jsx-indent-props": [2, 2],
+    "global-require": 0,
+    "import/no-dynamic-require": 0,
+    "prefer-rest-params": 0,
+    "import/no-extraneous-dependencies": 0,
+    "react/forbid-prop-types": 0,
+    "react/prefer-stateless-function": 0,
+    "react/jsx-curly-brace-presence": 0,
+    "jsx-a11y/href-no-hash": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "jsx-a11y/anchor-has-content": 0,
+    "class-methods-use-this": 0,
+    "no-unused-vars": [
+      1,
+      {
+        "argsIgnorePattern": "[iI]gnored"
+      }
+    ],
+    "no-underscore-dangle": [
+      2,
+      {
+        "allow": ["_id", "_d"]
+      }
+    ],
+    "object-curly-newline": 0,
+    "max-len": 0
+  },
+  "globals": {
+    "document": true,
+    "module": true,
+    "alert": true,
+    "fetch": true,
+    "window": true,
+    "test": true,
+    "expect": true
+  }
 }

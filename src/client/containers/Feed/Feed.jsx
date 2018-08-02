@@ -11,38 +11,36 @@ import Wrapper from './Feed.styled';
 @inject(({ app }) => ({ app }))
 @observer
 class Feed extends Component {
-    static defaultProps = {
-        userId: null,
-    }
-    static propTypes = {
-        app: PropTypes.object.isRequired,
-        userId: PropTypes.number,
-    }
-    constructor(props) {
-        super(props);
-        this.store = new Store(props.app, {
-            type: props.userId ? 'local' : 'global',
-            userId: props.userId,
-        });
-    }
-    componentDidMount() {
-        this.store.getFeed();
-        this.store.addListener();
-    }
-    componentWillUnmount() {
-        this.store.removeListener();
-    }
-    render() {
-        return (
-            <Wrapper>
-                {this.store.isOwner && <PostCreator />}
-                {this.store.list.map(post => <Post key={post.id} post={post} />)}
-                {this.store.loading && (
-                    <Loading />
-                )}
-            </Wrapper>
-        );
-    }
+  static propTypes = {
+    app: PropTypes.object.isRequired,
+    userId: PropTypes.number,
+  };
+  static defaultProps = {
+    userId: null,
+  };
+  constructor(props) {
+    super(props);
+    this.store = new Store(props.app, {
+      type: props.userId ? 'local' : 'global',
+      userId: props.userId,
+    });
+  }
+  componentDidMount() {
+    this.store.getFeed();
+    this.store.addListener();
+  }
+  componentWillUnmount() {
+    this.store.removeListener();
+  }
+  render() {
+    return (
+      <Wrapper>
+        {this.store.isOwner && <PostCreator />}
+        {this.store.list.map(post => <Post key={post.id} post={post} />)}
+        {this.store.loading && <Loading />}
+      </Wrapper>
+    );
+  }
 }
 
 export default Feed;

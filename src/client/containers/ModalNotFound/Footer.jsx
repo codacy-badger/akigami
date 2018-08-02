@@ -7,23 +7,21 @@ import Button from 'react-bootstrap/lib/Button';
 @inject('app')
 @observer
 export default class Footer extends Component {
-    static propTypes = {
-        id: PropTypes.string.isRequired,
-        app: PropTypes.object.isRequired,
-    }
-    constructor(props) {
-        super(props);
-        this.timer = setTimeout(this.handleClose, 2000);
-    }
-    componentWillUnmount() {
-        clearTimeout(this.timer);
-    }
-    handleClose = () => {
-        this.props.app.modal.close(this.props.id);
-    }
-    render() {
-        return (
-            <Button onClick={this.handleClose}>Close</Button>
-        );
-    }
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    app: PropTypes.object.isRequired,
+  };
+  constructor(props) {
+    super(props);
+    this.timer = setTimeout(this.handleClose, 2000);
+  }
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+  }
+  handleClose = () => {
+    this.props.app.modal.close(this.props.id);
+  };
+  render() {
+    return <Button onClick={this.handleClose}>Close</Button>;
+  }
 }

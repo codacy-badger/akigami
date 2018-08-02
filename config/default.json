@@ -1,33 +1,33 @@
 {
-    "server": {
-        "host": "localhost",
-        "port": 3000
-    },
-    "database": {
-        "host": "", // host:port/dbName
-        "options": {
-            "user": "",
-            "pass": "", // pass is obyazatelno
-            "autoIndex": false,
-            "autoReconnect": true,
-            "useMongoClient": true
-        }
-    },
-    "redis": {
-        "host": "127.0.0.1",
-        "port": 6379,
-        "pass": ""
-    },
-    "email": {
-        "noreply": {
-            "email": "",
-            "password": ""
-        }
-    },
-    "cdn": {
-        "token": "",
-        "address": ""
-    },
-    "sessionSecret": "",
-    "enviroment": "default"
+  "server": {
+    "host": "localhost",
+    "port": 3000
+  },
+  "database": {
+    "host": "",
+    "options": {
+      "user": "",
+      "pass": "",
+      "autoIndex": false,
+      "autoReconnect": true,
+      "useMongoClient": true
+    }
+  },
+  "redis": {
+    "host": "127.0.0.1",
+    "port": 6379,
+    "pass": ""
+  },
+  "email": {
+    "noreply": {
+      "email": "",
+      "password": ""
+    }
+  },
+  "cdn": {
+    "token": "",
+    "address": ""
+  },
+  "sessionSecret": "",
+  "enviroment": "default"
 }

@@ -11,52 +11,50 @@ import Wrapper from './Comments.styled';
 @inject(({ app }) => ({ app }))
 @observer
 class Comments extends Component {
-    static defaultProps = {
-        postId: null,
-    }
-    static propTypes = {
-        app: PropTypes.object.isRequired,
-        postId: PropTypes.number,
-    }
-    constructor(props) {
-        super(props);
-        this.store = new Store(props.app, {
-            postId: props.postId,
-        });
-    }
-    componentDidMount() {
-        this.store.getComments();
-        this.store.addListener();
-    }
-    componentWillUnmount() {
-        this.store.removeListener();
-    }
-    handleReply = (comment) => {
-        this.store.changeRepliedState(comment);
-    }
-    render() {
-        return (
-            <Wrapper>
-                {this.store.list.map(comment => (
-                    <Comment
-                        key={comment.id}
-                        comment={comment}
-                        // replies={this.store.getRepliesOnComment(comment.id)}
-                        // onReply={this.handleReply}
-                    />
-                ))}
-                {this.store.loading && (
-                    <Loading />
-                )}
-                {this.props.app.user.isAuth && (
-                    <CommentCreator
-                        post={this.props.postId}
-                        reply={this.store.repliedComment}
-                    />
-                )}
-            </Wrapper>
-        );
-    }
+  static propTypes = {
+    app: PropTypes.object.isRequired,
+    postId: PropTypes.number,
+  };
+  static defaultProps = {
+    postId: null,
+  };
+  constructor(props) {
+    super(props);
+    this.store = new Store(props.app, {
+      postId: props.postId,
+    });
+  }
+  componentDidMount() {
+    this.store.getComments();
+    this.store.addListener();
+  }
+  componentWillUnmount() {
+    this.store.removeListener();
+  }
+  handleReply = comment => {
+    this.store.changeRepliedState(comment);
+  };
+  render() {
+    return (
+      <Wrapper>
+        {this.store.list.map(comment => (
+          <Comment
+            key={comment.id}
+            comment={comment}
+            // replies={this.store.getRepliesOnComment(comment.id)}
+            // onReply={this.handleReply}
+          />
+        ))}
+        {this.store.loading && <Loading />}
+        {this.props.app.user.isAuth && (
+          <CommentCreator
+            post={this.props.postId}
+            reply={this.store.repliedComment}
+          />
+        )}
+      </Wrapper>
+    );
+  }
 }
 
 export default Comments;

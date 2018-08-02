@@ -5,156 +5,165 @@ import Icon from '../Icon';
 import EntityModal from '../EntityModal';
 
 import {
-    Block,
-    Overlay,
-    Poster,
-    Image,
-    Info,
-    Title,
-    Genres,
-    Genre,
-    Studio,
-    Meta,
-    ModalTrigger,
-    MetaItem,
-    Button,
-    Label,
+  Block,
+  Overlay,
+  Poster,
+  Image,
+  Info,
+  Title,
+  Genres,
+  Genre,
+  Studio,
+  Meta,
+  ModalTrigger,
+  MetaItem,
+  Button,
+  Label,
 } from './Entity.styled';
 
 @inject('app')
 @observer
 class Entity extends Component {
-    static defaultProps = {
-        status: null,
+  static typeConverter(type) {
+    switch (type) {
+    case 'tv':
+      return 'TV сериал';
+    case 'movie':
+      return 'Фильм';
+    case 'ova':
+      return 'OVA';
+    case 'ona':
+      return 'ONA';
+    case 'special':
+      return 'Спэшл';
+    default:
+      return '';
     }
-    static propTypes = {
-        type: PropTypes.oneOf(['anime', 'manga', 'novel']).isRequired,
-        status: PropTypes.oneOf([
-            'planned',
-            'watching',
-            'onhold',
-            'completed',
-            'dropped',
-        ]),
-        entity: PropTypes.object.isRequired,
-        app: PropTypes.object.isRequired,
+  }
+  static statusConverter(status) {
+    switch (status) {
+    case 'planned':
+      return {
+        color: '#a2a2a2',
+        title: 'В планах',
+      };
+    case 'watching':
+      return {
+        color: '#6fbb1c',
+        title: 'Смотрю',
+      };
+    case 'onhold':
+      return {
+        color: '#e6b11a',
+        title: 'Отложено',
+      };
+    case 'completed':
+      return {
+        color: '#1fbbbb',
+        title: 'Завершено',
+      };
+    case 'dropped':
+      return {
+        color: '#d54343',
+        title: 'Брошено',
+      };
+    default:
+      return {
+        color: '#2d2d2d',
+        title: 'Неизвестно',
+      };
     }
-    static typeConverter(type) {
-        switch (type) {
-        case 'tv': return 'TV сериал';
-        case 'movie': return 'Фильм';
-        case 'ova': return 'OVA';
-        case 'ona': return 'ONA';
-        case 'special': return 'Спэшл';
-        default: return '';
-        }
-    }
-    static statusConverter(status) {
-        switch (status) {
-        case 'planned': return {
-            color: '#a2a2a2',
-            title: 'В планах',
-        };
-        case 'watching': return {
-            color: '#6fbb1c',
-            title: 'Смотрю',
-        };
-        case 'onhold': return {
-            color: '#e6b11a',
-            title: 'Отложено',
-        };
-        case 'completed': return {
-            color: '#1fbbbb',
-            title: 'Завершено',
-        };
-        case 'dropped': return {
-            color: '#d54343',
-            title: 'Брошено',
-        };
-        default: return {
-            color: '#2d2d2d',
-            title: 'Неизвестно',
-        };
-        }
-    }
-    showModal = () => {
-        const {
-            app,
-            type,
-            entity,
-            status,
-        } = this.props;
-        app.modal.show({
-            content: {
-                component: EntityModal,
-            },
-            props: {
-                id: entity.id,
-                type,
-                entity,
-                status,
-            },
-        });
-    }
-    renderOverlay = () => {
-        const { type, entity, status } = this.props;
-        return (
-            <Overlay>
-                <div><ModalTrigger onClick={this.showModal} /></div>
-                <Button><Icon type={`playlist-${status ? 'check' : 'plus'}`} /></Button>
-                <Meta>
-                    {entity.type && (
-                        <MetaItem>
-                            {`${this.constructor.typeConverter(entity.type)},`}
-                        </MetaItem>
-                    )}
-                    {(entity.airing && entity.airing.start) && (
-                        <MetaItem>
-                            {new Date(entity.airing.start).getFullYear()}
-                        </MetaItem>
-                    )}
-                </Meta>
-                {(entity.genres && entity.genres.length > 0) && (
-                    <Genres>
-                        {entity.genres.slice(0, 3).map(item => (
-                            <Genre
-                                key={item.id}
-                                href={`/explore/${type}?genres=${item.id}`}
-                            >
-                                {item.title}
-                            </Genre>
-                        ))}
-                    </Genres>
-                )}
-            </Overlay>
-        );
-    }
-    render() {
-        const { type, entity, status } = this.props;
-        const href = `/${type}/${entity.id}`;
-        const label = this.constructor.statusConverter(status);
-        return (
-            <Block>
-                <Poster>
-                    {status && (
-                        <Label color={label.color}>{label.title}</Label>
-                    )}
-                    <Image src={entity.poster.medium} />
-                    {this.renderOverlay()}
-                </Poster>
-                <Info>
-                    <Title href={href}>
-                        {entity.title.romaji || 'Неизвестное название'}
-                    </Title>
-                    {entity.studio && (
-                        <Studio href={`/studio/${entity.studio.id}`}>
-                            {entity.studio.title}
-                        </Studio>
-                    )}
-                </Info>
-            </Block>
-        );
-    }
+  }
+  static propTypes = {
+    type: PropTypes.oneOf(['anime', 'manga', 'novel']).isRequired,
+    status: PropTypes.oneOf([
+      'planned',
+      'watching',
+      'onhold',
+      'completed',
+      'dropped',
+    ]),
+    entity: PropTypes.object.isRequired,
+    app: PropTypes.object.isRequired,
+  };
+  static defaultProps = {
+    status: null,
+  };
+  showModal = () => {
+    const { app, type, entity, status } = this.props;
+    app.modal.show({
+      content: {
+        component: EntityModal,
+      },
+      props: {
+        id: entity.id,
+        type,
+        entity,
+        status,
+      },
+    });
+  };
+  renderOverlay = () => {
+    const { type, entity, status } = this.props;
+    return (
+      <Overlay>
+        <div>
+          <ModalTrigger onClick={this.showModal} />
+        </div>
+        <Button>
+          <Icon type={`playlist-${status ? 'check' : 'plus'}`} />
+        </Button>
+        <Meta>
+          {entity.type && (
+            <MetaItem>
+              {`${this.constructor.typeConverter(entity.type)},`}
+            </MetaItem>
+          )}
+          {entity.airing &&
+            entity.airing.start && (
+            <MetaItem>{new Date(entity.airing.start).getFullYear()}</MetaItem>
+          )}
+        </Meta>
+        {entity.genres &&
+          entity.genres.length > 0 && (
+          <Genres>
+            {entity.genres.slice(0, 3).map(item => (
+              <Genre
+                key={item.id}
+                href={`/explore/${type}?genres=${item.id}`}
+              >
+                {item.title}
+              </Genre>
+            ))}
+          </Genres>
+        )}
+      </Overlay>
+    );
+  };
+  render() {
+    const { type, entity, status } = this.props;
+    const href = `/${type}/${entity.id}`;
+    const label = this.constructor.statusConverter(status);
+    return (
+      <Block>
+        <Poster>
+          {status && <Label color={label.color}>{label.title}</Label>}
+          <Image src={entity.poster.medium} />
+          {this.renderOverlay()}
+        </Poster>
+        <Info>
+          <Title href={href}>
+            {entity.title.romaji || 'Неизвестное название'}
+          </Title>
+          {entity.studio && (
+            <Studio href={`/studio/${entity.studio.id}`}>
+              {entity.studio.title}
+            </Studio>
+          )}
+        </Info>
+      </Block>
+    );
+  }
 }
 
 export default Entity;

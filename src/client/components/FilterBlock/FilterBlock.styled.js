@@ -1,27 +1,27 @@
 import styled from 'react-emotion';
 
 export const Block = styled('div')`
-    margin-bottom: 32px;
+  margin-bottom: 32px;
 `;
 
 export const Title = styled('h5')`
-    margin-top: 0;
-    margin-bottom: 12px;
-    font-size: 13px;
-    font-weight: 400;
-    text-transform: uppercase;
-    color: white;
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 13px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: white;
 `;
 
 export const Content = styled('div')`
-    position: relative;
+  position: relative;
 `;
 
 export const Line = styled('div')`
-    display: flex;
+  display: flex;
 `;
 
 export const Action = styled('div')`
-    margin-left: auto;
-    margin-top: -5px;
+  margin-left: auto;
+  margin-top: -5px;
 `;
