@@ -15,13 +15,22 @@ class Post extends MongooseClass {
         default: Date.now,
     }
 
+    deleted = {
+        deleted: {
+            type: Boolean,
+        },
+        time: {
+            type: Date,
+        },
+    }
+
     async populateUser() {
         const user = await this.model('User').findById(this.user);
         this.user = user;
     }
 
     static async getByUserId(user) {
-        const posts = await this.model('Post').find({ user }).sort({ createdAt: -1 });
+        const posts = await this.model('Post').find({ user, deleted: null }).sort({ createdAt: -1 });
         await Promise.all(posts.map(async (post) => {
             await post.populateUser();
         }));

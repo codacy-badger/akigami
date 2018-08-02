@@ -13,6 +13,7 @@ class Post {
 
     @observable edit = false;
     @observable backup = null;
+    @observable deleted = false;
 
     constructor(app, data) {
         this.app = app;
@@ -69,6 +70,11 @@ class Post {
             });
         });
         this.clearBackup();
+    }
+
+    remove = () => {
+        this.deleted = true;
+        socket.emit('feed:remove', this.id);
     }
 }
 

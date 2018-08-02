@@ -195,8 +195,12 @@ module.exports = () => {
                     use: {
                         loader: 'babel-loader',
                         options: {
-                            presets: ['@babel/preset-stage-0', '@babel/preset-react'],
-                            plugins: ['@babel/plugin-proposal-decorators', ['@babel/plugin-proposal-class-properties', { loose: true }], 'emotion'],
+                            presets: [['@babel/preset-stage-0', {
+                                decoratorsLegacy: true,
+                            }], '@babel/preset-react'],
+                            plugins: [['@babel/plugin-proposal-decorators', {
+                                legacy: true,
+                            }], ['@babel/plugin-proposal-class-properties', { loose: true }], 'emotion'],
                         },
                     },
                 },

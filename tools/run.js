@@ -8,8 +8,12 @@ process.on('unhandledRejection', (reason, promiseIgnored) => {
     // See Promise.onPossiblyUnhandledRejection for parameter documentation
 });
 require('@babel/register').default({
-    presets: ['@babel/preset-stage-0', '@babel/preset-react'],
-    plugins: ['dynamic-import-node', '@babel/plugin-transform-modules-commonjs', '@babel/plugin-proposal-decorators', ['@babel/plugin-proposal-class-properties', { loose: true }], 'emotion'],
+    presets: [['@babel/preset-stage-0', {
+        decoratorsLegacy: true,
+    }], '@babel/preset-react'],
+    plugins: ['dynamic-import-node', '@babel/plugin-transform-modules-commonjs', ['@babel/plugin-proposal-decorators', {
+        legacy: true,
+    }], ['@babel/plugin-proposal-class-properties', { loose: true }], 'emotion'],
 });
 require('@babel/polyfill');
 

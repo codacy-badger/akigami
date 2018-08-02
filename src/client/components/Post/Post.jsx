@@ -46,6 +46,9 @@ class Post extends Component {
         if (key === 'edit') {
             this.startEditPost();
         }
+        if (key === 'delete') {
+            this.props.post.remove();
+        }
     }
     startEditPost = () => {
         const { post } = this.props;
@@ -62,18 +65,18 @@ class Post extends Component {
     }
     switchNamespace = (namespace) => {
         switch (namespace) {
-        case 'followers': return {
-            icon: 'account-star',
-            text: 'Пост виден подписчикам',
-        };
-        case 'clubs': return {
-            icon: 'hexagon-multiple',
-            text: 'Пост виден участникам клуба',
-        };
-        default: return {
-            icon: 'earth',
-            text: 'Пост виден всем на сайте',
-        };
+            case 'followers': return {
+                icon: 'account-star',
+                text: 'Пост виден подписчикам',
+            };
+            case 'clubs': return {
+                icon: 'hexagon-multiple',
+                text: 'Пост виден участникам клуба',
+            };
+            default: return {
+                icon: 'earth',
+                text: 'Пост виден всем на сайте',
+            };
         }
     }
     renderHeader() {
@@ -182,6 +185,12 @@ class Post extends Component {
     }
     render() {
         const { post, user } = this.props;
+        if (post.deleted) {
+            return (
+                <Element>
+                    <div>Пост удалён. Восстановить?</div>
+                </Element>);
+        }
         return (
             <Element>
                 {this.renderHeader()}

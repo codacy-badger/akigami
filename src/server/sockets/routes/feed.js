@@ -17,7 +17,7 @@ export default (socket) => {
 
         io.sockets.emit('feed:getOnce', post);
         io.sockets.emit(`feed:getOnceUser-${socket.request.user.id}`, post);
-        callback?.();
+        callback ?.();
     });
 
     socket.on('feed:getByUser', async (data, callback) => {
@@ -26,7 +26,7 @@ export default (socket) => {
     });
 
     socket.on('feed:get', async (data, callback) => {
-        const posts = await Post.find({}).sort({ createdAt: -1 });
+        const posts = await Post.find({ deleted: null }).sort({ createdAt: -1 });
         await Promise.all(posts.map(async (post) => {
             await post.populateUser();
         }));
@@ -46,6 +46,22 @@ export default (socket) => {
 
         await post.update(editedPost);
 
-        callback?.();
+        callback ?.();
+    });
+
+    socket.on('feed:remove', async (id) => {
+        await socket.utils.check('user');
+        const post = await Post.findOne({ id });
+        if (!post) throw new Error('Post not found');
+        if (post.user !== socket.request.user.id) throw new Error('Removing not permitted');
+
+        const deletedPost = {
+            deleted: {
+                deleted: true,
+                time: Date.now(),
+            },
+        }
+
+        await post.update(deletedPost);
     });
 };
