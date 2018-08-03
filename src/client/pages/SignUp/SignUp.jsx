@@ -17,7 +17,7 @@ import SignUpStore from './SignUp.store';
 import AvatarUploader from '../../components/AvatarUploader';
 import GenderChanger from '../../components/GenderChanger';
 import Wrapper from '../../components/Wrapper';
-import { Card, Input, Group, Submit, Help, Title } from '../Login/Auth.styled';
+import { Card, Input, Group, Submit, Help, Title } from '../Login/Login.styled';
 
 function FieldGroup({ id, label, help, ...props }) {
   return (
