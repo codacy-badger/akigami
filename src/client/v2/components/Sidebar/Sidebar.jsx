@@ -9,7 +9,7 @@ import {
   ListItemText,
 } from 'rmwc/List';
 
-import { Wrapper, ThemedDrawer, ThemedList } from './Sidebar.styled';
+import { Wrapper, ThemedDrawer, ThemedList, ThemedListItemGraphic } from './Sidebar.styled';
 
 class Sidebar extends PureComponent {
   static propTypes = {
@@ -28,14 +28,16 @@ class Sidebar extends PureComponent {
           </DrawerHeader>
           <ThemedList>
             <ListItem>
-              <ListItemText>Cookies</ListItemText>
+              <ThemedListItemGraphic>home</ThemedListItemGraphic>
+              <ListItemText>Главная</ListItemText>
             </ListItem>
             <ListItem>
-              <ListItemText>Pizza</ListItemText>
+              <ThemedListItemGraphic>view_module</ThemedListItemGraphic>
+              <ListItemText>Обзор</ListItemText>
             </ListItem>
-            <ListItem>
+            {/* <ListItem>
               <ListItemText>Icecream</ListItemText>
-            </ListItem>
+            </ListItem> */}
           </ThemedList>
         </ThemedDrawer>
       </Wrapper>

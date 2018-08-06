@@ -5,4 +5,5 @@ export const ThemedTopAppBar = styled(TopAppBar)`
   position: sticky;
   background-color: ${p => p.theme.colors.background};
   color: ${p => p.theme.colors.textDark};
+  top: 0;
 `;

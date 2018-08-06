@@ -36,7 +36,7 @@ class App extends Component {
           }}
         />
         <Sidebar open={openDrawer} />
-        <Content>
+        <Content openDrawer={openDrawer}>
           <Header onCollapse={this.handleCollapse} />
           {router.container}
         </Content>
