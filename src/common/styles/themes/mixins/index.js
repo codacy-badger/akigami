@@ -1,4 +1,4 @@
-function transitions(properties, timing = '0.15s', effect = 'ease-in-out') {
+function transitions(properties, timing = '0.3s', effect = 'ease-in-out') {
   let transitions = '';
   properties.split(' ').forEach((prop, index) => {
     let composing = `${prop} ${timing} ${effect}`;

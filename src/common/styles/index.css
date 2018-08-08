@@ -20,6 +20,9 @@
 
 :root {
   --mdc-theme-on-primary: var(--mdc-theme-text-primary-on-light);
+  --mdc-layout-grid-column-width-desktop: 67px;
+  --mdc-layout-grid-column-width-tablet: 67px;
+  --mdc-layout-grid-column-width-phone: 67px;
 }
 
 html, body, #root {

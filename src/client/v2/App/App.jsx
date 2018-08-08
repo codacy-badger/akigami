@@ -35,7 +35,7 @@ class App extends Component {
             this.notificationSystem = e;
           }}
         />
-        <Sidebar open={openDrawer} />
+        <Sidebar open={openDrawer} mini={false} />
         <Content openDrawer={openDrawer}>
           <Header onCollapse={this.handleCollapse} />
           {router.container}

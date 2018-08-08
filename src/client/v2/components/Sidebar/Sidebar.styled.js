@@ -8,6 +8,8 @@ export const Wrapper = styled('div')`
   flex-shrink: 0;
   position: fixed;
   height: 100%;
+  border-right: 1px solid #e4e4e4;
+  background-color: ${p => p.theme.colors.white};
   transform: ${p => (p.open ? 'translate3d(0, 0, 0)' : 'translate3d(-324px, 0, 0)')};
   ${p => p.theme.mixins.transitions('transform')}
   z-index: 10;
@@ -16,16 +18,23 @@ export const Wrapper = styled('div')`
 export const ThemedDrawer = styled(Drawer)`
   height: 100%;
   width: ${p => (p.mini ? 58 : 324)}px;
-  background-color: ${p => p.theme.colors.drawer} !important;
+  border-right: none !important;
+  background-color: ${p => p.theme.colors.dark} !important;
+  color: ${p => p.theme.colors.textWhite};
+
   ${p => p.theme.mixins.transitions('width')}
 `;
 
 export const ThemedDrawerHeader = styled(DrawerHeader)`
+  border-bottom: 1px solid ${p => p.theme.colors.darkBorder};
+
   &:before {
     padding-top: 64px !important;
   }
+
   > div {
     padding: 8px 12px !important;
+    align-items: center !important;
   }
 `;
 
@@ -36,8 +45,10 @@ export const ThemedElevation = styled(Elevation)`
 `;
 
 export const ThemedList = styled(DrawerContent)`
+  color: ${p => p.theme.colors.textWhite};
   padding-top: 64px;
 `;
 
 export const ThemedListItemGraphic = styled(ListItemGraphic)`
+  color: rgba(255, 255, 255, 0.8) !important;
 `;
