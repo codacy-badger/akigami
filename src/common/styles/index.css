@@ -16,7 +16,7 @@
 @import "includes/modals.css"; */
 
 @import "external/material-components-web.css";
-@import "external/materialdesignicons.css";
+@import "external/icon.css";
 
 :root {
   --mdc-theme-on-primary: var(--mdc-theme-text-primary-on-light);

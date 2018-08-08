@@ -4,7 +4,7 @@ import {
   TopAppBarRow,
   TopAppBarSection,
   TopAppBarNavigationIcon,
-  // TopAppBarActionItem,
+  TopAppBarActionItem,
   TopAppBarTitle,
 } from 'rmwc/TopAppBar';
 
@@ -31,7 +31,7 @@ class Header extends PureComponent {
                   use="menu"
                   onClick={onCollapse}
                 />
-                <TopAppBarTitle>Title</TopAppBarTitle>
+                <TopAppBarTitle>Главная</TopAppBarTitle>
               </TopAppBarSection>
               {/* <TopAppBarSection alignEnd>
                 <TopAppBarActionItem aria-label="Download" alt="Download">
