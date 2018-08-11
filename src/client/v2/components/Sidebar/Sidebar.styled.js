@@ -2,6 +2,15 @@ import styled from 'react-emotion';
 import { Drawer, DrawerHeader, DrawerContent } from 'rmwc/Drawer';
 import { ListItemGraphic } from 'rmwc/List';
 import { Elevation } from 'rmwc/Elevation';
+import { Scrollbars } from 'react-custom-scrollbars';
+
+export const Title = styled('span')`
+  font-weight: bold;
+  font-size: 20px;
+  padding-left: 18px;
+  letter-spacing: .6px;
+`;
+
 
 export const Wrapper = styled('div')`
   width: 324px;
@@ -33,10 +42,15 @@ export const ThemedDrawerHeader = styled(DrawerHeader)`
   }
 
   > div {
-    padding: 8px 12px !important;
+    padding: 8px 11px !important;
     align-items: center !important;
   }
 `;
+
+export const ThemedScrollbars = styled(Scrollbars)`
+  flex: 1;
+`;
+
 
 export const ThemedElevation = styled(Elevation)`
   height: 100%;

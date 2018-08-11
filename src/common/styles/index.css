@@ -15,6 +15,7 @@
 @import "includes/loading.css";
 @import "includes/modals.css"; */
 
+@import "external/tippy.css";
 @import "external/material-components-web.css";
 @import "external/icon.css";
 

@@ -16,6 +16,7 @@ class App extends Component {
   };
   state = {
     openDrawer: true,
+    miniDrawer: false,
   }
   componentDidMount() {
     if (this.notificationSystem) {
@@ -26,7 +27,7 @@ class App extends Component {
     this.setState({ openDrawer: !this.state.openDrawer });
   }
   render() {
-    const { openDrawer } = this.state;
+    const { openDrawer, miniDrawer } = this.state;
     const { router } = this.props.app;
     return (
       <Main>
@@ -35,10 +36,11 @@ class App extends Component {
             this.notificationSystem = e;
           }}
         />
-        <Sidebar open={openDrawer} mini={false} />
+        <Sidebar open={openDrawer} mini={miniDrawer} />
         <Content openDrawer={openDrawer}>
           <Header onCollapse={this.handleCollapse} />
           {router.container}
+          <button onClick={() => this.setState({ miniDrawer: !miniDrawer })}>mini</button>
         </Content>
       </Main>
     );
