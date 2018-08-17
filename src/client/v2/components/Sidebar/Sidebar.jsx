@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Tooltip } from 'react-tippy';
 
 import {
-  ListItem,
   ListItemText,
+  ListDivider,
 } from 'rmwc/List';
 
+import Tooltip from '../../../components/Tooltip';
 import Logo from '../Logo';
 
 import {
@@ -14,12 +14,45 @@ import {
   Wrapper,
   ThemedElevation,
   ThemedDrawer,
+  ThemedListItem,
   ThemedList,
   ThemedDrawerHeader,
   ThemedListItemGraphic,
   ThemedScrollbars,
 } from './Sidebar.styled';
 
+const menu = [
+  {
+    key: 'home',
+    title: 'Главная',
+    icon: 'home',
+  },
+  {
+    key: 'calendar',
+    title: 'Календарь',
+    icon: 'date_range',
+  },
+  {
+    key: 'explore',
+    title: 'Обзор',
+    icon: 'view_module',
+  },
+  {
+    key: 'news',
+    title: 'Новости',
+    icon: 'library_books',
+  },
+  {
+    key: 'radio',
+    title: 'Радио',
+    icon: 'radio',
+  },
+  {
+    key: 'clubs',
+    title: 'Клубы',
+    icon: 'group',
+  },
+];
 class Sidebar extends PureComponent {
   static propTypes = {
     open: PropTypes.bool,
@@ -29,13 +62,22 @@ class Sidebar extends PureComponent {
     open: true,
     mini: false,
   }
-  renderItem = (title, body) => {
+  renderItem = (item) => {
     const { mini } = this.props;
+    const body = (
+      <ThemedListItem key={item.key} selected={item.key === 'home'}>
+        <ThemedListItemGraphic>{item.icon}</ThemedListItemGraphic>
+        <ListItemText>{item.title}</ListItemText>
+      </ThemedListItem>
+    );
     if (!mini) return body;
     return (
       <Tooltip
-        title={title}
-        position="right"
+        key={item.key}
+        id={item.key}
+        overlay={item.title}
+        place="right"
+        effect="solid"
       >
         {body}
       </Tooltip>
@@ -45,67 +87,15 @@ class Sidebar extends PureComponent {
     const { open, mini } = this.props;
     return (
       <Wrapper open={open}>
-        <ThemedElevation z={mini ? 3 : 0} mini={mini}>
-          <ThemedDrawer permanent mini={mini}>
-            <ThemedDrawerHeader mini={mini}>
+        <ThemedElevation z={mini ? 3 : 0} mini={mini ? true : undefined}>
+          <ThemedDrawer permanent mini={mini ? true : undefined}>
+            <ThemedDrawerHeader mini={mini ? true : undefined}>
               <Logo /> <Title>Акигами</Title>
             </ThemedDrawerHeader>
             <ThemedScrollbars autoHide universal>
               <ThemedList>
-                {this.renderItem(
-                  'Главная',
-                  (
-                    <ListItem>
-                      <ThemedListItemGraphic>home</ThemedListItemGraphic>
-                      <ListItemText>Главная</ListItemText>
-                    </ListItem>
-                  ),
-                )}
-                {this.renderItem(
-                  'Календарь',
-                  (
-                    <ListItem>
-                      <ThemedListItemGraphic>date_range</ThemedListItemGraphic>
-                      <ListItemText>Календарь</ListItemText>
-                    </ListItem>
-                  ),
-                )}
-                {this.renderItem(
-                  'Обзор',
-                  (
-                    <ListItem>
-                      <ThemedListItemGraphic>view_module</ThemedListItemGraphic>
-                      <ListItemText>Обзор</ListItemText>
-                    </ListItem>
-                  ),
-                )}
-                {this.renderItem(
-                  'Новости',
-                  (
-                    <ListItem>
-                      <ThemedListItemGraphic>library_books</ThemedListItemGraphic>
-                      <ListItemText>Новости</ListItemText>
-                    </ListItem>
-                  ),
-                )}
-                {this.renderItem(
-                  'Радио',
-                  (
-                    <ListItem>
-                      <ThemedListItemGraphic>radio</ThemedListItemGraphic>
-                      <ListItemText>Радио</ListItemText>
-                    </ListItem>
-                  ),
-                )}
-                {this.renderItem(
-                  'Клубы',
-                  (
-                    <ListItem>
-                      <ThemedListItemGraphic>group</ThemedListItemGraphic>
-                      <ListItemText>Клубы</ListItemText>
-                    </ListItem>
-                  ),
-                )}
+                {menu.map(this.renderItem)}
+                <ListDivider />
               </ThemedList>
             </ThemedScrollbars>
           </ThemedDrawer>

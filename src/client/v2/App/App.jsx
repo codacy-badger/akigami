@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
 import NotificationSystem from 'react-notification-system';
 
+
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 

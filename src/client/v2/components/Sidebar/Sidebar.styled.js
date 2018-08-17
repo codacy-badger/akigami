@@ -1,6 +1,6 @@
 import styled from 'react-emotion';
 import { Drawer, DrawerHeader, DrawerContent } from 'rmwc/Drawer';
-import { ListItemGraphic } from 'rmwc/List';
+import { ListItem, ListItemGraphic } from 'rmwc/List';
 import { Elevation } from 'rmwc/Elevation';
 import { Scrollbars } from 'react-custom-scrollbars';
 
@@ -10,7 +10,6 @@ export const Title = styled('span')`
   padding-left: 18px;
   letter-spacing: .6px;
 `;
-
 
 export const Wrapper = styled('div')`
   width: 324px;
@@ -27,22 +26,23 @@ export const Wrapper = styled('div')`
 export const ThemedDrawer = styled(Drawer)`
   height: 100%;
   width: ${p => (p.mini ? 58 : 324)}px;
-  border-right: none !important;
-  background-color: ${p => p.theme.colors.dark} !important;
-  color: ${p => p.theme.colors.textWhite};
+  border-right-color: ${p => (p.mini ? '#e4e4e4' : 'transparent')} !important;
+  background-color: ${p => p.theme.colors.white} !important;
+  color: ${p => p.theme.colors.textDark};
+  user-select: none;
 
   ${p => p.theme.mixins.transitions('width')}
 `;
 
 export const ThemedDrawerHeader = styled(DrawerHeader)`
-  border-bottom: 1px solid ${p => p.theme.colors.darkBorder};
+  /* border-bottom: 1px solid ${p => p.theme.colors.darkBorder}; */
 
   &:before {
     padding-top: 64px !important;
   }
 
   > div {
-    padding: 8px 11px !important;
+    padding: 8px 13px !important;
     align-items: center !important;
   }
 `;
@@ -59,10 +59,19 @@ export const ThemedElevation = styled(Elevation)`
 `;
 
 export const ThemedList = styled(DrawerContent)`
-  color: ${p => p.theme.colors.textWhite};
-  padding-top: 64px;
+  color: ${p => p.theme.colors.textDark};
+  padding-top: 24px;
 `;
 
+export const ThemedListItem = styled(ListItem)`
+  margin: 8px 8px;
+  padding: 0 8px;
+  height: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+`;
+
+
 export const ThemedListItemGraphic = styled(ListItemGraphic)`
-  color: rgba(255, 255, 255, 0.8) !important;
+  /* color: rgba(255, 255, 255, 0.8) !important; */
 `;

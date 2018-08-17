@@ -15,7 +15,7 @@
 @import "includes/loading.css";
 @import "includes/modals.css"; */
 
-@import "external/tippy.css";
+@import "../fonts/stylesheet.css";
 @import "external/material-components-web.css";
 @import "external/icon.css";
 
@@ -24,6 +24,7 @@
   --mdc-layout-grid-column-width-desktop: 67px;
   --mdc-layout-grid-column-width-tablet: 67px;
   --mdc-layout-grid-column-width-phone: 67px;
+  --mdc-theme-primary: #d54343;
 }
 
 html, body, #root {
@@ -33,4 +34,19 @@ html, body, #root {
 
 body {
   margin: 0;
+}
+
+.__react_component_tooltip.type-dark {
+  background-color: #616161e6;
+}
+
+.__react_component_tooltip.type-dark.place-right:after {
+  border-right-color: #616161e6;
+}
+
+.__react_component_tooltip {
+  padding: 0 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  font-weight: 500;
 }

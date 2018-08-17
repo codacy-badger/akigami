@@ -20,7 +20,7 @@ import theme from '../common/styles/themes';
   if (typeof window !== 'undefined') {
     ReactModal.setAppElement('#root');
   }
-  ReactDOM.render(
+  ReactDOM.hydrate(
     <ThemeProvider theme={theme}>
       <Provider app={app}>
         <App />
