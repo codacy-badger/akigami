@@ -12,14 +12,14 @@ export const Title = styled('span')`
 `;
 
 export const Wrapper = styled('div')`
-  width: 324px;
+  width: ${p => (p.collapsed ? '58px' : '324px')};
   flex-shrink: 0;
   position: fixed;
   height: 100%;
-  border-right: 1px solid #e4e4e4;
+  border-right: 1px solid ${p => (p.collapsed ? 'transparent' : '#e4e4e4')};
   background-color: ${p => p.theme.colors.white};
   transform: ${p => (p.open ? 'translate3d(0, 0, 0)' : 'translate3d(-324px, 0, 0)')};
-  ${p => p.theme.mixins.transitions('transform')}
+  ${p => p.theme.mixins.transitions('transform width border-right')}
   z-index: 10;
 `;
 

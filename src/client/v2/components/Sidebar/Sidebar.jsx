@@ -84,12 +84,25 @@ class Sidebar extends PureComponent {
     );
   }
   render() {
-    const { open, mini } = this.props;
+    let { mini } = this.props;
+    const { open, collapsed } = this.props;
+    if (collapsed) mini = true;
     return (
-      <Wrapper open={open}>
-        <ThemedElevation z={mini ? 3 : 0} mini={mini ? true : undefined}>
-          <ThemedDrawer permanent mini={mini ? true : undefined}>
-            <ThemedDrawerHeader mini={mini ? true : undefined}>
+      <Wrapper
+        open={open}
+        collapsed={collapsed ? true : undefined}
+      >
+        <ThemedElevation
+          z={mini ? 3 : 0}
+          mini={mini ? true : undefined}
+        >
+          <ThemedDrawer
+            permanent
+            mini={mini ? true : undefined}
+          >
+            <ThemedDrawerHeader
+              mini={mini ? true : undefined}
+            >
               <Logo /> <Title>Акигами</Title>
             </ThemedDrawerHeader>
             <ThemedScrollbars autoHide universal>
