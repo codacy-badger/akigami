@@ -6,7 +6,7 @@ import {
   ListDivider,
 } from 'rmwc/List';
 
-import Tooltip from '../../../components/Tooltip';
+import Tooltip from '../Tooltip';
 import Logo from '../Logo';
 
 import {
