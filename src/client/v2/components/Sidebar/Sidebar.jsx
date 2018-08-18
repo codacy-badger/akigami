@@ -57,20 +57,24 @@ class Sidebar extends PureComponent {
   static propTypes = {
     open: PropTypes.bool,
     mini: PropTypes.bool,
+    collapsed: PropTypes.bool,
   }
   static defaultProps = {
     open: true,
     mini: false,
+    collapsed: false,
   }
   renderItem = (item) => {
-    const { mini } = this.props;
+    let { mini } = this.props;
+    const { collapsed } = this.props;
+    if (collapsed) mini = true;
     const body = (
       <ThemedListItem key={item.key} selected={item.key === 'home'}>
         <ThemedListItemGraphic>{item.icon}</ThemedListItemGraphic>
         <ListItemText>{item.title}</ListItemText>
       </ThemedListItem>
     );
-    if (!mini) return body;
+    if (!collapsed && !mini) return body;
     return (
       <Tooltip
         key={item.key}
