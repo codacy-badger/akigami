@@ -22,6 +22,7 @@ class App extends Component {
     app: PropTypes.object.isRequired,
   };
   state = {
+    view: 'mobile',
     openDrawer: false,
     miniDrawer: false,
     collapsedDrawer: false,
@@ -33,19 +34,20 @@ class App extends Component {
       this.props.app.notification.init(this.notificationSystem);
     }
     this.resizeListener();
-    document.addEventListener('resize', this.resizeListener);
+    window.addEventListener('resize', this.resizeListener);
   }
   componentWillUnmount() {
-    document.removeEventListener('resize', this.resizeListener);
+    window.removeEventListener('resize', this.resizeListener);
   }
   resizeListener = () => {
     const width = window.innerWidth;
-    this.timeout = clearTimeout();
     if (width >= stateDrawer.FULL) {
       this.setState({
         openDrawer: true,
         collapsedDrawer: false,
         overlayedDrawer: false,
+        showDrawerTrigger: false,
+        view: 'desktop',
       });
     } else if (width >= stateDrawer.COLLAPSED) {
       this.setState({
@@ -53,6 +55,7 @@ class App extends Component {
         collapsedDrawer: true,
         overlayedDrawer: false,
         showDrawerTrigger: false,
+        view: 'tablet',
       });
     } else if (width >= stateDrawer.HIDDEN || width < stateDrawer.HIDDEN) {
       this.setState({
@@ -60,6 +63,7 @@ class App extends Component {
         collapsedDrawer: false,
         overlayedDrawer: true,
         showDrawerTrigger: true,
+        view: 'mobile',
       });
     }
   }
@@ -71,6 +75,7 @@ class App extends Component {
   }
   render() {
     const {
+      view,
       openDrawer,
       miniDrawer,
       collapsedDrawer,
@@ -86,6 +91,7 @@ class App extends Component {
           }}
         />
         <Sidebar
+          view={view}
           open={openDrawer}
           mini={miniDrawer}
           collapsed={collapsedDrawer}

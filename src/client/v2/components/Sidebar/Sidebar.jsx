@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import onClickOutside from 'react-onclickoutside';
 
 import {
   ListItemText,
@@ -53,38 +54,31 @@ const menu = [
     icon: 'group',
   },
 ];
+
 class Sidebar extends PureComponent {
   static propTypes = {
     open: PropTypes.bool,
     mini: PropTypes.bool,
+    view: PropTypes.string,
     collapsed: PropTypes.bool,
     onOutside: PropTypes.func,
   }
   static defaultProps = {
+    view: null,
     open: true,
     mini: false,
     collapsed: false,
     onOutside: null,
   }
 
-  componentDidMount() {
-    document.addEventListener('mousedown', this.handleClickOutside);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside);
-  }
-
   setWrapperRef = (node) => {
     this.wrapperRef = node;
   }
 
-  handleClickOutside = (event) => {
-    const { onOutside, collapsed, open } = this.props;
-    if (!open && !collapsed) return;
-    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      onOutside(true);
-    }
+  handleClickOutside = () => {
+    const { onOutside, view } = this.props;
+    if (view !== 'mobile') return;
+    onOutside(true);
   }
   renderItem = (item) => {
     let { mini } = this.props;
@@ -145,4 +139,10 @@ class Sidebar extends PureComponent {
   }
 }
 
-export default Sidebar;
+const clickOutsideConfig = {
+  handleClickOutside: (instance) => (
+    instance.handleClickOutside
+  ),
+};
+
+export default onClickOutside(Sidebar, clickOutsideConfig);
