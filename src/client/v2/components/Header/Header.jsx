@@ -4,7 +4,7 @@ import {
   TopAppBarRow,
   TopAppBarSection,
   TopAppBarNavigationIcon,
-  TopAppBarActionItem,
+  // TopAppBarActionItem,
   TopAppBarTitle,
 } from 'rmwc/TopAppBar';
 
@@ -15,23 +15,29 @@ import { ThemedTopAppBar } from './Header.styled';
 class Header extends PureComponent {
   static propTypes = {
     onCollapse: PropTypes.func,
+    showDrawerTrigger: PropTypes.bool,
   }
   static defaultProps = {
     onCollapse: null,
+    showDrawerTrigger: false,
   }
   render() {
-    const { onCollapse } = this.props;
+    const { onCollapse, showDrawerTrigger } = this.props;
     return (
       <ThemedTopAppBar fixed>
         <Grid fixedColumnWidth style={{ padding: 0 }}>
           <TopAppBarRow>
             <GridCell span={12}>
-              <TopAppBarSection alignStart>
-                <TopAppBarNavigationIcon
-                  use="menu"
-                  onClick={onCollapse}
-                />
-                <TopAppBarTitle>Главная</TopAppBarTitle>
+              <TopAppBarSection alignStart style={{ height: 48 }}>
+                {showDrawerTrigger && (
+                  <TopAppBarNavigationIcon
+                    use="menu"
+                    onClick={onCollapse}
+                  />
+                )}
+                <TopAppBarTitle style={{ paddingLeft: showDrawerTrigger ? 20 : 8 }}>
+                  Главная
+                </TopAppBarTitle>
               </TopAppBarSection>
               {/* <TopAppBarSection alignEnd>
                 <TopAppBarActionItem aria-label="Download" alt="Download">

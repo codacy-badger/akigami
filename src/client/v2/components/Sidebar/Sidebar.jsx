@@ -58,11 +58,33 @@ class Sidebar extends PureComponent {
     open: PropTypes.bool,
     mini: PropTypes.bool,
     collapsed: PropTypes.bool,
+    onOutside: PropTypes.func,
   }
   static defaultProps = {
     open: true,
     mini: false,
     collapsed: false,
+    onOutside: null,
+  }
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+  setWrapperRef = (node) => {
+    this.wrapperRef = node;
+  }
+
+  handleClickOutside = (event) => {
+    const { onOutside, collapsed, open } = this.props;
+    if (!open && !collapsed) return;
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      onOutside(true);
+    }
   }
   renderItem = (item) => {
     let { mini } = this.props;
@@ -93,6 +115,7 @@ class Sidebar extends PureComponent {
     if (collapsed) mini = true;
     return (
       <Wrapper
+        innerRef={this.setWrapperRef}
         open={open}
         collapsed={collapsed ? true : undefined}
       >

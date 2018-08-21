@@ -1,15 +1,15 @@
-function transitions(properties, timing = '0.3s', effect = 'ease-in-out') {
-  let transitions = '';
+function transitions(properties, timing = '0.25s', effect = 'ease-in-out') {
+  let transition = '';
   properties.split(' ').forEach((prop, index) => {
     let composing = `${prop} ${timing} ${effect}`;
     if (index < properties.split(' ').length - 1) {
       composing += ', ';
     }
-    transitions += composing;
+    transition += composing;
   });
   const changes = properties.split(' ').join(', ');
   return `
-    transition: ${transitions};
+    transition: ${transition};
     will-change: ${changes};
   `;
 }
