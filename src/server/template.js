@@ -1,6 +1,4 @@
 export default ({
-  criticalCss,
-  hydrateIds,
   body,
   title,
   css,
@@ -20,7 +18,7 @@ export default ({
     ${css}
   </head>
 
-  <body data-user=${user} data-ids=${hydrateIds}>
+  <body data-user=${user}>
     <div id="root">${body}</div>
     ${preload}
     ${js}

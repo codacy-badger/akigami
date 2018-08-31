@@ -20,7 +20,8 @@ const stateDrawer = {
 class App extends Component {
   static propTypes = {
     app: PropTypes.object.isRequired,
-  };
+  }
+
   state = {
     view: 'mobile',
     openDrawer: false,
@@ -29,6 +30,7 @@ class App extends Component {
     overlayedDrawer: false,
     showDrawerTrigger: true,
   }
+
   componentDidMount() {
     if (this.notificationSystem) {
       this.props.app.notification.init(this.notificationSystem);
@@ -36,9 +38,11 @@ class App extends Component {
     this.resizeListener();
     window.addEventListener('resize', this.resizeListener);
   }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeListener);
   }
+
   resizeListener = () => {
     const width = window.innerWidth;
     if (width >= stateDrawer.FULL) {
@@ -67,12 +71,15 @@ class App extends Component {
       });
     }
   }
+
   handleCollapse = () => {
     this.setState({ openDrawer: !this.state.openDrawer });
   }
+
   handleOutside = () => {
     this.setState({ openDrawer: false });
   }
+
   render() {
     const {
       view,
@@ -82,7 +89,7 @@ class App extends Component {
       overlayedDrawer,
       showDrawerTrigger,
     } = this.state;
-    const { router } = this.props.app;
+    const { user, ui, router } = this.props.app;
     return (
       <Main>
         <NotificationSystem
@@ -93,9 +100,11 @@ class App extends Component {
         <Sidebar
           view={view}
           open={openDrawer}
-          mini={miniDrawer}
+          mini={miniDrawer} /* Необязательно */
           collapsed={collapsedDrawer}
           onOutside={this.handleOutside}
+          content={ui.sidebarContent}
+          user={user}
         />
         <Content
           openDrawer={openDrawer}
@@ -107,6 +116,8 @@ class App extends Component {
             showDrawerTrigger={showDrawerTrigger}
           />
           {router.container}
+          <button onClick={() => ui.clearSidebarContent()}>clear sidebar content</button>
+          <button onClick={() => ui.setSidebarContent('Additional content')}>set sidebar content</button>
           <button onClick={() => this.setState({ collapsedDrawer: !collapsedDrawer })}>collapsed</button>
           <button onClick={() => this.setState({ miniDrawer: !miniDrawer })}>mini</button>
         </Content>

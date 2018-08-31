@@ -6,13 +6,15 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 export const Title = styled('span')`
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
   padding-left: 18px;
+  text-transform: uppercase;
   letter-spacing: .6px;
 `;
 
 export const Wrapper = styled('div')`
   width: ${p => (p.collapsed ? '58px' : '324px')};
+  display: flex;
   flex-shrink: 0;
   position: fixed;
   height: 100%;
@@ -60,7 +62,7 @@ export const ThemedElevation = styled(Elevation)`
 
 export const ThemedList = styled(DrawerContent)`
   color: ${p => p.theme.colors.textDark};
-  padding-top: 24px;
+  padding-top: 64px;
 `;
 
 export const ThemedListItem = styled(ListItem)`
@@ -74,4 +76,11 @@ export const ThemedListItem = styled(ListItem)`
 
 export const ThemedListItemGraphic = styled(ListItemGraphic)`
   /* color: rgba(255, 255, 255, 0.8) !important; */
+`;
+
+export const AdditionalContent = styled('div')`
+  position: relative;
+  padding: 16px;
+  width: 266px;
+  box-sizing: border-box;
 `;

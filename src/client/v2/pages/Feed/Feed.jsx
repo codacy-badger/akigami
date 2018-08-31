@@ -6,8 +6,14 @@ class Feed extends PureComponent {
     return (
       <Grid fixedColumnWidth style={{ flex: 1 }}>
         <GridInner>
+          <GridCell span={6}>
+            63
+          </GridCell>
+          <GridCell span={6}>
+            63
+          </GridCell>
           <GridCell span={12}>
-            123
+            63
           </GridCell>
         </GridInner>
       </Grid>

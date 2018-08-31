@@ -4,15 +4,17 @@ import onClickOutside from 'react-onclickoutside';
 
 import {
   ListItemText,
-  ListDivider,
+  // ListDivider,
 } from 'rmwc/List';
 
+import UserInfo from '../UserInfo';
 import Tooltip from '../Tooltip';
 import Logo from '../Logo';
 
 import {
   Title,
   Wrapper,
+  AdditionalContent,
   ThemedElevation,
   ThemedDrawer,
   ThemedListItem,
@@ -55,13 +57,28 @@ const menu = [
   },
 ];
 
+/**
+ * Сайдбар
+ *
+ * @class Sidebar
+ * @extends {PureComponent}
+ */
 class Sidebar extends PureComponent {
   static propTypes = {
+    /** Открытое состояние */
     open: PropTypes.bool,
+    /** Минимизированное состояние с дополнительной информацией */
     mini: PropTypes.bool,
+    /** Режим отображения */
     view: PropTypes.string,
+    /** Минимизированное состояние */
     collapsed: PropTypes.bool,
+    /** Хэндлер отклика вне сайдбара */
     onOutside: PropTypes.func,
+    /** Дополнительный контент в сайдбаре */
+    content: PropTypes.any,
+    /** Данные пользователя */
+    user: PropTypes.object,
   }
   static defaultProps = {
     view: null,
@@ -69,21 +86,51 @@ class Sidebar extends PureComponent {
     mini: false,
     collapsed: false,
     onOutside: null,
+    content: null,
+    user: null,
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      mini: props.collapsed || props.mini || !!props.content || false,
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      mini: nextProps.collapsed || nextProps.mini || !!nextProps.content || false,
+    });
+  }
+
+  /**
+   * Set reference
+   * @param {node} node
+   * @memberof Sidebar
+   */
   setWrapperRef = (node) => {
     this.wrapperRef = node;
   }
 
+  /**
+   * Outside handler
+   *
+   * @memberof Sidebar
+   */
   handleClickOutside = () => {
     const { onOutside, view } = this.props;
     if (view !== 'mobile') return;
     onOutside(true);
   }
+
+  /**
+   * Item of list renderer
+   * @param {object} item
+   * @memberof Sidebar
+   */
   renderItem = (item) => {
-    let { mini } = this.props;
+    const { mini } = this.state;
     const { collapsed } = this.props;
-    if (collapsed) mini = true;
     const body = (
       <ThemedListItem key={item.key} selected={item.key === 'home'}>
         <ThemedListItemGraphic>{item.icon}</ThemedListItemGraphic>
@@ -103,37 +150,44 @@ class Sidebar extends PureComponent {
       </Tooltip>
     );
   }
+
   render() {
-    let { mini } = this.props;
-    const { open, collapsed } = this.props;
-    if (collapsed) mini = true;
+    const { mini } = this.state;
+    const { open, collapsed, content, user } = this.props;
     return (
       <Wrapper
         innerRef={this.setWrapperRef}
         open={open}
-        collapsed={collapsed ? true : undefined}
+        collapsed={collapsed ? 'true' : undefined}
       >
         <ThemedElevation
           z={mini ? 3 : 0}
-          mini={mini ? true : undefined}
+          mini={mini ? 'true' : undefined}
         >
           <ThemedDrawer
             permanent
-            mini={mini ? true : undefined}
+            mini={mini ? 'true' : undefined}
           >
             <ThemedDrawerHeader
-              mini={mini ? true : undefined}
+              mini={mini ? 'true' : undefined}
             >
               <Logo /> <Title>Акигами</Title>
             </ThemedDrawerHeader>
             <ThemedScrollbars autoHide universal>
               <ThemedList>
                 {menu.map(this.renderItem)}
-                <ListDivider />
               </ThemedList>
             </ThemedScrollbars>
+            <UserInfo mini={mini} user={user} />
           </ThemedDrawer>
         </ThemedElevation>
+        {content && (
+          <ThemedScrollbars autoHide universal>
+            <AdditionalContent>
+              {content}
+            </AdditionalContent>
+          </ThemedScrollbars>
+        )}
       </Wrapper>
     );
   }
