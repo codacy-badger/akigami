@@ -27,6 +27,36 @@
   --mdc-theme-primary: #d54343;
 }
 
+@media screen and (min-width: 480px) {
+  :root {
+    --mdc-layout-grid-column-width-tablet: 42px;
+  }
+}
+
+@media screen and (min-width: 680px) {
+  :root {
+    --mdc-layout-grid-column-width-tablet: 67px;
+  }
+}
+
+@media screen and (min-width: 840px) {
+  :root {
+    --mdc-layout-grid-column-width-desktop: 44px;
+  }
+}
+
+@media screen and (min-width: 1174px) {
+  :root {
+    --mdc-layout-grid-column-width-desktop: 67px;
+  }
+}
+
+@media screen and (min-width: 1644px) {
+  :root {
+    --mdc-layout-grid-column-width-desktop: 84px;
+  }
+}
+
 html, body, #root {
   height: 100%;
   min-height: 100%;
