@@ -24,45 +24,6 @@ import {
   ThemedScrollbars,
 } from './Sidebar.styled';
 
-const menu = [
-  {
-    key: 'home',
-    title: 'Главная',
-    link: '/',
-    icon: 'home',
-  },
-  {
-    key: 'calendar',
-    title: 'Календарь',
-    link: '/calendar',
-    icon: 'date_range',
-  },
-  {
-    key: 'explore',
-    title: 'Обзор',
-    link: '/explore',
-    icon: 'view_module',
-  },
-  {
-    key: 'news',
-    title: 'Новости',
-    link: '/news',
-    icon: 'library_books',
-  },
-  {
-    key: 'radio',
-    title: 'Радио',
-    link: '/radio',
-    icon: 'radio',
-  },
-  {
-    key: 'clubs',
-    title: 'Клубы',
-    link: '/clubs',
-    icon: 'group',
-  },
-];
-
 /**
  * Сайдбар
  *
@@ -85,6 +46,8 @@ class Sidebar extends PureComponent {
     content: PropTypes.any,
     /** Данные пользователя */
     user: PropTypes.object,
+    /** Массив меню */
+    menu: PropTypes.array,
   }
   static defaultProps = {
     view: null,
@@ -94,6 +57,7 @@ class Sidebar extends PureComponent {
     onOutside: null,
     content: null,
     user: null,
+    menu: [],
   }
 
   constructor(props) {
@@ -167,7 +131,7 @@ class Sidebar extends PureComponent {
 
   render() {
     const { mini } = this.state;
-    const { open, collapsed, content, user } = this.props;
+    const { menu, open, collapsed, content, user } = this.props;
     return (
       <Wrapper
         innerRef={this.setWrapperRef}

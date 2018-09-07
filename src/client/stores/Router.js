@@ -11,6 +11,7 @@ import modals from '../modals';
 
 export default class Router {
   @observable container;
+  @observable key;
   constructor(app) {
     this.app = app;
     if (typeof window !== 'undefined') {
@@ -116,6 +117,7 @@ export default class Router {
       document.title = `${title} – Акигами`;
     }
     const Module = await Router.import(layout);
+    this.key = layout;
     this.container = React.createElement(Module, props);
     return true;
   }

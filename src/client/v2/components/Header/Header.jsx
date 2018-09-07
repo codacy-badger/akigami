@@ -16,15 +16,19 @@ class Header extends PureComponent {
   static propTypes = {
     onCollapse: PropTypes.func,
     showDrawerTrigger: PropTypes.bool,
+    transparent: PropTypes.bool,
+    title: PropTypes.string,
   }
   static defaultProps = {
     onCollapse: null,
     showDrawerTrigger: false,
+    transparent: false,
+    title: '',
   }
   render() {
-    const { onCollapse, showDrawerTrigger } = this.props;
+    const { title, onCollapse, showDrawerTrigger, transparent } = this.props;
     return (
-      <ThemedTopAppBar fixed>
+      <ThemedTopAppBar fixed transparent={transparent}>
         <Grid fixedColumnWidth style={{ padding: 0 }}>
           <TopAppBarRow>
             <GridCell span={12}>
@@ -36,7 +40,7 @@ class Header extends PureComponent {
                   />
                 )}
                 <TopAppBarTitle style={{ paddingLeft: showDrawerTrigger ? 20 : 8 }}>
-                  Главная
+                  {title}
                 </TopAppBarTitle>
               </TopAppBarSection>
               {/* <TopAppBarSection alignEnd>

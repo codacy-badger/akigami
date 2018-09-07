@@ -4345,7 +4345,7 @@ a.mdc-list-item {
     /* @alternate */
     background-color: var(--mdc-theme-primary, #6200ee); }
   .mdc-select:not(.mdc-select--disabled) .mdc-select__native-control:focus ~ .mdc-floating-label {
-    color: rgba(98, 0, 238, 0.87); }
+    color: var(--mdc-theme-primary); }
   .mdc-select:not(.mdc-select--disabled) .mdc-select__native-control:hover {
     border-bottom-color: rgba(0, 0, 0, 0.87); }
   [dir="rtl"] .mdc-select, .mdc-select[dir="rtl"] {
@@ -5956,19 +5956,19 @@ a.mdc-list-item {
   align-self: flex-start; }
 
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
-  color: rgba(98, 0, 238, 0.87); }
+  color: var(--mdc-theme-primary); }
 
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-text-field__input::-webkit-input-placeholder {
-  color: rgba(98, 0, 238, 0.87); }
+  color: var(--mdc-theme-primary); }
 
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-text-field__input:-ms-input-placeholder {
-  color: rgba(98, 0, 238, 0.87); }
+  color: var(--mdc-theme-primary); }
 
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-text-field__input::-ms-input-placeholder {
-  color: rgba(98, 0, 238, 0.87); }
+  color: var(--mdc-theme-primary); }
 
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-text-field__input::placeholder {
-  color: rgba(98, 0, 238, 0.87); }
+  color: var(--mdc-theme-primary); }
 
 .mdc-text-field--focused .mdc-text-field__input:required + .mdc-floating-label::after {
   color: #b00020; }
@@ -6406,8 +6406,8 @@ a.mdc-list-item {
             transform: translateX(calc(0 - 0%)) translateY(-50%) scale(0.923); } }
 
 :root {
-  --mdc-theme-primary: #6200ee;
-  --mdc-theme-secondary: #018786;
+  --mdc-theme-primary: #d54343;
+  --mdc-theme-secondary: #2d2d2d;
   --mdc-theme-background: #fff;
   --mdc-theme-surface: #fff;
   --mdc-theme-on-primary: #fff;
@@ -6435,9 +6435,9 @@ a.mdc-list-item {
   color: var(--mdc-theme-primary, #6200ee) !important; }
 
 .mdc-theme--secondary {
-  color: #018786 !important;
+  color: #2d2d2d !important;
   /* @alternate */
-  color: var(--mdc-theme-secondary, #018786) !important; }
+  color: var(--mdc-theme-secondary, #2d2d2d) !important; }
 
 .mdc-theme--background {
   background-color: #fff;

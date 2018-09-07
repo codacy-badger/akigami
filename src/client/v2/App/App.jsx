@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
 import NotificationSystem from 'react-notification-system';
+import filter from 'lodash/filter';
 
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
@@ -13,6 +14,63 @@ const stateDrawer = {
   COLLAPSED: 1174,
   HIDDEN: 1116,
 };
+
+const menu = [
+  {
+    key: 'home',
+    title: 'Главная',
+    link: '/',
+    icon: 'home',
+    layout: 'index',
+  },
+  {
+    key: 'calendar',
+    title: 'Календарь',
+    link: '/calendar',
+    icon: 'date_range',
+  },
+  {
+    key: 'explore',
+    title: 'Обзор',
+    link: '/explore',
+    icon: 'view_module',
+  },
+  {
+    key: 'news',
+    title: 'Новости',
+    link: '/news',
+    icon: 'library_books',
+  },
+  {
+    key: 'radio',
+    title: 'Радио',
+    link: '/radio',
+    icon: 'radio',
+  },
+  {
+    key: 'clubs',
+    title: 'Клубы',
+    link: '/clubs',
+    icon: 'group',
+  },
+];
+
+const headerTitles = [
+  ...menu,
+  {
+    key: 'signin',
+    title: '',
+    link: '/signin',
+    layout: 'login',
+  },
+  {
+    key: 'signup',
+    title: '',
+    link: '/signup',
+    layout: 'signup',
+  },
+];
+
 
 @inject('app')
 @observer
@@ -94,6 +152,8 @@ class App extends Component {
       showDrawerTrigger,
     } = this.state;
     const { user, ui, router } = this.props.app;
+    const transparentHeader = ['login', 'signup'].includes(router.key);
+    const [currentTitle] = filter(headerTitles, e => e.layout === router.key);
     return (
       <Main>
         <NotificationSystem
@@ -102,6 +162,7 @@ class App extends Component {
           }}
         />
         <Sidebar
+          menu={menu}
           view={view}
           open={openDrawer}
           mini={miniDrawer} /* Необязательно */
@@ -116,8 +177,10 @@ class App extends Component {
           overlayedDrawer={overlayedDrawer}
         >
           <Header
+            title={currentTitle.title}
             onCollapse={this.handleCollapse}
             showDrawerTrigger={showDrawerTrigger}
+            transparent={transparentHeader}
           />
           {router.container}
           <div
