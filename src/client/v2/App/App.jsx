@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
 import NotificationSystem from 'react-notification-system';
 
-
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 
@@ -73,11 +72,16 @@ class App extends Component {
   }
 
   handleCollapse = () => {
-    this.setState({ openDrawer: !this.state.openDrawer });
+    this.setState({ openDrawer: !this.state.openDrawer }, () => {
+      const cond = this.state.openDrawer && this.state.overlayedDrawer;
+      document.body.style.overflow = cond ? 'hidden' : '';
+    });
   }
 
   handleOutside = () => {
-    this.setState({ openDrawer: false });
+    this.setState({ openDrawer: false }, () => {
+      document.body.style.overflow = '';
+    });
   }
 
   render() {
