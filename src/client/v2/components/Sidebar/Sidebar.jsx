@@ -28,31 +28,37 @@ const menu = [
   {
     key: 'home',
     title: 'Главная',
+    link: '/',
     icon: 'home',
   },
   {
     key: 'calendar',
     title: 'Календарь',
+    link: '/calendar',
     icon: 'date_range',
   },
   {
     key: 'explore',
     title: 'Обзор',
+    link: '/explore',
     icon: 'view_module',
   },
   {
     key: 'news',
     title: 'Новости',
+    link: '/news',
     icon: 'library_books',
   },
   {
     key: 'radio',
     title: 'Радио',
+    link: '/radio',
     icon: 'radio',
   },
   {
     key: 'clubs',
     title: 'Клубы',
+    link: '/clubs',
     icon: 'group',
   },
 ];
@@ -129,10 +135,18 @@ class Sidebar extends PureComponent {
    * @memberof Sidebar
    */
   renderItem = (item) => {
+    if (typeof window === 'undefined') return false;
     const { mini } = this.state;
     const { collapsed } = this.props;
+    let pathKey = window.location.pathname;
+    if (pathKey === '/') pathKey = 'home';
     const body = (
-      <ThemedListItem key={item.key} selected={item.key === 'home'}>
+      <ThemedListItem
+        tag="a"
+        key={item.key}
+        href={item.link}
+        selected={pathKey.includes(item.key)}
+      >
         <ThemedListItemGraphic>{item.icon}</ThemedListItemGraphic>
         <ListItemText>{item.title}</ListItemText>
       </ThemedListItem>

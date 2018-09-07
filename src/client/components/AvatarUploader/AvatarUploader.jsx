@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Avatar from '../Avatar';
+import Avatar from '../../v2/components/Avatar';
 import { Wrapper, Replacer, Zone, Icon, Title } from './AvatarUploader.styled';
 
 class AvatarUploader extends PureComponent {

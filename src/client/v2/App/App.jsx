@@ -120,10 +120,20 @@ class App extends Component {
             showDrawerTrigger={showDrawerTrigger}
           />
           {router.container}
-          <button onClick={() => ui.clearSidebarContent()}>clear sidebar content</button>
-          <button onClick={() => ui.setSidebarContent('Additional content')}>set sidebar content</button>
-          <button onClick={() => this.setState({ collapsedDrawer: !collapsedDrawer })}>collapsed</button>
-          <button onClick={() => this.setState({ miniDrawer: !miniDrawer })}>mini</button>
+          <div
+            style={{
+              border: '1px dotted red',
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+            }}
+          >
+            {user.isAuth && <button onClick={() => user.logout()}>logout</button>}
+            <button onClick={() => ui.clearSidebarContent()}>clear sidebar content</button>
+            <button onClick={() => ui.setSidebarContent('Additional content')}>set sidebar content</button>
+            <button onClick={() => this.setState({ collapsedDrawer: !collapsedDrawer })}>collapsed</button>
+            <button onClick={() => this.setState({ miniDrawer: !miniDrawer })}>mini</button>
+          </div>
         </Content>
       </Main>
     );

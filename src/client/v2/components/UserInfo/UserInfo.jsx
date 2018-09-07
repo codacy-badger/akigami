@@ -27,6 +27,8 @@ class UserInfo extends PureComponent {
             <Button
               outlined
               style={{ width: 306, flexShrink: 0, margin: '2px 0' }}
+              tag="a"
+              href="/signin"
             >
               <ButtonIcon>vpn_key</ButtonIcon>
               Вход / Регистрация
@@ -46,7 +48,7 @@ class UserInfo extends PureComponent {
                 place="right"
                 effect="solid"
               >
-                <ThemedListItem key="login">
+                <ThemedListItem key="login" tag="a" href="/signin">
                   <ThemedListItemGraphic>vpn_key</ThemedListItemGraphic>
                 </ThemedListItem>
               </Tooltip>
