@@ -98,7 +98,7 @@
   -webkit-appearance: none;
   overflow: hidden;
   vertical-align: middle;
-  border-radius: 2px; }
+  border-radius: 4px; }
   .mdc-button::before, .mdc-button::after {
     position: absolute;
     border-radius: 50%;
@@ -230,7 +230,7 @@
   .mdc-button--unelevated:not(:disabled) {
     color: #fff;
     /* @alternate */
-    color: var(--mdc-theme-on-primary, #fff); }
+    color: var(--mdc-theme-primary-button, #fff); }
   .mdc-button--raised::before, .mdc-button--raised::after,
   .mdc-button--unelevated::before,
   .mdc-button--unelevated::after {
@@ -240,7 +240,7 @@
       .mdc-button--unelevated::before,
       .mdc-button--unelevated::after {
         /* @alternate */
-        background-color: var(--mdc-theme-on-primary, #fff); } }
+        background-color: var(--mdc-theme-primary-buttony, #fff); } }
   .mdc-button--raised:hover::before,
   .mdc-button--unelevated:hover::before {
     opacity: 0.08; }

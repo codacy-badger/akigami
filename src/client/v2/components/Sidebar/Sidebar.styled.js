@@ -6,10 +6,12 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 export const Title = styled('span')`
   font-weight: bold;
-  font-size: 18px;
+  font-size: 26px;
   padding-left: 18px;
   text-transform: uppercase;
-  letter-spacing: .6px;
+  letter-spacing: -.2px;
+  font-family: ${p => p.theme.altFontFamily};
+  text-transform: capitalize;
 `;
 
 export const Wrapper = styled('div')`

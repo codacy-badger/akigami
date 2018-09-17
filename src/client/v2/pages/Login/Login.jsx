@@ -56,7 +56,7 @@ class Login extends Component {
           <Background
             src="/images/SteinsGate.fullhd.jpg"
           />
-          <Blur src="/images/SteinsGate.fullhd.jpg">
+          <Blur>
             <Panel>
               <Header>Авторизация</Header>
               <br />
@@ -73,8 +73,8 @@ class Login extends Component {
               />
               <br />
               <Button
-                raised
-                theme="secondary-bg on-secondary"
+                unelevated
+                // theme="secondary-bg on-secondary"
                 disabled={!this.store.isValidEmail}
                 onClick={this.store.handleSend}
               >
@@ -124,7 +124,7 @@ class Login extends Component {
         <Background
           src="/images/SteinsGate.fullhd.jpg"
         />
-        <Blur src="/images/SteinsGate.fullhd.jpg">
+        <Blur>
           <Panel>
             <Header>Подтверждение</Header>
             <p style={{ marginTop: 0 }}>проверьте ваш электронный ящик</p>

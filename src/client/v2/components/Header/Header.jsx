@@ -28,7 +28,7 @@ class Header extends PureComponent {
   render() {
     const { title, onCollapse, showDrawerTrigger, transparent } = this.props;
     return (
-      <ThemedTopAppBar fixed transparent={transparent}>
+      <ThemedTopAppBar fixed transparent={transparent ? 'true' : undefined}>
         <Grid fixedColumnWidth style={{ padding: 0 }}>
           <TopAppBarRow>
             <GridCell span={12}>

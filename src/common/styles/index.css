@@ -16,6 +16,7 @@
 @import "includes/modals.css"; */
 
 @import "../fonts/stylesheet.css";
+@import "../fonts/stylesheet-futura.css";
 @import "external/material-components-web.css";
 @import "external/icon.css";
 
@@ -25,6 +26,7 @@
   --mdc-layout-grid-column-width-tablet: 67px;
   --mdc-layout-grid-column-width-phone: 67px;
   --mdc-theme-primary: #d54343;
+  --mdc-theme-primary-button: #fff;
 }
 
 @media screen and (min-width: 480px) {

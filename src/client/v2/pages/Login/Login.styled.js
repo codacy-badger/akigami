@@ -1,6 +1,8 @@
 import styled from 'react-emotion';
 
 
+
+
 export const Wrapper = styled('div')`
   width: 100%;
   height: 100%;
@@ -19,7 +21,6 @@ export const Background = styled('div')`
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position-x: -100px;
   opacity: 0.85;
   width: 100%;
   height: 100%;
@@ -34,25 +35,9 @@ export const Blur = styled('div')`
   width: 480px;
   height: 100%;
   display: flex;
+  background-color: rgba(255, 255, 255, 0.92);
   @media screen and (max-width: 480px) {
     width: 100%;
-  }
-  &:before {
-    content: "";
-    position: absolute;
-    top: -100px;
-    left: -100px;
-    bottom: -100px;
-    right: -100px;
-    box-shadow: inset 0 0 0 100vh rgba(255, 255, 255, 0.8);
-    background-image: url(${p => p.src});
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position-x: -100px;
-    overflow: hidden;
-    filter: blur(10px);
   }
 `;
 
