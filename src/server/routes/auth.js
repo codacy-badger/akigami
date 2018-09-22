@@ -45,13 +45,13 @@ export default app => {
     }
     res.ssr({
       title: 'Регистрация',
-      layout: 'signup',
+      layout: 'register',
       props: { email: emailToken.email },
     });
   });
 
   app.all('/email-verification/:token', async (req, res, next) => {
-    const token = req.params.token;
+    const { token } = req.params;
     if (!token) {
       next();
       return;
@@ -116,7 +116,7 @@ export default app => {
 
   app.post('/api/signup', async (req, res, next) => {
     if (!req.isAuthenticated()) {
-      const token = req.body.token;
+      const { token } = req.body;
       if (!token) {
         res.send({ success: false, message: 'no_token' });
         return;

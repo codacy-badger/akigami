@@ -1,6 +1,4 @@
 export default ({
-  criticalCss,
-  hydrateIds,
   body,
   title,
   css,
@@ -18,12 +16,9 @@ export default ({
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
     ${css}
-    <style type="text/css">
-      ${criticalCss}
-    </style>
   </head>
 
-  <body data-user=${user} data-ids=${hydrateIds}>
+  <body data-user=${user}>
     <div id="root">${body}</div>
     ${preload}
     ${js}

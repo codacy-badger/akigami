@@ -1,16 +1,48 @@
-/* Буцтрап не удалять. Он кастомизирован напрямую! */
-@import "external/bootstrap.css";
+@import "../external/semantic.css";
 
-@import "external/materialdesignicons.css";
-@import "external/slick.min.css";
-@import "external/slick-theme.min.css";
-@import "external/react-datetime.css";
-@import "external/react-select.css";
+body, html {
+  background: #f7f7f7 !important;
+}
 
-@import "cropperjs/dist/cropper";
+.root-content {
+  padding-top: 54px;
+  height: 100vh;
+}
 
-@import "includes/variables.css";
-@import "includes/fonts.css";
-@import "includes/general.css";
-@import "includes/loading.css";
-@import "includes/modals.css";
+.filled {
+  height: 100%;
+  min-height: 100%;
+}
+
+.centered-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-card {
+  width: 340px !important;
+  box-shadow: 0px 0px 0px 1px #D4D4D5,
+              0px 2px 0px 0px #DB2828,
+              0px 8px 32px 0px rgba(0, 0, 0, .2)!important;
+}
+
+.auth-card > .content {
+  padding: 2em !important;
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.blured-image {
+  filter: blur(10px);
+  transform: scale3d(1.1, 1.1, 1);
+  box-shadow: inset 0 0 0 100vh rgba(255, 255, 255, .5);
+}

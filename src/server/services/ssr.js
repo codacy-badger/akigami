@@ -1,7 +1,6 @@
 /* eslint react/jsx-filename-extension: 0 */
 import React from 'react';
 import { Provider } from 'mobx-react';
-import { extractCritical } from 'emotion-server';
 import { renderToStaticMarkup } from 'react-dom/server';
 import pick from 'lodash/pick';
 
@@ -28,17 +27,15 @@ async function ssr({ title, layout, props = {}, ...data } = {}) {
       ]);
       app.user.setUser(user);
       await app.router.setContainer({ title, layout, props });
-      const { html, ids, css } = extractCritical(renderToStaticMarkup((
+      const html = renderToStaticMarkup((
         <Provider app={app}>
           <App />
         </Provider>
-      )));
+      ));
       const render = Object.assign(
         {
           body: html,
           css: '<link rel="stylesheet" href="/assets/style.css" />',
-          criticalCss: css,
-          hydrateIds: JSON.stringify(ids),
           user: JSON.stringify(user || {}),
           js:
             '<script type="text/javascript" src="/assets/modules.chunk.js"></script><script type="text/javascript" src="/assets/app.js"></script>',

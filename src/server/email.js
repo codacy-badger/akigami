@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import { mjml2html } from 'mjml';
+import mjml2html from 'mjml';
 import htmlToText from 'html-to-text';
 import config from 'config';
 import Promise from 'bluebird';
