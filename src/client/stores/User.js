@@ -9,6 +9,7 @@ export default class User {
   @observable id = null;
   @observable username = null;
   @observable displayName = null;
+  @observable status = null;
   @observable avatar = null;
   @observable cover = null;
   @observable email = null;
@@ -25,6 +26,7 @@ export default class User {
     displayName = this.displayName,
     avatar = defaultAvatar,
     cover = defaultCover,
+    status = this.status,
     email = this.email,
     gender = this.gender,
     birthday = this.birthday,
@@ -34,6 +36,7 @@ export default class User {
       id,
       username,
       displayName,
+      status,
       avatar,
       cover,
       email,
@@ -49,6 +52,7 @@ export default class User {
     this.username = null;
     this.displayName = null;
     this.avatar = null;
+    this.status = null;
     this.cover = null;
     this.email = null;
     this.gender = null;
@@ -79,6 +83,7 @@ export default class User {
     avatar = defaultAvatar,
     cover = defaultCover,
     email = this.email,
+    status = this.status,
     gender = this.gender,
     birthday = this.birthday,
     // link = this.link
@@ -87,6 +92,7 @@ export default class User {
     this.username = username;
     this.displayName = displayName;
     this.avatar = avatar;
+    this.status = status;
     this.cover = cover;
     this.email = email;
     this.gender = gender;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { observer, inject } from 'mobx-react';
 
 import HeaderMenu from '../components/HeaderMenu';
@@ -11,11 +12,16 @@ class App extends Component {
     app: PropTypes.object.isRequired,
   };
   render() {
-    const { router } = this.props.app;
+    const { router, ui } = this.props.app;
     return (
       <React.Fragment>
         <HeaderMenu />
-        <div className="root-content">
+        <div
+          className={cx({
+            'root-content': true,
+            transparency: ui.transparented,
+          })}
+        >
           {router.container}
         </div>
       </React.Fragment>

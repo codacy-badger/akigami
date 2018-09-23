@@ -8,9 +8,9 @@ export default {
   register: {
     import: () => import(/* webpackChunkName: "register" */ './v2/pages/Register'),
   },
-  // profile: {
-  //     import: () => import(/* webpackChunkName: "profile" */ './pages/Profile'),
-  // },
+  profile: {
+    import: () => import(/* webpackChunkName: "profile" */ './v2/pages/User'),
+  },
   // error: {
   //     import: () => import(/* webpackChunkName: "error" */ './pages/Error'),
   // },

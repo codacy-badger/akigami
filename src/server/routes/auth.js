@@ -18,7 +18,7 @@ const removeUsersFromRoom = room =>
   });
 
 export default app => {
-  app.get('/signin', (req, res) => {
+  app.get('/signIn', (req, res) => {
     res.ssr({
       title: 'Вход',
       layout: 'login',
@@ -32,8 +32,8 @@ export default app => {
     });
   });
 
-  app.get('/signup/:token', async (req, res, next) => {
-    const token = req.params.token;
+  app.get('/signUp/:token', async (req, res, next) => {
+    const { token } = req.params;
     if (!token) {
       next();
       return;
@@ -70,14 +70,14 @@ export default app => {
         io.to(`sign:${emailToken.listenToken}`).emit('sign:listen', {
           action: 'redirect',
           data: {
-            pathname: `/signup/${token}`,
+            pathname: `/signUp/${token}`,
           },
         });
         removeUsersFromRoom(`sign:${emailToken.listenToken}`);
         res.send('Закройте эту вкладку и перейдите к прежней<script>window.close();</script>');
         return;
       }
-      res.redirect(`/signup/${token}`);
+      res.redirect(`/signUp/${token}`);
       return;
     }
     passport.authenticate('passwordless', (err, user, listen) => {
@@ -114,7 +114,7 @@ export default app => {
     })(req, res, next);
   });
 
-  app.post('/api/signup', async (req, res, next) => {
+  app.post('/api/signp', async (req, res, next) => {
     if (!req.isAuthenticated()) {
       const { token } = req.body;
       if (!token) {
