@@ -14,12 +14,16 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.store = new LoginStore(props.app);
+    this.changeEmail = this.changeEmail.bind(this);
   }
   componentWillUnmount() {
     this.store.removeListener();
   }
+  changeEmail(e) {
+    this.store.handleChange('email', e.target.value);
+  }
   render() {
-    const { handleChange, handleSend, isValidEmail, email, loading } = this.store;
+    const { handleSend, isValidEmail, email, loading } = this.store;
     return (
       <React.Fragment>
         <div
@@ -49,7 +53,7 @@ class Login extends Component {
                               placeholder="Введите адрес почты"
                               name="email"
                               error={email.length > 0 && !isValidEmail}
-                              onChange={(e) => handleChange('email', e.target.value)}
+                              onChange={this.changeEmail}
                               value={email}
                             />
                             <Message

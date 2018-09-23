@@ -15,12 +15,23 @@ class Register extends Component {
   constructor(props) {
     super(props);
     this.store = new RegisterStore(this.props.app);
+    this.changeGenderToFemale = this.changeGenderToFemale.bind(this);
+    this.changeGenderToMale = this.changeGenderToMale.bind(this);
+    this.changeUsername = this.changeUsername.bind(this);
+  }
+  changeGenderToMale() {
+    this.store.handleChange('gender', 'male');
+  }
+  changeGenderToFemale() {
+    this.store.handleChange('gender', 'female');
+  }
+  changeUsername(e) {
+    this.store.handleChange('username', e.target.value);
   }
   render() {
     const { email } = this.props;
     const {
       gender,
-      handleChange,
       handleRegister,
       usernameValid,
       username,
@@ -63,7 +74,7 @@ class Register extends Component {
                                 type="button"
                                 active={gender === 'male'}
                                 color={gender === 'male' ? 'blue' : null}
-                                onClick={() => handleChange('gender', 'male')}
+                                onClick={this.changeGenderToMale}
                               >
                                 Мужчина
                               </Button>
@@ -72,7 +83,7 @@ class Register extends Component {
                                 type="button"
                                 active={gender === 'female'}
                                 color={gender === 'female' ? 'pink' : null}
-                                onClick={() => handleChange('gender', 'female')}
+                                onClick={this.changeGenderToFemale}
                               >
                                 Женщина
                               </Button>
@@ -86,7 +97,7 @@ class Register extends Component {
                             placeholder="Например: Joker"
                             value={username}
                             error={!usernameValid}
-                            onChange={(e) => handleChange('username', e.target.value)}
+                            onChange={this.changeUsername}
                             required
                           />
                           <Message
