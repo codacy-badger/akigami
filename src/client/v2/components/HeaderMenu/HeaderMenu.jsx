@@ -13,11 +13,6 @@ class HeaderMenu extends Component {
   }
   render() {
     const { user } = this.props.app;
-    const userMenu = [
-      { key: 'user', text: 'Профильм', icon: 'user' },
-      { key: 'settings', text: 'Настройки', icon: 'settings' },
-      { key: 'sign-out', text: 'Выход', icon: 'sign out' },
-    ];
     return (
       <Menu fixed="top" inverted>
         <TopBar />
@@ -48,6 +43,7 @@ class HeaderMenu extends Component {
             {user.isAuth ? (
               <Dropdown
                 item
+                simple
                 trigger={(
                   <span>
                     <Image
@@ -57,10 +53,22 @@ class HeaderMenu extends Component {
                     {user.displayName}
                   </span>
                 )}
-                options={userMenu}
-                pointing="top left"
-                icon={null}
-              />
+              >
+                <Dropdown.Menu>
+                  <Dropdown.Item as="a">
+                    <Icon name="user" />
+                    Профиль
+                  </Dropdown.Item>
+                  <Dropdown.Item as="a">
+                    <Icon name="settings" />
+                    Настройки
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={user.logout}>
+                    <Icon name="sign-out" />
+                    Выход
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             ) : (
               <Menu.Item as="a" href="/signin">
                 Вход
