@@ -66,7 +66,7 @@ export default class SignUp {
     });
   }, 500);
   handleUsernameValid = () => {
-    if (this.username.length >= 3 && this.username.length <= 40) {
+    if (this.username.length >= 6 && this.username.length <= 40) {
       this.validateUsername();
     } else {
       this.usernameValid = false;
