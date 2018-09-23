@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "concurrently \"yarn run client\" \"yarn run server\"",
-    "server": "nodemon --ignore 'public' tools/run",
+    "server": "sh tools/start.sh",
     "client": "node_modules/.bin/webpack --watch",
     "defaults": "webpack-defaults",
     "webpack-defaults": "webpack-defaults",
