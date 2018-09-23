@@ -27,7 +27,7 @@ export function sendRegister({ email, link }) {
     ignoreHref: true,
   });
   const mailOptions = {
-    from: '"Коёми Арараги" <koyomi@akg.moe>', // sender address
+    from: '"Макисе Курису" <noreply@akg.moe>', // sender address
     to: email, // list of receivers
     subject: 'Регистрация на Акигами', // Subject line
     text: renderedPlain, // plaintext body
@@ -43,7 +43,7 @@ export function sendLogin({ email, link }) {
     ignoreHref: true,
   });
   const mailOptions = {
-    from: '"Коёми Арараги" <koyomi@akg.moe>', // sender address
+    from: '"Таканаси Рикка" <noreply@akg.moe>', // sender address
     to: email, // list of receivers
     subject: 'Вход в Акигами', // Subject line
     text: renderedPlain, // plaintext body
