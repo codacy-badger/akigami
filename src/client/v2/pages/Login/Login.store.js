@@ -4,6 +4,7 @@ import { socket } from '../../../lib/modules';
 export default class Login {
   @observable step = 'notLogged'; // notLogged, confirm, register
   @observable email = '';
+  @observable loading = false;
 
   constructor(app) {
     this.app = app;
@@ -31,8 +32,14 @@ export default class Login {
   };
 
   handleSend = () => {
+    this.loading = true;
     socket.emit('auth:send', this.email);
-    this.step = 'confirm';
+    setTimeout(() => {
+      this.loading = false;
+      setTimeout(() => {
+        this.step = 'confirm';
+      }, 100);
+    }, 200);
   };
 
   removeListener = () => {

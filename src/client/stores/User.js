@@ -2,8 +2,8 @@ import { computed, action, observable } from 'mobx';
 import set from 'lodash/set';
 import { socket } from '../lib/modules';
 
-const defaultAvatar = '/no-photo.jpg';
-const defaultCover = '/no-cover.jpg';
+const defaultAvatar = '/images/no_avatar.jpg';
+const defaultCover = '/images/no_cover.jpg';
 
 export default class User {
   @observable id = null;

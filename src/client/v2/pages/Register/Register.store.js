@@ -7,6 +7,8 @@ export default class SignUp {
   @observable usernameValid = false;
   @observable gender = '';
   @observable birthday = '';
+  @observable error = '';
+  @observable loading = false;
 
   constructor(app) {
     this.app = app;
@@ -17,9 +19,12 @@ export default class SignUp {
     this[key] = value;
   };
 
+  @action
   handleRegister = () => {
     const [, token] = /signup\/(.*)/.exec(window.location.pathname);
     if (this.usernameValid) {
+      this.loading = true;
+      this.error = '';
       const user = {
         username: this.username,
         token,
@@ -44,6 +49,7 @@ export default class SignUp {
         })
         .then(response => response.json())
         .then(response => {
+          this.loading = false;
           if (response.success) {
             this.app.user.setUser(response.user);
             this.app.router.go('/');
@@ -54,7 +60,8 @@ export default class SignUp {
           }
         })
         .catch(err => {
-          this.errorMessage = err.response.message;
+          this.loading = false;
+          this.error = err.response.message;
           console.error(err);
         });
     }
@@ -63,6 +70,9 @@ export default class SignUp {
   validateUsername = debounce(() => {
     socket.emit('validate:user', this.username, res => {
       this.usernameValid = res.is_valid === true && res.exists === false;
+      if (res.exists) {
+        this.error = 'Такое имя пользователя уже занято.';
+      }
     });
   }, 500);
   handleUsernameValid = () => {
@@ -70,6 +80,11 @@ export default class SignUp {
       this.validateUsername();
     } else {
       this.usernameValid = false;
+      if (this.username) {
+        this.error = 'Имя пользователя должно быть больше 5 символов.';
+      } else {
+        this.error = 'Поле обязательно для заполнения.';
+      }
     }
   };
 }
