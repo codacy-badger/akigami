@@ -52,8 +52,6 @@ body, html {
 }
 
 .menu-transparent {
-  transition: background .3s ease-in-out;
-  will-change: background;
   background: rgba(27, 28, 29, 0.4) !important;
 }
 
@@ -100,4 +98,9 @@ body, html {
 
 .page-content {
   padding-top: 32px;
+}
+
+.menu-transparency {
+  transition: background .3s ease-in-out;
+  will-change: background;
 }

@@ -31,7 +31,7 @@ class HeaderMenu extends Component {
   scrollEvent() {
     const { ui } = this.props;
     const scroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const isTop = scroll <= 130;
+    const isTop = scroll <= 40;
     if (ui.transparented) {
       if (!ui.transparent && isTop) ui.changeTransparent(true);
       if (ui.transparent && !isTop) ui.changeTransparent(false);
@@ -45,6 +45,7 @@ class HeaderMenu extends Component {
         fixed="top"
         inverted
         className={cx({
+          'menu-transparency': true,
           'menu-transparent': transparent,
         })}
       >
