@@ -3,7 +3,7 @@ import { action, observable } from 'mobx';
 export default class TopBar {
   @observable show = true;
   @observable progress = 0;
-  @observable color = 'rainbow';
+  @observable color = 'rgba(255, 255, 255, .15)';
   setProgress(progress) {
     this.progress = progress;
   }
@@ -17,7 +17,7 @@ export default class TopBar {
         setTimeout(
           action(() => {
             this.show = true;
-            this.color = 'rainbow';
+            this.color = 'rgba(255, 255, 255, .15)';
           }),
           100,
         );
@@ -27,7 +27,7 @@ export default class TopBar {
   }
 
   error() {
-    this.color = '#FF0000';
+    this.color = 'rgba(213, 67, 67, 0.35)';
     this.finish();
   }
 }

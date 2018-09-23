@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
+
 import HeaderMenu from '../components/HeaderMenu';
 
 @inject('app')
@@ -12,12 +13,12 @@ class App extends Component {
   render() {
     const { router } = this.props.app;
     return (
-      <div>
+      <React.Fragment>
         <HeaderMenu />
         <div className="root-content">
           {router.container}
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

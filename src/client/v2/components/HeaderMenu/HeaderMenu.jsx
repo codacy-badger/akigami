@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
 import { Menu, Container, Dropdown, Image, Icon } from 'semantic-ui-react';
 import Logo from '../Logo';
+import TopBar from '../TopBar';
 
 @inject('app')
 @observer
@@ -19,6 +20,7 @@ class HeaderMenu extends Component {
     ];
     return (
       <Menu fixed="top" inverted>
+        <TopBar />
         <Container>
           <Menu.Item header as="a" href="/">
             <Logo width={26} height={28} style={{ marginRight: '1em' }} />
