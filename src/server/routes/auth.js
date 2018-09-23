@@ -143,7 +143,7 @@ export default app => {
         res.send({
           success: true,
           message: 'account_successful_created',
-          user: pick(user, ['username', 'displayName', 'avatar']),
+          user: pick(user, ['id', 'username', 'displayName', 'avatar']),
         });
         return;
       } catch (e) {
