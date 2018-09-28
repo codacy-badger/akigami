@@ -12,8 +12,11 @@ export default class User {
   @observable status = null;
   @observable avatar = null;
   @observable cover = null;
+  @observable name = null;
   @observable email = null;
   @observable gender = null;
+  @observable website = null;
+  @observable city = null;
   @observable birthday = null;
 
   constructor(app) {
@@ -26,8 +29,11 @@ export default class User {
     displayName = this.displayName,
     avatar = defaultAvatar,
     cover = defaultCover,
+    name = this.name,
     status = this.status,
+    city = this.city,
     email = this.email,
+    website = this.website,
     gender = this.gender,
     birthday = this.birthday,
     // link = this.link
@@ -39,6 +45,9 @@ export default class User {
       status,
       avatar,
       cover,
+      city,
+      name,
+      website,
       email,
       gender,
       birthday,
@@ -52,6 +61,9 @@ export default class User {
     this.username = null;
     this.displayName = null;
     this.avatar = null;
+    this.name = null;
+    this.website = null;
+    this.city = null;
     this.status = null;
     this.cover = null;
     this.email = null;
@@ -82,9 +94,12 @@ export default class User {
     displayName = this.displayName,
     avatar = defaultAvatar,
     cover = defaultCover,
+    name = this.name,
     email = this.email,
     status = this.status,
+    website = this.website,
     gender = this.gender,
+    city = this.city,
     birthday = this.birthday,
     // link = this.link
   } = {}) => {
@@ -93,7 +108,10 @@ export default class User {
     this.displayName = displayName;
     this.avatar = avatar;
     this.status = status;
+    this.name = name;
+    this.website = website;
     this.cover = cover;
+    this.city = city;
     this.email = email;
     this.gender = gender;
     this.birthday = birthday;
@@ -111,6 +129,15 @@ export default class User {
   @computed
   get getAvatar() {
     return !this.avatar ? defaultAvatar : this.avatar;
+  }
+
+  @computed
+  get genderTitle() {
+    switch (this.gender) {
+    case 'male': return 'Мужчина';
+    case 'female': return 'Женщина';
+    default: return 'Не указан';
+    }
   }
 
   @computed

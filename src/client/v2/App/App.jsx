@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import moment from 'moment';
 import { observer, inject } from 'mobx-react';
 
 import HeaderMenu from '../components/HeaderMenu';
+
+moment.locale('ru');
 
 @inject('app')
 @observer

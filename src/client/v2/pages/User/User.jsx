@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { inject, observer, Provider } from 'mobx-react';
-import { Menu, Container, Grid, Label, Dropdown } from 'semantic-ui-react';
+import { Container, Grid, Segment, Header } from 'semantic-ui-react';
+import moment from 'moment';
 
 import UserCover from '../../components/UserCover';
 import UserStore from './User.store';
+import UserMenu from '../../components/UserMenu';
 
 @inject(s => ({
   app: s.app,
@@ -43,48 +45,65 @@ class User extends Component {
             <div className="page-content">
               <Container>
                 <Grid>
-                  <Grid.Row>
-                    <Grid.Column width={16}>
-                      <Menu>
-                        <Menu.Item
-                          name="home"
-                          active
-                          as="a"
-                        >
-                          Главная
-                        </Menu.Item>
-                        <Dropdown
-                          item
-                          simple
-                          text="Библиотека"
-                        >
-                          <Dropdown.Menu>
-                            <Dropdown.Item as="a">Аниме</Dropdown.Item>
-                            <Dropdown.Item as="a">Манга</Dropdown.Item>
-                          </Dropdown.Menu>
-                        </Dropdown>
-                        <Menu.Item
-                          name="followers"
-                          as="a"
-                        >
-                          Подписчики
-                          <Label>12</Label>
-                        </Menu.Item>
-                        <Menu.Item
-                          name="following"
-                          as="a"
-                        >
-                          Подписки
-                          <Label>42</Label>
-                        </Menu.Item>
-                        <Menu.Item
-                          name="clubs"
-                          as="a"
-                        >
-                          Клубы
-                          <Label>3</Label>
-                        </Menu.Item>
-                      </Menu>
+                  <Grid.Row columns={1}>
+                    <Grid.Column>
+                      <UserMenu />
+                    </Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row columns={2}>
+                    <Grid.Column>
+                      <Segment>
+                        left
+                      </Segment>
+                    </Grid.Column>
+                    <Grid.Column>
+                      <Segment basic className="segment-heading">
+                        <Header size="tiny" color="grey">Общая информация</Header>
+                      </Segment>
+                      <Segment style={{ padding: '.5em' }}>
+                        <Grid celled="internally">
+                          <Grid.Row columns={3}>
+                            <Grid.Column>
+                              <Header sub>Дата регистрации</Header>
+                              <span>{moment(this.store.createdAt).format('LL')}</span>
+                            </Grid.Column>
+                            <Grid.Column>
+                              <Header sub>День рождения</Header>
+                              <span>
+                                {(
+                                  this.store.birthday
+                                    ? moment(this.store.birthday).format('LL')
+                                    : 'Не указан'
+                                )}
+                              </span>
+                            </Grid.Column>
+                            <Grid.Column>
+                              <Header sub>Пол</Header>
+                              <span>{this.store.genderTitle}</span>
+                            </Grid.Column>
+                          </Grid.Row>
+                          <Grid.Row columns={3}>
+                            <Grid.Column>
+                              <Header sub>Имя</Header>
+                              <span>{this.store.name}</span>
+                            </Grid.Column>
+                            <Grid.Column>
+                              <Header sub>Город</Header>
+                              <span>{this.store.city}</span>
+                            </Grid.Column>
+                            <Grid.Column>
+                              <Header sub>Сайт</Header>
+                              <a
+                                href={this.store.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {this.store.website}
+                              </a>
+                            </Grid.Column>
+                          </Grid.Row>
+                        </Grid>
+                      </Segment>
                     </Grid.Column>
                   </Grid.Row>
                 </Grid>

@@ -10,6 +10,8 @@ class User extends MongooseClass {
   avatar = { type: String };
   cover = { type: String };
   status = { type: String };
+  name = { type: String };
+  city = { type: String };
   online = { type: Boolean, default: false };
   gender = {
     type: String,

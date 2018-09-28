@@ -13,6 +13,8 @@ class Profile {
   @observable avatar = defaultAvatar;
   @observable cover = defaultCover;
   @observable status = null;
+  @observable name = null;
+  @observable city = null;
 
   constructor(app, data) {
     this.app = app;
@@ -31,6 +33,15 @@ class Profile {
           }
         });
       });
+    }
+  }
+
+  @computed
+  get genderTitle() {
+    switch (this.gender) {
+    case 'male': return 'Мужчина';
+    case 'female': return 'Женщина';
+    default: return 'Не указан';
     }
   }
 

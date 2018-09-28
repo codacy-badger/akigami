@@ -52,8 +52,7 @@ class HeaderMenu extends Component {
         <TopBar />
         <Container>
           <Menu.Item header as="a" href="/">
-            <Logo width={26} height={28} style={{ marginRight: '1em' }} />
-            Акигами
+            <Logo width={26} height={28} />
           </Menu.Item>
           <Dropdown
             item
