@@ -47,7 +47,10 @@ class Tabs extends PureComponent {
   findActiveTab(arr, key) {
     for (const value of arr) {
       if (value.type === 'dropdown') {
-        return this.findActiveTab(value.items, key);
+        const item = this.findActiveTab(value.items, key);
+        if (item) {
+            return item;
+        }
       }
       if (value.key === key) {
         return value;
