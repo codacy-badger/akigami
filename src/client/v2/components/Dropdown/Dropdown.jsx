@@ -6,6 +6,7 @@ class Dropdown extends PureComponent {
     super(props);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleTouchEnd = this.handleTouchEnd.bind(this);
   }
   handleMouseEnter() {
     if (!this.dropdown.state.open) {
@@ -17,6 +18,12 @@ class Dropdown extends PureComponent {
       this.dropdown.close();
     }
   }
+  handleTouchEnd(e) {
+      if (!this.dropdown.state.open) {
+        e.preventDefault();
+        this.handleMouseEnter();
+      }
+  }
   render() {
     const { children, ...props } = this.props;
     return (
@@ -24,6 +31,7 @@ class Dropdown extends PureComponent {
         ref={(c) => { this.dropdown = c; }}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
+        onTouchEnd={this.handleTouchEnd}
         {...props}
       >
         {children}
