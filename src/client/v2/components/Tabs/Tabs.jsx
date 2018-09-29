@@ -1,10 +1,13 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { inject, observer } from 'mobx-react';
 import { Grid, Menu, Dropdown, Label, Icon } from 'semantic-ui-react';
 import DropdownElement from '../Dropdown';
 
-class Tabs extends PureComponent {
+@inject('app')
+@observer
+class Tabs extends Component {
   static propTypes = {
     active: PropTypes.string,
     data: PropTypes.arrayOf(PropTypes.shape({
@@ -21,6 +24,7 @@ class Tabs extends PureComponent {
       })),
     })).isRequired,
     onChange: PropTypes.func,
+    app: PropTypes.object.isRequired,
   }
   static defaultProps = {
     onChange: null,
@@ -39,9 +43,13 @@ class Tabs extends PureComponent {
     }
   }
   handleChangeTab(active) {
+    const topBarActive = this.state.active !== active;
     this.setState({ active }, () => {
       if (this.props.onChange) {
         this.props.onChange(active);
+      }
+      if (topBarActive) {
+        this.props.app.topBar.finish();
       }
     });
   }
