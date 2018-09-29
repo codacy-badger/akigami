@@ -6,9 +6,11 @@ class TitledBlock extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     children: PropTypes.any,
+    basic: PropTypes.bool,
   }
   static defaultProps = {
     children: null,
+    basic: false,
   }
   shouldComponentUpdate(nextProps) {
     if (this.props.title !== nextProps.title) {
@@ -20,13 +22,18 @@ class TitledBlock extends Component {
     return false;
   }
   render() {
-    const { title, children } = this.props;
+    const { title, children, basic } = this.props;
     return (
       <React.Fragment>
         <Segment basic className="segment-heading">
           <Header size="tiny" color="grey">{title}</Header>
         </Segment>
-        <Segment style={{ padding: '.5em' }}>
+        <Segment
+          basic={basic}
+          style={{
+            padding: basic ? 0 : '.5em',
+          }}
+        >
           {children}
         </Segment>
       </React.Fragment>

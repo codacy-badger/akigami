@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { inject, observer, Provider } from 'mobx-react';
-import { Container, Grid, Segment } from 'semantic-ui-react';
+import { Container, Grid } from 'semantic-ui-react';
 
 import UserCover from '../../components/UserCover';
 import UserStore from './User.store';
 import UserMenu from '../../components/UserMenu';
-import TitledBlock from '../../components/TitledBlock';
-import UserSummary from '../../components/UserSummary';
+import UserGeneral from './parts/UserGeneral';
 
 @inject(s => ({
   app: s.app,
@@ -51,18 +50,8 @@ class User extends Component {
                       <UserMenu />
                     </Grid.Column>
                   </Grid.Row>
-                  <Grid.Row columns={2}>
-                    <Grid.Column>
-                      <Segment>
-                        left
-                      </Segment>
-                    </Grid.Column>
-                    <Grid.Column>
-                      <TitledBlock title="Общая информация">
-                        <UserSummary />
-                      </TitledBlock>
-                    </Grid.Column>
-                  </Grid.Row>
+                  {/* Пользовательский роутинг */}
+                  <UserGeneral />
                 </Grid>
               </Container>
             </div>
