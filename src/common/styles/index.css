@@ -111,3 +111,10 @@ body, html {
   margin-bottom: -1rem !important;
   padding: .65em 1em !important;
 }
+
+.dropdown-active {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: rgba(0, 0, 0, 0.95) !important;
+  font-weight: normal !important;
+  box-shadow: none !important;
+}

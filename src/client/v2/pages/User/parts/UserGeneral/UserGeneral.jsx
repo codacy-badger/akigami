@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Grid } from 'semantic-ui-react';
 import TitledBlock from '../../../../components/TitledBlock';
 import UserSummary from '../../../../components/UserSummary';
 
-class UserGeneral extends Component {
+class UserGeneral extends PureComponent {
   render() {
     return (
       <Grid.Row columns={2}>
