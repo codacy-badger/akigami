@@ -16,11 +16,13 @@ class Tabs extends Component {
       icon: PropTypes.string,
       label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       type: PropTypes.oneOf(['dropdown']),
+      render: PropTypes.func,
       items: PropTypes.arrayOf(PropTypes.shape({
         key: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         icon: PropTypes.string,
         label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        render: PropTypes.func.isRequired,
       })),
     })).isRequired,
     onChange: PropTypes.func,

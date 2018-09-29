@@ -105,6 +105,7 @@ body, html {
 .menu-transparency {
   transition: background .3s ease-in-out;
   will-change: background;
+  backdrop-filter: blur(10px);
 }
 
 .segment-heading {
