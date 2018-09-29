@@ -72,7 +72,6 @@ class Tabs extends PureComponent {
                     <DropdownElement
                       key={item.key}
                       item
-                      simple
                       text={item.title}
                       className={cx({
                         'dropdown-active': item.items.map(e => e.key).includes(active),

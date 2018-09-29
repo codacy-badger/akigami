@@ -4,26 +4,26 @@ import { Dropdown as SDropdown } from 'semantic-ui-react';
 class Dropdown extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      open: false,
-    };
-    this.handleOpen = this.handleOpen.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
-  handleOpen() {
-    if (!this.state.open) {
-      this.setState({ open: true });
+  handleMouseEnter() {
+    if (!this.dropdown.state.open) {
+        this.dropdown.open();
     }
   }
-  handleClick(e, data) {
-    console.log(e, data);
+  handleMouseLeave() {
+    if (this.dropdown.state.open) {
+        this.dropdown.close();
+    }
   }
   render() {
     const { children, ...props } = this.props;
     return (
       <SDropdown
-        onOpen={this.handleOpen}
-        onChange={this.handleClick}
+        ref={(c) => this.dropdown = c}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
         {...props}
       >
         {children}
