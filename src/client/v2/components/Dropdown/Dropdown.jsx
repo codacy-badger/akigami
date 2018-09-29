@@ -9,19 +9,19 @@ class Dropdown extends PureComponent {
   }
   handleMouseEnter() {
     if (!this.dropdown.state.open) {
-        this.dropdown.open();
+      this.dropdown.open();
     }
   }
   handleMouseLeave() {
     if (this.dropdown.state.open) {
-        this.dropdown.close();
+      this.dropdown.close();
     }
   }
   render() {
     const { children, ...props } = this.props;
     return (
       <SDropdown
-        ref={(c) => this.dropdown = c}
+        ref={(c) => { this.dropdown = c; }}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
         {...props}

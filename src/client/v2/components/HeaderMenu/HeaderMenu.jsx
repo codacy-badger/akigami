@@ -5,6 +5,7 @@ import cx from 'classnames';
 import { Menu, Container, Dropdown, Image, Icon } from 'semantic-ui-react';
 import Logo from '../Logo';
 import TopBar from '../TopBar';
+import DropdownElement from '../Dropdown';
 
 @inject(s => ({
   ui: s.app.ui,
@@ -54,9 +55,8 @@ class HeaderMenu extends Component {
           <Menu.Item header as="a" href="/">
             <Logo width={26} height={28} />
           </Menu.Item>
-          <Dropdown
+          <DropdownElement
             item
-            simple
             trigger={(
               <span>
                 <Icon name="grid layout" />
@@ -70,13 +70,12 @@ class HeaderMenu extends Component {
               <Dropdown.Item as="a">Аниме</Dropdown.Item>
               <Dropdown.Item as="a">Манга</Dropdown.Item>
             </Dropdown.Menu>
-          </Dropdown>
+          </DropdownElement>
 
           <Menu.Menu position="right">
             {user.isAuth ? (
-              <Dropdown
+              <DropdownElement
                 item
-                simple
                 trigger={(
                   <span>
                     <Image
@@ -101,7 +100,7 @@ class HeaderMenu extends Component {
                     Выход
                   </Dropdown.Item>
                 </Dropdown.Menu>
-              </Dropdown>
+              </DropdownElement>
             ) : (
               <Menu.Item as="a" href="/signIn">
                 Вход
