@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Grid, Menu, Dropdown, Label, Icon } from 'semantic-ui-react';
+import DropdownElement from '../Dropdown';
 
 class Tabs extends PureComponent {
   static propTypes = {
@@ -48,9 +49,7 @@ class Tabs extends PureComponent {
     for (const value of arr) {
       if (value.type === 'dropdown') {
         const item = this.findActiveTab(value.items, key);
-        if (item) {
-            return item;
-        }
+        if (item) return item;
       }
       if (value.key === key) {
         return value;
@@ -70,7 +69,7 @@ class Tabs extends PureComponent {
               {data.map((item) => {
                 if (item.type === 'dropdown') {
                   return (
-                    <Dropdown
+                    <DropdownElement
                       key={item.key}
                       item
                       simple
@@ -86,6 +85,7 @@ class Tabs extends PureComponent {
                             <Dropdown.Item
                               key={dropItem.key}
                               onClick={changeDropdownTab}
+                              active={dropItem.key === active}
                             >
                               {dropItem.icon && <Icon name={dropItem.icon} />}
                               {dropItem.title}
@@ -94,7 +94,7 @@ class Tabs extends PureComponent {
                           );
                         })}
                       </Dropdown.Menu>
-                    </Dropdown>
+                    </DropdownElement>
                   );
                 }
                 const changeTab = () => this.handleChangeTab(item.key);
