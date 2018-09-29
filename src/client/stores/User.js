@@ -1,5 +1,6 @@
 import { computed, action, observable } from 'mobx';
 import set from 'lodash/set';
+import moment from 'moment';
 import { socket } from '../lib/modules';
 
 const defaultAvatar = '/images/no_avatar.jpg';
@@ -138,6 +139,19 @@ export default class User {
     case 'female': return 'Женщина';
     default: return 'Не указан';
     }
+  }
+
+  @computed
+  get registerDate() {
+    return moment(this.createdAt).format('LL');
+  }
+
+  @computed
+  get birthdayDate() {
+    if (this.birthday) {
+      return moment(this.birthday).format('LL');
+    }
+    return 'Не указан';
   }
 
   @computed
