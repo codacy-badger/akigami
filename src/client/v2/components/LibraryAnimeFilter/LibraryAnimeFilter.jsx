@@ -1,50 +1,44 @@
 import React, { Component } from 'react';
-import { Input, Segment, Label, Form, Checkbox } from 'semantic-ui-react';
+import { Input, Button, Dropdown } from 'semantic-ui-react';
 import TitledBlock from '../TitledBlock';
+import LibraryAnimeListFilter from '../LibraryAnimeListFilter';
 
 class LibraryAnimeFilter extends Component {
   render() {
     return (
       <React.Fragment>
         <Input fluid icon="search" placeholder="Поиск..." />
+        <TitledBlock basic title="Списки">
+          <LibraryAnimeListFilter />
+        </TitledBlock>
         <TitledBlock basic title="Фильтры">
-          <Segment attached="top">
-            <Label attached="top">Категория</Label>
-            <Form>
-              <Form.Field className="sort-field field-planned">
-                <Checkbox name="planned" label="Запланировано" />
-              </Form.Field>
-              <Form.Field className="sort-field field-current">
-                <Checkbox name="current" label="Смотрю сейчас" />
-              </Form.Field>
-              <Form.Field className="sort-field field-completed">
-                <Checkbox name="completed" label="Просмотрено" />
-              </Form.Field>
-              <Form.Field className="sort-field field-paused">
-                <Checkbox name="paused" label="Отложено" />
-              </Form.Field>
-              <Form.Field className="sort-field field-dropped">
-                <Checkbox name="dropped" label="Брошено" />
-              </Form.Field>
-            </Form>
-          </Segment>
-          <Segment attached="bottom">
-            <Label attached="top">Статус</Label>
-            <Form>
-              <Form.Field>
-                <Checkbox name="announced" label="Анонсировано" />
-              </Form.Field>
-              <Form.Field>
-                <Checkbox name="ongoing" label="Сейчас выходит" />
-              </Form.Field>
-              <Form.Field>
-                <Checkbox name="released" label="Завершенные" />
-              </Form.Field>
-              <Form.Field>
-                <Checkbox name="latest" label="Недавно завершены" />
-              </Form.Field>
-            </Form>
-          </Segment>
+          <Dropdown
+            placeholder="Формат"
+            fluid
+            selection
+            multiple
+            style={{ marginBottom: '.5em' }}
+            options={[
+              { key: 'tv', text: 'ТВ сериал', value: 'tv' },
+              { key: 'movie', text: 'Фильм', value: 'movie' },
+              { key: 'special', text: 'Спешл', value: 'special' },
+              { key: 'ova', text: 'OVA', value: 'ova' },
+              { key: 'ona', text: 'ONA', value: 'ona' },
+              { key: 'music', text: 'Клип', value: 'music' },
+            ]}
+          />
+          <Dropdown
+            placeholder="Статус"
+            fluid
+            multiple
+            selection
+            options={[
+              { key: 'announced', text: 'Анонсировано', value: 'announced' },
+              { key: 'ongoing', text: 'Сейчас выходит', value: 'ongoing' },
+              { key: 'released', text: 'Вышло', value: 'released' },
+              { key: 'latest', text: 'Недавние', value: 'latest' },
+            ]}
+          />
         </TitledBlock>
       </React.Fragment>
     );
