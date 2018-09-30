@@ -1,12 +1,19 @@
-import React, { Component } from 'react';
-import { Input, Button, Dropdown } from 'semantic-ui-react';
+import React, { PureComponent } from 'react';
+import { Input, Dropdown } from 'semantic-ui-react';
 import TitledBlock from '../TitledBlock';
 import LibraryAnimeListFilter from '../LibraryAnimeListFilter';
 
-class LibraryAnimeFilter extends Component {
+class LibraryAnimeFilter extends PureComponent {
   render() {
     return (
-      <React.Fragment>
+      <div
+        style={{
+          position: 'sticky',
+          position: '-webkit-sticky', // eslint-disable-line no-dupe-keys
+          top: 82,
+          zIndex: 0,
+        }}
+      >
         <Input fluid icon="search" placeholder="Поиск..." />
         <TitledBlock basic title="Списки">
           <LibraryAnimeListFilter />
@@ -40,7 +47,7 @@ class LibraryAnimeFilter extends Component {
             ]}
           />
         </TitledBlock>
-      </React.Fragment>
+      </div>
     );
   }
 }
