@@ -19,10 +19,10 @@ class Dropdown extends PureComponent {
     }
   }
   handleTouchEnd(e) {
-      if (!this.dropdown.state.open) {
-        e.preventDefault();
-        this.handleMouseEnter();
-      }
+    if (!this.dropdown.state.open) {
+      e.preventDefault();
+      this.handleMouseEnter();
+    }
   }
   render() {
     const { children, ...props } = this.props;

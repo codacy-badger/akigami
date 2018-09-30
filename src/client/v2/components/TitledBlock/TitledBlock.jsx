@@ -7,10 +7,12 @@ class TitledBlock extends Component {
     title: PropTypes.string.isRequired,
     children: PropTypes.any,
     basic: PropTypes.bool,
+    padding: PropTypes.bool,
   }
   static defaultProps = {
     children: null,
     basic: false,
+    padding: false,
   }
   shouldComponentUpdate(nextProps) {
     if (this.props.title !== nextProps.title) {
@@ -22,7 +24,8 @@ class TitledBlock extends Component {
     return false;
   }
   render() {
-    const { title, children, basic } = this.props;
+    const { title, children, basic, padding } = this.props;
+    const paddingValue = padding ? '1em' : '0.5em';
     return (
       <React.Fragment>
         <Segment basic className="segment-heading">
@@ -31,7 +34,7 @@ class TitledBlock extends Component {
         <Segment
           basic={basic}
           style={{
-            padding: basic ? 0 : '.5em',
+            padding: basic ? 0 : paddingValue,
           }}
         >
           {children}
