@@ -119,3 +119,67 @@ body, html {
   font-weight: normal !important;
   box-shadow: none !important;
 }
+
+.sort-field {
+  padding: 6px;
+  border-radius: 4px;
+  margin: 0 0 .5em;
+}
+
+.sort-field .checkbox {
+  width: 100%;
+}
+
+.sort-field .checkbox label {
+  color: #fff !important;
+}
+
+.field-planned {
+  background: #2185D0;
+}
+
+
+.field-current {
+  background: #21BA45;
+}
+
+.field-completed {
+  background: #A333C8;
+}
+
+.field-paused {
+  background: #767676;
+}
+
+.field-dropped {
+  background: #DB2828;
+}
+
+.library-table.ui.table thead th {
+  padding: 0.7em 0.78571429em;
+  /* border-bottom: none; */
+}
+
+.library-table-header tr th {
+  padding: 0.25em 0.78571429em !important;
+  border-radius: 0 !important;
+  border-bottom: 1px solid rgba(34, 36, 38, 0.1) !important;
+}
+
+.library-table.ui.table td {
+  padding: 0.5em 0.78571429em;
+}
+
+.library-image-wrapper {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.library-image {
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+}
