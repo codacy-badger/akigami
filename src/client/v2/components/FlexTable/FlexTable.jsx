@@ -16,7 +16,7 @@ class FlexTable extends PureComponent {
   render() {
     const { children } = this.props;
     return (
-      <Segment raised className="flex-table">
+      <Segment className="flex-table">
         {children}
       </Segment>
     );

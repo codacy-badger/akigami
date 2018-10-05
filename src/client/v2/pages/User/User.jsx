@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { inject, observer, Provider } from 'mobx-react';
-import { Container } from 'semantic-ui-react';
 
 import UserCover from '../../components/UserCover';
 
@@ -85,11 +84,7 @@ class User extends Component {
         <Provider store={this.store} isOwner={this.isOwner}>
           <React.Fragment>
             <UserCover />
-            <div className="page-content">
-              <Container>
-                <Tabs data={userPanes} />
-              </Container>
-            </div>
+            <Tabs data={userPanes} />
           </React.Fragment>
         </Provider>
       </div>

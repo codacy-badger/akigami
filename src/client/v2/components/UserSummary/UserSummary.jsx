@@ -59,7 +59,7 @@ class UserSummary extends Component {
       },
     ].filter(e => !!e.show);
     return (
-      <Grid celled="internally">
+      <Grid padded>
         {chunk(summaryInfo, 3).map((row, i) => (
           <Grid.Row columns={3} key={i}> {/* eslint-disable-line react/no-array-index-key */}
             {row.map(item => (

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { inject, observer } from 'mobx-react';
-import { Grid, Menu, Dropdown, Label, Icon } from 'semantic-ui-react';
+import { Grid, Menu, Dropdown, Label, Icon, Container } from 'semantic-ui-react';
 import DropdownElement from '../Dropdown';
 
 @inject('app')
@@ -72,59 +72,61 @@ class Tabs extends Component {
     const { data } = this.props;
     const current = this.findActiveTab(data, active);
     return (
-      <Grid>
-        <Grid.Row columns={1}>
-          <Grid.Column>
-            <Menu>
-              {data.map((item) => {
-                if (item.type === 'dropdown') {
-                  return (
-                    <DropdownElement
-                      key={item.key}
-                      item
-                      text={item.title}
-                      className={cx({
-                        'dropdown-active': item.items.map(e => e.key).includes(active),
-                      })}
-                    >
-                      <Dropdown.Menu>
-                        {item.items.map(dropItem => {
-                          const changeDropdownTab = () => this.handleChangeTab(dropItem.key);
-                          return (
-                            <Dropdown.Item
-                              key={dropItem.key}
-                              onClick={changeDropdownTab}
-                              active={dropItem.key === active}
-                            >
-                              {dropItem.icon && <Icon name={dropItem.icon} />}
-                              {dropItem.title}
-                              {dropItem.label && <Label>{dropItem.label}</Label>}
-                            </Dropdown.Item>
-                          );
-                        })}
-                      </Dropdown.Menu>
-                    </DropdownElement>
-                  );
-                }
-                const changeTab = () => this.handleChangeTab(item.key);
+      <React.Fragment>
+        <Menu className="flat-menu">
+          <Container>
+            {data.map((item) => {
+              if (item.type === 'dropdown') {
                 return (
-                  <Menu.Item
+                  <DropdownElement
                     key={item.key}
-                    name={item.key}
-                    active={active === item.key}
-                    onClick={changeTab}
+                    item
+                    text={item.title}
+                    className={cx({
+                      'dropdown-active': item.items.map(e => e.key).includes(active),
+                    })}
                   >
-                    {item.icon && <Icon name={item.icon} />}
-                    {item.title}
-                    {item.label && <Label>{item.label}</Label>}
-                  </Menu.Item>
+                    <Dropdown.Menu>
+                      {item.items.map(dropItem => {
+                        const changeDropdownTab = () => this.handleChangeTab(dropItem.key);
+                        return (
+                          <Dropdown.Item
+                            key={dropItem.key}
+                            onClick={changeDropdownTab}
+                            active={dropItem.key === active}
+                          >
+                            {dropItem.icon && <Icon name={dropItem.icon} />}
+                            {dropItem.title}
+                            {dropItem.label && <Label>{dropItem.label}</Label>}
+                          </Dropdown.Item>
+                        );
+                      })}
+                    </Dropdown.Menu>
+                  </DropdownElement>
                 );
-              })}
-            </Menu>
-          </Grid.Column>
-        </Grid.Row>
-        {current.render()}
-      </Grid>
+              }
+              const changeTab = () => this.handleChangeTab(item.key);
+              return (
+                <Menu.Item
+                  key={item.key}
+                  name={item.key}
+                  active={active === item.key}
+                  onClick={changeTab}
+                >
+                  {item.icon && <Icon name={item.icon} />}
+                  {item.title}
+                  {item.label && <Label>{item.label}</Label>}
+                </Menu.Item>
+              );
+            })}
+          </Container>
+        </Menu>
+        <Container>
+          <Grid>
+            {current.render()}
+          </Grid>
+        </Container>
+      </React.Fragment>
     );
   }
 }

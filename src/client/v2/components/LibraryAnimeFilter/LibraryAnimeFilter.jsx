@@ -7,12 +7,7 @@ class LibraryAnimeFilter extends PureComponent {
   render() {
     return (
       <div
-        style={{
-          position: 'sticky',
-          position: '-webkit-sticky', // eslint-disable-line no-dupe-keys
-          top: 82,
-          zIndex: 0,
-        }}
+        className="sticky-block with-menu"
       >
         <Input fluid icon="search" placeholder="Поиск..." />
         <TitledBlock basic title="Списки">
