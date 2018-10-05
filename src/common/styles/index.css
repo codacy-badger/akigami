@@ -177,7 +177,7 @@
 .library-image {
   background-size: cover;
   background-position: center;
-  border-radius: 4px;
+  border-radius: 0;
   width: 100%;
   height: 100%;
 }
@@ -285,14 +285,14 @@
   align-items: center;
   border-radius: 0;
   background: rgba(0,0,0,.2);
-  transition: .15s;
+  transition: .1s;
   color: #fff;
   cursor: pointer;
   display: none;
   height: 40px;
   justify-content: center;
   width: 40px;
-  z-index: 10;
+  z-index: 1;
 }
 
 .list-entry .list-cover .list-edit:hover {
@@ -336,7 +336,7 @@
   box-shadow: 0 8px 28px -6px rgba(49,54,68,.3);
   display: block;
   height: 200px;
-  left: -160px;
+  left: -169px;
   padding: 0;
   position: absolute;
   top: -60px;
@@ -359,7 +359,7 @@
   border-left: none !important;
   position: sticky;
   top: 54px;
-  z-index: 1;
+  z-index: 2;
 }
 
 .sticky-block {
@@ -390,4 +390,20 @@
 .ui.raised.segment,
 .ui.raised.segments {
   box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15) !important;
+}
+
+.flat-menu.ui.menu .item > .label {
+  padding: 0.4em 0.78571429em 0.3em;
+  box-shadow: 0 0 0 1px #999999;
+  color: #999999 !important;
+  background: transparent;
+
+  transition: background 0.1s ease, color 0.1s ease;
+}
+
+
+.flat-menu.ui.menu .item:hover > .label,
+.flat-menu.ui.menu .item.active > .label {
+  color: #fff !important;
+  background: #999999;
 }
