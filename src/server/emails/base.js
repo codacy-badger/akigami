@@ -7,13 +7,8 @@ class BaseEmail {
       <mjml>
         <mj-head>
           <mj-font name="Roboto" href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=cyrillic" />
-          <mj-style inline="inline">
-            .shadow {
-              box-shadow: 0px 0px 0px 1px #D4D4D5, 0px 2px 0px 0px #DB2828, 0px 1px 3px 0px #D4D4D5;
-            }
-          </mj-style>
         </mj-head>
-        <mj-body background-color="#f7f7f7">
+        <mj-body background-color="#FFFFFF">
           <mj-section>
             <mj-column>
               <mj-image

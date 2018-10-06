@@ -5,8 +5,8 @@ class LoginEmail extends BaseEmail {
   renderContent({ link }) {
     return `
       <mj-wrapper padding="12px">
-        <mj-section background-color="#D4D4D5" padding="1px" border-radius="4px">
-          <mj-column border-radius="4px" background-color="#FFFFFF">
+        <mj-section background-color="#D4D4D5" padding="1px" border-radius="0px">
+          <mj-column border-radius="0px" background-color="#FFFFFF">
             <mj-section padding="24px 0 16px">
               <mj-column width="180px">
                 <mj-image
@@ -41,7 +41,7 @@ class LoginEmail extends BaseEmail {
                 <mj-button
                   align="left"
                   background-color="#2185D0"
-                  border-radius="4px"
+                  border-radius="0px"
                   font-family="'Roboto', sans-serif"
                   font-size="16px"
                   font-weight="bold"
