@@ -21062,7 +21062,7 @@ ol.ui.horizontal.list li:before,
   -webkit-box-align: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
-  width: 100% !important;
+  width: 100%;
   padding: 0rem;
   padding-top: 1rem;
   padding-bottom: 1rem;

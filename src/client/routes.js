@@ -11,14 +11,14 @@ export default {
   profile: {
     import: () => import(/* webpackChunkName: "profile" */ './v2/pages/User'),
   },
+  explore: {
+    import: () => import(/* webpackChunkName: "explore" */ './v2/pages/Explore'),
+  },
   // error: {
   //     import: () => import(/* webpackChunkName: "error" */ './pages/Error'),
   // },
   // settings: {
   //     import: () => import(/* webpackChunkName: "settings" */ './pages/Settings'),
-  // },
-  // explore: {
-  //     import: () => import(/* webpackChunkName: "explore" */ './pages/Explore'),
   // },
   // entity: {
   //     import: () => import(/* webpackChunkName: "explore" */ './pages/Entity'),

@@ -5,6 +5,7 @@ class Anime extends MongooseClass {
     russian: { type: String },
     romaji: { type: String, required: true },
     english: { type: String },
+    japanese: { type: String },
     other: { type: Array, default: [] },
   };
   description = {
@@ -74,7 +75,7 @@ class Anime extends MongooseClass {
       type: {
         type: String,
         required: true,
-        enum: ['mal', 'shiki', 'oficial', 'other'],
+        enum: ['mal', 'shiki', 'official', 'other'],
       },
     },
   ];
