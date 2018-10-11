@@ -538,3 +538,24 @@
 .entity-description {
   padding: 4px 10px 4px 0;
 }
+
+.ui.selection.active.dropdown,
+.ui.selection.dropdown:focus,
+.ui.selection.active.dropdown:hover {
+  border-color: #d54343;
+}
+
+.ui.selection.dropdown .menu {
+  margin: -1px -1px 0px !important;
+}
+
+.ui.selection.active.dropdown .menu,
+.ui.selection.active.dropdown:hover .menu {
+  border-color: #d54343;
+  border-radius: 0 !important;
+}
+
+.ui.input.focus > input,
+.ui.input > input:focus {
+  border-color: #d54343;
+}
