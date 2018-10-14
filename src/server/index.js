@@ -1,60 +1,43 @@
-import http from 'http';
 import express from 'express';
-import path from 'path';
-import lusca from 'lusca';
-import logger from 'morgan';
-import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import bodyParser from 'body-parser';
-import favicon from 'serve-favicon';
+import cookieParser from 'cookie-parser';
 import config from 'config';
+import path from 'path';
 import passport from 'passport';
-import session from 'express-session';
 
-import { normalizePort, requireFiles } from './utils';
+import { gql } from 'apollo-server-express';
+import { execute, subscribe } from 'graphql';
+import { ApolloEngine } from 'apollo-engine';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
+
+import { requireFiles } from './utils';
+import engineConfig from './config/engine';
 import ssr from './services/ssr';
-import io from './services/websockets';
+
 import './services/database';
-import redisStore from './config/store';
+
+const typeDefs = gql`
+  type Query {
+    hello: String
+  }
+`;
+
+const resolvers = {
+  Query: {
+    hello: () => 'Hello world!',
+  },
+};
 
 const app = express();
-const port = normalizePort(config.get('server.port'));
-const icon = path.join(__dirname, '..', '..', 'public', 'favicon.ico');
-
-app.set('port', port);
-if (icon) app.use(favicon(icon));
-app.use(logger('dev', {
-  skip: (req, res) => res.statusCode < 400,
-}));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-
-app.use(session({
-  name: 'sid',
-  secret: config.get('sessionSecret'),
-  store: redisStore,
-  cookie: {
-    httpOnly: true,
-    maxAge: 1000 * 2630000 * 5, // 5 months
-  },
-  resave: true,
-  saveUninitialized: true,
-}));
-
-app.use(lusca({
-  csrf: false,
-  csp: false,
-  xframe: 'DENY', // or SAMEORIGIN
-  p3p: false,
-  hsts: {
-    maxAge: 31536000,
-    includeSubDomains: true,
-  },
-  xssProtection: true,
-}));
+const schema = { typeDefs, resolvers };
+const engine = new ApolloEngine(engineConfig);
 
 app.use(express.static(path.join(__dirname, '..', '..', 'public')));
-
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 require('./services/passport');
@@ -89,38 +72,19 @@ app.use((err, req, res, nextIgnored) => {
   });
 });
 
-const server = http.createServer(app);
-io.attach(server);
-io.set('transports', ['websocket']);
+const port = config.get('server.port');
+const WS_GQL_PATH = '/graphql';
 
-function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
-
-  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
-
-  switch (error.code) {
-  case 'EACCES':
-    console.error(`${bind} requires elevated privileges`);
-    process.exit(1);
-    break;
-  case 'EADDRINUSE':
-    console.error(`${bind} is already in use`);
-    process.exit(1);
-    break;
-  default:
-    throw error;
-  }
-}
-
-function onListening() {
-  const addr = server.address();
-  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
-
-  console.log(`Akigami Server listening on ${bind}`);
-}
-
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+engine.listen({ port, expressApp: app, graphqlPaths: [WS_GQL_PATH] }, () => {
+  console.log(`APP is now running on http://localhost:${port}`); // eslint-disable-line no-console
+  console.log(`API Server over web socket with subscriptions is now running on ws://localhost:${port}${WS_GQL_PATH}`); // eslint-disable-line no-console
+  // eslint-disable-next-line
+  new SubscriptionServer({
+    schema,
+    execute,
+    subscribe,
+  }, {
+    path: WS_GQL_PATH,
+    server: engine.httpServer,
+  });
+});
