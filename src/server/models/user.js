@@ -51,4 +51,6 @@ class User extends MongooseClass {
   };
 }
 
-export default User.schema();
+const schema = User.schema();
+
+export default schema;

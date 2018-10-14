@@ -14,9 +14,9 @@ export default {
   explore: {
     import: () => import(/* webpackChunkName: "explore" */ './v2/pages/Explore'),
   },
-  // error: {
-  //     import: () => import(/* webpackChunkName: "error" */ './pages/Error'),
-  // },
+  error: {
+    import: () => import(/* webpackChunkName: "error" */ './v2/pages/Error'),
+  },
   // settings: {
   //     import: () => import(/* webpackChunkName: "settings" */ './pages/Settings'),
   // },

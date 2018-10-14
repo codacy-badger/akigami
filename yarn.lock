@@ -6907,6 +6907,10 @@ mongodb@2.2.34:
   dependencies:
     extend "^3.0.0"
 
+mongoose-schema-to-graphql@^2.7.2:
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/mongoose-schema-to-graphql/-/mongoose-schema-to-graphql-2.7.2.tgz#8b439add190c61309a6c18da3ad2799a5abfa4b1"
+
 mongoose@^4.13.9:
   version "4.13.17"
   resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-4.13.17.tgz#0af0396b1e5af027edf404518c62cc194de7d17a"

@@ -56,6 +56,7 @@
     "moment": "^2.22.2",
     "mongoose": "^4.13.9",
     "mongoose-auto-increment": "https://github.com/Alorel/mongoose-auto-increment",
+    "mongoose-schema-to-graphql": "^2.7.2",
     "morgan": "^1.8.2",
     "multer": "^2.0.0-alpha.6",
     "nodemailer": "^4.6.5",
