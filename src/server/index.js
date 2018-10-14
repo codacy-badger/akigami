@@ -29,8 +29,10 @@ const resolvers = {
   },
 };
 
-
 const contextModels = getFiles('models');
+const port = config.get('server.port');
+const GQL_PATH = '/graphql';
+
 const app = express();
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 const server = new ApolloServer({
@@ -67,8 +69,7 @@ app.use((req, res, next) => {
   next();
 });
 
-const port = config.get('server.port');
-const GQL_PATH = '/graphql';
+server.applyMiddleware({ app });
 
 requireFiles('routes', app);
 
@@ -88,8 +89,6 @@ app.use((err, req, res, nextIgnored) => {
     layout: 'error',
   });
 });
-
-server.applyMiddleware({ app });
 
 engine.listen({ port, expressApp: app, graphqlPaths: [GQL_PATH] }, () => {
   console.log(`APP is now running on http://localhost:${port}`); // eslint-disable-line no-console
