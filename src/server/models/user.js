@@ -1,4 +1,5 @@
 import config from 'config';
+import gql from 'graphql-tag';
 import autoIncrement from '../utils/mongooseAutoIncrement';
 import MongooseClass from '../utils/mongooseClass';
 
@@ -51,6 +52,4 @@ class User extends MongooseClass {
   };
 }
 
-const schema = User.schema();
-
-export default schema;
+export default User.schema();

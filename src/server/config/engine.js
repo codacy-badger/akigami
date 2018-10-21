@@ -1,5 +1,7 @@
+import config from 'config';
+
 export default {
-  apiKey: 'moe:akg:disabledKey',
+  apiKey: config.get('apolloApiKey'),
   stores: [
     {
       name: 'publicResponseCache',
@@ -38,11 +40,7 @@ export default {
       },
     },
   ],
-  reporting: {
-    debugReports: true,
-    disabled: true,
-  },
   logging: {
-    level: 'DEBUG',
+    level: 'INFO',
   },
 };

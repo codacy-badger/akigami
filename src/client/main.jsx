@@ -44,15 +44,29 @@ import App from './v2/App';
     cache: new InMemoryCache(),
   });
 
-  console.log(client);
   const res = await client.query({
     query: gql`
       {
-        hello
+        users {
+          id
+          displayName
+          username
+          email
+          gender
+          avatar
+          cover
+          status
+          birthday
+          name
+          city
+          online
+          createdAt
+          visitedAt
+        }
       }
     `,
   });
-  console.log({ res });
+  console.log(res);
 
   if (typeof window !== 'undefined') {
     ReactModal.setAppElement('#root');

@@ -6,7 +6,7 @@ import config from 'config';
 import path from 'path';
 import passport from 'passport';
 import cookie from 'cookie';
-import { gql, makeExecutableSchema, ApolloServer } from 'apollo-server-express';
+import { ApolloServer } from 'apollo-server-express';
 import { execute, subscribe } from 'graphql';
 import { ApolloEngine } from 'apollo-engine';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
@@ -14,27 +14,15 @@ import { SubscriptionServer } from 'subscriptions-transport-ws';
 import { requireFiles, getFiles } from './utils';
 import engineConfig from './config/engine';
 import ssr from './services/ssr';
+import { schema, typeDefs, resolvers } from './graphs';
 
 import './services/database';
 
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-
-const resolvers = {
-  Query: {
-    hello: () => 'Hello world!',
-  },
-};
-
-const contextModels = getFiles('models');
+const contextModels = getFiles('models', null, true, true);
 const port = config.get('server.port');
 const GQL_PATH = '/graphql';
 
 const app = express();
-const schema = makeExecutableSchema({ typeDefs, resolvers });
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -44,7 +32,7 @@ const server = new ApolloServer({
   playground: true,
   context: ({ req }) => ({
     user: req.user,
-    ...contextModels,
+    models: contextModels,
   }),
 });
 const engine = new ApolloEngine(engineConfig);
@@ -110,7 +98,7 @@ engine.listen({ port, expressApp: app, graphqlPaths: [GQL_PATH] }, () => {
         const baseContext = {
           context: {
             user: wsSessionUser,
-            ...contextModels,
+            models: contextModels,
           },
         };
 

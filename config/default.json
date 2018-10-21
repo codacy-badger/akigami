@@ -29,6 +29,7 @@
     "token": "",
     "address": ""
   },
+  "apolloApiKey": "moe:akg:disabledKey",
   "sessionSecret": "",
   "enviroment": "default"
 }
