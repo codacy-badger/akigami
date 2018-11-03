@@ -1,6 +1,6 @@
 import { action, autorun, computed, observable } from 'mobx';
 import debounce from 'lodash/debounce';
-import { socket } from '../../../lib/modules';
+import { ApolloClient } from '../../../lib/modules';
 
 export default class SignUp {
   @observable username = '';
@@ -20,18 +20,25 @@ export default class SignUp {
   };
 
   @action
-  handleRegister = () => {
+  handleRegister = async () => {
     const [, token] = /signup\/(.*)/.exec(window.location.pathname);
     if (this.usernameValid) {
       this.loading = true;
       this.error = '';
-      const user = {
-        username: this.username,
-        token,
-        gender: this.gender,
-        birthday: this.birthday,
-      };
-      fetch('/api/signup', {
+
+      const res = await ApolloClient.mutate({
+        mutation: `
+        mutation {
+          signup(username: "${this.username}", token: "${token}", gender: "${this.gender}", birthday: "${this.birthday}")
+        }
+        `,
+      });
+
+      // this.loading = false;
+      // this.app.user.setUser(res.data.sigunp.user);
+      // this.app.router.go('/');
+
+      /* fetch('/api/signup', {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
@@ -63,20 +70,23 @@ export default class SignUp {
           this.loading = false;
           this.error = err.response.message;
           console.error(err);
-        });
-    }
+        }); */
+    } 
   };
 
-  validateUsername = debounce(() => {
-    socket.emit('validate:user', this.username, res => {
-      this.usernameValid = res.is_valid === true && res.exists === false;
-      if (res.exists) {
-        this.error = 'Такое имя пользователя уже занято.';
-      }
+  validateUsername = debounce(async () => {
+    const res = await ApolloClient.query({
+      query: `
+        { validateUsername(username: "${this.username}") }
+      `,
     });
+    this.usernameValid = res.data.validateUsername.is_valid && !res.data.validateUsername.exists;
+    if (res.data.validateUsername.exists) {
+      this.error = 'Такое имя пользователя уже занято.';
+    }
   }, 500);
   handleUsernameValid = () => {
-    if (this.username.length >= 6 && this.username.length <= 40) {
+    if (this.username.length >= 5 && this.username.length <= 40) {
       this.validateUsername();
     } else {
       this.usernameValid = false;

@@ -1,5 +1,5 @@
 import { computed, observable } from 'mobx';
-import { socket } from '../../../lib/modules';
+import { ApolloClient } from '../../../lib/modules';
 
 export default class Login {
   @observable step = 'notLogged'; // notLogged, confirm, register
@@ -9,7 +9,7 @@ export default class Login {
   constructor(app) {
     this.app = app;
     if (typeof window !== 'undefined') {
-      socket.on('sign:listen', this.handleListener);
+      // socket.on('sign:listen', this.handleListener);
     }
   }
 
@@ -33,7 +33,14 @@ export default class Login {
 
   handleSend = () => {
     this.loading = true;
-    socket.emit('auth:send', this.email);
+    // socket.emit('auth:send', this.email);
+    ApolloClient.mutate({
+      mutation: `
+      mutation {
+        sendEmail(email: "${this.email}")
+      }
+      `,
+    });
     setTimeout(() => {
       this.loading = false;
       setTimeout(() => {
@@ -43,7 +50,7 @@ export default class Login {
   };
 
   removeListener = () => {
-    socket.removeListener('sign:listen', this.handleListener);
+    // socket.removeListener('sign:listen', this.handleListener);
   };
 
   @computed

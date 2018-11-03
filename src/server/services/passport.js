@@ -5,14 +5,15 @@ import CustomStrategy from 'passport-custom';
 const User = mongoose.model('User');
 const EmailToken = mongoose.model('EmailToken');
 passport.serializeUser((user, done) => {
-  done(null, user.username);
+  done(null, user.id);
 });
-passport.deserializeUser((username, done) => {
-  User.findOne({
-    username: new RegExp(username, 'i'),
-  })
-    .then(user => Promise.resolve(done(null, user)))
-    .catch(err => done(err, null));
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findOne({ id });
+    done(null, user);
+  } catch (err) {
+    done(err, null);
+  }
 });
 
 passport.use(

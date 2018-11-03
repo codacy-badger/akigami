@@ -4,7 +4,7 @@ import MongooseClass from '../utils/mongooseClass';
 class EmailToken extends MongooseClass {
   email = { type: String, required: true };
   token = { type: String, required: true, default: uuid.v4 };
-  listenToken = { type: String, required: true, default: uuid.v4 };
+  listenToken = { type: String, required: true };
   createdAt = { type: Date, expires: 60 * 15, default: Date.now };
 
   async isLogin() {

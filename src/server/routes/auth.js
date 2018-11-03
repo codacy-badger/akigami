@@ -1,24 +1,10 @@
 import mongoose from 'mongoose';
-import passport from 'passport';
-import pick from 'lodash/pick';
-
-import io from '../services/websockets';
 
 const User = mongoose.model('User');
 const EmailToken = mongoose.model('EmailToken');
 
-const getUsersByRoom = room =>
-  (typeof io.of('/').adapter.rooms[room] !== 'undefined'
-    ? io.of('/').adapter.rooms[room].length
-    : 0);
-const removeUsersFromRoom = room =>
-  typeof io.of('/').adapter.rooms[room] !== 'undefined' &&
-  Object.keys(io.sockets.adapter.rooms[room].sockets).forEach(s => {
-    io.sockets.sockets[s].leave(room);
-  });
-
 export default app => {
-  app.get('/signIn', (req, res) => {
+  app.get('/signin', (req, res) => {
     res.ssr({
       title: 'Вход',
       layout: 'login',
@@ -32,7 +18,7 @@ export default app => {
     });
   });
 
-  app.get('/signUp/:token', async (req, res, next) => {
+  app.get('/signup/:token', async (req, res, next) => {
     const { token } = req.params;
     if (!token) {
       next();
@@ -47,6 +33,23 @@ export default app => {
       title: 'Регистрация',
       layout: 'register',
       props: { email: emailToken.email },
+    });
+  });
+
+  app.get('/auth/:token', async (req, res, next) => {
+    const { token } = req.params;
+    if (!token) {
+      next();
+      return;
+    }
+    const emailToken = await EmailToken.findOne({ token });
+    if (!emailToken) {
+      next();
+      return;
+    }
+    res.ssr({
+      title: 'Авторизация',
+      layout: 'auth',
     });
   });
 
@@ -65,94 +68,10 @@ export default app => {
 
     const hasUser = await User.findOne({ email: emailToken.email }).select('id');
     if (!hasUser) {
-      const room = `sign:${emailToken.listenToken}`;
-      if (getUsersByRoom(room) > 0) {
-        io.to(`sign:${emailToken.listenToken}`).emit('sign:listen', {
-          action: 'redirect',
-          data: {
-            pathname: `/signUp/${token}`,
-          },
-        });
-        removeUsersFromRoom(`sign:${emailToken.listenToken}`);
-        res.send('Закройте эту вкладку и перейдите к прежней<script>window.close();</script>');
-        return;
-      }
-      res.redirect(`/signUp/${token}`);
+      res.redirect(`/signup/${token}`);
       return;
     }
-    passport.authenticate('passwordless', (err, user, listen) => {
-      if (err) {
-        next();
-        return;
-      }
-      req.login(user, e => {
-        if (e) {
-          next(e);
-          return;
-        }
-
-        emailToken.remove();
-        const pickedUser = pick(user, [
-          'id',
-          'avatar',
-          'username',
-          'displayName',
-          'link',
-        ]);
-        const room = `sign:${listen}`;
-        if (getUsersByRoom(room) > 0) {
-          io.to(`sign:${listen}`).emit('sign:listen', {
-            action: 'login',
-            data: { user: pickedUser },
-          });
-          removeUsersFromRoom(`sign:${listen}`);
-          res.send('Закройте эту вкладку и перейдите к прежней<script>window.close();</script>');
-          return;
-        }
-        res.redirect('/news');
-      });
-    })(req, res, next);
-  });
-
-  app.post('/api/signp', async (req, res, next) => {
-    if (!req.isAuthenticated()) {
-      const { token } = req.body;
-      if (!token) {
-        res.send({ success: false, message: 'no_token' });
-        return;
-      }
-      const emailToken = await EmailToken.findOne({ token });
-      if (!emailToken) {
-        res.send({ success: false, message: 'no_token' });
-        return;
-      }
-      const data = {
-        displayName: req.body.username,
-        username: req.body.username.toLowerCase(),
-        email: emailToken.email,
-        gender: req.body.gender,
-        birthday: req.body.birthday,
-        // gender and date
-      };
-      try {
-        const user = await User.create(data);
-        await new Promise(resp => {
-          req.logIn(user, resp);
-        });
-        await emailToken.remove();
-        res.send({
-          success: true,
-          message: 'account_successful_created',
-          user: pick(user, ['id', 'username', 'displayName', 'avatar']),
-        });
-        return;
-      } catch (e) {
-        console.error(e);
-        res.send({ success: false, message: 'account_create_failed' });
-        return;
-      }
-    }
-    next();
+    res.redirect(`/auth/${token}`);
   });
 
   app.post('/api/logout', (req, res, next) => {

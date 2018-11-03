@@ -2,14 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
 import ReactModal from 'react-modal';
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { WebSocketLink } from 'apollo-link-ws';
-import { onError } from 'apollo-link-error';
-import { ApolloLink } from 'apollo-link';
 import gql from 'graphql-tag';
 import AppStore from './stores/AppStore';
 import App from './v2/App';
+import { ApolloClient } from './lib/modules';
 
 (async () => {
   const raw = document.querySelector('#preload-data');
@@ -24,28 +20,8 @@ import App from './v2/App';
     layout: raw.dataset.layout,
   });
 
-  const client = new ApolloClient({
-    link: ApolloLink.from([
-      onError(({ graphQLErrors, networkError }) => {
-        if (graphQLErrors) {
-          graphQLErrors.map(({ message, locations, path }) => (
-            console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
-          ));
-        }
-        if (networkError) console.log('[Network error]:', networkError);
-      }),
-      new WebSocketLink({
-        uri: 'ws://localhost:3000/graphql',
-        options: {
-          reconnect: true,
-        },
-      }),
-    ]),
-    cache: new InMemoryCache(),
-  });
-
-  const res = await client.query({
-    query: gql`
+  const res = await ApolloClient.query({
+    query: `
       {
         users {
           id
@@ -67,6 +43,19 @@ import App from './v2/App';
     `,
   });
   console.log(res);
+
+  const res2 = await ApolloClient.query({
+    query: `
+      {
+        getMe {
+          id
+          displayName
+          username
+        }
+      }
+    `,
+  });
+  console.log(res2);
 
   if (typeof window !== 'undefined') {
     ReactModal.setAppElement('#root');

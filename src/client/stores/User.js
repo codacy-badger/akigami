@@ -1,7 +1,9 @@
 import { computed, action, observable } from 'mobx';
 import set from 'lodash/set';
 import moment from 'moment';
-import { socket } from '../lib/modules';
+import gql from 'graphql-tag';
+import cookie from 'cookie';
+import { ApolloClient } from '../lib/modules';
 
 const defaultAvatar = '/images/no_avatar.jpg';
 const defaultCover = '/images/no_cover.jpg';
@@ -22,6 +24,30 @@ export default class User {
 
   constructor(app) {
     this.app = app;
+    if (typeof window !== 'undefined') {
+      // socket.on(`profile:${this.id}`, this.listener);
+      ApolloClient.subscribe({
+        query: gql`
+        subscription {
+          changed
+        }`,
+        variables: {},
+      }).subscribe({
+        next: ({ data }) => {
+          if (data.changed && data.changed.action === 'login') {
+            this.app.user.setUser(data.changed.data.user);
+            this.app.router.go('/');
+            if (!document.hidden) {
+              this.app.notification.create({
+                title: `Добро пожаловать, ${data.changed.data.user.displayName}!`,
+                message: 'Вы успешно авторизовались, открытые вкладки с сайтом также авторизованы и перенаправлены.',
+                level: 'success',
+              });
+            }
+          }
+        },
+      });
+    }
   }
 
   setUser = ({
@@ -57,7 +83,7 @@ export default class User {
 
   @action
   clearUserData = () => {
-    socket.removeListener(`profile:${this.id}`, this.listener);
+    // socket.removeListener(`profile:${this.id}`, this.listener);
     this.id = null;
     this.username = null;
     this.displayName = null;
@@ -116,9 +142,20 @@ export default class User {
     this.email = email;
     this.gender = gender;
     this.birthday = birthday;
-    if (typeof window !== 'undefined') {
-      socket.on(`profile:${this.id}`, this.listener);
-    }
+    // if (typeof window !== 'undefined') {
+    //   // socket.on(`profile:${this.id}`, this.listener);
+    //   ApolloClient.subscribe({
+    //     query: gql`
+    //     subscription {
+    //       changed(cookie: "${cookie.parse(document.cookie).sid}")
+    //     }`,
+    //     variables: {},
+    //   }).subscribe({
+    //     next(data) {
+    //       console.log(data);
+    //     },
+    //   });
+    // }
     // this.link = link;
   };
 

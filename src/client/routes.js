@@ -2,6 +2,9 @@ export default {
   feed: {
     import: () => import(/* webpackChunkName: "feed" */ './v2/pages/Feed'),
   },
+  auth: {
+    import: () => import(/* webpackChunkName: "auth" */ './v2/pages/Auth'),
+  },
   login: {
     import: () => import(/* webpackChunkName: "login" */ './v2/pages/Login'),
   },
