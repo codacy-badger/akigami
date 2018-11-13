@@ -1,2 +1,2 @@
 # Akigami
-Social network with tracking anime & manga.
+> Social network with tracking anime & manga.
