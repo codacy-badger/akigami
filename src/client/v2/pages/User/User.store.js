@@ -2,7 +2,7 @@ import { computed, observable } from 'mobx';
 import superagent from 'superagent';
 import set from 'lodash/set';
 import moment from 'moment';
-import { socket } from '../../../lib/modules';
+// import { socket } from '../../../lib/modules';
 
 const defaultAvatar = '/images/no_avatar.jpg';
 const defaultCover = '/images/no_cover.jpg';
@@ -23,7 +23,7 @@ class Profile {
       set(this, key, data[key]);
     });
     if (typeof window !== 'undefined') {
-      socket.on(`profile:${this.id}`, newData => {
+      /* socket.on(`profile:${this.id}`, newData => {
         Object.keys(newData).forEach(key => {
           set(this, key, newData[key]);
           if (key === 'displayName') {
@@ -33,7 +33,7 @@ class Profile {
             this.app.router.setURL(`@${newData[key]}`);
           }
         });
-      });
+      }); */
     }
   }
 
@@ -117,7 +117,7 @@ class Profile {
   };
 
   removeImage = type => {
-    socket.emit(
+    /* socket.emit(
       'profile:image',
       {
         action: 'remove',
@@ -132,7 +132,7 @@ class Profile {
           level: 'success',
         });
       },
-    );
+    ); */
   };
 }
 
