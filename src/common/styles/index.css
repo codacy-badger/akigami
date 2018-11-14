@@ -451,6 +451,7 @@
 }
 
 .poster {
+  display: block;
   width: 100%;
   height: 0;
   padding-bottom: 142%;
@@ -492,11 +493,11 @@
 }
 
 .entity-genres {
-  margin: 0 -0.14285714em;
+  margin: -0.14285714em;
 }
 
 .entity-genres .label {
-  margin: 0em 0.14285714em !important;
+  margin: 0.14285714em !important;
 }
 
 .entity:hover .entity-more {
@@ -504,7 +505,7 @@
 }
 
 .entity-description-wrapper {
-  font-size: .82em;
+  font-size: .86em;
   color: #767676;
   line-height: 1.43;
   margin-top: 8px;

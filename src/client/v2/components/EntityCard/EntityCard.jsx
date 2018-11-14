@@ -29,16 +29,11 @@ class EntityCard extends Component {
     this.calculateHeight();
   }
   shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.item.id !== nextProps.item.id) {
-      return true;
-    }
-    if (this.state.height !== nextState.height) {
-      return true;
-    }
-    if (this.state.more !== nextState.more) {
-      return true;
-    }
-    return false;
+    return (
+      this.props.item.id !== nextProps.item.id ||
+      this.state.height !== nextState.height ||
+      this.state.more !== nextState.more
+    );
   }
   calculateHeight() {
     const rect = this.inner.current.getBoundingClientRect();
@@ -63,16 +58,16 @@ class EntityCard extends Component {
       desc = item.description.english;
     }
     return (
-      <a
+      <div
         className="entity"
-        href={`/${type}/${item.id}`}
         onMouseEnter={this.handleMore}
         onMouseLeave={this.handleLess}
         style={{ height }}
       >
         <div className="entity-box">
           <div className="entity-inner" ref={this.inner}>
-            <div
+            <a
+              href={`/${type}/${item.id}`}
               className="poster"
               style={{
                 backgroundImage: `url(${item.poster.original})`,
@@ -84,12 +79,18 @@ class EntityCard extends Component {
                 <span>{moment(item.airing.start).format('YYYY')}</span>
               </div>
               <Divider fitted />
-              <Header size="small">{item.title.romaji}</Header>
+              <Header
+                as="a"
+                href={`/${type}/${item.id}`}
+                size="small"
+              >
+                {item.title.romaji}
+              </Header>
               {more && (
                 <div className="entity-more">
                   <div className="entity-genres">
                     {item.genres.map(genre => (
-                      <Label key={genre.id} size="mini">{genre.title}</Label>
+                      <Label key={genre.id} size="tiny">{genre.title}</Label>
                     ))}
                   </div>
                   {desc && (
@@ -115,7 +116,7 @@ class EntityCard extends Component {
             </div>
           </div>
         </div>
-      </a>
+      </div>
     );
   }
 }
