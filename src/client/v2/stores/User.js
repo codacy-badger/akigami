@@ -2,11 +2,10 @@ import { computed, action, observable } from 'mobx';
 import set from 'lodash/set';
 import moment from 'moment';
 import gql from 'graphql-tag';
-import cookie from 'cookie';
 import { ApolloClient } from '../lib/modules';
 
 const defaultAvatar = '/images/no_avatar.jpg';
-const defaultCover = '/images/no_cover.jpg';
+const defaultCover = '/images/no-cover.jpg';
 
 export default class User {
   @observable id = null;
@@ -25,7 +24,6 @@ export default class User {
   constructor(app) {
     this.app = app;
     if (typeof window !== 'undefined') {
-      // socket.on(`profile:${this.id}`, this.listener);
       ApolloClient.subscribe({
         query: gql`
         subscription {
@@ -63,7 +61,6 @@ export default class User {
     website = this.website,
     gender = this.gender,
     birthday = this.birthday,
-    // link = this.link
   } = {}) => {
     this.setUserData({
       id,
@@ -83,7 +80,6 @@ export default class User {
 
   @action
   clearUserData = () => {
-    // socket.removeListener(`profile:${this.id}`, this.listener);
     this.id = null;
     this.username = null;
     this.displayName = null;
@@ -128,7 +124,6 @@ export default class User {
     gender = this.gender,
     city = this.city,
     birthday = this.birthday,
-    // link = this.link
   } = {}) => {
     this.id = id;
     this.username = username;
@@ -142,21 +137,6 @@ export default class User {
     this.email = email;
     this.gender = gender;
     this.birthday = birthday;
-    // if (typeof window !== 'undefined') {
-    //   // socket.on(`profile:${this.id}`, this.listener);
-    //   ApolloClient.subscribe({
-    //     query: gql`
-    //     subscription {
-    //       changed(cookie: "${cookie.parse(document.cookie).sid}")
-    //     }`,
-    //     variables: {},
-    //   }).subscribe({
-    //     next(data) {
-    //       console.log(data);
-    //     },
-    //   });
-    // }
-    // this.link = link;
   };
 
   @computed
