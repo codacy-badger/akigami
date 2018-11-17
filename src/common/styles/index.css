@@ -561,6 +561,10 @@
   border-color: #d54343;
 }
 
+.ui.circular.button {
+  border-radius: 10em !important;
+}
+
 .inline-block {
   display: flex;
 }
