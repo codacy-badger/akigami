@@ -11,13 +11,14 @@ class Inline extends Component {
     align: 'top',
   }
   render() {
-    const { children, align } = this.props;
+    const { children, align, ...props } = this.props;
     return (
       <div
         className={cx({
           'inline-block': true,
           [`align-${align}`]: align,
         })}
+        {...props}
       >
         {children}
       </div>
