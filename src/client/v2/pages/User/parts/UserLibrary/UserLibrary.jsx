@@ -35,7 +35,7 @@ class UserLibrary extends Component {
                   libraryType="anime"
                   item={{
                     id: 1,
-                    poster: 'https://cdn.anilist.co/img/dir/anime/reg/3786-Bpw3uAtKvhq7.jpg',
+                    poster: 'https://s3.anilist.co/media/anime/cover/large/nx3786-Bpw3uAtKvhq7.jpg',
                     title: 'Evangelion Shin Gekijouban: ||',
                     type: 'Фильм',
                     score: '0',

@@ -21,11 +21,18 @@ class User extends Component {
     ui: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
     myUser: PropTypes.object.isRequired,
+    tab: PropTypes.string,
+    subTab: PropTypes.string,
+  }
+  static defaultProps = {
+    tab: null,
+    subTab: null,
   }
   constructor(props) {
     super(props);
     this.store = new UserStore(props.app, props.user);
     this.isOwner = this.isOwner.bind(this);
+    this.handleChangeHistory = this.handleChangeHistory.bind(this);
   }
   componentDidMount() {
     this.props.ui.changeTransparented(true);
@@ -37,7 +44,17 @@ class User extends Component {
     const { myUser } = this.props;
     return this.store.id === myUser.id;
   }
+  handleChangeHistory(tab, item, parent) {
+    const prefix = `/@${this.store.username}`;
+    let path = `${prefix}/${tab}`;
+    if (tab === 'general') path = `${prefix}`;
+    if (parent) path = `${prefix}/${parent.key}/${tab}`;
+    window.history.pushState(null, null, path);
+  }
   render() {
+    const { tab, subTab } = this.props;
+    let activeTab = tab;
+    if (subTab) activeTab = subTab;
     const userPanes = [
       {
         key: 'general',
@@ -84,7 +101,11 @@ class User extends Component {
         <Provider store={this.store} isOwner={this.isOwner}>
           <React.Fragment>
             <UserCover />
-            <Tabs data={userPanes} />
+            <Tabs
+              data={userPanes}
+              active={activeTab}
+              onChange={this.handleChangeHistory}
+            />
           </React.Fragment>
         </Provider>
       </div>
