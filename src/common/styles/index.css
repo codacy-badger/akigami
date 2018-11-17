@@ -560,3 +560,19 @@
 .ui.input > input:focus {
   border-color: #d54343;
 }
+
+.inline-block {
+  display: flex;
+}
+
+.inline-block.align-top {
+  align-items: flex-start;
+}
+
+.inline-block.align-center {
+  align-items: center;
+}
+
+.inline-block.align-bottom {
+  align-items: flex-end;
+}
