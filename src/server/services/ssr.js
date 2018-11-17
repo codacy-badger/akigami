@@ -4,7 +4,7 @@ import { Provider } from 'mobx-react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import pick from 'lodash/pick';
 
-import AppStore from '../../client/stores/AppStore';
+import AppStore from '../../client/v2/stores/AppStore';
 import App from '../../client/App';
 import template from '../template';
 

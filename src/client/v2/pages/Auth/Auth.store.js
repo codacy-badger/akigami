@@ -1,4 +1,4 @@
-import { ApolloClient } from '../../../lib/modules';
+import { ApolloClient } from '../../lib/modules';
 
 export default class Auth {
 

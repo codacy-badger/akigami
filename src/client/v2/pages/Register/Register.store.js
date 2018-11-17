@@ -1,6 +1,6 @@
 import { action, autorun, computed, observable } from 'mobx';
 import debounce from 'lodash/debounce';
-import { ApolloClient } from '../../../lib/modules';
+import { ApolloClient } from '../../lib/modules';
 
 export default class SignUp {
   @observable username = '';
@@ -71,7 +71,7 @@ export default class SignUp {
           this.error = err.response.message;
           console.error(err);
         }); */
-    } 
+    }
   };
 
   validateUsername = debounce(async () => {

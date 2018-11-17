@@ -4,7 +4,7 @@ import moment from 'moment';
 import { Header, Divider, Label } from 'semantic-ui-react';
 import { Scrollbars } from 'react-custom-scrollbars';
 
-import { getType } from '../../../lib/converters';
+import { getType } from '../../lib/converters';
 
 class EntityCard extends Component {
   static propTypes = {

@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
 import ReactModal from 'react-modal';
 import gql from 'graphql-tag';
-import AppStore from './stores/AppStore';
+import AppStore from './v2/stores/AppStore';
 import App from './v2/App';
-import { ApolloClient } from './lib/modules';
+import { ApolloClient } from './v2/lib/modules';
 
 (async () => {
   const raw = document.querySelector('#preload-data');

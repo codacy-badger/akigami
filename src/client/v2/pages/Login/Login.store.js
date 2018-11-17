@@ -1,5 +1,5 @@
 import { computed, observable } from 'mobx';
-import { ApolloClient } from '../../../lib/modules';
+import { ApolloClient } from '../../lib/modules';
 
 export default class Login {
   @observable step = 'notLogged'; // notLogged, confirm, register

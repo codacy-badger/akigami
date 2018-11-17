@@ -6,8 +6,8 @@ import qs from 'querystringify';
 import find from 'lodash/find';
 import pathToRegexp from 'path-to-regexp';
 
-import routes from '../routes';
-import modals from '../modals';
+import routes from '../../routes';
+import modals from '../../modals';
 
 export default class Router {
   @observable container;
