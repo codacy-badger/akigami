@@ -580,3 +580,72 @@
 .inline-block.align-bottom {
   align-items: flex-end;
 }
+
+.ui.form textarea,
+.ui.form input {
+  border-radius: 0 !important;
+}
+
+.list-remove-button {
+  height: 37.67px;
+  width: 36px;
+  flex-shrink: 0;
+  padding: 0 !important;
+  margin-right: -1px !important;
+}
+
+.list-remove-button:hover {
+  z-index: 1;
+}
+
+.segment-no-padding {
+  padding: 0 !important;
+}
+
+.poster-upload {
+  height: 285px;
+}
+
+.poster-upload-image {
+  width: 200px;
+  border-right: 1px solid rgba(34, 36, 38, 0.15);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.poster-upload-content {
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.dropzone {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+  border-width: 0;
+  border-color: transparent;
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.cover-upload-image {
+  width: 100%;
+  height: 151px;
+  border-bottom: 1px solid rgba(34, 36, 38, 0.15);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.cover-upload-content {
+  width: 100%;
+  position: relative;
+  height: 131px;
+}

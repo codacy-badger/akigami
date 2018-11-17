@@ -17,6 +17,9 @@ export default {
   explore: {
     import: () => import(/* webpackChunkName: "explore" */ './v2/pages/Explore'),
   },
+  addAnimeEntity: {
+    import: () => import(/* webpackChunkName: "addAnimeEntity" */ './v2/pages/AddAnimeEntity'),
+  },
   error: {
     import: () => import(/* webpackChunkName: "error" */ './v2/pages/Error'),
   },

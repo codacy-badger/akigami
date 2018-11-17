@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Grid, Header } from 'semantic-ui-react';
+import { Container, Grid, Header, Button, Icon } from 'semantic-ui-react';
 
 import EntityCard from '../../components/EntityCard/EntityCard';
 
@@ -24,7 +24,20 @@ class Explore extends Component {
           <Grid>
             <Grid.Row>
               <Grid.Column width={16}>
-                <Header as="h1">Обзор {typeTitle}</Header>
+                <Header floated="left" as="h1">
+                  Обзор {typeTitle}
+                </Header>
+                <Button
+                  floated="right"
+                  icon
+                  labelPosition="left"
+                  basic
+                  color="olive"
+                  href={`/explore/${type}/create`}
+                >
+                  <Icon name="edit" />
+                  Добавить
+                </Button>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row columns={5} className="entity-row">
