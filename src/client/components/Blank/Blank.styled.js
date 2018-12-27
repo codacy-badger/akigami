@@ -1,4 +1,4 @@
-import styled from 'react-emotion';
+import styled from '@emotion/styled'
 
 export const Block = styled('div')`
   background-color: #f6f5f3;

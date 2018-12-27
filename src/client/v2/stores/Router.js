@@ -116,7 +116,7 @@ export default class Router {
       document.title = `${title} – Акигами`;
     }
     const Module = await Router.import(layout);
-    this.container = React.createElement(Module, props);
+    this.container = { Module, props };
     return true;
   }
 

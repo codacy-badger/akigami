@@ -44,7 +44,6 @@ export const resolvers = {
     users: async (parent, { limit = 0 }, ctx) => {
       const { User } = ctx.models;
       const users = await User.find({}).limit(limit);
-      // console.log('users', users);
       return users;
     },
     user: async (parent, { id }, ctx) => {

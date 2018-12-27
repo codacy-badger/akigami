@@ -14,7 +14,7 @@ try {
 // Initialize plugin by creating counter collection in database.
 exports.initialize = function initialize(connection) {
   try {
-    IdentityCounter = connection.model('IdentityCounter');
+    IdentityCounter = mongoose.model('IdentityCounter');
   } catch (ex) {
     if (ex.name === 'MissingSchemaError') {
       // Create new counter schema.
@@ -28,7 +28,7 @@ exports.initialize = function initialize(connection) {
       counterSchema.index({ field: 1, model: 1 }, { unique: true });
 
       // Create model using new schema.
-      IdentityCounter = connection.model('IdentityCounter', counterSchema);
+      IdentityCounter = mongoose.model('IdentityCounter', counterSchema);
     } else throw ex;
   }
 };

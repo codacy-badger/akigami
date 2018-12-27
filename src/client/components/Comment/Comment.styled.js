@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import styled from 'react-emotion';
+import styled from '@emotion/styled'
 import Text from 'react-textarea-autosize';
 import { Button } from 'react-bootstrap';
 import Ava from '../Avatar';

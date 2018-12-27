@@ -1,4 +1,4 @@
-import styled from 'react-emotion';
+import styled from '@emotion/styled'
 import Grid from 'react-bootstrap/lib/Grid';
 
 export default styled(Grid)`

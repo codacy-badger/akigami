@@ -13,11 +13,13 @@ class App extends Component {
   static propTypes = {
     app: PropTypes.object.isRequired,
   };
+
   componentDidMount() {
     if (this.notificationSystem) {
       this.props.app.notification.init(this.notificationSystem);
     }
   }
+  
   render() {
     const { router } = this.props.app;
     return (
@@ -30,7 +32,7 @@ class App extends Component {
         <Modal />
         <TopBar />
         <Header />
-        {router.container}
+        {React.createElement(router.container.Module, router.container.props)}
       </section>
     );
   }

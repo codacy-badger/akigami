@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import styled from 'react-emotion';
+import styled from '@emotion/styled'
 
 const bordered = css`
   border-radius: 2px;

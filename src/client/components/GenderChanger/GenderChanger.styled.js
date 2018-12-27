@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import styled from 'react-emotion';
+import styled from '@emotion/styled'
 import Ico from '../Icon';
 
 export const Wrapper = styled('div')`

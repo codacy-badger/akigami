@@ -1,4 +1,4 @@
-import styled from 'react-emotion';
+import styled from '@emotion/styled'
 import { Grid as G, Row as R, Col as C } from 'react-bootstrap';
 
 export const Block = styled('div')`

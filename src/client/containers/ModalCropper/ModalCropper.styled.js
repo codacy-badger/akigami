@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import styled from 'react-emotion';
+import styled from '@emotion/styled'
 
 const avatar = css`
   width: 120px !important;

@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import styled from 'react-emotion';
+import styled from '@emotion/styled'
 import { Button } from 'react-bootstrap';
 import I from '../Icon';
 

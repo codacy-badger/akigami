@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import styled from 'react-emotion';
+import styled from '@emotion/styled'
 import { Jumbotron } from 'react-bootstrap';
 
 export const Wrapper = styled(Jumbotron)`

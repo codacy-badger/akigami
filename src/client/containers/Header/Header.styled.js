@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import styled from 'react-emotion';
+import styled from '@emotion/styled'
 import G from 'react-bootstrap/lib/Grid';
 import R from 'react-bootstrap/lib/Row';
 import C from 'react-bootstrap/lib/Col';

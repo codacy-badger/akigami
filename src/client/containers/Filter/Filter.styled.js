@@ -1,4 +1,5 @@
-import styled, { css } from 'react-emotion';
+import styled from '@emotion/styled'
+import { css } from 'emotion'
 import { FormControl } from 'react-bootstrap';
 
 export const Wrapper = styled('div')`

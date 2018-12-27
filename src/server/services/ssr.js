@@ -5,7 +5,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import pick from 'lodash/pick';
 
 import AppStore from '../../client/v2/stores/AppStore';
-import App from '../../client/App';
+import App from '../../client/v2/App';
 import template from '../template';
 
 async function ssr({ title, layout, props = {}, ...data } = {}) {
