@@ -1,15 +1,9 @@
-import { toJS, action, observable } from 'mobx';
+import { toJS, action } from 'mobx';
 import set from 'lodash/set';
 import AnimeModel from '../../models/Anime';
+import { ApolloClient } from '../../lib/modules';
 
 class AddAnimeEntityStore extends AnimeModel {
-  @observable cover = {
-    small: '/images/no-cover.jpg',
-    medium: '/images/no-cover.jpg',
-    large: '/images/no-cover.jpg',
-    original: '/images/no-cover.jpg',
-  };
-
   setField(field, value) {
     set(this, field, value);
   }
@@ -23,12 +17,31 @@ class AddAnimeEntityStore extends AnimeModel {
     if (typeof this[type].original !== 'string' && this[type].original) {
       URL.revokeObjectURL(this[type].original);
     }
-    return new Promise((resolve) => {
-      this[type].original = URL.createObjectURL(file);
-      setTimeout(() => {
-        resolve();
-      }, 2000);
-    });
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const hash = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      }).then(res => res.text());
+      if (!hash) throw new Error('Hash not didn\'t come');
+      const { data = null } = await ApolloClient.query({
+        query: `{
+          getFromCDN(hash: "${hash}") {
+            small
+            medium
+            large
+            original
+          }
+        }`,
+      });
+      if (!data || !data.getFromCDN) throw new Error('Some error getFromCDN GQL');
+      Object.keys(data.getFromCDN).forEach((key) => {
+        this[type][key] = data.getFromCDN[key];
+      });
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 }
 
