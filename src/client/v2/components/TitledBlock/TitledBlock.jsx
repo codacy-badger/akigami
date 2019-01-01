@@ -13,6 +13,7 @@ class TitledBlock extends Component {
     styleHeader: PropTypes.object,
     size: PropTypes.string,
   }
+
   static defaultProps = {
     children: null,
     basic: false,
@@ -22,15 +23,16 @@ class TitledBlock extends Component {
     styleHeader: {},
     size: 'tiny',
   }
+
   shouldComponentUpdate(nextProps) {
-    if (this.props.title !== nextProps.title) {
-      return true;
-    }
-    if (this.state.children !== nextProps.children) {
-      return true;
-    }
-    return false;
+    const { children } = this.state;
+    const { title } = this.props;
+    return (
+      title !== nextProps.title
+      || children !== nextProps.children
+    );
   }
+
   render() {
     const { size, title, children, basic, padding, normal, style, styleHeader } = this.props;
     const paddingValue = padding ? '1em' : '0.5em';
