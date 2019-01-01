@@ -40,6 +40,7 @@ export default app => {
     try {
       const url = JSON.parse(body).path;
       const uid = uuid.v4();
+      // потому что юзер может любой юрл передать
       redis.hset('upload_hash', uid, JSON.stringify({ url }));
       res.status(200).send(uid);
       return;

@@ -26,14 +26,17 @@ class AddAnimeEntity extends Component {
   static propTypes = {
     app: PropTypes.object.isRequired,
   }
+
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.store = new AddAnimeEntityStore(props.app);
   }
+
   getFieldValue(field) {
     return get(this.store, field) || '';
   }
+
   handleChangeField = (field) => (event) => {
     let { value } = event.target;
     if (typeof value === 'string' && !value.length) {
@@ -41,9 +44,11 @@ class AddAnimeEntity extends Component {
     }
     this.store.setField(field, value);
   }
+
   handleSubmit() {
     this.store.submit();
   }
+
   render() {
     const alternateTitlesLabel = <label>Альтернативные названия</label>;
     return (
@@ -106,7 +111,7 @@ class AddAnimeEntity extends Component {
                     />
                   </Form.Group>
                   {this.getFieldValue('title.other').map((item, index) => (
-                    <Form.Field width={8} key={index}> {/* eslint-disable-line react/no-array-index-key */}
+                    <Form.Field width={8} key={index}> {/* eslint-disable-line */}
                       {index === 0 && alternateTitlesLabel}
                       <Inline align="center">
                         <Button
