@@ -127,9 +127,7 @@ SubscriptionServer.create({
         baseContext,
       );
 
-      if (!sess.passport) {
-        resolve(paramsWithFulfilledBaseContext);
-      } else {
+      if (sess && sess.passport) {
         try {
           const currentUser = await contextModels.User.findById(sess.passport.user);
           resolve(Object.assign(paramsWithFulfilledBaseContext, {
@@ -143,7 +141,9 @@ SubscriptionServer.create({
         } catch (e) {
           resolve(paramsWithFulfilledBaseContext);
         }
-      }
+      } else {
+        resolve(paramsWithFulfilledBaseContext);
+      } 
     }
   }),
 }, {
