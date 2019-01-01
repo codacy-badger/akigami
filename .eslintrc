@@ -41,6 +41,7 @@
     "fetch": true,
     "window": true,
     "test": true,
-    "expect": true
+    "expect": true,
+    "FormData": true
   }
 }
