@@ -11,10 +11,12 @@ class PosterUploader extends PureComponent {
     src: PropTypes.string,
     onChange: PropTypes.func,
   }
+
   static defaultProps = {
     src: null,
     onChange: null,
   }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -22,6 +24,7 @@ class PosterUploader extends PureComponent {
     };
     this.handleDropImage = this.handleDropImage.bind(this);
   }
+
   async handleDropImage(files) {
     const { onChange } = this.props;
     this.setState({ loading: true });
@@ -30,6 +33,7 @@ class PosterUploader extends PureComponent {
       this.setState({ loading: false });
     }
   }
+
   render() {
     const { loading } = this.state;
     const { src } = this.props;
@@ -40,49 +44,54 @@ class PosterUploader extends PureComponent {
           onDrop={this.handleDropImage}
           disableClick
         >
-          {({ open, isDragActive }) => {
-            if (isDragActive) {
-              return (
-                <Inline
-                  align="center"
-                  style={{
-                    height: '100%',
-                    justifyContent: 'center',
-                    backgroundColor: 'rgba(0, 0, 0, 0.05)',
-                  }}
-                >
-                  <Header as="h4" icon>
-                    <Icon name="download" />
-                    Переместите изображение сюда
-                  </Header>
-                </Inline>
-              );
-            }
-            return (
-              <Inline align="center">
-                <div className="poster-upload-image">
-                  <Dimmer active={loading} inverted>
-                    <Loader inverted content="Загрузка" />
-                  </Dimmer>
-                  <div
-                    className="poster"
+          {({ open, isDragActive, getRootProps, getInputProps }) => (
+            <div {...getRootProps()} style={{ height: '100%', outline: 'none' }}>
+              {isDragActive
+                ? (
+                  <Inline
+                    align="center"
                     style={{
-                      backgroundImage: `url(${(src && src.preview) || src})`,
+                      height: '100%',
+                      justifyContent: 'center',
+                      backgroundColor: 'rgba(0, 0, 0, 0.05)',
                     }}
-                  />
-                </div>
-                <div className="poster-upload-content">
-                  <Dimmer active={loading} inverted />
-                  <Button type="button" animated="fade" onClick={() => open()}>
-                    <Button.Content visible>Загрузите изображение</Button.Content>
-                    <Button.Content hidden>Выбрать файл</Button.Content>
-                  </Button>
-                  <Divider horizontal>Или</Divider>
-                  <p>переместите его сюда</p>
-                </div>
-              </Inline>
-            );
-          }}
+                  >
+                    <Header as="h4" icon>
+                      <Icon name="download" />
+                      Переместите изображение сюда
+                    </Header>
+                  </Inline>
+                ) : (
+                  <Inline align="center">
+                    <input {...getInputProps()} />
+                    <div className="poster-upload-image">
+                      <Dimmer active={loading} inverted>
+                        <Loader inverted content="Загрузка" />
+                      </Dimmer>
+                      <div
+                        className="poster"
+                        style={{
+                          backgroundImage: `url(${(src && src.preview) || src})`,
+                        }}
+                      />
+                    </div>
+                    <div className="poster-upload-content">
+                      <Dimmer active={loading} inverted />
+                      <Button
+                        type="button"
+                        animated="fade"
+                        onClick={() => open()}
+                      >
+                        <Button.Content visible>Загрузите изображение</Button.Content>
+                        <Button.Content hidden>Выбрать файл</Button.Content>
+                      </Button>
+                      <Divider horizontal>Или</Divider>
+                      <p>переместите его сюда</p>
+                    </div>
+                  </Inline>
+                )}
+            </div>
+          )}
         </Dropzone>
       </Segment>
     );

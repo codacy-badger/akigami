@@ -20,10 +20,12 @@ class CoverUploadCard extends PureComponent {
     src: PropTypes.string,
     onChange: PropTypes.func,
   }
+
   static defaultProps = {
     src: null,
     onChange: null,
   }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -31,6 +33,7 @@ class CoverUploadCard extends PureComponent {
     };
     this.handleDropImage = this.handleDropImage.bind(this);
   }
+
   async handleDropImage(files) {
     const { onChange } = this.props;
     this.setState({ loading: true });
@@ -39,6 +42,7 @@ class CoverUploadCard extends PureComponent {
       this.setState({ loading: false });
     }
   }
+
   render() {
     const { loading } = this.state;
     const { src } = this.props;
@@ -49,78 +53,79 @@ class CoverUploadCard extends PureComponent {
           onDrop={this.handleDropImage}
           disableClick
         >
-          {({ open, isDragActive }) => {
-            if (isDragActive) {
-              return (
-                <Inline
-                  align="center"
-                  style={{
-                    height: '100%',
-                    justifyContent: 'center',
-                    backgroundColor: 'rgba(0, 0, 0, 0.05)',
-                  }}
-                >
-                  <Header as="h4" icon>
-                    <Icon name="download" />
-                    Переместите изображение сюда
-                  </Header>
-                </Inline>
-              );
-            }
-            return (
-              <React.Fragment>
-                <div className="cover-upload-image">
-                  <Dimmer active={loading} inverted>
-                    <Loader inverted content="Загрузка" />
-                  </Dimmer>
-                  <div
-                    className="cover"
+          {({ open, isDragActive, getRootProps, getInputProps }) => (
+            <div {...getRootProps()} style={{ height: '100%', outline: 'none' }}>
+              {isDragActive
+                ? (
+                  <Inline
+                    align="center"
                     style={{
-                      backgroundImage: `url(${(src && src.preview) || src})`,
-                    }}
-                  />
-                </div>
-                <div className="cover-upload-content">
-                  <Dimmer active={loading} inverted />
-                  <Grid
-                    columns={3}
-                    style={{
-                      height: 'calc(100% + 2rem)',
-                      padding: '0 30px',
+                      height: '100%',
+                      justifyContent: 'center',
+                      backgroundColor: 'rgba(0, 0, 0, 0.05)',
                     }}
                   >
-                    <Grid.Row>
-                      <Grid.Column
+                    <Header as="h4" icon>
+                      <Icon name="download" />
+                      Переместите изображение сюда
+                    </Header>
+                  </Inline>
+                ) : (
+                  <React.Fragment>
+                    <input {...getInputProps()} />
+                    <div className="cover-upload-image">
+                      <Dimmer active={loading} inverted>
+                        <Loader inverted content="Загрузка" />
+                      </Dimmer>
+                      <div
+                        className="cover"
                         style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          flex: 1,
+                          backgroundImage: `url(${(src && src.preview) || src})`,
+                        }}
+                      />
+                    </div>
+                    <div className="cover-upload-content">
+                      <Dimmer active={loading} inverted />
+                      <Grid
+                        columns={3}
+                        style={{
+                          height: 'calc(100% + 2rem)',
+                          padding: '0 30px',
                         }}
                       >
-                        <Button type="button" animated="fade" onClick={() => open()}>
-                          <Button.Content visible>Загрузите изображение</Button.Content>
-                          <Button.Content hidden>Выбрать файл</Button.Content>
-                        </Button>
-                      </Grid.Column>
-                      <Grid.Column width={3}>
-                        <Divider vertical>Или</Divider>
-                      </Grid.Column>
-                      <Grid.Column
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          flex: 1,
-                          justifyContent: 'center',
-                        }}
-                      >
-                        <p>переместите его сюда</p>
-                      </Grid.Column>
-                    </Grid.Row>
-                  </Grid>
-                </div>
-              </React.Fragment>
-            );
-          }}
+                        <Grid.Row>
+                          <Grid.Column
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              flex: 1,
+                            }}
+                          >
+                            <Button type="button" animated="fade" onClick={() => open()}>
+                              <Button.Content visible>Загрузите изображение</Button.Content>
+                              <Button.Content hidden>Выбрать файл</Button.Content>
+                            </Button>
+                          </Grid.Column>
+                          <Grid.Column width={3}>
+                            <Divider vertical>Или</Divider>
+                          </Grid.Column>
+                          <Grid.Column
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              flex: 1,
+                              justifyContent: 'center',
+                            }}
+                          >
+                            <p>переместите его сюда</p>
+                          </Grid.Column>
+                        </Grid.Row>
+                      </Grid>
+                    </div>
+                  </React.Fragment>
+                )}
+            </div>
+          )}
         </Dropzone>
       </Segment>
     );
