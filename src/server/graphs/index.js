@@ -5,6 +5,7 @@ import merge from 'lodash/merge';
 import { typeDef as User, resolvers as userResolvers } from './user';
 import { typeDef as Auth, resolvers as authResolvers } from './auth';
 import { typeDef as CDN, resolvers as CDNResolvers } from './cdn';
+import { typeDef as Genre, resolvers as GenreResolvers } from './genre';
 
 const Query = gql`
   type Query {
@@ -27,6 +28,7 @@ export const typeDefs = [
   User,
   Auth,
   CDN,
+  Genre,
 ];
 
 export const resolvers = merge(
@@ -34,6 +36,7 @@ export const resolvers = merge(
   userResolvers,
   authResolvers,
   CDNResolvers,
+  GenreResolvers,
 );
 
 export const schema = makeExecutableSchema({ typeDefs, resolvers });

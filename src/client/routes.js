@@ -23,6 +23,12 @@ export default {
   error: {
     import: () => import(/* webpackChunkName: "error" */ './v2/pages/Error'),
   },
+  admin: {
+    import: () => import(/* webpackChunkName: "admin" */ './v2/pages/admin/Dashboard'),
+  },
+  'admin:genres': {
+    import: () => import(/* webpackChunkName: "admin:genres" */ './v2/pages/admin/Genres'),
+  },
   // settings: {
   //     import: () => import(/* webpackChunkName: "settings" */ './pages/Settings'),
   // },
