@@ -25,8 +25,7 @@ class TitledBlock extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    const { children } = this.state;
-    const { title } = this.props;
+    const { title, children } = this.props;
     return (
       title !== nextProps.title
       || children !== nextProps.children
