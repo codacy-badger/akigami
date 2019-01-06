@@ -28,10 +28,12 @@ class Tabs extends Component {
     onChange: PropTypes.func,
     app: PropTypes.object.isRequired,
   }
+
   static defaultProps = {
     onChange: null,
     active: null,
   }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -39,11 +41,13 @@ class Tabs extends Component {
     };
     this.handleChangeTab = this.handleChangeTab.bind(this);
   }
+
   componentWillReceiveProps(next) {
     if (this.props.active !== next.active) {
       this.setState({ active: next.active });
     }
   }
+
   handleChangeTab(active, item, parent) {
     const topBarActive = this.state.active !== active;
     this.setState({ active }, () => {
@@ -55,6 +59,7 @@ class Tabs extends Component {
       }
     });
   }
+
   findActiveTab(arr, key) {
     for (const value of arr) {
       if (value.type === 'dropdown') {
@@ -67,6 +72,7 @@ class Tabs extends Component {
     }
     return null;
   }
+
   render() {
     const { active } = this.state;
     const { data } = this.props;

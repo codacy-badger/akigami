@@ -2,6 +2,7 @@ import { observable, computed } from 'mobx';
 
 class Notification {
   @observable notify = undefined;
+
   defaultParams = {
     level: 'info',
     title: 'Подсказка',

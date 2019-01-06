@@ -1,8 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const config = require('config');
-const babelConfig = require('./babelrc');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const babelConfig = require('./babelrc');
 // const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 // const PreloadWebpackPlugin = require('preload-webpack-plugin');
 

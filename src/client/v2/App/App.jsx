@@ -21,7 +21,7 @@ class App extends Component {
       this.props.app.notification.init(this.notificationSystem);
     }
   }
-  
+
   render() {
     const { router, ui } = this.props.app;
     return (

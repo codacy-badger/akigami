@@ -10,9 +10,11 @@ class Explore extends Component {
   static propTypes = {
     type: PropTypes.oneOf(['anime', 'manga']),
   }
+
   static defaultProps = {
     type: 'anime',
   }
+
   render() {
     const { type } = this.props;
     let typeTitle = 'аниме';
@@ -23,9 +25,10 @@ class Explore extends Component {
         <div className="page-content">
           <Grid>
             <Grid.Row>
-              <Grid.Column width={16}>
+              <Grid.Column>
                 <Header floated="left" as="h1">
-                  Обзор {typeTitle}
+                  Обзор
+                  {` ${typeTitle}`}
                 </Header>
                 <Button
                   floated="right"

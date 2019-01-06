@@ -11,6 +11,7 @@ import modals from '../../modals';
 
 export default class Router {
   @observable container;
+
   constructor(app) {
     this.app = app;
     if (typeof window !== 'undefined') {
@@ -44,11 +45,11 @@ export default class Router {
 
     // if middle mouse button was clicked
     if (
-      event.button !== 0 ||
-      event.ctrlKey ||
-      event.altKey ||
-      event.shiftKey ||
-      event.metaKey
+      event.button !== 0
+      || event.ctrlKey
+      || event.altKey
+      || event.shiftKey
+      || event.metaKey
     ) {
       return;
     }
@@ -63,8 +64,8 @@ export default class Router {
     }
 
     if (
-      window.location.protocol !== element.protocol ||
-      window.location.hostname !== element.hostname
+      window.location.protocol !== element.protocol
+      || window.location.hostname !== element.hostname
     ) {
       return;
     }

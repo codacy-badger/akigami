@@ -17,6 +17,7 @@ class HeaderMenu extends Component {
     user: PropTypes.object.isRequired,
     ui: PropTypes.object.isRequired,
   }
+
   constructor(props) {
     super(props);
     this.scrollEvent = this.scrollEvent.bind(this);
@@ -26,9 +27,11 @@ class HeaderMenu extends Component {
     this.scrollEvent();
     document.addEventListener('scroll', this.scrollEvent);
   }
+
   componentWillUnmount() {
     document.removeEventListener('scroll', this.scrollEvent);
   }
+
   scrollEvent() {
     const { ui } = this.props;
     const scroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -38,6 +41,7 @@ class HeaderMenu extends Component {
       if (ui.transparent && !isTop) ui.changeTransparent(false);
     }
   }
+
   render() {
     const { ui, user } = this.props;
     const transparent = ui.transparented ? ui.transparent : false;
@@ -95,6 +99,12 @@ class HeaderMenu extends Component {
                     <Icon name="settings" />
                     Настройки
                   </Dropdown.Item>
+                  {user.role === 'admin' && (
+                    <Dropdown.Item as="a" href="/admin">
+                      <Icon name="shield alternate" />
+                      Админ панель
+                    </Dropdown.Item>
+                  )}
                   <Dropdown.Item onClick={user.logout}>
                     <Icon name="sign-out" />
                     Выход
