@@ -24,8 +24,9 @@ async function ssr({ title, layout, props = {}, ...data } = {}) {
         'displayName',
         'id',
         'avatar',
+        'role',
       ]);
-      app.user.setUser(user);
+      app.user.setUserData(user);
       await app.router.setContainer({ title, layout, props });
       const html = renderToStaticMarkup((
         <Provider app={app}>

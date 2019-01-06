@@ -1,25 +1,42 @@
 import config from 'config';
-import gql from 'graphql-tag';
 import autoIncrement from '../utils/mongooseAutoIncrement';
 import MongooseClass from '../utils/mongooseClass';
 
 class User extends MongooseClass {
   username = { type: String, required: true };
+
   displayName = { type: String, required: true };
+
   email = { type: String, required: true };
+
   birthday = { type: Date };
+
   avatar = { type: String };
+
   cover = { type: String };
+
   status = { type: String };
+
   name = { type: String };
+
   city = { type: String };
+
+  role = {
+    type: String,
+    default: 'user',
+    enum: ['user', 'admin'],
+  };
+
   online = { type: Boolean, default: false };
+
   gender = {
     type: String,
     default: 'none',
     enum: ['none', 'male', 'female'],
   };
+
   createdAt = { type: Date, default: Date.now() };
+
   visitedAt = { type: Date, default: Date.now() };
 
   static async findById(id) {

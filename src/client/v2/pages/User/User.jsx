@@ -4,7 +4,7 @@ import { inject, observer, Provider } from 'mobx-react';
 
 import UserCover from '../../components/UserCover';
 
-import UserStore from './User.store';
+import UserStore from '../../stores/User';
 import UserGeneral from './parts/UserGeneral';
 import UserLibrary from './parts/UserLibrary';
 import Tabs from '../../components/Tabs/Tabs';
@@ -24,26 +24,35 @@ class User extends Component {
     tab: PropTypes.string,
     subTab: PropTypes.string,
   }
+
   static defaultProps = {
     tab: null,
     subTab: null,
   }
+
   constructor(props) {
     super(props);
-    this.store = new UserStore(props.app, props.user);
+    this.store = new UserStore(props.app);
     this.isOwner = this.isOwner.bind(this);
     this.handleChangeHistory = this.handleChangeHistory.bind(this);
   }
+
   componentDidMount() {
-    this.props.ui.changeTransparented(true);
+    const { ui, user } = this.props;
+    this.store.setUserData(user);
+    ui.changeTransparented(true);
   }
+
   componentWillUnmount() {
-    this.props.ui.changeTransparented(false);
+    const { ui } = this.props;
+    ui.changeTransparented(false);
   }
+
   isOwner() {
     const { myUser } = this.props;
     return this.store.id === myUser.id;
   }
+
   handleChangeHistory(tab, item, parent) {
     const prefix = `/@${this.store.username}`;
     let path = `${prefix}/${tab}`;
@@ -51,6 +60,7 @@ class User extends Component {
     if (parent) path = `${prefix}/${parent.key}/${tab}`;
     window.history.pushState(null, null, path);
   }
+
   render() {
     const { tab, subTab } = this.props;
     let activeTab = tab;

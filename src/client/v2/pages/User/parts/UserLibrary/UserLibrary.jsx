@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { inject, observer } from 'mobx-react';
 import { Grid } from 'semantic-ui-react';
 import LibraryAnimeFilter from '../../../../components/LibraryAnimeFilter';
 import FlexTable from '../../../../components/FlexTable';
 import TitledBlock from '../../../../components/TitledBlock';
 
-@inject('store')
-@observer
 class UserLibrary extends Component {
   static propTypes = {
     type: PropTypes.string,
   }
+
   static defaultProps = {
     type: null,
   }
+
   render() {
     const { type } = this.props;
     let typeTitle = 'Список';

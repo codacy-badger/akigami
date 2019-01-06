@@ -9,17 +9,30 @@ const defaultCover = '/images/no-cover.jpg';
 
 export default class User {
   @observable id = null;
+
   @observable username = null;
+
   @observable displayName = null;
+
   @observable status = null;
-  @observable avatar = null;
-  @observable cover = null;
+
+  @observable avatar = defaultAvatar;
+
+  @observable cover = defaultCover;
+
   @observable name = null;
+
   @observable email = null;
+
   @observable gender = null;
+
   @observable website = null;
+
   @observable city = null;
+
   @observable birthday = null;
+
+  @observable role = null;
 
   constructor(app) {
     this.app = app;
@@ -33,7 +46,7 @@ export default class User {
       }).subscribe({
         next: ({ data }) => {
           if (data.changed && data.changed.action === 'login') {
-            this.app.user.setUser(data.changed.data.user);
+            this.app.user.setUserData(data.changed.data.user);
             this.app.router.go('/');
             if (!document.hidden) {
               this.app.notification.create({
@@ -47,36 +60,6 @@ export default class User {
       });
     }
   }
-
-  setUser = ({
-    id = this.id,
-    username = this.username,
-    displayName = this.displayName,
-    avatar = defaultAvatar,
-    cover = defaultCover,
-    name = this.name,
-    status = this.status,
-    city = this.city,
-    email = this.email,
-    website = this.website,
-    gender = this.gender,
-    birthday = this.birthday,
-  } = {}) => {
-    this.setUserData({
-      id,
-      username,
-      displayName,
-      status,
-      avatar,
-      cover,
-      city,
-      name,
-      website,
-      email,
-      gender,
-      birthday,
-    });
-  };
 
   @action
   clearUserData = () => {
@@ -92,6 +75,7 @@ export default class User {
     this.email = null;
     this.gender = null;
     this.birthday = null;
+    this.role = null;
   };
 
   logout = () => {
@@ -124,6 +108,7 @@ export default class User {
     gender = this.gender,
     city = this.city,
     birthday = this.birthday,
+    role = this.role,
   } = {}) => {
     this.id = id;
     this.username = username;
@@ -137,6 +122,7 @@ export default class User {
     this.email = email;
     this.gender = gender;
     this.birthday = birthday;
+    this.role = role;
   };
 
   @computed

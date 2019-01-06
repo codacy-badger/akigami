@@ -11,10 +11,9 @@ class UserCover extends Component {
     store: PropTypes.object.isRequired,
     // isOwner: PropTypes.func.isRequired,
   }
+
   render() {
     const { store } = this.props;
-    store.cover = 'https://static.zerochan.net/Pixiv.Id.29871659.full.2395239.jpg';
-    store.status = 'Демонстрационный статус';
     return (
       <div className="user-cover-backdrop">
         <div

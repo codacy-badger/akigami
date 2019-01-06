@@ -12,7 +12,7 @@ import { ApolloClient } from './v2/lib/modules';
   const userData = JSON.parse(document.body.dataset.user);
   const app = new AppStore();
 
-  app.user.setUser(userData);
+  app.user.setUserData(userData);
 
   await app.router.setContainer({
     title: raw.dataset.title,
