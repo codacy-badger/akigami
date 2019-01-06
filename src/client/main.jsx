@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
 import ReactModal from 'react-modal';
-import gql from 'graphql-tag';
+import debugNamespace from 'debug';
 import AppStore from './v2/stores/AppStore';
 import App from './v2/App';
 import { ApolloClient } from './v2/lib/modules';
+
+window.localStorage.debug = 'akigami:client:*';
+const debug = debugNamespace('akigami:client');
 
 (async () => {
   const raw = document.querySelector('#preload-data');
@@ -42,7 +45,7 @@ import { ApolloClient } from './v2/lib/modules';
       }
     `,
   });
-  console.log(res);
+  debug('users', res);
 
   const res2 = await ApolloClient.query({
     query: `
@@ -55,7 +58,7 @@ import { ApolloClient } from './v2/lib/modules';
       }
     `,
   });
-  console.log(res2);
+  debug('currentUser', res2);
 
   if (typeof window !== 'undefined') {
     ReactModal.setAppElement('#root');

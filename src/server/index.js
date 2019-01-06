@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import debugNamespace from 'debug';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import config from 'config';
@@ -14,9 +15,9 @@ import { requireFiles, getFiles } from './utils';
 import ssr from './services/ssr';
 import { schema, typeDefs, resolvers } from './graphs';
 import RedisStore from './config/store';
-
 import './services/database';
 
+const debug = debugNamespace('akigami:server');
 const redisStore = Promise.promisifyAll(RedisStore);
 
 const contextModels = getFiles('models', null, true, true);
@@ -66,7 +67,7 @@ require('./services/passport');
 
 app.use((req, res, next) => {
   res.locals.user = req.isAuthenticated() ? req.user : null;
-  console.log(`hi ${req.user ? req.user.username : 'guest'}`);
+  debug(`user: ${req.user ? req.user.username : 'guest'}`);
   next();
 });
 
@@ -91,9 +92,8 @@ app.use((err, req, res, nextIgnored) => {
   });
 });
 const s = app.listen({ port, graphqlPaths: [GQL_PATH] }, () => {
-  console.log(`APP is now running on http://localhost:${port}`); // eslint-disable-line no-console
-  console.log(`API Server over web socket with subscriptions is now running on ws://localhost:${port}${GQL_PATH}`); // eslint-disable-line no-console
-  // eslint-disable-next-line
+  debug(`APP is now running on http://localhost:${port}`);
+  debug(`API Server over web socket with subscriptions is now running on ws://localhost:${port}${GQL_PATH}`);
 });
 
 SubscriptionServer.create({
@@ -143,7 +143,7 @@ SubscriptionServer.create({
         }
       } else {
         resolve(paramsWithFulfilledBaseContext);
-      } 
+      }
     }
   }),
 }, {

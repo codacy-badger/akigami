@@ -1,11 +1,13 @@
 import mongoose from 'mongoose';
 import cfg from 'config';
+import debugNamespace from 'debug';
 import autoIncrement from '../utils/mongooseAutoIncrement';
 
 import { requireFiles } from '../utils';
 
 mongoose.Promise = global.Promise;
 
+const debug = debugNamespace('akigami:server:db');
 const { options, host } = cfg.get('database');
 const connection = mongoose.connect(
   `mongodb://${host}`,
@@ -14,9 +16,8 @@ const connection = mongoose.connect(
 
 autoIncrement.initialize(connection);
 
-mongoose.connection.on('connected', () => console.log('Connected to DB'));
-mongoose.connection.on('error', () => console.log('DB error connection'));
-mongoose.connection.on('disconnected', () =>
-  console.log('Disconnected from DB'));
+mongoose.connection.on('connected', () => debug('Connected to DB'));
+mongoose.connection.on('error', () => debug('DB error connection'));
+mongoose.connection.on('disconnected', () => debug('Disconnected from DB'));
 
 requireFiles('models');

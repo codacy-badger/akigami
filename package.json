@@ -5,8 +5,8 @@
   "main": "tools/run.js",
   "scripts": {
     "start": "concurrently \"yarn run client\" \"yarn run server\"",
-    "server": "sh tools/start.sh",
-    "client": "node_modules/.bin/webpack --watch",
+    "server": "cross-env DEBUG='akigami:server:*' sh tools/start.sh",
+    "client": "cross-env DEBUG='akigami:client:*' webpack --watch",
     "defaults": "webpack-defaults",
     "webpack-defaults": "webpack-defaults"
   },
@@ -127,8 +127,10 @@
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "babel-plugin-emotion": "^10.0.5",
     "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
     "css-loader": "^2.1.0",
     "cssnano": "^4.1.8",
+    "debug": "^4.1.1",
     "eslint": "^5.11.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.12.0",
