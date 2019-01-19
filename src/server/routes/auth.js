@@ -78,8 +78,8 @@ export default app => {
     if (req.isAuthenticated()) {
       // io.emit(`profile:${req.user.username}`, { online: false });
       req.logOut();
-      req.session.destroy();
-      res.status(200).json('logout');
+      // req.session.destroy();
+      res.status(200).json({ status: 'logout' });
       return;
     }
     next();

@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import debugNamespace from 'debug';
 import bodyParser from 'body-parser';
+import cookie from 'cookie';
 import cookieParser from 'cookie-parser';
 import config from 'config';
 import path from 'path';
@@ -54,7 +55,7 @@ app.use(session({
   secret: config.get('sessionSecret'),
   store: redisStore,
   cookie: {
-    httpOnly: false,
+    httpOnly: true,
     maxAge: 1000 * 2630000 * 5, // 5 months
   },
   resave: true,
@@ -106,8 +107,9 @@ SubscriptionServer.create({
   onOperation: (msg, params, socket) => new Promise(async (resolve) => {
     const wsSessionUser = null;
     if (socket.upgradeReq) {
+      const { sid } = cookie.parse(socket.upgradeReq.headers.cookie);
       const sessionID = cookieParser.signedCookie(
-        msg.payload.authToken,
+        sid,
         config.get('sessionSecret'),
       );
 
@@ -117,7 +119,7 @@ SubscriptionServer.create({
           user: wsSessionUser,
           models: contextModels,
           location: params.context.location,
-          token: msg.payload.authToken,
+          token: sid,
         },
       };
 

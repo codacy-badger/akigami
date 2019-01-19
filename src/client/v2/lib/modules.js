@@ -6,19 +6,12 @@ if (typeof window !== 'undefined') {
   const { InMemoryCache } = require('apollo-cache-inmemory');
   const { WebSocketLink } = require('apollo-link-ws');
   const { onError } = require('apollo-link-error');
-  const cookie = require('cookie');
   const gql = require('graphql-tag');
-
-  const middlewareLink = typeof window !== 'undefined' ? new ApolloLink((operation, forward) => {
-    operation.authToken = cookie.parse(document.cookie).sid; // eslint-disable-line no-param-reassign
-    return forward(operation);
-  }) : null;
 
   ApolloClient = (
     typeof window !== 'undefined'
       ? new AC({
         link: ApolloLink.from([
-          middlewareLink,
           onError(({ graphQLErrors, networkError }) => {
             if (graphQLErrors) {
               graphQLErrors.map(({ message, locations, path }) => (

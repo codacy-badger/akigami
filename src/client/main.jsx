@@ -8,7 +8,7 @@ import App from './v2/App';
 import { ApolloClient } from './v2/lib/modules';
 
 window.localStorage.debug = 'akigami:client:*';
-const debug = debugNamespace('akigami:client');
+const debug = debugNamespace('akigami:client:log');
 
 (async () => {
   const raw = document.querySelector('#preload-data');
@@ -22,7 +22,6 @@ const debug = debugNamespace('akigami:client');
     props: raw.text ? JSON.parse(raw.text) : null,
     layout: raw.dataset.layout,
   });
-
   const res = await ApolloClient.query({
     query: `
       {
