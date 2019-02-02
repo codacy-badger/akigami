@@ -8,7 +8,7 @@ import App from './v2/App';
 import { ApolloClient } from './v2/lib/modules';
 
 window.localStorage.debug = 'akigami:client:*';
-const debug = debugNamespace('akigami:client:log');
+const debug = debugNamespace('akigami:client:main');
 
 (async () => {
   const raw = document.querySelector('#preload-data');

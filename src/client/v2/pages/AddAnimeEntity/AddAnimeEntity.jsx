@@ -12,13 +12,17 @@ import {
   Icon,
   Divider,
   Flag,
+  Dropdown,
 } from 'semantic-ui-react';
 import get from 'lodash/get';
-
+import debugNamespace from 'debug';
+import { ApolloClient } from '../../lib/modules';
 import Inline from '../../components/Inline';
 import PosterUploadCard from '../../components/PosterUploadCard';
 import CoverUploadCard from '../../components/CoverUploadCard';
 import AddAnimeEntityStore from './AddAnimeEntity.store';
+
+const debug = debugNamespace('akigami:client:anime:create');
 
 @inject('app')
 @observer
@@ -31,6 +35,13 @@ class AddAnimeEntity extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.store = new AddAnimeEntityStore(props.app);
+    this.state = {
+      availableGenres: [],
+    };
+  }
+
+  componentDidMount() {
+    this.fetchGenres();
   }
 
   getFieldValue(field) {
@@ -45,11 +56,29 @@ class AddAnimeEntity extends Component {
     this.store.setField(field, value);
   }
 
+  async fetchGenres() {
+    const res = await ApolloClient.query({
+      query: `
+        {
+          genres {
+            id
+            title
+          }
+        }
+      `,
+    });
+    debug('genres', res);
+    this.setState({
+      availableGenres: res.data.genres,
+    });
+  }
+
   handleSubmit() {
     this.store.submit();
   }
 
   render() {
+    const { availableGenres } = this.state;
     const alternateTitlesLabel = <label>Альтернативные названия</label>;
     return (
       <Container>
@@ -110,38 +139,55 @@ class AddAnimeEntity extends Component {
                       control={Input}
                     />
                   </Form.Group>
-                  {this.getFieldValue('title.other').map((item, index) => (
-                    <Form.Field width={8} key={index}> {/* eslint-disable-line */}
-                      {index === 0 && alternateTitlesLabel}
-                      <Inline align="center">
-                        <Button
-                          basic
-                          icon="remove"
-                          type="button"
-                          className="list-remove-button"
-                          onClick={() => this.store.title.other.splice(index, 1)}
+                  <Grid>
+                    <Grid.Row>
+                      <Grid.Column width={8}>
+                        {this.getFieldValue('title.other').map((item, index) => (
+                          <Form.Field key={index}> {/* eslint-disable-line */}
+                            {index === 0 && alternateTitlesLabel}
+                            <Inline align="center">
+                              <Button
+                                basic
+                                icon="remove"
+                                type="button"
+                                className="list-remove-button"
+                                onClick={() => this.store.title.other.splice(index, 1)}
+                              />
+                              <input
+                                value={this.getFieldValue(`title.other[${index}]`)}
+                                onChange={this.handleChangeField(`title.other[${index}]`)}
+                                placeholder={`Альтернативное название №${index + 1}`}
+                              />
+                            </Inline>
+                          </Form.Field>
+                        ))}
+                        <Form.Field>
+                          {!this.getFieldValue('title.other').length && alternateTitlesLabel}
+                          <Button
+                            icon
+                            basic
+                            labelPosition="left"
+                            type="button"
+                            onClick={() => this.store.title.other.push('')}
+                          >
+                            <Icon name="add" />
+                            Добавить
+                          </Button>
+                        </Form.Field>
+                      </Grid.Column>
+                      <Grid.Column width={8}>
+                        <Form.Field
+                          control={Dropdown}
+                          multiple
+                          selection
+                          fluid
+                          label="Жанры"
+                          options={availableGenres.map(e => ({ key: e.id, value: e.id, text: e.title }))}
+                          placeholder="Укажите жанры"
                         />
-                        <input
-                          value={this.getFieldValue(`title.other[${index}]`)}
-                          onChange={this.handleChangeField(`title.other[${index}]`)}
-                          placeholder={`Альтернативное название №${index + 1}`}
-                        />
-                      </Inline>
-                    </Form.Field>
-                  ))}
-                  <Form.Field width={8}>
-                    {!this.getFieldValue('title.other').length && alternateTitlesLabel}
-                    <Button
-                      icon
-                      basic
-                      labelPosition="left"
-                      type="button"
-                      onClick={() => this.store.title.other.push('')}
-                    >
-                      <Icon name="add" />
-                      Добавить
-                    </Button>
-                  </Form.Field>
+                      </Grid.Column>
+                    </Grid.Row>
+                  </Grid>
                   <Divider section hidden />
                   <Form.Group widths="equal">
                     <Form.TextArea

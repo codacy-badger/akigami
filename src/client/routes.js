@@ -29,6 +29,9 @@ export default {
   'admin:genres': {
     import: () => import(/* webpackChunkName: "admin:genres" */ './v2/pages/admin/Genres'),
   },
+  'admin:users': {
+    import: () => import(/* webpackChunkName: "admin:genres" */ './v2/pages/admin/Users'),
+  },
   // settings: {
   //     import: () => import(/* webpackChunkName: "settings" */ './pages/Settings'),
   // },

@@ -40,6 +40,22 @@ router.get('/genres', async (req, res) => {
   });
 });
 
+router.get('/users', async (req, res) => {
+  const users = await mongoose
+    .model('User')
+    .find({})
+    .sort({ id: -1 });
+
+  res.ssr({
+    title: 'Список пользователей',
+    layout: 'admin:users',
+    props: {
+      users,
+      activeTab: 'users',
+    },
+  });
+});
+
 export default app => {
   app.use('/admin', router);
 };

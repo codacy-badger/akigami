@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Provider, inject, observer } from 'mobx-react';
-import { Container, Grid, Button, Header, Icon, Table } from 'semantic-ui-react';
+import { Container, Grid, Button, Header, Icon, Table, Dimmer, Loader } from 'semantic-ui-react';
 import GenresStore from '../../../stores/Genres';
 import Menu from '../Menu';
 import NewGenre from './NewGenre';
@@ -17,10 +17,21 @@ class Genres extends Component {
 
   constructor(props) {
     super(props);
-    this.store = new GenresStore(props.app, props.genres);
+    this.store = new GenresStore(props.app);
+    this.state = {
+      fetching: true,
+    };
+  }
+
+  componentDidMount() {
+    const { genres } = this.props;
+    this.store.setData(genres, () => {
+      this.setState({ fetching: false });
+    });
   }
 
   render() {
+    const { fetching } = this.state;
     const { activeTab } = this.props;
     const { list } = this.store;
     return (
@@ -51,7 +62,10 @@ class Genres extends Component {
                       </NewGenre>
                     </Grid.Column>
                   </Grid.Row>
-                  <Table selectable>
+                  <Table selectable style={{ position: 'relative' }}>
+                    <Dimmer active={fetching}>
+                      <Loader>Loading</Loader>
+                    </Dimmer>
                     <Table.Header>
                       <Table.Row>
                         <Table.HeaderCell>ID</Table.HeaderCell>

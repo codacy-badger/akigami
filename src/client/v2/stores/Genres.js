@@ -14,12 +14,13 @@ class Genres {
 
   constructor(app, genres = this.list) {
     this.app = app;
-    this.setData(genres);
+    if (genres?.length) this.setData(genres);
   }
 
   @action
-  setData(arr) {
+  setData(arr, cb) {
     this.list = arr.map(this.setModel);
+    cb();
   }
 
   setModel = obj => (
