@@ -72,6 +72,7 @@ class HeaderMenu extends Component {
               <Dropdown.Item as="a" href="/explore/anime">Аниме</Dropdown.Item>
               <Dropdown.Item as="a" href="/explore/manga">Манга</Dropdown.Item>
               <Dropdown.Divider />
+              <Dropdown.Item as="a" href="/studios">Студии</Dropdown.Item>
               <Dropdown.Item as="a">Календарь</Dropdown.Item>
             </Dropdown.Menu>
           </DropdownElement>

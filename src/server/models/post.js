@@ -3,13 +3,17 @@ import MongooseClass from '../utils/mongooseClass';
 
 class Post extends MongooseClass {
   user = { type: MongooseClass.Types.Mixed, required: true };
+
   content = { type: String, required: true };
+
   attachments = [Number];
+
   namespace = {
     type: String,
     default: 'global',
     enum: ['global', 'followers', 'clubs'],
   };
+
   createdAt = {
     type: Date,
     default: Date.now,

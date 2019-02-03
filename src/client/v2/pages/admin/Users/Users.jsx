@@ -5,7 +5,7 @@ import debugNamespace from 'debug';
 import { Container, Grid, Dimmer, Loader, Table } from 'semantic-ui-react';
 
 import Menu from '../Menu';
-import PageHeader from '../PageHeader';
+import PageHeader from '../../../components/PageHeader';
 import UsersStore from '../../../stores/Users';
 
 const debug = debugNamespace('akigami:client:admin:users');

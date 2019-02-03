@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Container, Grid, Header, Button, Icon } from 'semantic-ui-react';
 
 import EntityCard from '../../components/EntityCard/EntityCard';
-
+import PageHeader from '../../components/PageHeader';
 import mock from './Explore.mock';
 
 class Explore extends Component {
@@ -26,21 +26,19 @@ class Explore extends Component {
           <Grid>
             <Grid.Row>
               <Grid.Column>
-                <Header floated="left" as="h1">
-                  Обзор
-                  {` ${typeTitle}`}
-                </Header>
-                <Button
-                  floated="right"
-                  icon
-                  labelPosition="left"
-                  basic
-                  color="olive"
-                  href={`/explore/${type}/create`}
-                >
-                  <Icon name="edit" />
-                  Добавить
-                </Button>
+                <PageHeader title={`Обзор ${typeTitle}`}>
+                  <Button
+                    floated="right"
+                    icon
+                    labelPosition="left"
+                    basic
+                    color="olive"
+                    href={`/explore/${type}/create`}
+                  >
+                    <Icon name="edit" />
+                    Добавить
+                  </Button>
+                </PageHeader>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row columns={5} className="entity-row">

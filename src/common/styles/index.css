@@ -1,4 +1,5 @@
 @import "../external/semantic.css";
+@import "../external/datepicker.css";
 
 /* body, html {
   background: #f7f7f7 !important;
@@ -648,4 +649,46 @@
   width: 100%;
   position: relative;
   height: 131px;
+}
+
+.react-datepicker-top:before, .react-datepicker-top:after {
+  content: none !important;
+}
+
+.react-datepicker .react-datepicker-container .react-datepicker-top {
+  background: #d54343;
+  border-top-color: #d54343;
+  border-left-color: #d54343;
+  border-right-color: #d54343;
+}
+
+.react-datepicker .react-datepicker-container .react-datepicker-body .react-datepicker-row .react-datepicker-picker.selected {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.react-datepicker .react-datepicker-container .react-datepicker-body .react-datepicker-row .react-datepicker-picker.current {
+  background: #fff2f2;
+}
+
+.react-datepicker .react-datepicker-container .react-datepicker-body .react-datepicker-row .react-datepicker-picker.selected.current {
+  background: #e7acac;
+  border: 1px solid #e7acac;
+}
+
+.react-datepicker .react-datepicker-container .react-datepicker-body .react-datepicker-row .react-datepicker-picker.current:hover {
+  background: #f0dfdf;
+}
+
+.react-datepicker .react-datepicker-container .react-datepicker-top,
+.react-datepicker .react-datepicker-container .react-datepicker-body {
+  border-radius: 0;
+}
+
+.image-upload-image {
+  width: 284px;
+}
+
+.image-upload-image .poster {
+  padding-bottom: 100%;
 }

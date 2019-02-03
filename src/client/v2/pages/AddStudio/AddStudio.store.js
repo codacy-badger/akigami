@@ -1,25 +1,44 @@
 import { toJS, action } from 'mobx';
 import set from 'lodash/set';
 import debugNamespace from 'debug';
-
-import AnimeModel from '../../models/Anime';
+import StudioModel from '../../models/Studio';
 import { ApolloClient } from '../../lib/modules';
 
-const debug = debugNamespace('akigami:client:anime:create:store');
+const debug = debugNamespace('akigami:client:studio:create:store');
 
-class AddAnimeEntityStore extends AnimeModel {
+class AddStudioStore extends StudioModel {
+  constructor(app) {
+    super(app);
+    if (app) this.app = app;
+  }
+
   setField(field, value) {
     set(this, field, value);
   }
 
-  submit() {
+  async submit() {
     debug(toJS(this));
+    const res = await ApolloClient.mutate({
+      mutation: `mutation {
+          addStudio(
+            title: "${this.title}"
+            about: "${this.about}"
+            createdAt: "${this.createdAt}"
+          ) {
+            id
+          }
+        }
+      `,
+    });
+    debug('submit', res);
+    const { id } = res.data.addStudio;
+    if (id) this.app.router.go(`/studios/${id}`);
   }
 
   @action
-  async uploadImage(file, type) {
-    if (typeof this[type].original !== 'string' && this[type].original) {
-      URL.revokeObjectURL(this[type].original);
+  async uploadImage(file) {
+    if (typeof this.image.original !== 'string' && this.image.original) {
+      URL.revokeObjectURL(this.image.original);
     }
     try {
       const formData = new FormData();
@@ -41,7 +60,7 @@ class AddAnimeEntityStore extends AnimeModel {
       });
       if (!data || !data.getFromCDN) throw new Error('Some error getFromCDN GQL');
       Object.keys(data.getFromCDN).forEach((key) => {
-        this[type][key] = data.getFromCDN[key];
+        this.image[key] = data.getFromCDN[key];
       });
     } catch (err) {
       throw new Error(err);
@@ -49,4 +68,4 @@ class AddAnimeEntityStore extends AnimeModel {
   }
 }
 
-export default AddAnimeEntityStore;
+export default AddStudioStore;

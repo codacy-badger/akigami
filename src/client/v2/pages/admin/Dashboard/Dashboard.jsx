@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Grid, Header } from 'semantic-ui-react';
 import Menu from '../Menu';
+import PageHeader from '../../../components/PageHeader';
 
 class Dashboard extends Component {
   static propTypes = {
@@ -19,13 +20,7 @@ class Dashboard extends Component {
                 <Menu active={activeTab} />
               </Grid.Column>
               <Grid.Column width={12}>
-                <Grid.Row>
-                  <Grid.Column>
-                    <Header as="h1">
-                      Панель управления
-                    </Header>
-                  </Grid.Column>
-                </Grid.Row>
+                <PageHeader title="Панель управления" />
                 Dashb123oard
               </Grid.Column>
             </Grid.Row>

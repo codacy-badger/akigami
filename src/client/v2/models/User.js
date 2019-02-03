@@ -115,6 +115,10 @@ class User {
     return !this.cover ? defaultCover : this.cover;
   }
 
+  get isAdmin() {
+    return this.role === 'admin';
+  }
+
   @computed
   get link() {
     return `/@${this.username}`;

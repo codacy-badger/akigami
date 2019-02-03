@@ -4,6 +4,7 @@ import { Provider, inject, observer } from 'mobx-react';
 import { Container, Grid, Button, Header, Icon, Table, Dimmer, Loader } from 'semantic-ui-react';
 import GenresStore from '../../../stores/Genres';
 import Menu from '../Menu';
+import PageHeader from '../../../components/PageHeader';
 import NewGenre from './NewGenre';
 
 @inject('app')
@@ -44,24 +45,19 @@ class Genres extends Component {
               </Grid.Column>
               <Provider store={this.store}>
                 <Grid.Column width={12}>
-                  <Grid.Row>
-                    <Grid.Column>
-                      <Header floated="left" as="h1">
-                        Список жанров
-                      </Header>
-                      <NewGenre>
-                        <Button
-                          icon
-                          basic
-                          floated="right"
-                          labelPosition="left"
-                        >
-                          <Icon name="edit" />
-                          Создать
-                        </Button>
-                      </NewGenre>
-                    </Grid.Column>
-                  </Grid.Row>
+                  <PageHeader title="Список жанров">
+                    <NewGenre>
+                      <Button
+                        icon
+                        basic
+                        floated="right"
+                        labelPosition="left"
+                      >
+                        <Icon name="edit" />
+                        Создать
+                      </Button>
+                    </NewGenre>
+                  </PageHeader>
                   <Table selectable style={{ position: 'relative' }}>
                     <Dimmer active={fetching}>
                       <Loader>Loading</Loader>

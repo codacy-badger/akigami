@@ -17,8 +17,14 @@ export default {
   explore: {
     import: () => import(/* webpackChunkName: "explore" */ './v2/pages/Explore'),
   },
+  studios: {
+    import: () => import(/* webpackChunkName: "studios" */ './v2/pages/Studios'),
+  },
   addAnimeEntity: {
     import: () => import(/* webpackChunkName: "addAnimeEntity" */ './v2/pages/AddAnimeEntity'),
+  },
+  addStudio: {
+    import: () => import(/* webpackChunkName: "addStudio" */ './v2/pages/addStudio'),
   },
   error: {
     import: () => import(/* webpackChunkName: "error" */ './v2/pages/Error'),
@@ -30,7 +36,7 @@ export default {
     import: () => import(/* webpackChunkName: "admin:genres" */ './v2/pages/admin/Genres'),
   },
   'admin:users': {
-    import: () => import(/* webpackChunkName: "admin:genres" */ './v2/pages/admin/Users'),
+    import: () => import(/* webpackChunkName: "admin:users" */ './v2/pages/admin/Users'),
   },
   // settings: {
   //     import: () => import(/* webpackChunkName: "settings" */ './pages/Settings'),

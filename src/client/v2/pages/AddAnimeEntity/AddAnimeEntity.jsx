@@ -1,3 +1,4 @@
+/* eslint jsx-a11y/label-has-associated-control: 0 */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
@@ -20,9 +21,28 @@ import { ApolloClient } from '../../lib/modules';
 import Inline from '../../components/Inline';
 import PosterUploadCard from '../../components/PosterUploadCard';
 import CoverUploadCard from '../../components/CoverUploadCard';
+import PageHeader from '../../components/PageHeader';
 import AddAnimeEntityStore from './AddAnimeEntity.store';
 
 const debug = debugNamespace('akigami:client:anime:create');
+
+const queryGenres = `
+  {
+    genres {
+      id
+      title
+    }
+  }
+`;
+
+const queryStudios = `
+  {
+    studios {
+      id
+      title
+    }
+  }
+`;
 
 @inject('app')
 @observer
@@ -36,12 +56,14 @@ class AddAnimeEntity extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.store = new AddAnimeEntityStore(props.app);
     this.state = {
-      availableGenres: [],
+      genres: [],
+      studios: [],
     };
   }
 
   componentDidMount() {
-    this.fetchGenres();
+    this.fetch(queryGenres, 'genres');
+    this.fetch(queryStudios, 'studios');
   }
 
   getFieldValue(field) {
@@ -56,20 +78,11 @@ class AddAnimeEntity extends Component {
     this.store.setField(field, value);
   }
 
-  async fetchGenres() {
-    const res = await ApolloClient.query({
-      query: `
-        {
-          genres {
-            id
-            title
-          }
-        }
-      `,
-    });
-    debug('genres', res);
+  async fetch(query, field) {
+    const res = await ApolloClient.query({ query });
+    debug(field, res);
     this.setState({
-      availableGenres: res.data.genres,
+      [field]: res.data[field],
     });
   }
 
@@ -78,7 +91,7 @@ class AddAnimeEntity extends Component {
   }
 
   render() {
-    const { availableGenres } = this.state;
+    const { genres, studios } = this.state;
     const alternateTitlesLabel = <label>Альтернативные названия</label>;
     return (
       <Container>
@@ -86,9 +99,7 @@ class AddAnimeEntity extends Component {
           <Grid>
             <Grid.Row>
               <Grid.Column width={16}>
-                <Header as="h1">
-                  Добавить новое аниме
-                </Header>
+                <PageHeader title="Добавить новое аниме" />
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -182,8 +193,16 @@ class AddAnimeEntity extends Component {
                           selection
                           fluid
                           label="Жанры"
-                          options={availableGenres.map(e => ({ key: e.id, value: e.id, text: e.title }))}
+                          options={genres.map(e => ({ key: e.id, value: e.id, text: e.title }))}
                           placeholder="Укажите жанры"
+                        />
+                        <Form.Field
+                          control={Dropdown}
+                          selection
+                          fluid
+                          label="Студия"
+                          options={studios.map(e => ({ key: e.id, value: e.id, text: e.title }))}
+                          placeholder="Выберите студию"
                         />
                       </Grid.Column>
                     </Grid.Row>
