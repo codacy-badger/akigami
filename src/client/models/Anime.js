@@ -46,19 +46,9 @@ class AnimeModel {
 
   @observable videos = [];
 
-  @observable poster = {
-    small: fallbackPoster,
-    medium: fallbackPoster,
-    large: fallbackPoster,
-    original: fallbackPoster,
-  };
+  @observable poster = fallbackPoster;
 
-  @observable cover = {
-    small: fallbackCover,
-    medium: fallbackCover,
-    large: fallbackCover,
-    original: fallbackCover,
-  };
+  @observable cover = fallbackCover;
 
   @observable externalLinks = [];
 

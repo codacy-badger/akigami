@@ -4,12 +4,7 @@ import autoIncrement from '../utils/mongooseAutoIncrement';
 class Studio extends MongooseClass {
   title = { type: String, required: true };
 
-  image = {
-    small: { type: String },
-    medium: { type: String },
-    large: { type: String },
-    original: { type: String },
-  };
+  image = { type: String };
 
   about = { type: String };
 

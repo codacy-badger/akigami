@@ -7,7 +7,7 @@ import config from 'config';
 import pick from 'lodash/pick';
 import PubSub from '../services/gqlpubsub';
 import RedisStore from '../config/store';
-import { sendLogin, sendRegister } from '../email';
+import { sendLogin, sendRegister } from '../emails';
 
 const redisStore = Promise.promisifyAll(RedisStore);
 

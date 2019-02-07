@@ -20,6 +20,9 @@ export default {
   studios: {
     import: () => import(/* webpackChunkName: "studios" */ './pages/Studios'),
   },
+  studio: {
+    import: () => import(/* webpackChunkName: "studio" */ './pages/Studio'),
+  },
   addAnimeEntity: {
     import: () => import(/* webpackChunkName: "addAnimeEntity" */ './pages/AddAnimeEntity'),
   },

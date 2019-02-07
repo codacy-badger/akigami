@@ -9,14 +9,14 @@ export const typeDef = gql`
   extend type Mutation {
     addStudio(
       title: String!,
-      # image: Image,
+      image: String,
       about: String,
       createdAt: String
     ): Studio
     editStudio(
       id: ID!,
       title: String!,
-      # image: Image,
+      image: String,
       about: String,
       createdAt: String
     ): Studio
@@ -25,7 +25,7 @@ export const typeDef = gql`
   type Studio {
     id: ID!
     title: String!
-    image: Image
+    image: String
     about: String
     createdAt: String
   }
@@ -40,7 +40,7 @@ export const resolvers = {
     },
     studio: async (parent, { id }, ctx) => {
       const { Studio } = ctx.models;
-      const studio = await Studio.findById(id);
+      const studio = await Studio.findOne({ id });
       return studio;
     },
   },

@@ -12,22 +12,13 @@ import {
   Image,
   Segment,
   Header,
+  Dimmer,
+  Loader,
 } from 'semantic-ui-react';
 import PageHeader from '../../components/PageHeader';
 import StudiosStore from '../../stores/Studios';
 
 const debug = debugNamespace('akigami:client:studios');
-
-// const mock = {
-//   id: 1,
-//   title: 'A-1 Pictures',
-//   image: {
-//     original: 'https://avatars.mds.yandex.net/get-zen_doc/196516/pub_5af7fce15f4967a18d618c99_5af97fcbfd96b1ee19ace63f/scale_2400',
-//   },
-//   about: '',
-//   createdAt: new Date('2005-05-09'),
-//   entities: [],
-// };
 
 @inject('app')
 @observer
@@ -49,12 +40,14 @@ class Studios extends Component {
   componentDidMount() {
     const { studios } = this.props;
     debug('studios', studios);
-    this.store.setData(studios);
+    this.store.setData(studios, () => {
+      this.store.loading = false;
+    });
   }
 
   render() {
     const { app: { user } } = this.props;
-    const { list } = this.store;
+    const { loading, list } = this.store;
     return (
       <Container>
         <div className="page-content">
@@ -63,7 +56,6 @@ class Studios extends Component {
               <Button
                 icon
                 basic
-                color="olive"
                 labelPosition="left"
                 href="/studios/create"
               >
@@ -72,10 +64,17 @@ class Studios extends Component {
               </Button>
             </PageHeader>
             <Grid.Row>
-              {list.length ? list.map(item => (
+              {loading && (
+                <Segment basic style={{ height: 300, width: '100%' }}>
+                  <Dimmer active={loading} inverted>
+                    <Loader inverted content="Загрузка" />
+                  </Dimmer>
+                </Segment>
+              )}
+              {!loading && list.length && list.map(item => (
                 <Grid.Column key={item.id} width={4}>
                   <Card href={`/studios/${item.id}`}>
-                    <Image src={item.image.original} />
+                    <Image src={item.image} />
                     <Card.Content>
                       <Card.Header>{item.title}</Card.Header>
                       {item.createdAt && (
@@ -93,7 +92,8 @@ class Studios extends Component {
                     </Card.Content>
                   </Card>
                 </Grid.Column>
-              )) : (
+              ))}
+              {!loading && !list.length && (
                 <Grid.Column>
                   <Segment padded placeholder textAlign="center">
                     <Header icon>

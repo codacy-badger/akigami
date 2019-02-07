@@ -69,19 +69,9 @@ class Anime extends MongooseClass {
     },
   ];
 
-  poster = {
-    small: { type: String },
-    medium: { type: String },
-    large: { type: String },
-    original: { type: String },
-  };
+  poster = { type: String };
 
-  cover = {
-    small: { type: String },
-    medium: { type: String },
-    large: { type: String },
-    original: { type: String },
-  };
+  cover = { type: String };
 
   externalLinks = [
     {

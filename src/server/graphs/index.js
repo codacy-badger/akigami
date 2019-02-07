@@ -7,6 +7,7 @@ import { typeDef as Auth, resolvers as authResolvers } from './auth';
 import { typeDef as CDN, resolvers as CDNResolvers } from './cdn';
 import { typeDef as Genre, resolvers as GenreResolvers } from './genre';
 import { typeDef as Studio, resolvers as StudioResolvers } from './studio';
+import { typeDef as Anime, resolvers as AnimeResolvers } from './anime';
 
 const Query = gql`
   type Query {
@@ -31,6 +32,7 @@ export const typeDefs = [
   CDN,
   Genre,
   Studio,
+  Anime,
 ];
 
 export const resolvers = merge(
@@ -40,6 +42,7 @@ export const resolvers = merge(
   CDNResolvers,
   GenreResolvers,
   StudioResolvers,
+  AnimeResolvers,
 );
 
 export const schema = makeExecutableSchema({ typeDefs, resolvers });

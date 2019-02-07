@@ -3,17 +3,20 @@ import React from 'react';
 import { Provider } from 'mobx-react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import pick from 'lodash/pick';
+import debugNamespace from 'debug';
 
 import AppStore from '../../client/stores/AppStore';
 import App from '../../client/App';
 import template from '../template';
+
+const debug = debugNamespace('akigami:server:ssr');
 
 async function ssr({ title, layout, props = {}, ...data } = {}) {
   try {
     if (props) {
       Object.keys(props).forEach(item => {
         if (props[item]?.constructor.name === 'model') {
-          props[item] = props[item].toObject();
+          props[item] = props[item].toObject(); // eslint-disable-line no-param-reassign
         }
       });
     }
@@ -56,7 +59,7 @@ async function ssr({ title, layout, props = {}, ...data } = {}) {
     });
     return;
   } catch (e) {
-    console.log(e);
+    debug(e);
   }
 }
 

@@ -3,12 +3,7 @@ import { observable, action } from 'mobx';
 class Studio {
   @observable title = '';
 
-  @observable image = {
-    small: '',
-    medium: '',
-    large: '',
-    original: '',
-  };
+  @observable image = '';
 
   @observable about = '';
 

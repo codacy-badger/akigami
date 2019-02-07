@@ -1,4 +1,4 @@
-import { toJS, action } from 'mobx';
+import { observable, toJS, action } from 'mobx';
 import set from 'lodash/set';
 import debugNamespace from 'debug';
 
@@ -8,44 +8,67 @@ import { ApolloClient } from '../../lib/modules';
 const debug = debugNamespace('akigami:client:anime:create:store');
 
 class AddAnimeEntityStore extends AnimeModel {
+  @observable studioId = null;
+
   setField(field, value) {
     set(this, field, value);
   }
 
-  submit() {
+  async create() {
+    const res = await ApolloClient.mutate({
+      mutation: `mutation {
+          addAnime(
+            ${Object.keys(toJS(this)).map(i => `${i}: "${this[i]}"`).join(',')}
+          ) {
+            id
+          }
+        }
+      `,
+    });
+    return res.data.addAnime;
+  }
+
+  async edit() {
+    const res = await ApolloClient.mutate({
+      mutation: `mutation {
+          editAnime(
+            ${Object.keys(toJS(this)).map(i => `${i}: "${this[i]}"`).join(',')}
+          ) {
+            id
+          }
+        }
+      `,
+    });
+    return res.data.editAnime;
+  }
+
+  async submit(type) {
     debug(toJS(this));
+    let res = null;
+    res = await this[type]();
+    debug('submit', type, res);
+    if (res?.id) this.app.router.go(`/anime/${res.id}`);
   }
 
   @action
   async uploadImage(file, type) {
-    if (typeof this[type].original !== 'string' && this[type].original) {
-      URL.revokeObjectURL(this[type].original);
+    if (typeof this[type] !== 'string' && this[type]) {
+      URL.revokeObjectURL(this[type]);
     }
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-      const hash = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      }).then(res => res.text());
-      if (!hash) throw new Error('Hash not didn\'t come');
-      const { data = null } = await ApolloClient.query({
-        query: `{
-          getFromCDN(hash: "${hash}") {
-            small
-            medium
-            large
-            original
-          }
-        }`,
-      });
-      if (!data || !data.getFromCDN) throw new Error('Some error getFromCDN GQL');
-      Object.keys(data.getFromCDN).forEach((key) => {
-        this[type][key] = data.getFromCDN[key];
-      });
-    } catch (err) {
-      throw new Error(err);
-    }
+    const formData = new FormData();
+    formData.append('file', file);
+    const hash = await fetch('/api/upload', {
+      method: 'POST',
+      body: formData,
+    }).then(res => res.text());
+    if (!hash) throw new Error('Hash not didn\'t come');
+    const { data = null } = await ApolloClient.query({
+      query: `{
+        getFromCDN(hash: "${hash}")
+      }`,
+    });
+    if (!data || !data.getFromCDN) throw new Error('Some error getFromCDN GQL');
+    this[type] = data.getFromCDN;
   }
 }
 

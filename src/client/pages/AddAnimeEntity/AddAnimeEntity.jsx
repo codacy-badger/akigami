@@ -49,6 +49,12 @@ const queryStudios = `
 class AddAnimeEntity extends Component {
   static propTypes = {
     app: PropTypes.object.isRequired,
+    type: PropTypes.oneOf(['edit', 'create']).isRequired,
+    anime: PropTypes.object,
+  }
+
+  static defaultProps = {
+    anime: null,
   }
 
   constructor(props) {
@@ -62,8 +68,12 @@ class AddAnimeEntity extends Component {
   }
 
   componentDidMount() {
+    const { anime, type } = this.props;
     this.fetch(queryGenres, 'genres');
     this.fetch(queryStudios, 'studios');
+    if (anime && type === 'edit') {
+      this.store.setData(anime);
+    }
   }
 
   getFieldValue(field) {
@@ -71,7 +81,10 @@ class AddAnimeEntity extends Component {
   }
 
   handleChangeField = (field) => (event) => {
-    let { value } = event.target;
+    let value = event;
+    if (event.target) {
+      ({ value } = event.target);
+    }
     if (typeof value === 'string' && !value.length) {
       value = undefined;
     }
@@ -87,19 +100,23 @@ class AddAnimeEntity extends Component {
   }
 
   handleSubmit() {
-    this.store.submit();
+    const { type } = this.props;
+    this.store.submit(type);
   }
 
   render() {
     const { genres, studios } = this.state;
+    const { type, anime } = this.props;
     const alternateTitlesLabel = <label>Альтернативные названия</label>;
+    let title = 'Добавить новое аниме';
+    if (type === 'edit') title = `Редактирование ${anime.title.romaji}`;
     return (
       <Container>
         <div className="page-content">
           <Grid>
             <Grid.Row>
               <Grid.Column width={16}>
-                <PageHeader title="Добавить новое аниме" />
+                <PageHeader title={title} />
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -193,7 +210,11 @@ class AddAnimeEntity extends Component {
                           selection
                           fluid
                           label="Жанры"
+                          value={this.store.genres}
                           options={genres.map(e => ({ key: e.id, value: e.id, text: e.title }))}
+                          onChange={(e, { value }) => {
+                            this.handleChangeField('genres')(value);
+                          }}
                           placeholder="Укажите жанры"
                         />
                         <Form.Field
@@ -201,7 +222,11 @@ class AddAnimeEntity extends Component {
                           selection
                           fluid
                           label="Студия"
+                          value={this.store.studioId}
                           options={studios.map(e => ({ key: e.id, value: e.id, text: e.title }))}
+                          onChange={(e, { value }) => {
+                            this.handleChangeField('studioId')(value);
+                          }}
                           placeholder="Выберите студию"
                         />
                       </Grid.Column>
@@ -239,14 +264,14 @@ class AddAnimeEntity extends Component {
                     <Form.Field>
                       <label>Постер</label>
                       <PosterUploadCard
-                        src={this.store.poster.original}
+                        src={this.store.poster}
                         onChange={file => this.store.uploadImage(file, 'poster')}
                       />
                     </Form.Field>
                     <Form.Field>
                       <label>Обложка</label>
                       <CoverUploadCard
-                        src={this.store.cover.original}
+                        src={this.store.cover}
                         onChange={file => this.store.uploadImage(file, 'cover')}
                       />
                     </Form.Field>

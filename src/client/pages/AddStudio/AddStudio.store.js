@@ -16,55 +16,69 @@ class AddStudioStore extends StudioModel {
     set(this, field, value);
   }
 
-  async submit() {
-    debug(toJS(this));
+  async create() {
     const res = await ApolloClient.mutate({
       mutation: `mutation {
           addStudio(
             title: "${this.title}"
             about: "${this.about}"
             createdAt: "${this.createdAt}"
+            image: "${this.image}"
           ) {
             id
           }
         }
       `,
     });
-    debug('submit', res);
-    const { id } = res.data.addStudio;
-    if (id) this.app.router.go(`/studios/${id}`);
+    return res.data.addStudio;
+  }
+
+  async edit() {
+    const res = await ApolloClient.mutate({
+      mutation: `mutation {
+          editStudio(
+            id: "${this.id}"
+            title: "${this.title}"
+            about: "${this.about}"
+            createdAt: "${this.createdAt}"
+            image: "${this.image}"
+          ) {
+            id
+          }
+        }
+      `,
+    });
+    return res.data.editStudio;
+  }
+
+  async submit(type) {
+    debug(toJS(this));
+    let res = null;
+    res = await this[type]();
+    debug('submit', type, res);
+    if (res?.id) this.app.router.go(`/studios/${res.id}`);
   }
 
   @action
   async uploadImage(file) {
-    if (typeof this.image.original !== 'string' && this.image.original) {
-      URL.revokeObjectURL(this.image.original);
+    if (typeof this.image !== 'string' && this.image) {
+      URL.revokeObjectURL(this.image);
     }
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-      const hash = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      }).then(res => res.text());
-      if (!hash) throw new Error('Hash not didn\'t come');
-      const { data = null } = await ApolloClient.query({
-        query: `{
-          getFromCDN(hash: "${hash}") {
-            small
-            medium
-            large
-            original
-          }
-        }`,
-      });
-      if (!data || !data.getFromCDN) throw new Error('Some error getFromCDN GQL');
-      Object.keys(data.getFromCDN).forEach((key) => {
-        this.image[key] = data.getFromCDN[key];
-      });
-    } catch (err) {
-      throw new Error(err);
-    }
+    const formData = new FormData();
+    formData.append('file', file);
+    const hash = await fetch('/api/upload', {
+      method: 'POST',
+      body: formData,
+    }).then(res => res.text());
+    if (!hash) throw new Error('Hash not didn\'t come');
+    const { data = null } = await ApolloClient.query({
+      query: `{
+        getFromCDN(hash: "${hash}")
+      }`,
+    });
+    if (!data || !data.getFromCDN) throw new Error('Some error getFromCDN GQL');
+    debug(data, data.getFromCDN);
+    this.image = data.getFromCDN;
   }
 }
 

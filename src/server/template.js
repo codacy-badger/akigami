@@ -5,8 +5,7 @@ export default ({
   user,
   js,
   preload,
-}) =>
-  `
+}) => `
   <!DOCTYPE html>
   <html lang="ru">
 
