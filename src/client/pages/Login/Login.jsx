@@ -1,108 +1,98 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
-import { Grid, Row, Col, ControlLabel, HelpBlock } from 'react-bootstrap';
+import { Container, Grid, Card, Form, Message, Input } from 'semantic-ui-react';
 
 import LoginStore from './Login.store';
-import Wrapper from '../../components/Wrapper';
-
-import {
-  Card,
-  Input,
-  Group,
-  Submit,
-  Help,
-  Title,
-} from './Login.styled';
-
-function FieldGroup({ id, label, help, ...props }) {
-  return (
-    <Group controlId={id}>
-      <ControlLabel>{label}</ControlLabel>
-      <Input {...props} />
-      {help && <HelpBlock>{help}</HelpBlock>}
-    </Group>
-  );
-}
-
-FieldGroup.propTypes = {
-  id: PropTypes.any.isRequired,
-  label: PropTypes.string.isRequired,
-  help: PropTypes.string,
-};
-
-FieldGroup.defaultProps = {
-  help: null,
-};
 
 @inject('app')
 @observer
-export default class Login extends PureComponent {
+class Login extends Component {
   static propTypes = {
     app: PropTypes.object.isRequired,
   };
   constructor(props) {
     super(props);
     this.store = new LoginStore(props.app);
+    this.changeEmail = this.changeEmail.bind(this);
   }
   componentWillUnmount() {
     this.store.removeListener();
   }
+  changeEmail(e) {
+    this.store.handleChange('email', e.target.value);
+  }
   render() {
-    if (this.store.step === 'notLogged') {
-      return (
-        <Wrapper opaque>
-          <Grid>
-            <Row>
-              <Col mdOffset={4} md={4}>
-                <Card>
-                  <Title>Вход</Title>
-                  <Help>укажите свой электронный ящик</Help>
-                  <FieldGroup
-                    id="authEmail"
-                    type="email"
-                    name="email"
-                    label="Email"
-                    placeholder="Например: suzuki@chan.jp"
-                    value={this.store.email}
-                    onChange={e =>
-                      this.store.handleChange('email', e.target.value)
-                    }
-                  />
-                  <Submit
-                    bsStyle="danger"
-                    bsSize="lg"
-                    disabled={!this.store.isValidEmail}
-                    onClick={this.store.handleSend}
-                    style={{ width: '40%' }}
-                  >
-                    Войти
-                  </Submit>
-                </Card>
-              </Col>
-            </Row>
-          </Grid>
-        </Wrapper>
-      );
-    }
+    const { handleSend, isValidEmail, email, loading } = this.store;
     return (
-      <Wrapper opaque>
-        <Grid>
-          <Row>
-            <Col mdOffset={4} md={4}>
-              <Card>
-                <Title>Подтверждение</Title>
-                <Help>проверьте ваш электронный ящик</Help>
-
-                <p>
-                  Мы отправили вам письмо с подтверждением авторизации.
-                  Пожалуйста проверьте ваш электронный ящик.
-                </p>
-              </Card>
-            </Col>
-          </Row>
-        </Grid>
-      </Wrapper>
+      <React.Fragment>
+        <div
+          className="background-image blured-image"
+          style={{ backgroundImage: "url('/images/SteinsGate.fullhd.jpg')" }}
+        />
+        <Container className="filled">
+          <Grid className="filled">
+            <Grid.Row className="filled">
+              <Grid.Column>
+                <div className="centered-wrapper filled">
+                  <Card color="red" className="auth-card">
+                    {this.store.step === 'notLogged' ? (
+                      <Card.Content>
+                        <Card.Header>Авторизация</Card.Header>
+                        <Card.Meta>и регистрация</Card.Meta>
+                        <div style={{ marginTop: 48 }}>
+                          <Form
+                            onSubmit={handleSend}
+                            error={email.length > 0 && !isValidEmail}
+                          >
+                            <Form.Field
+                              control={Input}
+                              icon="at"
+                              iconPosition="left"
+                              label="Электронная почта"
+                              placeholder="Введите адрес почты"
+                              name="email"
+                              error={email.length > 0 && !isValidEmail}
+                              onChange={this.changeEmail}
+                              value={email}
+                            />
+                            <Message
+                              error
+                              size="small"
+                              content="Введите корректный адрес почты"
+                            />
+                            <Form.Button
+                              primary
+                              fluid
+                              content="Войти"
+                              type="submit"
+                              loading={loading}
+                              disabled={loading || !isValidEmail}
+                            />
+                          </Form>
+                        </div>
+                      </Card.Content>
+                    ) : (
+                      <Card.Content>
+                        <Card.Header>Подтверждение</Card.Header>
+                        <Card.Meta>проверьте ваш электронный ящик</Card.Meta>
+                        <div style={{ marginTop: 48 }}>
+                          <Card.Description>
+                            Мы отправили вам письмо с подтверждением авторизации.
+                            Пожалуйста проверьте ваш электронный ящик.
+                          </Card.Description>
+                        </div>
+                      </Card.Content>
+                    )}
+                  </Card>
+                </div>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Container>
+      </React.Fragment>
     );
   }
 }
+
+export default Login;

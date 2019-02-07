@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
 import ReactModal from 'react-modal';
 import debugNamespace from 'debug';
-import AppStore from './v2/stores/AppStore';
-import App from './v2/App';
-import { ApolloClient } from './v2/lib/modules';
+import AppStore from './stores/AppStore';
+import App from './App';
+import { ApolloClient } from './lib/modules';
 
 window.localStorage.debug = 'akigami:client:*';
 const debug = debugNamespace('akigami:client:main');

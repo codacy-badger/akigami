@@ -1,94 +1,59 @@
-import React, { PureComponent } from 'react';
-import { inject } from 'mobx-react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Grid as BsGrid, Row, Col } from 'react-bootstrap';
+import { Container, Grid, Header, Button, Icon } from 'semantic-ui-react';
 
-import Wrapper from '../../components/Wrapper';
-import Entity from '../../components/Entity';
-import Switcher from '../../components/Switcher';
-import Filter from '../../containers/Filter';
-import {
-  Content,
-  Header,
-  Title,
-  Grid,
-  Fixer,
-  Settings,
-} from './Explore.styled';
-import data from './Explore.mock';
+import EntityCard from '../../components/EntityCard/EntityCard';
+import PageHeader from '../../components/PageHeader';
+import mock from './Explore.mock';
 
-@inject('app')
-class Explore extends PureComponent {
-  static convertToSearchType(type) {
-    switch (type) {
-    case 'manga':
-      return 'манге';
-    case 'novel':
-      return 'новеллам';
-    default:
-      return 'аниме';
-    }
-  }
+class Explore extends Component {
   static propTypes = {
-    type: PropTypes.string,
-    app: PropTypes.object.isRequired,
-  };
+    type: PropTypes.oneOf(['anime', 'manga']),
+  }
+
   static defaultProps = {
-    type: null,
-  };
+    type: 'anime',
+  }
+
   render() {
-    const { type, app } = this.props;
+    const { type } = this.props;
+    let typeTitle = 'аниме';
+    if (type === 'manga') typeTitle = 'манги';
+    const entities = mock[type];
     return (
-      <Wrapper opaque>
-        <BsGrid>
-          <Row>
-            <Col xs={12}>
-              <Header>
-                <Title>
-                  Обзор
-                  <Switcher
-                    inline
-                    options={[
-                      {
-                        value: 'anime',
-                        title: 'аниме',
-                      },
-                      {
-                        value: 'manga',
-                        title: 'манги',
-                      },
-                      {
-                        value: 'novel',
-                        title: 'новелл',
-                      },
-                    ]}
-                    value={type}
-                    onChange={async newType => {
-                      await app.router.go(`/explore/${newType}`);
-                    }}
-                  />
-                </Title>
-              </Header>
-              <Settings>
-                <Filter type={this.constructor.convertToSearchType(type)} />
-              </Settings>
-              <Content>
-                <Grid>
-                  {data.map((item, index) => (
-                    <Fixer key={index}>
-                      <Entity
-                        type={item.type}
-                        status={item.status}
-                        entity={item.entity}
-                      />
-                    </Fixer>
-                  ))}
-                </Grid>
-              </Content>
-            </Col>
-          </Row>
-        </BsGrid>
-      </Wrapper>
+      <Container>
+        <div className="page-content">
+          <Grid>
+            <Grid.Row>
+              <Grid.Column>
+                <PageHeader title={`Обзор ${typeTitle}`}>
+                  <Button
+                    floated="right"
+                    icon
+                    labelPosition="left"
+                    basic
+                    color="olive"
+                    href={`/explore/${type}/create`}
+                  >
+                    <Icon name="edit" />
+                    Добавить
+                  </Button>
+                </PageHeader>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row columns={5} className="entity-row">
+              {entities.map(entity => (
+                <Grid.Column
+                  key={entity.id}
+                  className="entity-column"
+                >
+                  <EntityCard type={type} item={entity} />
+                </Grid.Column>
+              ))}
+            </Grid.Row>
+          </Grid>
+        </div>
+      </Container>
     );
   }
 }

@@ -1,42 +1,42 @@
 export default {
   feed: {
-    import: () => import(/* webpackChunkName: "feed" */ './v2/pages/Feed'),
+    import: () => import(/* webpackChunkName: "feed" */ './pages/Feed'),
   },
   auth: {
-    import: () => import(/* webpackChunkName: "auth" */ './v2/pages/Auth'),
+    import: () => import(/* webpackChunkName: "auth" */ './pages/Auth'),
   },
   login: {
-    import: () => import(/* webpackChunkName: "login" */ './v2/pages/Login'),
+    import: () => import(/* webpackChunkName: "login" */ './pages/Login'),
   },
   register: {
-    import: () => import(/* webpackChunkName: "register" */ './v2/pages/Register'),
+    import: () => import(/* webpackChunkName: "register" */ './pages/Register'),
   },
   profile: {
-    import: () => import(/* webpackChunkName: "profile" */ './v2/pages/User'),
+    import: () => import(/* webpackChunkName: "profile" */ './pages/User'),
   },
   explore: {
-    import: () => import(/* webpackChunkName: "explore" */ './v2/pages/Explore'),
+    import: () => import(/* webpackChunkName: "explore" */ './pages/Explore'),
   },
   studios: {
-    import: () => import(/* webpackChunkName: "studios" */ './v2/pages/Studios'),
+    import: () => import(/* webpackChunkName: "studios" */ './pages/Studios'),
   },
   addAnimeEntity: {
-    import: () => import(/* webpackChunkName: "addAnimeEntity" */ './v2/pages/AddAnimeEntity'),
+    import: () => import(/* webpackChunkName: "addAnimeEntity" */ './pages/AddAnimeEntity'),
   },
   addStudio: {
-    import: () => import(/* webpackChunkName: "addStudio" */ './v2/pages/addStudio'),
+    import: () => import(/* webpackChunkName: "addStudio" */ './pages/addStudio'),
   },
   error: {
-    import: () => import(/* webpackChunkName: "error" */ './v2/pages/Error'),
+    import: () => import(/* webpackChunkName: "error" */ './pages/Error'),
   },
   admin: {
-    import: () => import(/* webpackChunkName: "admin" */ './v2/pages/admin/Dashboard'),
+    import: () => import(/* webpackChunkName: "admin" */ './pages/admin/Dashboard'),
   },
   'admin:genres': {
-    import: () => import(/* webpackChunkName: "admin:genres" */ './v2/pages/admin/Genres'),
+    import: () => import(/* webpackChunkName: "admin:genres" */ './pages/admin/Genres'),
   },
   'admin:users': {
-    import: () => import(/* webpackChunkName: "admin:users" */ './v2/pages/admin/Users'),
+    import: () => import(/* webpackChunkName: "admin:users" */ './pages/admin/Users'),
   },
   // settings: {
   //     import: () => import(/* webpackChunkName: "settings" */ './pages/Settings'),

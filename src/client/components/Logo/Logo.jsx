@@ -15,7 +15,7 @@ export default class Logo extends PureComponent {
     twoColor: '#fff',
   };
   render() {
-    const { width, height, oneColor, twoColor } = this.props;
+    const { width, height, oneColor, twoColor, ...props } = this.props;
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -24,6 +24,7 @@ export default class Logo extends PureComponent {
         version="1.1"
         viewBox="0 0 238.51737 281.03214"
         aria-labelledby="title"
+        {...props}
       >
         <title id="title">Акигами</title>
         <g

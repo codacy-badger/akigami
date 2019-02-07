@@ -1,22 +1,43 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import some from 'lodash/some';
-import { Dropdown, Trigger, DropdownContent } from './Dropdown.styled';
+import { Dropdown as SDropdown } from 'semantic-ui-react';
 
-export default class DropdownComponent extends PureComponent {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    trigger: PropTypes.node.isRequired,
-  };
-  render() {
-    if (!some(this.props.children)) {
-      return false;
+class Dropdown extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleTouchEnd = this.handleTouchEnd.bind(this);
+  }
+  handleMouseEnter() {
+    if (!this.dropdown.state.open) {
+      this.dropdown.open();
     }
+  }
+  handleMouseLeave() {
+    if (this.dropdown.state.open) {
+      this.dropdown.close();
+    }
+  }
+  handleTouchEnd(e) {
+    if (!this.dropdown.state.open) {
+      e.preventDefault();
+      this.handleMouseEnter();
+    }
+  }
+  render() {
+    const { children, ...props } = this.props;
     return (
-      <Dropdown>
-        <Trigger>{this.props.trigger}</Trigger>
-        <DropdownContent>{this.props.children}</DropdownContent>
-      </Dropdown>
+      <SDropdown
+        ref={(c) => { this.dropdown = c; }}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+        onTouchEnd={this.handleTouchEnd}
+        {...props}
+      >
+        {children}
+      </SDropdown>
     );
   }
 }
+
+export default Dropdown;
