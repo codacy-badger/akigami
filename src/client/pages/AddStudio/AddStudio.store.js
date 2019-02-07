@@ -53,15 +53,14 @@ class AddStudioStore extends StudioModel {
 
   async submit(type) {
     debug(toJS(this));
-    let res = null;
-    res = await this[type]();
+    const res = await this[type]();
     debug('submit', type, res);
     if (res?.id) this.app.router.go(`/studios/${res.id}`);
   }
 
   @action
   async uploadImage(file) {
-    if (typeof this.image !== 'string' && this.image) {
+    if (this.image && typeof this.image !== 'string') {
       URL.revokeObjectURL(this.image);
     }
     const formData = new FormData();
@@ -76,7 +75,7 @@ class AddStudioStore extends StudioModel {
         getFromCDN(hash: "${hash}")
       }`,
     });
-    if (!data || !data.getFromCDN) throw new Error('Some error getFromCDN GQL');
+    if (!data?.getFromCDN) throw new Error('Some error getFromCDN GQL');
     debug(data, data.getFromCDN);
     this.image = data.getFromCDN;
   }

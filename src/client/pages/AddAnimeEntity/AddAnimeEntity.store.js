@@ -44,15 +44,14 @@ class AddAnimeEntityStore extends AnimeModel {
 
   async submit(type) {
     debug(toJS(this));
-    let res = null;
-    res = await this[type]();
+    const res = await this[type]();
     debug('submit', type, res);
     if (res?.id) this.app.router.go(`/anime/${res.id}`);
   }
 
   @action
   async uploadImage(file, type) {
-    if (typeof this[type] !== 'string' && this[type]) {
+    if (this[type] && typeof this[type] !== 'string') {
       URL.revokeObjectURL(this[type]);
     }
     const formData = new FormData();
@@ -67,7 +66,7 @@ class AddAnimeEntityStore extends AnimeModel {
         getFromCDN(hash: "${hash}")
       }`,
     });
-    if (!data || !data.getFromCDN) throw new Error('Some error getFromCDN GQL');
+    if (!data?.getFromCDN) throw new Error('Some error getFromCDN GQL');
     this[type] = data.getFromCDN;
   }
 }
