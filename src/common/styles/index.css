@@ -443,7 +443,7 @@
   top: -1rem;
   left: -1rem;
   padding: 1rem;
-  box-shadow: 0 0 0 1px #d54343, 0 12px 24px -6px rgba(0, 0, 0, .15);
+  box-shadow: 0 0 0 1px #d4d4d5, 0 12px 24px -6px rgba(0, 0, 0, .15);
   /* box-shadow: 0 0 0 1px #d54343; rgba(34, 36, 38, 0.1); */
 }
 

@@ -8,12 +8,14 @@ export default class Logo extends PureComponent {
     oneColor: PropTypes.string,
     twoColor: PropTypes.string,
   };
+
   static defaultProps = {
     width: 100,
     height: 100,
     oneColor: '#d54343',
     twoColor: '#fff',
   };
+
   render() {
     const { width, height, oneColor, twoColor, ...props } = this.props;
     return (
