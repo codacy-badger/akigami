@@ -1,6 +1,5 @@
 import { action, autorun, computed, observable } from 'mobx';
 import debounce from 'lodash/debounce';
-import { ApolloClient } from '../../lib/modules';
 
 export default class SignUp {
   @observable username = '';
@@ -26,7 +25,7 @@ export default class SignUp {
       this.loading = true;
       this.error = '';
 
-      const res = await ApolloClient.mutate({
+      const res = await this.app.apolloClient.mutate({
         mutation: `
         mutation {
           signup(username: "${this.username}", token: "${token}", gender: "${this.gender}", birthday: "${this.birthday}")
@@ -75,7 +74,7 @@ export default class SignUp {
   };
 
   validateUsername = debounce(async () => {
-    const res = await ApolloClient.query({
+    const res = await this.app.apolloClient.query({
       query: `
         { validateUsername(username: "${this.username}") }
       `,

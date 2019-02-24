@@ -17,7 +17,6 @@ import {
 } from 'semantic-ui-react';
 import get from 'lodash/get';
 import debugNamespace from 'debug';
-// import { ApolloClient } from '../../lib/modules';
 import Inline from '../../components/Inline';
 import PosterUploadCard from '../../components/PosterUploadCard';
 import CoverUploadCard from '../../components/CoverUploadCard';

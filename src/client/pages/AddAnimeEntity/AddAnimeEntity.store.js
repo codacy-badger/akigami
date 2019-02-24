@@ -3,7 +3,6 @@ import set from 'lodash/set';
 import debugNamespace from 'debug';
 
 import AnimeModel from '../../models/Anime';
-import { ApolloClient } from '../../lib/modules';
 
 const debug = debugNamespace('akigami:client:anime:create:store');
 
@@ -19,7 +18,7 @@ class AddAnimeEntityStore extends AnimeModel {
   }
 
   async create() {
-    const res = await ApolloClient.mutate({
+    const res = await this.app.apolloClient.mutate({
       mutation: `mutation (
         $title: AnimeTitleInput!
         $status: String!
@@ -46,7 +45,7 @@ class AddAnimeEntityStore extends AnimeModel {
   }
 
   async edit() {
-    // const res = await ApolloClient.mutate({
+    // const res = await this.app.apolloClient.mutate({
     //   mutation: `mutation {
     //       editAnime(
     //         ${Object.keys(toJS(this)).map(i => `${i}: "${this[i]}"`).join(',')}
@@ -91,7 +90,7 @@ class AddAnimeEntityStore extends AnimeModel {
       body: formData,
     }).then(res => res.text());
     if (!hash) throw new Error('Hash not didn\'t come');
-    const { data = null } = await ApolloClient.query({
+    const { data = null } = await this.app.apolloClient.query({
       query: `{
         getFromCDN(hash: "${hash}")
       }`,
