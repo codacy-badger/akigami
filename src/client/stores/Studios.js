@@ -16,6 +16,18 @@ class Studios {
     if (cb) cb();
   }
 
+  async initData() {
+    const response = await this.app.apolloClient.query({
+      query: `{
+        studios(limit: 10) {
+          id title image
+        }
+      }`,
+    });
+    this.setData(response.data.studios);
+    this.loading = false;
+  }
+
   wrapModel = item => new StudioModel(this.app, item);
 }
 

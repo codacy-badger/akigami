@@ -6,7 +6,6 @@ import { Container, Grid, Dimmer, Loader, Table } from 'semantic-ui-react';
 
 import Menu from '../Menu';
 import PageHeader from '../../../components/PageHeader';
-import UsersStore from '../../../stores/Users';
 
 const debug = debugNamespace('akigami:client:admin:users');
 
@@ -16,26 +15,20 @@ class Users extends Component {
   static propTypes = {
     activeTab: PropTypes.string.isRequired,
     app: PropTypes.object.isRequired,
-    users: PropTypes.array,
-  }
-
-  static defaultProps = {
-    users: [],
   }
 
   constructor(props) {
     super(props);
-    this.store = new UsersStore(props.app);
     this.state = {
-      fetching: true,
+      fetching: false,
     };
   }
 
   componentDidMount() {
-    const { users } = this.props;
-    this.store.setData(users, () => {
-      this.setState({ fetching: false });
-    });
+    // const { users } = this.props;
+    // this.store.setData(users, () => {
+    //   this.setState({ fetching: false });
+    // });
   }
 
   handleGo = (user) => {
@@ -45,8 +38,8 @@ class Users extends Component {
 
   render() {
     const { fetching } = this.state;
-    const { activeTab } = this.props;
-    const { list } = this.store;
+    const { activeTab, store } = this.props;
+    const { list } = store;
     debug(list);
     return (
       <Container>

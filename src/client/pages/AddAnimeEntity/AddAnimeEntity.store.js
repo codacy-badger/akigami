@@ -10,39 +10,69 @@ const debug = debugNamespace('akigami:client:anime:create:store');
 class AddAnimeEntityStore extends AnimeModel {
   @observable studioId = null;
 
+  @observable genresList = [];
+
+  @observable studiosList = [];
+
   setField(field, value) {
     set(this, field, value);
   }
 
   async create() {
     const res = await ApolloClient.mutate({
-      mutation: `mutation {
+      mutation: `mutation (
+        $title: AnimeTitleInput!
+        $status: String!
+        $rating: String!
+        ) {
           addAnime(
-            ${Object.keys(toJS(this)).map(i => `${i}: "${this[i]}"`).join(',')}
+            title: $title
+            rating: $rating
+            status: $status
           ) {
             id
           }
         }
       `,
+      variables: {
+        title: {
+          romaji: this.title.romaji,
+        },
+        rating: this.rating,
+        status: this.status,
+      }
     });
     return res.data.addAnime;
   }
 
   async edit() {
-    const res = await ApolloClient.mutate({
-      mutation: `mutation {
-          editAnime(
-            ${Object.keys(toJS(this)).map(i => `${i}: "${this[i]}"`).join(',')}
-          ) {
-            id
-          }
+    // const res = await ApolloClient.mutate({
+    //   mutation: `mutation {
+    //       editAnime(
+    //         ${Object.keys(toJS(this)).map(i => `${i}: "${this[i]}"`).join(',')}
+    //       ) {
+    //         id
+    //       }
+    //     }
+    //   `,
+    // });
+    // return res.data.editAnime;
+  }
+
+  async initData() {
+    const response = await this.app.apolloClient.query({
+      query: `{
+        studios {
+          id
+          title
         }
-      `,
+      }`,
     });
-    return res.data.editAnime;
+    this.studiosList = response.data.studios;
   }
 
   async submit(type) {
+    if (!this.title.romaji) return false;
     debug(toJS(this));
     const res = await this[type]();
     debug('submit', type, res);

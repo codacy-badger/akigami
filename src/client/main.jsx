@@ -11,18 +11,20 @@ window.localStorage.debug = 'akigami:client:*';
 const debug = debugNamespace('akigami:client:main');
 
 (async () => {
-  const raw = document.querySelector('#preload-data');
+  // const raw = document.querySelector('#preload-data');
   const userData = JSON.parse(document.body.dataset.user);
   const app = new AppStore();
-
+  app.apolloClient = ApolloClient;
   app.user.setUserData(userData);
+  app.user.setListener();
 
-  await app.router.setContainer({
-    title: raw.dataset.title,
-    props: raw.text ? JSON.parse(raw.text) : null,
-    layout: raw.dataset.layout,
-  });
-  const res = await ApolloClient.query({
+  // await app.router.setContainer({
+  //   title: raw.dataset.title,
+  //   props: raw.text ? JSON.parse(raw.text) : null,
+  //   layout: raw.dataset.layout,
+  // });
+  await app.router.setContainer2(document.location.pathname);
+  const res = await app.apolloClient.query({
     query: `
       {
         users {
@@ -46,7 +48,7 @@ const debug = debugNamespace('akigami:client:main');
   });
   debug('users', res);
 
-  const res2 = await ApolloClient.query({
+  const res2 = await app.apolloClient.query({
     query: `
       {
         getMe {

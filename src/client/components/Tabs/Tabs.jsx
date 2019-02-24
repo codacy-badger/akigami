@@ -49,15 +49,15 @@ class Tabs extends Component {
   }
 
   handleChangeTab(active, item, parent) {
-    const topBarActive = this.state.active !== active;
-    this.setState({ active }, () => {
-      if (this.props.onChange) {
-        this.props.onChange(active, item, parent);
-      }
-      if (topBarActive) {
-        this.props.app.topBar.finish();
-      }
-    });
+    // const topBarActive = this.state.active !== active;
+    // this.setState({ active }, () => {
+    //   if (this.props.onChange) {
+    //     this.props.onChange(active, item, parent);
+    //   }
+    //   if (topBarActive) {
+    //     this.props.app.topBar.finish();
+    //   }
+    // });
   }
 
   findActiveTab(arr, key) {
@@ -97,6 +97,7 @@ class Tabs extends Component {
                         const changeDropdownTab = () => this.handleChangeTab(dropItem.key, dropItem, item);
                         return (
                           <Dropdown.Item
+                            href={`/${this.props.prefix}/${item.key}/${dropItem.key}`}
                             key={dropItem.key}
                             onClick={changeDropdownTab}
                             active={dropItem.key === active}
@@ -114,6 +115,8 @@ class Tabs extends Component {
               const changeTab = () => this.handleChangeTab(item.key, item);
               return (
                 <Menu.Item
+                  link
+                  href={`/${this.props.prefix}/${item.key}`}
                   key={item.key}
                   name={item.key}
                   active={active === item.key}

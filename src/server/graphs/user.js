@@ -5,6 +5,7 @@ export const typeDef = gql`
     user(id: ID!): User
     users(limit: Int): [User]
     getMe: User
+    getByUsername(username: String): User
   }
   
   extend type Mutation {
@@ -51,8 +52,12 @@ export const resolvers = {
       const user = await User.findById(id);
       return user;
     },
+    getByUsername: async (parent, { username }, ctx) => {
+      const { User } = ctx.models;
+      return User.findOne({ username }); // проверить селект на бенчмарках
+    },
     getMe: async (parent, args, ctx) => {
-      // console.log('getme', ctx.user);
+      // console.log('getme', ctx);
       return ctx.user;
     },
   },

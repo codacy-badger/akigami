@@ -1,9 +1,10 @@
 import { computed, observable } from 'mobx';
-import { ApolloClient } from '../../lib/modules';
 
 export default class Login {
   @observable step = 'notLogged'; // notLogged, confirm, register
+
   @observable email = '';
+
   @observable loading = false;
 
   constructor(app) {
@@ -34,7 +35,7 @@ export default class Login {
   handleSend = () => {
     this.loading = true;
     // socket.emit('auth:send', this.email);
-    ApolloClient.mutate({
+    this.app.apolloClient.mutate({
       mutation: `
       mutation {
         sendEmail(email: "${this.email}")

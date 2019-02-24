@@ -19,9 +19,9 @@ class UserCover extends Component {
         <div
           className={cx({
             'user-cover': true,
-            'user-no-cover': store.cover.includes('no_cover'),
+            'user-no-cover': store.getCover.includes('no_cover'),
           })}
-          style={{ backgroundImage: `url(${store.cover})` }}
+          style={{ backgroundImage: `url(${store.getCover})` }}
         />
         <div className="transparency-container filled">
           <Container className="filled">
@@ -31,7 +31,7 @@ class UserCover extends Component {
                   <div className="user-cover-container filled">
                     <Image
                       circular
-                      src={store.avatar}
+                      src={store.getAvatar}
                       size="small"
                       style={{ flexShrink: 0 }}
                     />

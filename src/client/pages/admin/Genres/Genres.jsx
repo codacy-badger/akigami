@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Provider, inject, observer } from 'mobx-react';
 import { Container, Grid, Button, Header, Icon, Table, Dimmer, Loader } from 'semantic-ui-react';
-import GenresStore from '../../../stores/Genres';
 import Menu from '../Menu';
 import PageHeader from '../../../components/PageHeader';
 import NewGenre from './NewGenre';
@@ -18,23 +17,22 @@ class Genres extends Component {
 
   constructor(props) {
     super(props);
-    this.store = new GenresStore(props.app);
     this.state = {
-      fetching: true,
+      fetching: false,
     };
   }
 
   componentDidMount() {
-    const { genres } = this.props;
-    this.store.setData(genres, () => {
-      this.setState({ fetching: false });
-    });
+    // const { genres } = this.props;
+    // this.store.setData(genres, () => {
+    //   this.setState({ fetching: false });
+    // });
   }
 
   render() {
     const { fetching } = this.state;
-    const { activeTab } = this.props;
-    const { list } = this.store;
+    const { activeTab, store } = this.props;
+    const { list } = store;
     return (
       <Container>
         <div className="page-content">
@@ -43,7 +41,7 @@ class Genres extends Component {
               <Grid.Column width={4}>
                 <Menu active={activeTab} />
               </Grid.Column>
-              <Provider store={this.store}>
+              <Provider store={store}>
                 <Grid.Column width={12}>
                   <PageHeader title="Список жанров">
                     <NewGenre>

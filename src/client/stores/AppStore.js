@@ -13,5 +13,6 @@ export default class AppStore {
     this.router = new Router(this);
     this.user = new User(this);
     this.notification = new Notification();
+    this.apolloClient = null;
   }
 }

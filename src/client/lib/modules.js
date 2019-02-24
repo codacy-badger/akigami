@@ -21,7 +21,7 @@ if (typeof window !== 'undefined') {
             if (networkError) console.log('[Network error]:', networkError);
           }),
           new WebSocketLink({
-            uri: 'ws://localhost:3000/graphql',
+            uri: `ws://${window.location.host}/graphql`,
             options: {
               reconnect: true,
               connectionParams: {
@@ -30,7 +30,17 @@ if (typeof window !== 'undefined') {
             },
           }),
         ]),
-        cache: new InMemoryCache(),
+        cache: new InMemoryCache().restore(window.__APOLLO_STATE__),
+        defaultOptions: {
+          watchQuery: {
+            fetchPolicy: 'network-only',
+            errorPolicy: 'ignore',
+          },
+          query: {
+            fetchPolicy: 'network-only',
+            errorPolicy: 'all',
+          },
+        },
       })
       : null
   );

@@ -11,10 +11,12 @@ class Auth extends Component {
   static propTypes = {
     app: PropTypes.object.isRequired,
   };
+
   constructor(props) {
     super(props);
     this.store = new AuthStore(props.app);
   }
+
   render() {
     // const { handleSend, isValidEmail, email, loading } = this.store;
     return (

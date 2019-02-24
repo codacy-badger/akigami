@@ -16,6 +16,12 @@ export const typeDef = gql`
 
   extend type Query {
     validateUsername(username: String): JSON
+    checkToken(
+      token: String!
+    ): String
+    getEmailFromToken(
+      token: String!
+    ): String
   }
 
   extend type Mutation {
@@ -26,6 +32,8 @@ export const typeDef = gql`
     signup(token: String, username: String, gender: String, birthday: String): JSON
 
     auth(token: String): Boolean
+
+    logout: Boolean
   }
   extend type Subscription {
     changed: JSON
@@ -47,8 +55,43 @@ export const resolvers = {
       const user = await ctx.models.User.findOne({ username: new RegExp(`^${username}$`, 'i') });
       return { status: 'ok', is_valid: true, exists: !!user };
     },
+    checkToken: async (parent, args, ctx, info) => {
+      const { token } = args;
+      if (!token) {
+        return 'notfound';
+      }
+
+      const emailToken = await ctx.models.EmailToken.findOne({ token });
+      if (!emailToken) {
+        return 'notfound';
+      }
+
+      const hasUser = await ctx.models.User.findOne({ email: emailToken.email }).select('id');
+      if (!hasUser) {
+        return 'signup';
+      }
+      return 'auth';
+    },
+    getEmailFromToken: async (parent, args, ctx, info) => {
+      const { token } = args;
+      const emailToken = await ctx.models.EmailToken.findOne({ token });
+      if (!emailToken) {
+        return null;
+      }
+      return emailToken.email;
+    },
   },
   Mutation: {
+    logout: async (parent, args, ctx, info) => {
+      const sessionID = cookieParser.signedCookie(
+        ctx.token,
+        config.get('sessionSecret'),
+      );
+      const sess = await redisStore.getAsync(sessionID);
+      sess.passport = {};
+      await redisStore.setAsync(sessionID, sess);
+      return true;
+    },
     sendEmail: async (parent, args, ctx, info) => {
       const { email } = args;
       if (/.+@.+\..+/i.test(email)) {

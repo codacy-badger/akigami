@@ -27,7 +27,7 @@ export default {
     import: () => import(/* webpackChunkName: "addAnimeEntity" */ './pages/AddAnimeEntity'),
   },
   addStudio: {
-    import: () => import(/* webpackChunkName: "addStudio" */ './pages/addStudio'),
+    import: () => import(/* webpackChunkName: "addStudio" */ './pages/AddStudio'),
   },
   error: {
     import: () => import(/* webpackChunkName: "error" */ './pages/Error'),

@@ -4,13 +4,13 @@ import { Icon, Button, Container, Grid, Image, Header } from 'semantic-ui-react'
 import { inject, observer } from 'mobx-react';
 import PageHeader from '../../components/PageHeader';
 import TitledBlock from '../../components/TitledBlock';
-import StudioModel from '../../models/Studio';
 
 @inject('app')
 @observer
 class Studio extends Component {
   static propTypes = {
     app: PropTypes.object.isRequired,
+    store: PropTypes.object.isRequired,
     studio: PropTypes.object,
   }
 
@@ -18,17 +18,13 @@ class Studio extends Component {
     studio: {},
   }
 
-  constructor(props) {
-    super(props);
-    this.store = new StudioModel(props.app);
-  }
-
   componentDidMount() {
-    const { studio } = this.props;
-    this.store.setData(studio);
+    // const { studio, store } = this.props;
+    // store.setData(studio);
   }
 
   render() {
+    const { store } = this.props;
     return (
       <Container>
         <div className="page-content">
@@ -38,7 +34,7 @@ class Studio extends Component {
                 icon
                 basic
                 labelPosition="left"
-                href={`/studios/${this.store.id}/edit`}
+                href={`/studios/${store.id}/edit`}
               >
                 <Icon name="edit" />
                 Редактировать
@@ -46,12 +42,12 @@ class Studio extends Component {
             </PageHeader>
             <Grid.Row>
               <Grid.Column width={4}>
-                <Image src={this.store.image} size="medium" bordered />
+                <Image src={store.image} size="medium" bordered />
               </Grid.Column>
               <Grid.Column width={12}>
-                <Header as="h1">{this.store.title}</Header>
+                <Header as="h1">{store.title}</Header>
                 <TitledBlock title="Описание">
-                  {this.store.about || 'Нет описания'}
+                  {store.about || 'Нет описания'}
                 </TitledBlock>
               </Grid.Column>
             </Grid.Row>

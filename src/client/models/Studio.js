@@ -36,6 +36,20 @@ class Studio {
     this.about = about;
     this.createdAt = createdAt;
   }
+
+  initData = async ({ id, type }) => {
+    const response = await this.app.apolloClient.query({
+      query: `{
+        studio(id: "${id}") {
+          id
+          title
+          image
+          about
+        }
+      }`,
+    });
+    this.setData(response.data.studio);
+  }
 }
 
 export default Studio;

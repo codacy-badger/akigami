@@ -38,7 +38,7 @@ class App extends Component {
             transparency: ui.transparented,
           })}
         >
-          {React.createElement(router.container.Module, router.container.props)}
+          {React.createElement(router.container.component, router.container.props)}
         </div>
       </React.Fragment>
     );

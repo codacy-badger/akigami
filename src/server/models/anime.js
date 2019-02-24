@@ -16,7 +16,6 @@ class Anime extends MongooseClass {
 
   type = {
     type: String,
-    required: true,
     enum: ['tv', 'movie', 'ova', 'ona', 'special'],
   };
 
@@ -35,7 +34,6 @@ class Anime extends MongooseClass {
 
   season = {
     type: String,
-    required: true,
     enum: ['winter', 'spring', 'summer', 'fall'],
   };
 

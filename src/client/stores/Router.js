@@ -5,15 +5,32 @@ import URL from 'url';
 import qs from 'querystringify';
 import find from 'lodash/find';
 import pathToRegexp from 'path-to-regexp';
+import UniversalRouter from 'universal-router';
 
 import routes from '../routes';
+import router from '../router';
 import modals from '../modals';
 
 export default class Router {
   @observable container;
 
+  customHandler = null;
+
+  currentURL = null;
+
+  router;
+
   constructor(app) {
     this.app = app;
+    this.router = new UniversalRouter(router, {
+      context: { app },
+      async errorHandler(error, context) {
+        if (error.status != 404) {
+          console.log(error);
+        }
+        return { title: 'Ошибка', component: await import(/* webpackChunkName: "error" */ '../pages/Error') };
+      },
+    });
     if (typeof window !== 'undefined') {
       this.initHandler();
       this.setModal(window.location.search);
@@ -35,6 +52,13 @@ export default class Router {
         this.linkClickHandler(event, link);
       }
     });
+    window.addEventListener('popstate', (e) => {
+      this.go(document.location.pathname, false, false);
+    }, false);
+  }
+
+  clearCustomHandler() {
+    this.customHandler = null;
   }
 
   linkClickHandler(event, element) {
@@ -85,8 +109,9 @@ export default class Router {
       window.history.pushState(null, null, h);
     }
     if (!skip) {
-      this.app.topBar.setProgress(30);
-      await this.requestAndInsert(h, query);
+      // this.app.topBar.setProgress(30);
+      // await this.requestAndInsert(h, query);
+      await this.setContainer2(h);
     }
     await this.setModal(query);
   }
@@ -110,6 +135,40 @@ export default class Router {
     const data = routes[id] || routes.error;
     const Module = await data.import();
     return Module.default;
+  }
+
+  async setContainer2(url) {
+    const { title, component, params = {}, redirect } = await this.router.resolve(url);
+    if (redirect) {
+      return { redirect };
+    }
+    if (typeof window !== 'undefined' && title) {
+      document.title = `${title} – Акигами`;
+    }
+    if (component) {
+      const container = {
+        component: component.default,
+        props: params,
+      };
+      if (component.store) {
+        const store = new component.store(this.app); // eslint-disable-line new-cap
+        if (store.initData) {
+          if (typeof window !== 'undefined') {
+            store.initData(params);
+          } else {
+            await store.initData(params);
+          }
+        }
+        Object.assign(container.props, { store });
+      }
+      // console.log('hello');
+      this.container = container;
+      // console.log(this.container.type.prototype);
+    } else {
+      this.customHandler?.(params); // eslint-disable-line no-unused-expressions
+    }
+    this.currentURL = url;
+    return { title };
   }
 
   async setContainer({ layout, title, props } = {}) {

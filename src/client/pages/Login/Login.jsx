@@ -10,20 +10,24 @@ import LoginStore from './Login.store';
 class Login extends Component {
   static propTypes = {
     app: PropTypes.object.isRequired,
+    store: PropTypes.object.isRequired,
   };
+
   constructor(props) {
     super(props);
-    this.store = new LoginStore(props.app);
     this.changeEmail = this.changeEmail.bind(this);
   }
+
   componentWillUnmount() {
-    this.store.removeListener();
+    this.props.store.removeListener();
   }
+
   changeEmail(e) {
-    this.store.handleChange('email', e.target.value);
+    this.props.store.handleChange('email', e.target.value);
   }
+
   render() {
-    const { handleSend, isValidEmail, email, loading } = this.store;
+    const { handleSend, isValidEmail, email, loading, step } = this.props.store;
     return (
       <React.Fragment>
         <div
@@ -36,7 +40,7 @@ class Login extends Component {
               <Grid.Column>
                 <div className="centered-wrapper filled">
                   <Card color="red" className="auth-card">
-                    {this.store.step === 'notLogged' ? (
+                    {step === 'notLogged' ? (
                       <Card.Content>
                         <Card.Header>Авторизация</Card.Header>
                         <Card.Meta>и регистрация</Card.Meta>

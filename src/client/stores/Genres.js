@@ -1,6 +1,5 @@
 import { observable, action } from 'mobx';
 import Genre from '../models/Genre';
-import { ApolloClient } from '../lib/modules';
 
 class Genres {
   @observable list = [];
@@ -27,6 +26,20 @@ class Genres {
     new Genre(this.app, this, obj)
   )
 
+  initData = async () => {
+    const response = await this.app.apolloClient.query({
+      query: `
+        {
+          genres {
+            id
+            title
+          }
+        }
+      `,
+    });
+    this.list = response.data.genres.map(this.setModel);
+  }
+
   @action
   async create(isEdit, cb) {
     if (!this.canCreate) return;
@@ -34,7 +47,7 @@ class Genres {
     try {
       let data = null;
       if (isEdit) {
-        ({ data = null } = await ApolloClient.mutate({
+        ({ data = null } = await this.app.apolloClient.mutate({
           mutation: `mutation {
             editGenre(
               id: ${this.new.id}
@@ -46,7 +59,7 @@ class Genres {
           }`,
         }));
       } else {
-        ({ data = null } = await ApolloClient.mutate({
+        ({ data = null } = await this.app.apolloClient.mutate({
           mutation: `mutation {
             addGenre(title: "${this.new.title}") {
               id

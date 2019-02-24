@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { getFromCDN } from '../utils/cdn';
 
 export const typeDef = gql`
   extend type Query {
@@ -10,15 +11,13 @@ export const typeDef = gql`
     addStudio(
       title: String!,
       image: String,
-      about: String,
-      createdAt: String
+      about: String
     ): Studio
     editStudio(
       id: ID!,
       title: String!,
       image: String,
-      about: String,
-      createdAt: String
+      about: String
     ): Studio
   }
 
@@ -47,13 +46,18 @@ export const resolvers = {
   Mutation: {
     addStudio: async (parent, args, ctx) => {
       const { Studio } = ctx.models;
-      const studio = new Studio(args);
-      const newStudio = await studio.save();
+      const changedArgs = args;
+      changedArgs.image = await getFromCDN(changedArgs.image);
+      const newStudio = await Studio.create(changedArgs);
       return newStudio;
     },
     editStudio: async (parent, { id, ...args }, ctx) => {
       const { Studio } = ctx.models;
-      const studio = await Studio.findOneAndUpdate({ id }, args, { new: true });
+      const changedArgs = args;
+      if (args.image) {
+        changedArgs.image = await getFromCDN(changedArgs.image);
+      }
+      const studio = await Studio.findOneAndUpdate({ id }, changedArgs, { new: true });
       return studio;
     },
   },

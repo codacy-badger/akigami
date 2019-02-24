@@ -74,7 +74,9 @@ app.use((req, res, next) => {
 
 server.applyMiddleware({ app });
 
-requireFiles('routes', app);
+// requireFiles('routes', app);
+require('./routes/index').default(app);
+require('./routes/api').default(app);
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');
@@ -87,7 +89,7 @@ app.use((err, req, res, nextIgnored) => {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   res.status(err.status || 500);
-  res.ssr({
+  res.json({
     title: 'Ошибка',
     layout: 'error',
   });

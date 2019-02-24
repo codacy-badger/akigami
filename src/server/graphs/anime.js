@@ -8,47 +8,55 @@ export const typeDef = gql`
 
   extend type Mutation {
     addAnime(
-      title: AnimeTitle,
-      description: AnimeDesc,
-      type: String!,
+      title: AnimeTitleInput,
+      description: AnimeDescInput,
+      type: String,
       episodes: Int,
       status: String!,
-      airing: AnimeAir,
-      season: String!,
+      airing: AnimeAirInput,
+      season: String,
       source: String,
       genres: [Int],
       duration: Int,
       rating: String!,
-      stats: AnimeStats,
-      videos: [AnimeVideo],
+      stats: AnimeStatsInput,
+      videos: [AnimeVideoInput],
       poster: String,
       cover: String,
-      externalLinks: [AnimeExtLinks],
+      externalLinks: [AnimeExtLinksInput],
       studioId: ID
     ): Anime
     editAnime(
       id: ID!,
-      title: AnimeTitle,
-      description: AnimeDesc,
-      type: String!,
+      title: AnimeTitleInput,
+      description: AnimeDescInput,
+      type: String,
       episodes: Int,
       status: String!,
-      airing: AnimeAir,
-      season: String!,
+      airing: AnimeAirInput,
+      season: String,
       source: String,
       genres: [Int],
       duration: Int,
       rating: String!,
-      stats: AnimeStats,
-      videos: [AnimeVideo],
+      stats: AnimeStatsInput,
+      videos: [AnimeVideoInput],
       poster: String,
       cover: String,
       studioId: ID,
-      externalLinks: [AnimeExtLinks]
+      externalLinks: [AnimeExtLinksInput]
     ): Anime
   }
 
   type AnimeTitle {
+    russian: String
+    romaji: String!
+    english: String
+    japanese: String
+    other: [String]
+  }
+
+  input AnimeTitleInput {
     russian: String
     romaji: String!
     english: String
@@ -61,12 +69,28 @@ export const typeDef = gql`
     english: String
   }
 
+  input AnimeDescInput {
+    russian: String
+    english: String
+  }
+
   type AnimeAir {
     start: String
     finish: String
   }
 
+  input AnimeAirInput {
+    start: String
+    finish: String
+  }
+
   type AnimeStats {
+    score: Int
+    ranked: Int
+    members: Int
+  }
+
+  input AnimeStatsInput {
     score: Int
     ranked: Int
     members: Int
@@ -78,7 +102,19 @@ export const typeDef = gql`
     thumbnail: String
   }
 
+  input AnimeVideoInput {
+    title: String
+    url: String
+    thumbnail: String
+  }
+
   type AnimeExtLinks {
+    title: String
+    url: String
+    type: String
+  }
+
+  input AnimeExtLinksInput {
     title: String
     url: String
     type: String
@@ -88,11 +124,11 @@ export const typeDef = gql`
     id: ID!
     title: AnimeTitle
     description: AnimeDesc
-    type: String!
+    type: String
     episodes: Int
     status: String!
     airing: AnimeAir
-    season: String!
+    season: String
     source: String
     genres: [Int]
     duration: Int

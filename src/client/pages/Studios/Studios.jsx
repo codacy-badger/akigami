@@ -25,29 +25,15 @@ const debug = debugNamespace('akigami:client:studios');
 class Studios extends Component {
   static propTypes = {
     app: PropTypes.object.isRequired,
-    studios: PropTypes.array,
-  }
-
-  static defaultProps = {
-    studios: [],
-  }
-
-  constructor(props) {
-    super(props);
-    this.store = new StudiosStore(props.app);
+    store: PropTypes.object.isRequired,
   }
 
   componentDidMount() {
-    const { studios } = this.props;
-    debug('studios', studios);
-    this.store.setData(studios, () => {
-      this.store.loading = false;
-    });
   }
 
   render() {
-    const { app: { user } } = this.props;
-    const { loading, list } = this.store;
+    const { app: { user }, store } = this.props;
+    const { loading, list } = store;
     return (
       <Container>
         <div className="page-content">

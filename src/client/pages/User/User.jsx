@@ -4,7 +4,6 @@ import { inject, observer, Provider } from 'mobx-react';
 
 import UserCover from '../../components/UserCover';
 
-import UserStore from '../../stores/User';
 import UserGeneral from './parts/UserGeneral';
 import UserLibrary from './parts/UserLibrary';
 import Tabs from '../../components/Tabs/Tabs';
@@ -19,33 +18,39 @@ class User extends Component {
   static propTypes = {
     app: PropTypes.object.isRequired,
     ui: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
     myUser: PropTypes.object.isRequired,
     tab: PropTypes.string,
     subTab: PropTypes.string,
+    store: PropTypes.object,
   }
 
   static defaultProps = {
     tab: null,
     subTab: null,
+    store: null,
   }
 
   constructor(props) {
     super(props);
-    this.store = new UserStore(props.app);
+    this.state = { activeTab: props.subTab || props.tab };
     this.isOwner = this.isOwner.bind(this);
-    this.handleChangeHistory = this.handleChangeHistory.bind(this);
+    this.setTab = this.setTab.bind(this);
+    props.app.router.customHandler = this.setTab;
   }
 
   componentDidMount() {
-    const { ui, user } = this.props;
-    this.store.setUserData(user);
+    const { ui } = this.props;
     ui.changeTransparented(true);
   }
 
   componentWillUnmount() {
+    this.props.app.router.customHandler = null;
     const { ui } = this.props;
     ui.changeTransparented(false);
+  }
+
+  setTab({ tab, subTab }) {
+    this.setState({ activeTab: subTab || tab });
   }
 
   isOwner() {
@@ -53,18 +58,9 @@ class User extends Component {
     return this.store.id === myUser.id;
   }
 
-  handleChangeHistory(tab, item, parent) {
-    const prefix = `/@${this.store.username}`;
-    let path = `${prefix}/${tab}`;
-    if (tab === 'general') path = `${prefix}`;
-    if (parent) path = `${prefix}/${parent.key}/${tab}`;
-    window.history.pushState(null, null, path);
-  }
-
   render() {
-    const { tab, subTab } = this.props;
-    let activeTab = tab;
-    if (subTab) activeTab = subTab;
+    const { activeTab } = this.state;
+    const { store } = this.props;
     const userPanes = [
       {
         key: 'general',
@@ -108,13 +104,13 @@ class User extends Component {
     ];
     return (
       <div className="filled">
-        <Provider store={this.store} isOwner={this.isOwner}>
+        <Provider store={store} isOwner={this.isOwner}>
           <React.Fragment>
             <UserCover />
             <Tabs
+              prefix={`@${store.username}`}
               data={userPanes}
               active={activeTab}
-              onChange={this.handleChangeHistory}
             />
           </React.Fragment>
         </Provider>
@@ -122,5 +118,6 @@ class User extends Component {
     );
   }
 }
+
 
 export default User;

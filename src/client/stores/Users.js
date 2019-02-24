@@ -20,6 +20,32 @@ class Users {
     cb();
   }
 
+  initData = async () => {
+    const response = await this.app.apolloClient.query({
+      query: `
+        {
+          users {
+            id
+            displayName
+            username
+            email
+            gender
+            avatar
+            cover
+            status
+            birthday
+            name
+            city
+            online
+            createdAt
+            visitedAt
+          }
+        }
+      `,
+    });
+    this.list = response.data.users.map(this.wrapModel);
+  }
+
   wrapModel = (item) => (
     new UserModel(this.app, item)
   )

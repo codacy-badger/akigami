@@ -15,6 +15,7 @@ import AddStudioStore from './AddStudio.store';
 class AddStudio extends Component {
   static propTypes = {
     app: PropTypes.object.isRequired,
+    store: PropTypes.object.isRequired,
     type: PropTypes.oneOf(['edit', 'create']).isRequired,
     studio: PropTypes.object,
   }
@@ -25,19 +26,22 @@ class AddStudio extends Component {
 
   constructor(props) {
     super(props);
-    this.store = new AddStudioStore(props.app);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    const { studio, type } = this.props;
-    if (studio && type === 'edit') {
-      this.store.setData(studio);
-    }
+    // const { studio, type, store } = this.props;
+    // if (studio && type === 'edit') {
+    //   this.store.setData(studio);
+    // }
+  }
+
+  componentWillUnmount() {
+    this.props.store.revokeImage();
   }
 
   getFieldValue(field) {
-    return get(this.store, field) || '';
+    return get(this.props.store, field) || '';
   }
 
   handleChangeField = (field, plain) => (event) => {
@@ -48,18 +52,18 @@ class AddStudio extends Component {
     if (typeof value === 'string' && !value.length) {
       value = undefined;
     }
-    this.store.setField(field, value);
+    this.props.store.setField(field, value);
   }
 
   handleSubmit() {
     const { type } = this.props;
-    this.store.submit(type);
+    this.props.store.submit(type);
   }
 
   render() {
-    const { type, studio } = this.props;
+    const { type, store } = this.props;
     let title = 'Добавить новую студию';
-    if (type === 'edit') title = `Редактирование ${studio.title}`;
+    if (type === 'edit') title = `Редактирование ${store.title}`;
     return (
       <Container>
         <div className="page-content">
@@ -95,10 +99,10 @@ class AddStudio extends Component {
                       />
                     </Form.Field>
                     <Form.Field width={10}>
-                      <label>Изображение</label>
+                      <label>Изображение {store.blob || store.image ? <button onClick={store.clearImage}>X</button> : ''}</label>
                       <ImageUploadCard
-                        src={this.store.image}
-                        onChange={file => this.store.uploadImage(file)}
+                        src={store.blob || store.image}
+                        onChange={store.uploadImage}
                       />
                     </Form.Field>
                   </Form.Group>

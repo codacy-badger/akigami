@@ -1,12 +1,13 @@
-import { toJS, action } from 'mobx';
+import { toJS, action, observable } from 'mobx';
 import set from 'lodash/set';
 import debugNamespace from 'debug';
 import StudioModel from '../../models/Studio';
-import { ApolloClient } from '../../lib/modules';
 
 const debug = debugNamespace('akigami:client:studio:create:store');
 
 class AddStudioStore extends StudioModel {
+  @observable blob = null;
+
   constructor(app) {
     super(app);
     if (app) this.app = app;
@@ -17,13 +18,23 @@ class AddStudioStore extends StudioModel {
   }
 
   async create() {
-    const res = await ApolloClient.mutate({
+    let hash = null;
+    if (this.blob) {
+      const blob = await fetch(this.blob).then(r => r.blob());
+      const formData = new FormData();
+      formData.append('file', blob);
+      hash = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      }).then(res => res.text());
+      if (!hash) throw new Error('Hash not didn\'t come');
+    }
+    const res = await this.app.apolloClient.mutate({
       mutation: `mutation {
           addStudio(
             title: "${this.title}"
             about: "${this.about}"
-            createdAt: "${this.createdAt}"
-            image: "${this.image}"
+            image: ${hash ? `${hash}` : 'null'}
           ) {
             id
           }
@@ -34,14 +45,25 @@ class AddStudioStore extends StudioModel {
   }
 
   async edit() {
-    const res = await ApolloClient.mutate({
+    let hash = null;
+    if (this.blob) {
+      const blob = await fetch(this.blob).then(r => r.blob());
+      const formData = new FormData();
+      formData.append('file', blob);
+      hash = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      }).then(res => res.text());
+      if (!hash) throw new Error('Hash not didn\'t come');
+    }
+    const res = await this.app.apolloClient.mutate({
       mutation: `mutation {
           editStudio(
             id: "${this.id}"
             title: "${this.title}"
             about: "${this.about}"
-            createdAt: "${this.createdAt}"
-            image: "${this.image}"
+            ${hash ? `image: "${hash}"` : ''}
+            ${!this.image && !hash ? 'image: null' : ''}
           ) {
             id
           }
@@ -49,6 +71,18 @@ class AddStudioStore extends StudioModel {
       `,
     });
     return res.data.editStudio;
+  }
+
+  // checkImageIsBlob = () => this.image?.startsWith('blob')
+
+  revokeImage = () => {
+    if (this.blob) URL.revokeObjectURL(this.blob);
+  }
+
+  clearImage = () => {
+    this.revokeImage();
+    this.blob = null;
+    this.image = null;
   }
 
   async submit(type) {
@@ -59,25 +93,29 @@ class AddStudioStore extends StudioModel {
   }
 
   @action
-  async uploadImage(file) {
-    if (this.image && typeof this.image !== 'string') {
-      URL.revokeObjectURL(this.image);
+  uploadImage = async (file) => {
+    if (file) {
+      this.revokeImage();
+      this.blob = URL.createObjectURL(file);
     }
-    const formData = new FormData();
-    formData.append('file', file);
-    const hash = await fetch('/api/upload', {
-      method: 'POST',
-      body: formData,
-    }).then(res => res.text());
-    if (!hash) throw new Error('Hash not didn\'t come');
-    const { data = null } = await ApolloClient.query({
-      query: `{
-        getFromCDN(hash: "${hash}")
-      }`,
-    });
-    if (!data?.getFromCDN) throw new Error('Some error getFromCDN GQL');
-    debug(data, data.getFromCDN);
-    this.image = data.getFromCDN;
+    // if (this.image && typeof this.image !== 'string') {
+    //   URL.revokeObjectURL(this.image);
+    // }
+    // const formData = new FormData();
+    // formData.append('file', file);
+    // const hash = await fetch('/api/upload', {
+    //   method: 'POST',
+    //   body: formData,
+    // }).then(res => res.text());
+    // if (!hash) throw new Error('Hash not didn\'t come');
+    // const { data = null } = await this.app.apolloClient.query({
+    //   query: `{
+    //     getFromCDN(hash: "${hash}")
+    //   }`,
+    // });
+    // if (!data?.getFromCDN) throw new Error('Some error getFromCDN GQL');
+    // debug(data, data.getFromCDN);
+    // this.image = data.getFromCDN;
   }
 }
 

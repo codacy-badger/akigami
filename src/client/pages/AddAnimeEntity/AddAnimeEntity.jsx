@@ -17,32 +17,31 @@ import {
 } from 'semantic-ui-react';
 import get from 'lodash/get';
 import debugNamespace from 'debug';
-import { ApolloClient } from '../../lib/modules';
+// import { ApolloClient } from '../../lib/modules';
 import Inline from '../../components/Inline';
 import PosterUploadCard from '../../components/PosterUploadCard';
 import CoverUploadCard from '../../components/CoverUploadCard';
 import PageHeader from '../../components/PageHeader';
-import AddAnimeEntityStore from './AddAnimeEntity.store';
 
 const debug = debugNamespace('akigami:client:anime:create');
 
-const queryGenres = `
-  {
-    genres {
-      id
-      title
-    }
-  }
-`;
+// const queryGenres = `
+//   {
+//     genres {
+//       id
+//       title
+//     }
+//   }
+// `;
 
-const queryStudios = `
-  {
-    studios {
-      id
-      title
-    }
-  }
-`;
+// const queryStudios = `
+//   {
+//     studios {
+//       id
+//       title
+//     }
+//   }
+// `;
 
 @inject('app')
 @observer
@@ -60,24 +59,13 @@ class AddAnimeEntity extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.store = new AddAnimeEntityStore(props.app);
-    this.state = {
-      genres: [],
-      studios: [],
-    };
   }
 
   componentDidMount() {
-    const { anime, type } = this.props;
-    this.fetch(queryGenres, 'genres');
-    this.fetch(queryStudios, 'studios');
-    if (anime && type === 'edit') {
-      this.store.setData(anime);
-    }
   }
 
   getFieldValue(field) {
-    return get(this.store, field) || '';
+    return get(this.props.store, field) || '';
   }
 
   handleChangeField = (field) => (event) => {
@@ -88,25 +76,17 @@ class AddAnimeEntity extends Component {
     if (typeof value === 'string' && !value.length) {
       value = undefined;
     }
-    this.store.setField(field, value);
-  }
-
-  async fetch(query, field) {
-    const res = await ApolloClient.query({ query });
-    debug(field, res);
-    this.setState({
-      [field]: res.data[field],
-    });
+    this.props.store.setField(field, value);
   }
 
   handleSubmit() {
-    const { type } = this.props;
-    this.store.submit(type);
+    const { type, store } = this.props;
+    store.submit(type);
   }
 
   render() {
-    const { genres, studios } = this.state;
-    const { type, anime } = this.props;
+    const { type, anime, store } = this.props;
+    const { genresList: genres, studiosList: studios } = store;
     const alternateTitlesLabel = <label>Альтернативные названия</label>;
     let title = 'Добавить новое аниме';
     if (type === 'edit') title = `Редактирование ${anime.title.romaji}`;
@@ -179,7 +159,7 @@ class AddAnimeEntity extends Component {
                                 icon="remove"
                                 type="button"
                                 className="list-remove-button"
-                                onClick={() => this.store.title.other.splice(index, 1)}
+                                onClick={() => store.title.other.splice(index, 1)}
                               />
                               <input
                                 value={this.getFieldValue(`title.other[${index}]`)}
@@ -196,7 +176,7 @@ class AddAnimeEntity extends Component {
                             basic
                             labelPosition="left"
                             type="button"
-                            onClick={() => this.store.title.other.push('')}
+                            onClick={() => store.title.other.push('')}
                           >
                             <Icon name="add" />
                             Добавить
@@ -210,7 +190,7 @@ class AddAnimeEntity extends Component {
                           selection
                           fluid
                           label="Жанры"
-                          value={this.store.genres}
+                          value={store.genres}
                           options={genres.map(e => ({ key: e.id, value: e.id, text: e.title }))}
                           onChange={(e, { value }) => {
                             this.handleChangeField('genres')(value);
@@ -222,7 +202,7 @@ class AddAnimeEntity extends Component {
                           selection
                           fluid
                           label="Студия"
-                          value={this.store.studioId}
+                          value={store.studioId}
                           options={studios.map(e => ({ key: e.id, value: e.id, text: e.title }))}
                           onChange={(e, { value }) => {
                             this.handleChangeField('studioId')(value);
@@ -264,15 +244,15 @@ class AddAnimeEntity extends Component {
                     <Form.Field>
                       <label>Постер</label>
                       <PosterUploadCard
-                        src={this.store.poster}
-                        onChange={file => this.store.uploadImage(file, 'poster')}
+                        src={store.poster}
+                        onChange={file => store.uploadImage(file, 'poster')}
                       />
                     </Form.Field>
                     <Form.Field>
                       <label>Обложка</label>
                       <CoverUploadCard
-                        src={this.store.cover}
-                        onChange={file => this.store.uploadImage(file, 'cover')}
+                        src={store.cover}
+                        onChange={file => store.uploadImage(file, 'cover')}
                       />
                     </Form.Field>
                   </Form.Group>
