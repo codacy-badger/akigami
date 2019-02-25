@@ -73,8 +73,6 @@ class AddStudioStore extends StudioModel {
     return res.data.editStudio;
   }
 
-  // checkImageIsBlob = () => this.image?.startsWith('blob')
-
   revokeImage = () => {
     if (this.blob) URL.revokeObjectURL(this.blob);
   }
@@ -98,24 +96,6 @@ class AddStudioStore extends StudioModel {
       this.revokeImage();
       this.blob = URL.createObjectURL(file);
     }
-    // if (this.image && typeof this.image !== 'string') {
-    //   URL.revokeObjectURL(this.image);
-    // }
-    // const formData = new FormData();
-    // formData.append('file', file);
-    // const hash = await fetch('/api/upload', {
-    //   method: 'POST',
-    //   body: formData,
-    // }).then(res => res.text());
-    // if (!hash) throw new Error('Hash not didn\'t come');
-    // const { data = null } = await this.app.apolloClient.query({
-    //   query: `{
-    //     getFromCDN(hash: "${hash}")
-    //   }`,
-    // });
-    // if (!data?.getFromCDN) throw new Error('Some error getFromCDN GQL');
-    // debug(data, data.getFromCDN);
-    // this.image = data.getFromCDN;
   }
 }
 

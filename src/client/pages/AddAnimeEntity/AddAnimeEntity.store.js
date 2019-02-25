@@ -39,7 +39,7 @@ class AddAnimeEntityStore extends AnimeModel {
         },
         rating: this.rating,
         status: this.status,
-      }
+      },
     });
     return res.data.addAnime;
   }
@@ -65,9 +65,14 @@ class AddAnimeEntityStore extends AnimeModel {
           id
           title
         }
+        genres {
+          id
+          title
+        }
       }`,
     });
     this.studiosList = response.data.studios;
+    this.genresList = response.data.genres;
   }
 
   async submit(type) {
