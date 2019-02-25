@@ -1,5 +1,3 @@
-import React from 'react';
-import superagent from 'superagent';
 import { observable } from 'mobx';
 import URL from 'url';
 import qs from 'querystringify';
@@ -8,7 +6,6 @@ import pathToRegexp from 'path-to-regexp';
 import UniversalRouter from 'universal-router';
 
 import routes from '../routes';
-import router from '../router';
 import modals from '../modals';
 
 export default class Router {
@@ -22,7 +19,7 @@ export default class Router {
 
   constructor(app) {
     this.app = app;
-    this.router = new UniversalRouter(router, {
+    this.router = new UniversalRouter(routes, {
       context: { app },
       async errorHandler(error, context) {
         if (error.status != 404) {
@@ -109,35 +106,12 @@ export default class Router {
       window.history.pushState(null, null, h);
     }
     if (!skip) {
-      // this.app.topBar.setProgress(30);
-      // await this.requestAndInsert(h, query);
-      await this.setContainer2(h);
+      await this.setContainer(h);
     }
     await this.setModal(query);
   }
 
-  async requestAndInsert(href, hasQuery) {
-    const { body, status } = await superagent
-      .get(`${href}${hasQuery ? '&' : '?'}time=${Date.now()}`)
-      .set('X-PJAX', true)
-      .ok(res => res.status < 600);
-
-    await this.setContainer(body);
-    document.body.scrollTop = 0;
-    if (status > 400) {
-      this.app.topBar.error();
-    } else {
-      this.app.topBar.finish();
-    }
-  }
-
-  static async import(id) {
-    const data = routes[id] || routes.error;
-    const Module = await data.import();
-    return Module.default;
-  }
-
-  async setContainer2(url) {
+  async setContainer(url) {
     const { title, component, params = {}, redirect } = await this.router.resolve(url);
     if (redirect) {
       return { redirect };
@@ -161,23 +135,12 @@ export default class Router {
         }
         Object.assign(container.props, { store });
       }
-      // console.log('hello');
       this.container = container;
-      // console.log(this.container.type.prototype);
     } else {
       this.customHandler?.(params); // eslint-disable-line no-unused-expressions
     }
     this.currentURL = url;
     return { title };
-  }
-
-  async setContainer({ layout, title, props } = {}) {
-    if (typeof window !== 'undefined') {
-      document.title = `${title} – Акигами`;
-    }
-    const Module = await Router.import(layout);
-    this.container = { Module, props };
-    return true;
   }
 
   async importModal(path, modal) {

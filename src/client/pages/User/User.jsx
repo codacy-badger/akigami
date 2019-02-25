@@ -44,13 +44,13 @@ class User extends Component {
   }
 
   componentWillUnmount() {
-    this.props.app.router.customHandler = null;
+    // this.props.app.router.customHandler = null;
     const { ui } = this.props;
     ui.changeTransparented(false);
   }
 
   setTab({ tab, subTab }) {
-    this.setState({ activeTab: subTab || tab });
+    this.setState({ activeTab: subTab || tab || 'general' });
   }
 
   isOwner() {

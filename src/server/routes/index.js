@@ -47,7 +47,7 @@ export default app => {
       'role',
     ]);
     appStore.user.setUserData(user);
-    const { title, redirect } = await appStore.router.setContainer2(req.url);
+    const { title, redirect } = await appStore.router.setContainer(req.url);
     if (redirect) {
       return res.redirect(redirect);
     }

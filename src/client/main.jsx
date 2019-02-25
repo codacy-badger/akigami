@@ -11,19 +11,13 @@ window.localStorage.debug = 'akigami:client:*';
 const debug = debugNamespace('akigami:client:main');
 
 (async () => {
-  // const raw = document.querySelector('#preload-data');
   const userData = JSON.parse(document.body.dataset.user);
   const app = new AppStore();
   app.apolloClient = ApolloClient;
   app.user.setUserData(userData);
   app.user.setListener();
 
-  // await app.router.setContainer({
-  //   title: raw.dataset.title,
-  //   props: raw.text ? JSON.parse(raw.text) : null,
-  //   layout: raw.dataset.layout,
-  // });
-  await app.router.setContainer2(document.location.pathname);
+  await app.router.setContainer(document.location.pathname);
   const res = await app.apolloClient.query({
     query: `
       {

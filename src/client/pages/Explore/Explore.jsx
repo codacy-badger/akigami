@@ -27,7 +27,7 @@ class Explore extends Component {
   }
 
   componentWillUnmount() {
-    this.props.app.router.customHandler = null;
+    // this.props.app.router.customHandler = null;
   }
 
   setTab({ type }) {
