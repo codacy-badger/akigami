@@ -51,10 +51,9 @@ class CoverUploadCard extends PureComponent {
         <Dropzone
           className="dropzone"
           onDrop={this.handleDropImage}
-          disableClick
         >
           {({ open, isDragActive, getRootProps, getInputProps }) => (
-            <div {...getRootProps()} style={{ height: '100%', outline: 'none' }}>
+            <div {...getRootProps({ onClick: evt => evt.preventDefault() })} style={{ height: '100%', outline: 'none' }}>
               {isDragActive
                 ? (
                   <Inline

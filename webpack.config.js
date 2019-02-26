@@ -1,10 +1,9 @@
 const webpack = require('webpack');
 const path = require('path');
 const config = require('config');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const babelConfig = require('./babelrc');
 // const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-// const PreloadWebpackPlugin = require('preload-webpack-plugin');
 
 const host = config.get('server.host');
 const port = config.get('server.port');
@@ -44,13 +43,12 @@ module.exports = () => {
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify(nodeEnv) },
     }),
-    new ExtractTextPlugin('assets/style.css'),
+    new MiniCssExtractPlugin({ filename: 'assets/style.css' }),
     new webpack.LoaderOptionsPlugin({
       options: {
         context: process.cwd(), // or the same value as `context`
       },
     }),
-    // new PreloadWebpackPlugin(),
     // new webpack.optimize.ModuleConcatenationPlugin(),
   ];
 
@@ -119,75 +117,75 @@ module.exports = () => {
         {
           test: /\.css$/,
           exclude: [/node_modules/, /emotion\.css$/],
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  sourceMap: true,
-                },
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true,
               },
-              {
-                loader: 'postcss-loader',
-                options: {
-                  sourceMap: true,
-                  plugins: loader => [
-                    require('postcss-import')({
-                      addDependencyTo: loader,
-                      path: [
-                        path.join(__dirname, 'src', 'common'),
-                        path.join(__dirname, 'node_modules'),
-                      ],
-                      root: loader.resourcePath,
-                    }),
-                    require('postcss-simple-vars')(),
-                    require('postcss-color-function')(),
-                    require('postcss-nested')(),
-                    require('autoprefixer')(),
-                    // require('cssnano')(),
-                  ],
-                },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true,
+                plugins: loader => [
+                  require('postcss-import')({
+                    addDependencyTo: loader,
+                    path: [
+                      path.join(__dirname, 'src', 'common'),
+                      path.join(__dirname, 'node_modules'),
+                    ],
+                    root: loader.resourcePath,
+                  }),
+                  require('postcss-simple-vars')(),
+                  require('postcss-color-function')(),
+                  require('postcss-nested')(),
+                  require('autoprefixer')(),
+                  // require('cssnano')(),
+                ],
               },
-            ],
-          }),
+            },
+          ],
         },
         {
           test: /emotion\.css$/,
           exclude: /node_modules/,
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  sourceMap: true,
-                  modules: true,
-                },
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true,
+                modules: true,
               },
-              {
-                loader: 'postcss-loader',
-                options: {
-                  sourceMap: true,
-                  plugins: loader => [
-                    require('postcss-import')({
-                      addDependencyTo: loader,
-                      path: [
-                        path.join(__dirname, 'src', 'common'),
-                        path.join(__dirname, 'node_modules'),
-                      ],
-                      root: loader.resourcePath,
-                    }),
-                    require('postcss-simple-vars')(),
-                    require('postcss-color-function')(),
-                    require('postcss-nested')(),
-                    require('autoprefixer')(),
-                    // require('cssnano')(),
-                  ],
-                },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true,
+                plugins: loader => [
+                  require('postcss-import')({
+                    addDependencyTo: loader,
+                    path: [
+                      path.join(__dirname, 'src', 'common'),
+                      path.join(__dirname, 'node_modules'),
+                    ],
+                    root: loader.resourcePath,
+                  }),
+                  require('postcss-simple-vars')(),
+                  require('postcss-color-function')(),
+                  require('postcss-nested')(),
+                  require('autoprefixer')(),
+                  // require('cssnano')(),
+                ],
               },
-            ],
-          }),
+            },
+          ],
         },
         {
           test: /\.(js|jsx)$/,
