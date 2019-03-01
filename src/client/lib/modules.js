@@ -41,6 +41,7 @@ if (typeof window !== 'undefined') {
             errorPolicy: 'all',
           },
         },
+        ssrForceFetchDelay: 100,
       })
       : null
   );
