@@ -3,7 +3,6 @@ const path = require('path');
 const config = require('config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const babelConfig = require('./babelrc');
-// const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const host = config.get('server.host');
 const port = config.get('server.port');
@@ -33,13 +32,6 @@ module.exports = () => {
   const isProd = nodeEnv === 'production';
 
   const plugins = [
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor',
-    //   filename: path.join('assets', 'modules.js'),
-    //   async: false,
-    //   minChunks: (module, countIgnored) =>
-    //     module.context && module.context.includes('node_modules'),
-    // }),
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify(nodeEnv) },
     }),
@@ -49,25 +41,9 @@ module.exports = () => {
         context: process.cwd(), // or the same value as `context`
       },
     }),
-    // new webpack.optimize.ModuleConcatenationPlugin(),
   ];
 
-  if (isProd) {
-    // plugins.push(new UglifyJSPlugin({
-    //   compress: {
-    //     warnings: false,
-    //     screw_ie8: true,
-    //     conditionals: true,
-    //     unused: true,
-    //     comparisons: true,
-    //     sequences: true,
-    //     dead_code: true,
-    //     evaluate: true,
-    //     if_return: true,
-    //     join_vars: true,
-    //   },
-    // }));
-  } else {
+  if (!isProd) {
     plugins.push(
       new webpack.NamedModulesPlugin(),
       new webpack.NoEmitOnErrorsPlugin(),
@@ -77,7 +53,7 @@ module.exports = () => {
   const entryPoint = './index.js';
 
   return {
-    mode: 'development',
+    mode: nodeEnv,
     optimization: {
       splitChunks: {
         cacheGroups: {
@@ -131,21 +107,26 @@ module.exports = () => {
               loader: 'postcss-loader',
               options: {
                 sourceMap: true,
-                plugins: loader => [
-                  require('postcss-import')({
-                    addDependencyTo: loader,
-                    path: [
-                      path.join(__dirname, 'src', 'common'),
-                      path.join(__dirname, 'node_modules'),
-                    ],
-                    root: loader.resourcePath,
-                  }),
-                  require('postcss-simple-vars')(),
-                  require('postcss-color-function')(),
-                  require('postcss-nested')(),
-                  require('autoprefixer')(),
-                  // require('cssnano')(),
-                ],
+                plugins: loader => {
+                  const cfg = [
+                    require('postcss-import')({
+                      addDependencyTo: loader,
+                      path: [
+                        path.join(__dirname, 'src', 'common'),
+                        path.join(__dirname, 'node_modules'),
+                      ],
+                      root: loader.resourcePath,
+                    }),
+                    require('postcss-simple-vars')(),
+                    require('postcss-color-function')(),
+                    require('postcss-nested')(),
+                    require('autoprefixer')(),
+                  ];
+                  if (isProd) {
+                    cfg.push(require('cssnano')());
+                  }
+                  return cfg;
+                },
               },
             },
           ],
@@ -168,21 +149,26 @@ module.exports = () => {
               loader: 'postcss-loader',
               options: {
                 sourceMap: true,
-                plugins: loader => [
-                  require('postcss-import')({
-                    addDependencyTo: loader,
-                    path: [
-                      path.join(__dirname, 'src', 'common'),
-                      path.join(__dirname, 'node_modules'),
-                    ],
-                    root: loader.resourcePath,
-                  }),
-                  require('postcss-simple-vars')(),
-                  require('postcss-color-function')(),
-                  require('postcss-nested')(),
-                  require('autoprefixer')(),
-                  // require('cssnano')(),
-                ],
+                plugins: loader => {
+                  const cfg = [
+                    require('postcss-import')({
+                      addDependencyTo: loader,
+                      path: [
+                        path.join(__dirname, 'src', 'common'),
+                        path.join(__dirname, 'node_modules'),
+                      ],
+                      root: loader.resourcePath,
+                    }),
+                    require('postcss-simple-vars')(),
+                    require('postcss-color-function')(),
+                    require('postcss-nested')(),
+                    require('autoprefixer')(),
+                  ];
+                  if (isProd) {
+                    cfg.push(require('cssnano')());
+                  }
+                  return cfg;
+                },
               },
             },
           ],

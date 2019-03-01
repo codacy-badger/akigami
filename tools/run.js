@@ -1,6 +1,8 @@
 const Promise = require('bluebird');
 const config = require('../babelrc');
 
+config.plugins.unshift('dynamic-import-node');
+
 Promise.config({
   longStackTraces: true,
 });

@@ -3,7 +3,6 @@ module.exports = {
     '@babel/preset-react',
   ],
   plugins: [
-    'dynamic-import-node',
     // Stage 0
     '@babel/plugin-proposal-function-bind',
 
