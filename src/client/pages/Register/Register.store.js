@@ -3,10 +3,15 @@ import debounce from 'lodash/debounce';
 
 export default class SignUp {
   @observable username = '';
+
   @observable usernameValid = false;
+
   @observable gender = '';
+
   @observable birthday = '';
+
   @observable error = '';
+
   @observable loading = false;
 
   constructor(app) {
@@ -25,65 +30,34 @@ export default class SignUp {
       this.loading = true;
       this.error = '';
 
-      const res = await this.app.apolloClient.mutate({
+      await this.app.apolloClient.mutate({
         mutation: `
         mutation {
-          signup(username: "${this.username}", token: "${token}", gender: "${this.gender}", birthday: "${this.birthday}")
+          signup(username: "${this.username}", token: "${token}", gender: "${this.gender}", birthday: "${this.birthday}") {
+            status
+            message
+          }
         }
         `,
       });
-
-      // this.loading = false;
-      // this.app.user.setUser(res.data.sigunp.user);
-      // this.app.router.go('/');
-
-      /* fetch('/api/signup', {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
-      })
-        .then(response => {
-          if (response.status >= 200 && response.status < 300) {
-            return response;
-          }
-          const error = new Error(response.statusText);
-          error.response = response;
-          throw error;
-        })
-        .then(response => response.json())
-        .then(response => {
-          this.loading = false;
-          if (response.success) {
-            this.app.user.setUser(response.user);
-            this.app.router.go('/');
-          } else {
-            const error = new Error(response.message);
-            error.response = response;
-            throw error;
-          }
-        })
-        .catch(err => {
-          this.loading = false;
-          this.error = err.response.message;
-          console.error(err);
-        }); */
     }
   };
 
   validateUsername = debounce(async () => {
     const res = await this.app.apolloClient.query({
       query: `
-        { validateUsername(username: "${this.username}") }
+        { validateUsername(username: "${this.username}") {
+          isValid
+          exists
+        } }
       `,
     });
-    this.usernameValid = res.data.validateUsername.is_valid && !res.data.validateUsername.exists;
+    this.usernameValid = res.data.validateUsername.isValid && !res.data.validateUsername.exists;
     if (res.data.validateUsername.exists) {
       this.error = 'Такое имя пользователя уже занято.';
     }
   }, 500);
+
   handleUsernameValid = () => {
     if (this.username.length >= 5 && this.username.length <= 40) {
       this.validateUsername();

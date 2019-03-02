@@ -13,9 +13,19 @@ const redisStore = Promise.promisifyAll(RedisStore);
 
 export const typeDef = gql`
   scalar JSON
+  type ValidateUsername {
+    status: String
+    isValid: Boolean
+    exists: Boolean
+  }
+
+  type SignUp {
+    status: String
+    message: String
+  }
 
   extend type Query {
-    validateUsername(username: String): JSON
+    validateUsername(username: String): ValidateUsername
     checkToken(
       token: String!
     ): String
@@ -29,7 +39,7 @@ export const typeDef = gql`
       email: String
     ): Boolean
 
-    signup(token: String, username: String, gender: String, birthday: String): JSON
+    signup(token: String, username: String, gender: String, birthday: String): SignUp
 
     auth(token: String): Boolean
 
@@ -46,14 +56,12 @@ export const resolvers = {
     validateUsername: async (parent, args, ctx) => {
       const { username } = args;
       if (
-        !/^\w+$/g.test(username) ||
-        username.length < 3 ||
-        username.length > 40
+        !/^\w+$/g.test(username) || username.length < 3 || username.length > 40
       ) {
-        return { status: 'ok', is_valid: false, exists: false };
+        return { status: 'ok', isValid: false, exists: false };
       }
       const user = await ctx.models.User.findOne({ username: new RegExp(`^${username}$`, 'i') });
-      return { status: 'ok', is_valid: true, exists: !!user };
+      return { status: 'ok', isValid: true, exists: !!user };
     },
     checkToken: async (parent, args, ctx, info) => {
       const { token } = args;
@@ -160,7 +168,7 @@ export const resolvers = {
           },
         });
         await emailToken.remove();
-        return {};
+        return { success: true, message: 'ok' };
       } catch (e) {
         console.error(e);
         return { success: false, message: 'account_create_failed' };

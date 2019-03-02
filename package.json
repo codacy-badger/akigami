@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently \"yarn run client\" \"yarn run server\"",
     "server": "cross-env DEBUG='akigami:server:*' sh tools/start.sh",
-    "client": "cross-env DEBUG='akigami:client:*' webpack --watch",
+    "client": "webpack --watch",
     "defaults": "webpack-defaults",
     "webpack-defaults": "webpack-defaults"
   },
