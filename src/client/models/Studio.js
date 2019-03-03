@@ -38,8 +38,9 @@ class Studio {
   }
 
   initData = async ({ id, type }) => {
-    const response = await this.app.apolloClient.query({
-      query: `{
+    if (id) {
+      const response = await this.app.apolloClient.query({
+        query: `{
         studio(id: "${id}") {
           id
           title
@@ -47,8 +48,9 @@ class Studio {
           about
         }
       }`,
-    });
-    this.setData(response.data.studio);
+      });
+      this.setData(response.data.studio);
+    }
   }
 }
 

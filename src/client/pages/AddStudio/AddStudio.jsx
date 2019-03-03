@@ -3,12 +3,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
 import get from 'lodash/get';
-import { DatePicker } from 'rc-datepicker';
+import Calendar from 'react-calendar/dist/entry.nostyle';
 import { Container, Grid, Form, Input, TextArea, Button } from 'semantic-ui-react';
 
 import ImageUploadCard from '../../components/ImageUploadCard';
 import PageHeader from '../../components/PageHeader';
-import AddStudioStore from './AddStudio.store';
 
 @inject('app')
 @observer
@@ -93,9 +92,9 @@ class AddStudio extends Component {
                   <Form.Group>
                     <Form.Field width={6}>
                       <label>Дата основания студии</label>
-                      <DatePicker
+                      <Calendar
                         onChange={this.handleChangeField('createdAt', true)}
-                        value={this.getFieldValue('createdAt')}
+                        value={this.getFieldValue('createdAt') || new Date()}
                       />
                     </Form.Field>
                     <Form.Field width={10}>
