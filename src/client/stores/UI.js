@@ -1,6 +1,8 @@
 import { observable } from 'mobx';
 
 export default class UI {
+  @observable uaScreenWidth = 0;
+
   @observable transparented = false;
 
   @observable transparent = true;
@@ -11,5 +13,9 @@ export default class UI {
 
   changeTransparent(value) {
     this.transparent = value;
+  }
+
+  async setUAScreenWidth(value) {
+    this.uaScreenWidth = value;
   }
 }

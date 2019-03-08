@@ -34,6 +34,7 @@
     "emotion-theming": "^10.0.7",
     "express": "^4.16.3",
     "express-session": "^1.15.5",
+    "express-useragent": "^1.0.12",
     "extend": "^3.0.2",
     "form-data": "^2.3.2",
     "gm": "^1.23.1",

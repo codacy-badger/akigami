@@ -11,6 +11,7 @@ import { ApolloServer } from 'apollo-server-express';
 import { execute, subscribe } from 'graphql';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 import session from 'express-session';
+import useragent from 'express-useragent';
 
 import { getFiles } from './utils';
 import { schema, typeDefs, resolvers } from './graphs';
@@ -42,6 +43,7 @@ app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(useragent.express());
 app.use(cookieParser(config.get('sessionSecret')));
 
 app.use(session({

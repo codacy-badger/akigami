@@ -21,7 +21,7 @@ export const LayoutSidenav = styled('section')`
 export const LayoutHeader = styled('header')`
   position: fixed;
   top: 0;
-  width: ${p => (p.width || 'auto')};
+  width: ${p => p.width}px;
   height: 54px;
   border-bottom: 1px solid ${p => p.theme.colors.sidenav};
   background: ${p => p.theme.colors.background};

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import debugNamespace from 'debug';
 import merge from 'lodash/merge';
+import { inject, observer } from 'mobx-react';
 import {
   LayoutWrapper,
   LayoutSidenav,
@@ -18,8 +19,11 @@ const defaultProps = {
   },
 };
 
+@inject('app')
+@observer
 class Layout extends Component {
   static propTypes = {
+    app: PropTypes.object.isRequired,
     Sidenav: PropTypes.func.isRequired,
     Header: PropTypes.func.isRequired,
     Content: PropTypes.func.isRequired,
@@ -38,13 +42,15 @@ class Layout extends Component {
     this.sidenav = React.createRef();
     this.setContentWidth = this.setContentWidth.bind(this);
     this.state = {
-      contentWidth: 0,
+      contentWidth: props.app.ui.uaScreenWidth - 320,
     };
   }
 
   componentDidMount() {
     debug(this.layout, this.sidenav);
-    this.setContentWidth();
+    if (typeof window !== 'undefined') {
+      this.setContentWidth();
+    }
   }
 
   setContentWidth() {

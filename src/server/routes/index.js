@@ -17,7 +17,7 @@ import theme from '../../common/theme';
 
 const contextModels = getFiles('models', null, true, true);
 
-function startRender({ title, user }) {
+function startRender({ title, user, screen }) {
   return `
     <!DOCTYPE html>
     <html lang="ru">
@@ -41,6 +41,12 @@ function endRender({ cache }) {
       </body>
     </html>
   `;
+}
+
+function getScreenWidth(ua) {
+  if (ua.isMobile) return 320;
+  if (ua.isDesktop) return 1280;
+  return 0;
 }
 
 export default app => {
@@ -76,6 +82,7 @@ export default app => {
       'role',
     ]);
     appStore.user.setUserData(user);
+    await appStore.ui.setUAScreenWidth(getScreenWidth(req.useragent));
     const { title, redirect } = await appStore.router.setContainer(req.url);
     res.write(startRender({ title, user }));
     if (redirect) {
