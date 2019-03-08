@@ -43,12 +43,6 @@ function endRender({ cache }) {
   `;
 }
 
-function getScreenWidth(ua) {
-  if (ua.isMobile) return 320;
-  if (ua.isDesktop) return 1280;
-  return 0;
-}
-
 export default app => {
   app.get('*', async (req, res) => { // eslint-disable-line consistent-return
     const cache = new InMemoryCache();
@@ -82,7 +76,7 @@ export default app => {
       'role',
     ]);
     appStore.user.setUserData(user);
-    await appStore.ui.setUAScreenWidth(getScreenWidth(req.useragent));
+    await appStore.ui.setIsMobile(!req.useragent.isDesktop);
     const { title, redirect } = await appStore.router.setContainer(req.url);
     res.write(startRender({ title, user }));
     if (redirect) {

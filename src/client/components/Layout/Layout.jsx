@@ -42,7 +42,7 @@ class Layout extends Component {
     this.sidenav = React.createRef();
     this.setContentWidth = this.setContentWidth.bind(this);
     this.state = {
-      contentWidth: props.app.ui.uaScreenWidth - 320,
+      contentWidth: props.app.ui.screenWidth - 320,
     };
   }
 

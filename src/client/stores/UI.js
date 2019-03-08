@@ -1,7 +1,7 @@
-import { observable } from 'mobx';
+import { computed, observable } from 'mobx';
 
 export default class UI {
-  @observable uaScreenWidth = 0;
+  @observable isMobile = false;
 
   @observable transparented = false;
 
@@ -15,7 +15,13 @@ export default class UI {
     this.transparent = value;
   }
 
-  async setUAScreenWidth(value) {
-    this.uaScreenWidth = value;
+  async setIsMobile(value) {
+    this.isMobile = value;
+  }
+
+  @computed get screenWidth() {
+    if (typeof window !== 'undefined') return window.innerWidth;
+    if (this.isMobile) return 320;
+    return 1280;
   }
 }
