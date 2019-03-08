@@ -24,6 +24,7 @@ function startRender({ title, user, screen }) {
       <head>
         <title>${title} ~ akigami</title>
         <meta name="theme-color" content="#060606">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
       </head>
@@ -91,7 +92,8 @@ export default app => {
     )).pipe(renderStylesToNodeStream());
     stream.pipe(res, { end: 'false' });
     stream.on('end', () => {
-      res.end(endRender({ cache }));
+      res.write(endRender({ cache }));
+      res.end();
     });
   });
 };
