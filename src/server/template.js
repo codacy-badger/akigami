@@ -10,7 +10,7 @@ export default ({
   <html lang="ru">
 
   <head>
-    <title>${title} – Акигами</title>
+    <title>${title} – akigami</title>
     <meta name="theme-color" content="#060606">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>

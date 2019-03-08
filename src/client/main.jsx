@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
-import ReactModal from 'react-modal';
+import { ThemeProvider } from 'emotion-theming';
 import debugNamespace from 'debug';
 import AppStore from './stores/AppStore';
 import App from './App';
 import { ApolloClient } from './lib/modules';
+import theme from '../common/theme';
 
 window.localStorage.debug = 'akigami:client:*';
 const debug = debugNamespace('akigami:client:main');
@@ -55,13 +56,12 @@ const debug = debugNamespace('akigami:client:main');
   });
   debug('currentUser', res2);
 
-  if (typeof window !== 'undefined') {
-    ReactModal.setAppElement('#root');
-  }
   ReactDOM.render(
-    <Provider app={app}>
-      <App />
-    </Provider>,
+    <ThemeProvider theme={theme}>
+      <Provider app={app}>
+        <App />
+      </Provider>
+    </ThemeProvider>,
     document.getElementById('root'),
   );
 })();

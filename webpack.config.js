@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const config = require('config');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const babelConfig = require('./babelrc');
 
 const host = config.get('server.host');
@@ -35,7 +34,6 @@ module.exports = () => {
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify(nodeEnv) },
     }),
-    new MiniCssExtractPlugin({ filename: 'assets/style.css' }),
     new webpack.LoaderOptionsPlugin({
       options: {
         context: process.cwd(), // or the same value as `context`
@@ -91,89 +89,6 @@ module.exports = () => {
           },
         },
         {
-          test: /\.css$/,
-          exclude: [/node_modules/, /emotion\.css$/],
-          use: [
-            {
-              loader: MiniCssExtractPlugin.loader,
-            },
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: true,
-              },
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true,
-                plugins: loader => {
-                  const cfg = [
-                    require('postcss-import')({
-                      addDependencyTo: loader,
-                      path: [
-                        path.join(__dirname, 'src', 'common'),
-                        path.join(__dirname, 'node_modules'),
-                      ],
-                      root: loader.resourcePath,
-                    }),
-                    require('postcss-simple-vars')(),
-                    require('postcss-color-function')(),
-                    require('postcss-nested')(),
-                    require('autoprefixer')(),
-                  ];
-                  if (isProd) {
-                    cfg.push(require('cssnano')());
-                  }
-                  return cfg;
-                },
-              },
-            },
-          ],
-        },
-        {
-          test: /emotion\.css$/,
-          exclude: /node_modules/,
-          use: [
-            {
-              loader: MiniCssExtractPlugin.loader,
-            },
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: true,
-                modules: true,
-              },
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true,
-                plugins: loader => {
-                  const cfg = [
-                    require('postcss-import')({
-                      addDependencyTo: loader,
-                      path: [
-                        path.join(__dirname, 'src', 'common'),
-                        path.join(__dirname, 'node_modules'),
-                      ],
-                      root: loader.resourcePath,
-                    }),
-                    require('postcss-simple-vars')(),
-                    require('postcss-color-function')(),
-                    require('postcss-nested')(),
-                    require('autoprefixer')(),
-                  ];
-                  if (isProd) {
-                    cfg.push(require('cssnano')());
-                  }
-                  return cfg;
-                },
-              },
-            },
-          ],
-        },
-        {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           use: {
@@ -187,17 +102,13 @@ module.exports = () => {
       extensions: ['.js', '.jsx'],
       modules: [path.resolve(__dirname, 'node_modules'), paths.source],
     },
-
     plugins,
-
     // performance: isProd && {
     //   maxAssetSize: 300000,
     //   maxEntrypointSize: 300000,
     //   hints: 'warning',
     // },
-
     stats,
-
     devServer: {
       contentBase: './src/client',
       publicPath: '/',

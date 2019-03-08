@@ -12,8 +12,7 @@ import { execute, subscribe } from 'graphql';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 import session from 'express-session';
 
-import { requireFiles, getFiles } from './utils';
-import ssr from './services/ssr';
+import { getFiles } from './utils';
 import { schema, typeDefs, resolvers } from './graphs';
 import RedisStore from './config/store';
 import './services/database';
@@ -26,11 +25,6 @@ const port = config.get('server.port');
 const GQL_PATH = '/graphql';
 
 const app = express();
-
-app.use((req, res, next) => {
-  res.ssr = ssr;
-  next();
-});
 
 const server = new ApolloServer({
   typeDefs,

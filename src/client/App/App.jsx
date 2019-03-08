@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 import moment from 'moment';
 import { observer, inject } from 'mobx-react';
 import NotificationSystem from 'react-notification-system';
+import { Global } from '@emotion/core';
+import globalStyle from '../../common/global';
 
-import HeaderMenu from '../components/HeaderMenu';
+import Layout from '../components/Layout';
+import Sidenav from '../components/Sidenav';
+import Header from '../components/Header';
+
+import AppWrapper from './App.styles';
 
 moment.locale('ru');
 
@@ -16,31 +21,35 @@ class App extends Component {
     app: PropTypes.object.isRequired,
   };
 
+  constructor(props) {
+    super(props);
+    this.notificationSystem = React.createRef();
+  }
+
   componentDidMount() {
-    if (this.notificationSystem) {
-      this.props.app.notification.init(this.notificationSystem);
+    if (this.notificationSystem.current) {
+      const { app } = this.props;
+      app.notification.init(this.notificationSystem.current);
     }
   }
 
   render() {
-    const { router, ui } = this.props.app;
+    const { app: { router, ui } } = this.props;
     return (
-      <React.Fragment>
+      <AppWrapper>
+        <Global styles={globalStyle} />
         <NotificationSystem
-          ref={e => {
-            this.notificationSystem = e;
+          ref={this.notificationSystem}
+        />
+        <Layout
+          Header={Header}
+          Sidenav={Sidenav}
+          Content={router.container.component}
+          props={{
+            content: router.container.props,
           }}
         />
-        <HeaderMenu />
-        <div
-          className={cx({
-            'root-content': true,
-            transparency: ui.transparented,
-          })}
-        >
-          {React.createElement(router.container.component, router.container.props)}
-        </div>
-      </React.Fragment>
+      </AppWrapper>
     );
   }
 }
