@@ -117,7 +117,7 @@ export default class Router {
       return { redirect };
     }
     if (typeof window !== 'undefined' && title) {
-      document.title = `${title} – Акигами`;
+      document.title = `${title} ~ akigami`;
     }
     if (component) {
       const container = {

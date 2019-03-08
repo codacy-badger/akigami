@@ -4,6 +4,7 @@ export const SidenavWrapper = styled('nav')`
   box-shadow: 1px 0 0 ${p => p.theme.colors.border};
   min-width: 68px;
   max-width: 320px;
+  height: 100%;
 `;
-// mini 68px;
+
 export default null;

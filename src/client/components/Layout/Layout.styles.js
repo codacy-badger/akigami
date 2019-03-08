@@ -1,10 +1,23 @@
 import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 
 export const LayoutWrapper = styled('main')`
   min-height: 100vh;
   height: 100%;
   display: flex;
   flex-direction: column;
+
+  ${p => (p.isOpenSidenav && css`
+    @media screen and (max-width: 1280px) {
+      &:after {
+        content: '';
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, .4);
+      }
+    }
+  `)}
 `;
 
 export const LayoutSidenav = styled('section')`
@@ -12,22 +25,61 @@ export const LayoutSidenav = styled('section')`
   top: 0;
   left: 0;
   bottom: 0;
-  background: ${p => p.theme.colors.sidenav};
   width: 320px;
-  box-shadow: inset -12px 0 24px -12px #ccc;
+  transform: translate3d(-321px, 0, 0);
   overflow: hidden;
+  z-index: 1;
+  background: ${p => p.theme.colors.background};
+  border-right: 1px solid ${p => p.theme.colors.border};
+  height: 100%;
+
+  > nav {
+    background: ${p => p.theme.colors.sidenav};
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 64px;
+    transform: translate3d(0, 0, 0);
+  }
+  @media screen and (min-width: 1280px) {
+    width: 320px;
+  }
+
+  ${p => (p.isOpen && css`
+    @media screen and (max-width: 1280px) {
+      width: 320px !important;
+      transform: translate3d(0, 0, 0) !important;
+    }
+  `)}
 `;
 
 export const LayoutHeader = styled('header')`
   position: fixed;
   top: 0;
-  width: ${p => p.width}px;
+  left: 0;
+  width: 100%;
   height: 54px;
   border-bottom: 1px solid ${p => p.theme.colors.sidenav};
   background: ${p => p.theme.colors.background};
+
+  > div {
+    margin-left: 0;
+    @media screen and (min-width: 768px) {
+      margin-left: 64px;
+    }
+    @media screen and (min-width: 1280px) {
+      margin-left: 320px;
+    }
+  }
 `;
 
 export const LayoutContent = styled('section')`
-  padding: 54px 0 0 320px;
+  padding: 54px 0 0 0;
+  @media screen and (min-width: 768px) {
+    padding: 54px 0 0 64px;
+  }
+  @media screen and (min-width: 1280px) {
+    padding: 54px 0 0 320px;
+  }
   flex: 1;
 `;

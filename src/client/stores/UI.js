@@ -1,11 +1,17 @@
-import { computed, observable } from 'mobx';
+import { reaction, computed, observable } from 'mobx';
 
-export default class UI {
+class UI {
+  @observable isOpenSidenav = false;
+
   @observable isMobile = false;
 
   @observable transparented = false;
 
   @observable transparent = true;
+
+  constructor() {
+    this.overlayListener();
+  }
 
   changeTransparented(value) {
     this.transparented = value;
@@ -13,6 +19,47 @@ export default class UI {
 
   changeTransparent(value) {
     this.transparent = value;
+  }
+
+  openSidenav() {
+    this.isOpenSidenav = true;
+  }
+
+  closeSidenav() {
+    this.isOpenSidenav = false;
+  }
+
+  triggerSidenav() {
+    this.isOpenSidenav = !this.isOpenSidenav;
+  }
+
+  addHtmlClass(classname) {
+    if (this.isLoaded) {
+      const html = document.getElementsByTagName('html')[0];
+      if (!(html.className).includes(classname)) {
+        html.className += ` ${classname}`;
+      }
+    }
+  }
+
+  removeHtmlClass(classname) {
+    if (this.isLoaded) {
+      const html = document.getElementsByTagName('html')[0];
+      if ((html.className).includes(classname)) {
+        html.className = html.className.replace(classname, '');
+      }
+    }
+  }
+
+  overlayListener() {
+    reaction(
+      () => this.isOpenSidenav,
+      (isOpen) => {
+        const name = 'scroll-lock';
+        if (isOpen) this.addHtmlClass(name);
+        else this.removeHtmlClass(name);
+      },
+    );
   }
 
   async setIsMobile(value) {
@@ -24,4 +71,11 @@ export default class UI {
     if (this.isMobile) return 320;
     return 1280;
   }
+
+  @computed get isLoaded() {
+    return typeof window !== 'undefined';
+  }
 }
+
+
+export default UI;

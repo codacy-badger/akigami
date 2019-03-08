@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import debugNamespace from 'debug';
 import merge from 'lodash/merge';
 import { inject, observer } from 'mobx-react';
 import {
@@ -10,7 +9,6 @@ import {
   LayoutContent,
 } from './Layout.styles';
 
-const debug = debugNamespace('akigami:client:components:layout');
 const defaultProps = {
   props: {
     sidenav: {},
@@ -19,11 +17,11 @@ const defaultProps = {
   },
 };
 
-@inject('app')
+@inject(s => ({ ui: s.app.ui }))
 @observer
 class Layout extends Component {
   static propTypes = {
-    app: PropTypes.object.isRequired,
+    ui: PropTypes.object.isRequired,
     Sidenav: PropTypes.func.isRequired,
     Header: PropTypes.func.isRequired,
     Content: PropTypes.func.isRequired,
@@ -36,45 +34,16 @@ class Layout extends Component {
 
   static defaultProps = defaultProps;
 
-  constructor(props) {
-    super(props);
-    this.layout = React.createRef();
-    this.sidenav = React.createRef();
-    this.setContentWidth = this.setContentWidth.bind(this);
-    this.state = {
-      contentWidth: props.app.ui.screenWidth - 320,
-    };
-  }
-
-  componentDidMount() {
-    debug(this.layout, this.sidenav);
-    if (typeof window !== 'undefined') {
-      this.setContentWidth();
-    }
-  }
-
-  setContentWidth() {
-    debug(this.layout.current.offsetWidth, this.sidenav.current.offsetWidth);
-    if (this.layout.current && this.sidenav.current) {
-      this.setState({
-        contentWidth: (
-          this.layout.current.offsetWidth - this.sidenav.current.offsetWidth
-        ),
-      });
-    }
-  }
-
   render() {
-    const { contentWidth } = this.state;
-    const { Sidenav, Header, Content, props } = this.props;
+    const { ui, Sidenav, Header, Content, props } = this.props;
     const p = merge(props, defaultProps.props);
     return (
-      <LayoutWrapper ref={this.layout}>
-        <LayoutSidenav ref={this.sidenav}>
+      <LayoutWrapper isOpenSidenav={ui.isOpenSidenav}>
+        <LayoutSidenav isOpen={ui.isOpenSidenav}>
           <Sidenav {...p.sidenav} />
         </LayoutSidenav>
         <LayoutContent>
-          <LayoutHeader width={contentWidth}>
+          <LayoutHeader>
             <Header {...p.header} />
           </LayoutHeader>
           <Content {...p.content} />
