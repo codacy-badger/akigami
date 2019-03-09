@@ -25,8 +25,7 @@ class Sidenav extends Component {
           isMobile={isMobile}
           href="/"
         >
-          {((!ui.isMiniSidenav && ui.isOpenSidenav) || !isMobile) && <Logo width={160} height={43} />}
-          {(isMobile || ui.isMiniSidenav || (isMobile && !ui.isOpenSidenav)) && <LogoMini width={36} height={43} />}
+          {(ui.isMiniSidenav || (isMobile && !ui.isOpenSidenav)) ? <LogoMini width={36} height={43} /> : <Logo width={160} height={43} />}
         </LogoWrapper>
         sidenav
       </SidenavWrapper>
