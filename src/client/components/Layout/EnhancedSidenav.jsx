@@ -58,6 +58,9 @@ class EnhancedSidenav extends Component {
     if (ui.isLoaded) {
       if (this.isSwitchLayoutPoint(ui.screenWidth)) {
         this.memScreenWidth = ui.screenWidth;
+        if (ui.isOpenSidenav) {
+          ui.closeSidenav();
+        }
       }
       this.canUseOutsideEvent = this.memScreenWidth <= this.switchPoint;
     }

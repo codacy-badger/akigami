@@ -49,7 +49,7 @@ class UI {
 
   addHtmlClass(classname) {
     if (this.isLoaded) {
-      const html = document.getElementsByTagName('html')[0];
+      const html = document.querySelector('html');
       if (!(html.className).includes(classname)) {
         html.classList.add(classname);
       }
@@ -58,7 +58,7 @@ class UI {
 
   removeHtmlClass(classname) {
     if (this.isLoaded) {
-      const html = document.getElementsByTagName('html')[0];
+      const html = document.querySelector('html');
       if ((html.className).includes(classname)) {
         html.classList.remove(classname);
       }
@@ -86,7 +86,7 @@ class UI {
     return 1280;
   }
 
-  @computed get isLoaded() {
+  get isLoaded() {
     return typeof window !== 'undefined';
   }
 }
