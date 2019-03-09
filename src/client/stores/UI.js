@@ -3,6 +3,8 @@ import { reaction, computed, observable } from 'mobx';
 class UI {
   @observable isOpenSidenav = false;
 
+  @observable isMiniSidenav = false;
+
   @observable isMobile = false;
 
   @observable transparented = false;
@@ -19,6 +21,18 @@ class UI {
 
   changeTransparent(value) {
     this.transparent = value;
+  }
+
+  minimizeSidebar = () => {
+    this.isMiniSidenav = true;
+  }
+
+  maximizeSidebar = () => {
+    this.isMiniSidenav = false;
+  }
+
+  triggerMiniSidebar = () => {
+    this.isMiniSidenav = !this.isMiniSidenav;
   }
 
   openSidenav = () => {

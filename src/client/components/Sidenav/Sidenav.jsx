@@ -16,15 +16,17 @@ class Sidenav extends Component {
   render() {
     const { enhanced, ui } = this.props;
     const isMobile = enhanced.canUseOutsideEvent;
+    console.log('isMobile', isMobile, 'isMini', ui.isMiniSidenav, 'isOpen', ui.isOpenSidenav);
     return (
-      <SidenavWrapper>
+      <SidenavWrapper isMini={ui.isMiniSidenav}>
         <LogoWrapper
+          isMiniSidenav={ui.isMiniSidenav}
           isOpenSidenav={ui.isOpenSidenav}
           isMobile={isMobile}
           href="/"
         >
-          {(ui.isOpenSidenav || !isMobile) && <Logo width={160} height={43} />}
-          {(!ui.isOpenSidenav && isMobile) && <LogoMini width={36} height={43} />}
+          {((!ui.isMiniSidenav && ui.isOpenSidenav) || !isMobile) && <Logo width={160} height={43} />}
+          {(isMobile || ui.isMiniSidenav || (isMobile && !ui.isOpenSidenav)) && <LogoMini width={36} height={43} />}
         </LogoWrapper>
         sidenav
       </SidenavWrapper>

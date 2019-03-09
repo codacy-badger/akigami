@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaAlignRight } from 'react-icons/fa';
 import Button from '../Button';
 
 import { HeaderWrapper, AutoHide } from './Header.styles';
@@ -24,6 +24,11 @@ class Header extends Component {
             onClick={ui.triggerSidenav}
           />
         </AutoHide>
+        <Button
+          view="borderless"
+          icon={<FaAlignRight />}
+          onClick={ui.triggerMiniSidebar}
+        />
       </HeaderWrapper>
     );
   }
