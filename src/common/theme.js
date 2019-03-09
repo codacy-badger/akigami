@@ -10,8 +10,8 @@ export default {
   borderRadius: '4px',
   borderRadiusCircle: '100vw',
   colors: {
-    sidenav: '#f2f2f5',
-    background: '#ffffff',
+    sidenav: '#ffffff',
+    background: '#fafafb',
     primary: '#0b78ff',
     success: '#3ed485',
     warning: '#f5ad45',

@@ -199,6 +199,9 @@ export const StyledButton = styled('button')`
   ${p => (p.block && css`
     width: 100%;
   `)}
+  ${p => (p.transparent && css`
+    background: transparent;
+  `)}
   ${p => p.theme.mixins.transition('background box-shadow', '0.4s')}
 `;
 

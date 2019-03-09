@@ -13,6 +13,7 @@ const Button = ({
   iconLeft,
   iconRight,
   icon,
+  transparent,
   ...props
 }) => {
   const styleProps = {
@@ -24,6 +25,7 @@ const Button = ({
     <StyledButton
       {...props}
       {...styleProps}
+      transparent={transparent}
       block={block}
       isIconLeft={!!iconLeft}
       isIconRight={!!iconRight}
@@ -43,6 +45,7 @@ Button.propTypes = {
   view: PropTypes.oneOf(['default', 'success', 'warning', 'danger', 'info', 'primary', 'borderless', 'disable']),
   children: PropTypes.any,
   disabled: PropTypes.bool,
+  transparent: PropTypes.bool,
   block: PropTypes.bool,
   icon: PropTypes.any,
   iconLeft: PropTypes.any,
@@ -54,6 +57,7 @@ Button.defaultProps = {
   view: 'default',
   children: null,
   disabled: false,
+  transparent: false,
   block: false,
   icon: null,
   iconLeft: null,

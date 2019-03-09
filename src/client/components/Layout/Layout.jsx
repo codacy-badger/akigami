@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import merge from 'lodash/merge';
 import { inject, observer } from 'mobx-react';
 
+import Sidebody from '../Sidebody';
 import EnhancedSidenav from './EnhancedSidenav';
 import {
   LayoutWrapper,
@@ -42,6 +43,7 @@ class Layout extends Component {
       <LayoutWrapper isOpenSidenav={ui.isOpenSidenav}>
         <EnhancedSidenav>
           <Sidenav {...p.sidenav} />
+          {ui.isMiniSidenav && <Sidebody />}
         </EnhancedSidenav>
         <LayoutContent isOpenSidenav={ui.isOpenSidenav}>
           <LayoutHeader isOpenSidenav={ui.isOpenSidenav}>

@@ -63,10 +63,13 @@ class EnhancedSidenav extends Component {
         }
       }
       this.canUseOutsideEvent = this.memScreenWidth <= this.switchPoint;
+      if (!this.canUseOutsideEvent && ui.isOpenSidenav) {
+        ui.closeSidenav();
+      }
     }
   }
 
-  handleClickOutside(e) {
+  handleClickOutside() {
     const { ui } = this.props;
     if (this.canUseOutsideEvent && ui.isOpenSidenav) {
       ui.closeSidenav();
@@ -78,7 +81,9 @@ class EnhancedSidenav extends Component {
     return (
       <LayoutSidenav isOpen={ui.isOpenSidenav}>
         <Provider enhanced={this}>
-          {children}
+          <React.Fragment>
+            {children}
+          </React.Fragment>
         </Provider>
       </LayoutSidenav>
     );

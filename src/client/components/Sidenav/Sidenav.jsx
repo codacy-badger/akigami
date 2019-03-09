@@ -16,7 +16,6 @@ class Sidenav extends Component {
   render() {
     const { enhanced, ui } = this.props;
     const isMobile = enhanced.canUseOutsideEvent;
-    console.log('isMobile', isMobile, 'isMini', ui.isMiniSidenav, 'isOpen', ui.isOpenSidenav);
     return (
       <SidenavWrapper isMini={ui.isMiniSidenav}>
         <LogoWrapper
@@ -25,7 +24,9 @@ class Sidenav extends Component {
           isMobile={isMobile}
           href="/"
         >
-          {(ui.isMiniSidenav || (isMobile && !ui.isOpenSidenav)) ? <LogoMini width={36} height={43} /> : <Logo width={160} height={43} />}
+          {(ui.isMiniSidenav || (isMobile && !ui.isOpenSidenav))
+            ? <LogoMini width={36} height={43} />
+            : <Logo width={160} height={43} />}
         </LogoWrapper>
         sidenav
       </SidenavWrapper>

@@ -35,11 +35,12 @@ export const LayoutSidenav = styled('section')`
   left: 0;
   bottom: 0;
   width: 320px;
+  display: flex;
   transform: translate3d(-321px, 0, 0);
   overflow: hidden;
   z-index: 1;
-  background: ${p => p.theme.colors.background};
-  border-right: 1px solid ${p => p.theme.colors.border};
+  background: ${p => p.theme.colors.sidenav};
+  /* border-right: 1px solid ${p => p.theme.colors.border}; */
   height: 100%;
   ${p => p.theme.mixins.transition('width transform')}
 
@@ -72,10 +73,21 @@ export const LayoutHeader = styled('header')`
   left: 0;
   width: 100%;
   height: 54px;
-  border-bottom: 1px solid ${p => p.theme.colors.border};
+  box-shadow: inset 0 0 0 -24px rgba(0, 0, 0, .08);
+  /* border-bottom: 1px solid ${p => p.theme.colors.border}; */
   background: ${p => p.theme.colors.background};
-  ${p => p.theme.mixins.transition('margin-left')}
-
+  ${p => p.theme.mixins.transition('margin-left box-shadow')}
+  @media screen and (min-width: 768px) {
+    box-shadow: inset 94px 0 16px -24px rgba(0, 0, 0, .08);
+  }
+  @media screen and (min-width: 1280px) {
+    box-shadow: inset 350px 0 16px -24px rgba(0, 0, 0, .08);
+  }
+  ${p => (p.isOpenSidenav && css`
+    @media screen and (min-width: 1280px) {
+      box-shadow: inset 94px 0 16px -24px rgba(0, 0, 0, .08);
+    }
+  `)}
   > div {
     margin-left: 0;
     @media screen and (min-width: 768px) {
@@ -94,16 +106,20 @@ export const LayoutHeader = styled('header')`
 
 export const LayoutContent = styled('section')`
   padding: 54px 0 0 0;
-  ${p => p.theme.mixins.transition('padding')}
+  box-shadow: inset 0 0 0 -24px rgba(0, 0, 0, .08);
+  ${p => p.theme.mixins.transition('padding box-shadow')}
   @media screen and (min-width: 768px) {
     padding: 54px 0 0 64px;
+    box-shadow: inset 94px 0 16px -24px rgba(0, 0, 0, .08);
   }
   @media screen and (min-width: 1280px) {
     padding: 54px 0 0 320px;
+    box-shadow: inset 350px 0 16px -24px rgba(0, 0, 0, .08);
   }
   ${p => (p.isOpenSidenav && css`
     @media screen and (min-width: 1280px) {
       padding: 54px 0 0 64px;
+      box-shadow: inset 94px 0 16px -24px rgba(0, 0, 0, .08);
     }
   `)}
   flex: 1;

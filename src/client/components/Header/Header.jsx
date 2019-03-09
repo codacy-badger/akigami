@@ -19,12 +19,14 @@ class Header extends Component {
       <HeaderWrapper>
         <AutoHide>
           <Button
+            transparent
             view="borderless"
             icon={<FaBars />}
             onClick={ui.triggerSidenav}
           />
         </AutoHide>
         <Button
+          transparent
           view="borderless"
           icon={<FaAlignRight />}
           onClick={ui.triggerMiniSidebar}
