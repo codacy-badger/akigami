@@ -85,7 +85,7 @@ export default app => {
     }
     const stream = renderToNodeStream((
       <ThemeProvider theme={theme}>
-        <Provider app={appStore}>
+        <Provider {...appStore.provide()}>
           <App />
         </Provider>
       </ThemeProvider>

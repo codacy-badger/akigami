@@ -6,5 +6,7 @@ export default css`
 
   .scroll-lock {
     overflow: hidden;
+    position: fixed;
+    width: 100%;
   }
 `;

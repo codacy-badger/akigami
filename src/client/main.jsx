@@ -58,7 +58,7 @@ const debug = debugNamespace('akigami:client:main');
 
   ReactDOM.render(
     <ThemeProvider theme={theme}>
-      <Provider app={app}>
+      <Provider {...app.provide()}>
         <App />
       </Provider>
     </ThemeProvider>,

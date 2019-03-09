@@ -7,4 +7,8 @@ export const HeaderWrapper = styled('div')`
   padding: 0 16px;
 `;
 
-export default null;
+export const AutoHide = styled('div')`
+  @media screen and (min-width: 1280px) {
+    display: none;
+  }
+`;

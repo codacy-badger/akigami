@@ -21,15 +21,15 @@ class UI {
     this.transparent = value;
   }
 
-  openSidenav() {
+  openSidenav = () => {
     this.isOpenSidenav = true;
   }
 
-  closeSidenav() {
+  closeSidenav = () => {
     this.isOpenSidenav = false;
   }
 
-  triggerSidenav() {
+  triggerSidenav = () => {
     this.isOpenSidenav = !this.isOpenSidenav;
   }
 
@@ -37,7 +37,7 @@ class UI {
     if (this.isLoaded) {
       const html = document.getElementsByTagName('html')[0];
       if (!(html.className).includes(classname)) {
-        html.className += ` ${classname}`;
+        html.classList.add(classname);
       }
     }
   }
@@ -46,7 +46,7 @@ class UI {
     if (this.isLoaded) {
       const html = document.getElementsByTagName('html')[0];
       if ((html.className).includes(classname)) {
-        html.className = html.className.replace(classname, '');
+        html.classList.remove(classname);
       }
     }
   }

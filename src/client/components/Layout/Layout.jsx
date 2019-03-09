@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import merge from 'lodash/merge';
 import { inject, observer } from 'mobx-react';
+
+import EnhancedSidenav from './EnhancedSidenav';
 import {
   LayoutWrapper,
-  LayoutSidenav,
   LayoutHeader,
   LayoutContent,
 } from './Layout.styles';
@@ -17,7 +18,7 @@ const defaultProps = {
   },
 };
 
-@inject(s => ({ ui: s.app.ui }))
+@inject('ui')
 @observer
 class Layout extends Component {
   static propTypes = {
@@ -39,11 +40,11 @@ class Layout extends Component {
     const p = merge(props, defaultProps.props);
     return (
       <LayoutWrapper isOpenSidenav={ui.isOpenSidenav}>
-        <LayoutSidenav isOpen={ui.isOpenSidenav}>
+        <EnhancedSidenav>
           <Sidenav {...p.sidenav} />
-        </LayoutSidenav>
-        <LayoutContent>
-          <LayoutHeader>
+        </EnhancedSidenav>
+        <LayoutContent isOpenSidenav={ui.isOpenSidenav}>
+          <LayoutHeader isOpenSidenav={ui.isOpenSidenav}>
             <Header {...p.header} />
           </LayoutHeader>
           <Content {...p.content} />

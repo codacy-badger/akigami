@@ -15,4 +15,13 @@ export default class AppStore {
     this.notification = new Notification();
     this.apolloClient = null;
   }
+
+  provide = () => ({
+    app: this,
+    ui: this.ui,
+    router: this.router,
+    user: this.user,
+    notification: this.notification,
+    apolloClient: this.apolloClient,
+  })
 }

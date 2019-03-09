@@ -11,3 +11,7 @@ export function fileToBlobURL(file, type) {
 }
 
 export const temp = 1337;
+
+export function getDisplayName(WrappedComponent) {
+  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+}
