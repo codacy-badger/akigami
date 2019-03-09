@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-export default class Logo extends PureComponent {
+class Logo extends PureComponent {
   static propTypes = {
     width: PropTypes.number,
     height: PropTypes.number,
@@ -10,42 +10,23 @@ export default class Logo extends PureComponent {
   };
 
   static defaultProps = {
-    width: 100,
-    height: 100,
+    width: 775,
+    height: 208,
     oneColor: '#d54343',
-    twoColor: '#fff',
+    twoColor: '#2f333a',
   };
 
   render() {
     const { width, height, oneColor, twoColor, ...props } = this.props;
     return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={width}
-        height={height}
-        version="1.1"
-        viewBox="0 0 238.51737 281.03214"
-        aria-labelledby="title"
-        {...props}
-      >
-        <title id="title">Акигами</title>
-        <g
-          fillRule="evenodd"
-          strokeWidth="1px"
-          transform="translate(-166.53 -160.41)"
-        >
-          <path
-            fill={oneColor}
-            d="m254.05 225.43-39.775 14.142-47.098 108.72 116.42 58.589 42.931-16.162-117.18-56.063z"
-            stroke={oneColor}
-          />
-          <path
-            fill={twoColor}
-            d="m246.48 161.16 39.143-0.25254 118.67 280.03h-39.554z"
-            stroke={twoColor}
-          />
+      <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 775 208" {...props}>
+        <g fillRule="evenodd">
+          <path fill={oneColor} d="M64 48L35 58 0 139l86 43 32-11-87-42z" />
+          <path fill={twoColor} d="M173 208h-26L59 0h26zM242 76a33 33 0 0 0-24.1-10 39.9 39.9 0 0 0-28 11 43 43 0 0 0-12 31c0 11.6 3.7 20.5 11.2 28.5a37 37 0 0 0 27.9 12.3c7.6 0 18.6-3 25-11.8v10h26V68h-26v8zm-17.9 13.6a17.7 17.7 0 0 1 12.5 5 17.2 17.2 0 0 1 5.4 12.7 16.9 16.9 0 0 1-5.2 12.5 17.8 17.8 0 0 1-12.5 5.4 19.5 19.5 0 0 1-12.5-5.2 18 18 0 0 1-5.4-12.7 18.2 18.2 0 0 1 5.6-12.7 17.7 17.7 0 0 1 12.1-5zM370 68v79h28V68h-28zm99 0v8a31.5 31.5 0 0 0-23.4-10.6 39 39 0 0 0-28 11.8 44.8 44.8 0 0 0-.8 58.7c5.2 5.3 14.4 10.9 28.6 10.9 6.3 0 15-.6 23.6-9.8v30h-47v27h74V68h-27zm-16.8 20.5a17.6 17.6 0 0 1 12.3 5 20 20 0 0 1 5.5 12.7 18.6 18.6 0 0 1-5.2 12.5 18.3 18.3 0 0 1-12.4 5.2 17.5 17.5 0 0 1-12.5-5 17.4 17.4 0 0 1 0-25.2 16.5 16.5 0 0 1 12.3-5.2zM568 76a32.2 32.2 0 0 0-23.8-10 39.8 39.8 0 0 0-28 11 43 43 0 0 0-11.9 31c0 11.6 3.7 20.5 11.1 28.5a37 37 0 0 0 28 12.3c7.6 0 18.2-2 24.6-10.8v9h26V68h-26v8zm-17.6 13.6a17.7 17.7 0 0 1 12.5 5 17.2 17.2 0 0 1 5.4 12.7 16.9 16.9 0 0 1-5.2 12.5 17.8 17.8 0 0 1-12.5 5.4 19.5 19.5 0 0 1-12.5-5.2 18 18 0 0 1-5.3-12.7 18.2 18.2 0 0 1 5.5-12.7 17.7 17.7 0 0 1 12.1-5zM605 147h27v-39c0-4.9-.6-11.8 4.2-16.5A10.8 10.8 0 0 1 644 88h1c2.6.2 6 1 8.2 3.3 3.1 3.3 3.8 9.2 3.8 16.7v39h28v-41c0-3.8-.6-10 4.1-14.5 2.4-2.2 4.7-3.5 7.8-3.5a7.3 7.3 0 0 1 .9 0 13 13 0 0 1 7.2 3.3c3.1 3 4 8.5 4 16.7v39h28V96c0-5.4-.6-14.8-7.5-21.5-6.4-6.3-15.8-7.1-21.5-7.1a31.4 31.4 0 0 0-16.2 3.8 27.3 27.3 0 0 0-10.5 10.7 24.2 24.2 0 0 0-10.8-11 31.5 31.5 0 0 0-14.9-3.5c-7.6 0-17 2.6-23.6 10.6V68h-27v79zm142-79v79h28V68h-28zm-298 99h20v27h-20v-27zm-143-20v-35l21 35h36l-31-41.6L361 68h-35l-20 33V20h-28v127h28zm64-127h28v28h-28V20zm377 0h28v28h-28V20z" />
         </g>
       </svg>
     );
   }
 }
+
+export default Logo;

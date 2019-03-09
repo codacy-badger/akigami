@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observable } from 'mobx';
-import { inject, observer } from 'mobx-react';
+import { Provider, inject, observer } from 'mobx-react';
 import onClickOutside from 'react-onclickoutside';
 import { LayoutSidenav } from './Layout.styles';
 
 @inject('ui')
-@observer
 @onClickOutside
+@observer
 class EnhancedSidenav extends Component {
   static propTypes = {
     ui: PropTypes.object.isRequired,
@@ -74,7 +74,9 @@ class EnhancedSidenav extends Component {
     const { ui, children } = this.props;
     return (
       <LayoutSidenav isOpen={ui.isOpenSidenav}>
-        {children}
+        <Provider enhanced={this}>
+          {children}
+        </Provider>
       </LayoutSidenav>
     );
   }

@@ -17,7 +17,7 @@ export default {
     warning: '#f5ad45',
     danger: '#fd5b77',
     info: '#a63ed4',
-    default: '#334150',
+    default: '#2f333a',
     white: '#ffffff',
     gray: '#7f8fa4',
     border: '#d5dfe7',
