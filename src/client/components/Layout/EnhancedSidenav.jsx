@@ -63,9 +63,6 @@ class EnhancedSidenav extends Component {
         }
       }
       this.canUseOutsideEvent = this.memScreenWidth <= this.switchPoint;
-      if (!this.canUseOutsideEvent && ui.isOpenSidenav) {
-        ui.closeSidenav();
-      }
     }
   }
 
