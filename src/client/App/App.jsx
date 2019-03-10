@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import ReactTooltip from 'react-tooltip';
 import { observer, inject } from 'mobx-react';
 import NotificationSystem from 'react-notification-system';
 import { Global } from '@emotion/core';
@@ -49,6 +50,7 @@ class App extends Component {
             content: router.container.props,
           }}
         />
+        <ReactTooltip effect="solid" />
       </AppWrapper>
     );
   }

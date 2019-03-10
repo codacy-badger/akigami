@@ -13,7 +13,7 @@ export default class Router {
 
   customHandler = null;
 
-  currentURL = null;
+  @observable currentURL = null;
 
   router;
 

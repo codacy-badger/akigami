@@ -3,4 +3,4 @@ export {
   StateButton,
   StatefulButton,
 } from './Button';
-export { default as StyledButton } from './Button.styles';
+export { StyledButton } from './Button.styles';

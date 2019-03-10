@@ -84,15 +84,15 @@ export const views = {
 const sizes = {
   small: css`
     padding: 8px 16px;
-    font-size: 11px;
+    font-size: 14px;
   `,
   large: css`
     padding: 18px 36px;
-    font-size: 16px;
+    font-size: 18px;
   `,
   default: css`
     padding: 12px 22px;
-    font-size: 14px;
+    font-size: 16px;
   `,
 };
 
@@ -132,13 +132,13 @@ const paddingWithIcons = {
 
 const iconSizes = {
   small: css`
-    font-size: 14px;
+    font-size: 18px;
   `,
   large: css`
-    font-size: 20px;
+    font-size: 22px;
   `,
   default: css`
-    font-size: 18px;
+    font-size: 20px;
   `,
 };
 
@@ -152,19 +152,31 @@ function makeSize(p) {
   return sizes[isValid ? p.size : 'default'];
 }
 
+const collapsed = (p) => css`
+  > span {
+    display: none;
+  }
+  ${p.size === 'large' && paddingWithIcons.largeSingle}
+  ${p.size === 'small' && paddingWithIcons.smallSingle}
+  ${p.size === 'default' && paddingWithIcons.defaultSingle}
+`;
+
 export const StyledButton = styled('button')`
   border: 1px solid transparent;
   cursor: pointer;
   margin: 0;
-  outline: none;
+  outline: none !important;
   ${makeView}
   ${makeSize}
   border-radius: ${p => p.theme.borderRadius};
   font-family: ${p => p.theme.fontFamily};
   font-weight: 500;
-  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  text-decoration: none;
+  white-space: nowrap;
   ${p => ((p.isIconSingle || p.isIconLeft || p.isIconRight) && css`
     display: inline-flex;
+    align-items: center;
   `)}
   ${(p) => {
     if (p.isIconLeft) {
@@ -196,12 +208,31 @@ export const StyledButton = styled('button')`
     }
     return '';
   }}
+  ${p => (p.collapsible && css`
+    @media screen and (max-width: 1280px) {
+      ${collapsed(p)};
+    }
+  `)}
+  ${p => (p.collapsed && collapsed)}
   ${p => (p.block && css`
     width: 100%;
   `)}
   ${p => (p.transparent && css`
     background: transparent;
   `)}
+  ${(p) => {
+    if (p.active) {
+      if (['default', 'borderless'].includes(p.view)) {
+        return css`
+          background: ${p.theme.mixins.darken(p.theme.colors.white, '10%')};
+        `;
+      }
+      return css`
+        background: ${p.theme.mixins.darken(p.theme.colors[p.view], '10%')};
+      `;
+    }
+    return '';
+  }}
   ${p => p.theme.mixins.transition('background box-shadow', '0.4s')}
 `;
 

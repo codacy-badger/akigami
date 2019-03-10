@@ -5,6 +5,7 @@ import { withState, withStateful } from './modifiers';
 import { StyledButton, Icon } from './Button.styles';
 
 const Button = ({
+  as,
   view,
   children,
   block,
@@ -14,6 +15,8 @@ const Button = ({
   iconRight,
   icon,
   transparent,
+  collapsible,
+  collapsed,
   ...props
 }) => {
   const styleProps = {
@@ -21,11 +24,15 @@ const Button = ({
     view: disabled ? 'disable' : view,
     disabled,
   };
+  let Component = StyledButton;
+  if (as) Component = StyledButton.withComponent(as);
   return (
-    <StyledButton
+    <Component
       {...props}
       {...styleProps}
       transparent={transparent}
+      collapsible={collapsible}
+      collapsed={collapsed}
       block={block}
       isIconLeft={!!iconLeft}
       isIconRight={!!iconRight}
@@ -33,9 +40,9 @@ const Button = ({
     >
       {(icon && !children) && <Icon {...styleProps} place="single">{icon}</Icon>}
       {iconLeft && <Icon {...styleProps} place="left">{iconLeft}</Icon>}
-      {children}
+      {children && <span>{children}</span>}
       {iconRight && <Icon {...styleProps} place="right">{iconRight}</Icon>}
-    </StyledButton>
+    </Component>
   );
 };
 
@@ -46,10 +53,13 @@ Button.propTypes = {
   children: PropTypes.any,
   disabled: PropTypes.bool,
   transparent: PropTypes.bool,
+  collapsible: PropTypes.bool,
+  collapsed: PropTypes.bool,
   block: PropTypes.bool,
   icon: PropTypes.any,
   iconLeft: PropTypes.any,
   iconRight: PropTypes.any,
+  as: PropTypes.any,
 };
 
 Button.defaultProps = {
@@ -58,10 +68,13 @@ Button.defaultProps = {
   children: null,
   disabled: false,
   transparent: false,
+  collapsible: false,
+  collapsed: false,
   block: false,
   icon: null,
   iconLeft: null,
   iconRight: null,
+  as: null,
 };
 
 export const StateButton = withState(Button);

@@ -24,9 +24,9 @@ const defaultProps = {
 class Layout extends Component {
   static propTypes = {
     ui: PropTypes.object.isRequired,
-    Sidenav: PropTypes.func.isRequired,
-    Header: PropTypes.func.isRequired,
-    Content: PropTypes.func.isRequired,
+    Sidenav: PropTypes.any.isRequired,
+    Header: PropTypes.any.isRequired,
+    Content: PropTypes.any.isRequired,
     props: PropTypes.shape({
       sidenav: PropTypes.object,
       header: PropTypes.object,

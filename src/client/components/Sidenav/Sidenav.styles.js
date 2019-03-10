@@ -3,6 +3,8 @@ import { css } from '@emotion/core';
 
 export const SidenavWrapper = styled('nav')`
   /* box-shadow: 1px 0 0 ${p => p.theme.colors.border}; */
+  display: flex;
+  flex-direction: column;
   min-width: 64px;
   max-width: 320px;
   height: 100%;
