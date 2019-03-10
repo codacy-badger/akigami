@@ -59,6 +59,13 @@ export default class Router {
   }
 
   linkClickHandler(event, element) {
+    const reactEventHandlers = Object.keys(element).find((item) => item.startsWith('__reactEventHandlers'));
+    if (reactEventHandlers) {
+      const obj = element[reactEventHandlers];
+      if (obj.onClick) {
+        obj.onClick();
+      }
+    }
     const targetAttribute = element.getAttribute('target');
     if (targetAttribute) {
       return;
@@ -92,6 +99,7 @@ export default class Router {
     }
 
     event.preventDefault();
+    event.stopPropagation();
 
     if (document.location.pathname === element.pathname) {
       this.go(locationString, true, true);
