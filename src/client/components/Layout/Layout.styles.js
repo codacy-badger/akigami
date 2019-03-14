@@ -74,19 +74,20 @@ export const LayoutHeader = styled('header')`
   width: 100%;
   height: 54px;
   box-shadow: inset 0 0 0 -24px rgba(0, 0, 0, .05);
-  /* border-bottom: 1px solid ${p => p.theme.colors.border}; */
-  background: ${p => p.theme.colors.background};
+  background: ${p => (p.isTransparent ? 'none' : p.theme.colors.background)};
   ${p => p.theme.mixins.transition('margin-left box-shadow')}
-  @media screen and (min-width: 768px) {
-    box-shadow: inset 94px 0 16px -24px rgba(0, 0, 0, .05);
-  }
-  @media screen and (min-width: 1280px) {
-    box-shadow: inset 350px 0 16px -24px rgba(0, 0, 0, .05);
-  }
-  ${p => (p.isOpenSidenav && css`
-    @media screen and (min-width: 1280px) {
+  ${p => (!p.isTransparent && css`
+    @media screen and (min-width: 768px) {
       box-shadow: inset 94px 0 16px -24px rgba(0, 0, 0, .05);
     }
+    @media screen and (min-width: 1280px) {
+      box-shadow: inset 350px 0 16px -24px rgba(0, 0, 0, .05);
+    }
+    ${p.isOpenSidenav && css`
+      @media screen and (min-width: 1280px) {
+        box-shadow: inset 94px 0 16px -24px rgba(0, 0, 0, .05);
+      }
+    `}
   `)}
   > div {
     margin-left: 0;

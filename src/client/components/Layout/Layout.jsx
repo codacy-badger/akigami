@@ -36,8 +36,39 @@ class Layout extends Component {
 
   static defaultProps = defaultProps;
 
+  constructor(props) {
+    super(props);
+    this.scrollEvent = this.scrollEvent.bind(this);
+  }
+
+  componentDidMount() {
+    const { ui } = this.props;
+    if (ui.isLoaded && ui.transparented) {
+      this.scrollEvent();
+      document.addEventListener('scroll', this.scrollEvent);
+    }
+  }
+
+  componentWillUnmount() {
+    const { ui } = this.props;
+    if (ui.isLoaded && ui.transparented) {
+      document.removeEventListener('scroll', this.scrollEvent);
+    }
+  }
+
+  scrollEvent() {
+    const { ui } = this.props;
+    const scroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const isTop = scroll <= 60;
+    if (ui.transparented) {
+      if (!ui.transparent && isTop) ui.changeTransparent(true);
+      if (ui.transparent && !isTop) ui.changeTransparent(false);
+    }
+  }
+
   render() {
     const { ui, Sidenav, Header, Content, props } = this.props;
+    const transparent = ui.transparented ? ui.transparent : false;
     const p = merge(props, defaultProps.props);
     return (
       <LayoutWrapper isOpenSidenav={ui.isOpenSidenav}>
@@ -46,7 +77,7 @@ class Layout extends Component {
           {ui.isMiniSidenav && <Sidebody />}
         </EnhancedSidenav>
         <LayoutContent isOpenSidenav={ui.isOpenSidenav}>
-          <LayoutHeader isOpenSidenav={ui.isOpenSidenav}>
+          <LayoutHeader isTransparent={transparent} isOpenSidenav={ui.isOpenSidenav}>
             <Header {...p.header} />
           </LayoutHeader>
           <Content {...p.content} />
