@@ -7,8 +7,6 @@ class SearchStore {
 
   @observable restState = false;
 
-  @observable blockedBlur = false;
-
   @observable focused = false;
 
   @observable rect = {
@@ -45,20 +43,13 @@ class SearchStore {
 
   @action.bound
   handleBlur() {
-    console.log('handleBlur', this.blockedBlur);
-    if (!this.blockedBlur) {
-      this.focused = false;
-    }
+    console.log('handleBlur');
+    this.focused = false;
   }
 
-  handleBlockBlur = () => {
-    console.log('handleBlockBlur');
-    this.blockedBlur = true;
-  }
-
-  handleReleaseBlur = () => {
-    console.log('handleReleaseBlur');
-    this.blockedBlur = false;
+  handleBlockBlur = (e) => {
+    e.preventDefault();
+    console.log('block blur in results');
   }
 
   @computed get isClear() {
