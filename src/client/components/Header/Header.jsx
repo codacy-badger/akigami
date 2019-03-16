@@ -34,9 +34,7 @@ class Header extends Component {
           onClick={ui.triggerMiniSidebar}
         /> */}
         <Spacer />
-        <Search
-          placeholder="Начните поиск"
-        />
+        <Search />
       </HeaderWrapper>
     );
   }
