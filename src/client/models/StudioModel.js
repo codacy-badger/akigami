@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx';
 
-class Studio {
+class StudioStore {
   @observable title = '';
 
   @observable image = '';
@@ -54,4 +54,4 @@ class Studio {
   }
 }
 
-export default Studio;
+export default StudioStore;

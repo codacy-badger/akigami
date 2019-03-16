@@ -1,7 +1,7 @@
 import { observable, action } from 'mobx';
-import Genre from '../models/Genre';
+import Genre from '../models/GenreModel';
 
-class Genres {
+class GenresStore {
   @observable list = [];
 
   @observable processing = false;
@@ -101,4 +101,4 @@ class Genres {
   }
 }
 
-export default Genres;
+export default GenresStore;

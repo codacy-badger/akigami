@@ -1,6 +1,6 @@
 import { reaction, computed, observable } from 'mobx';
 
-class UI {
+class UIStore {
   @observable isOpenSidenav = false;
 
   @observable isMiniSidenav = false;
@@ -92,4 +92,4 @@ class UI {
 }
 
 
-export default UI;
+export default UIStore;

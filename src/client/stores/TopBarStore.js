@@ -1,6 +1,6 @@
 import { action, observable } from 'mobx';
 
-export default class TopBar {
+class TopBarStore {
   @observable show = true;
 
   @observable progress = 0;
@@ -34,3 +34,5 @@ export default class TopBar {
     this.finish();
   }
 }
+
+export default TopBarStore;

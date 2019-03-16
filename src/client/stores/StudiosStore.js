@@ -1,7 +1,7 @@
 import { observable } from 'mobx';
-import StudioModel from '../models/Studio';
+import StudioModel from '../models/StudioModel';
 
-class Studios {
+class StudiosStore {
   @observable list = [];
 
   @observable loading = true;
@@ -31,4 +31,4 @@ class Studios {
   wrapModel = item => new StudioModel(this.app, item);
 }
 
-export default Studios;
+export default StudiosStore;

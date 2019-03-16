@@ -2,9 +2,9 @@ import { observable, action } from 'mobx';
 import set from 'lodash/set';
 
 import { socket } from '../lib/modules';
-import User from '../stores/User';
+import User from '../stores/UserStore';
 
-class Comment {
+class CommentModel {
   @observable user = null;
 
   @observable content = null;
@@ -100,4 +100,4 @@ class Comment {
   };
 }
 
-export default Comment;
+export default CommentModel;

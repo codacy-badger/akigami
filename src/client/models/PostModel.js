@@ -2,9 +2,9 @@ import { observable, action } from 'mobx';
 import set from 'lodash/set';
 
 import { socket } from '../lib/modules';
-import User from '../stores/User';
+import User from '../stores/UserStore';
 
-class Post {
+class PostModel {
   @observable user = null;
 
   @observable content = null;
@@ -88,4 +88,4 @@ class Post {
   };
 }
 
-export default Post;
+export default PostModel;

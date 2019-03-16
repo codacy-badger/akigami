@@ -1,7 +1,7 @@
 import { observable, action } from 'mobx';
-import UserModel from '../models/User';
+import UserModel from '../models/UserModel';
 
-class Users {
+class UsersStore {
   @observable list = [];
 
   constructor(app, array) {
@@ -51,4 +51,4 @@ class Users {
   )
 }
 
-export default Users;
+export default UsersStore;

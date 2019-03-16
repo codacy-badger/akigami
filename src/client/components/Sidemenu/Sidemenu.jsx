@@ -14,12 +14,6 @@ import {
 import Button from '../Button';
 import { SidemenuWrapper } from './Sidemenu.styles';
 
-const style = css`
-  > div {
-    color: #d54343;
-  }
-`;
-
 @inject('enhanced', 'ui', 'user', 'router')
 @observer
 class Sidemenu extends Component {
@@ -37,9 +31,7 @@ class Sidemenu extends Component {
 
   closeTrigger() {
     const { ui, enhanced } = this.props;
-    console.log('closeTrigger');
     if (enhanced.canUseOutsideEvent && ui.isOpenSidenav) {
-      console.log('enhanced.canUseOutsideEvent && ui.isOpenSidenav');
       ui.closeSidenav();
     }
   }
@@ -90,23 +82,23 @@ class Sidemenu extends Component {
       <SidemenuWrapper isMobile={isCollapsed}>
         {routes.map((item) => {
           const isActive = router.currentURL.includes(item.href);
-          const tooltipProps = {
-            'data-tip': item.title,
-            'data-place': 'right',
-          };
           return (
             <Button
               block
               as="a"
-              view="borderless"
               key={item.href}
+              view="borderless"
               href={item.href}
-              css={isActive && style}
+              css={css`
+                > div {
+                  margin-right: 20px;
+                  ${isActive && 'color: #d54343;'}
+                }
+              `}
               collapsed={isCollapsed}
               iconLeft={item.icon}
               active={isActive}
               onClick={this.closeTrigger}
-              {...(isCollapsed ? tooltipProps : {})}
             >
               {item.title}
             </Button>

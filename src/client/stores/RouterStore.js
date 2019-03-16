@@ -8,7 +8,7 @@ import UniversalRouter from 'universal-router';
 import routes from '../routes';
 import modals from '../modals';
 
-export default class Router {
+class RouterStore {
   @observable container;
 
   customHandler = null;
@@ -191,3 +191,5 @@ export default class Router {
     window.history.replaceState(null, null, url);
   }
 }
+
+export default RouterStore;

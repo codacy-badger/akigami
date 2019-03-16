@@ -1,11 +1,11 @@
-import Router from './Router';
-import TopBar from './TopBar';
-import Modal from './Modal';
-import UI from './UI';
-import User from './User';
-import Notification from './Notification';
+import Router from './RouterStore';
+import TopBar from './TopBarStore';
+import Modal from './ModalStore';
+import UI from './UIStore';
+import User from './UserStore';
+import Notification from './NotificationStore';
 
-export default class AppStore {
+class AppStore {
   constructor() {
     this.ui = new UI();
     this.topBar = new TopBar();
@@ -25,3 +25,5 @@ export default class AppStore {
     apolloClient: this.apolloClient,
   })
 }
+
+export default AppStore;

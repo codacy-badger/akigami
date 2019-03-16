@@ -1,6 +1,6 @@
 import { observable, computed } from 'mobx';
 
-class Notification {
+class NotificationStore {
   @observable notify = undefined;
 
   defaultParams = {
@@ -53,4 +53,4 @@ class Notification {
   }
 }
 
-export default Notification;
+export default NotificationStore;

@@ -4,7 +4,7 @@ import { css } from '@emotion/core';
 const activeState = p => css`
   background: ${p.theme.colors.white};
   box-shadow: 0 3px 16px -4px rgba(0, 0, 0, 0.25);
-  max-width: 400px;
+  max-width: 500px;
 `;
 
 export const SearchWrapper = styled('div')`
@@ -17,7 +17,11 @@ export const SearchWrapper = styled('div')`
   max-width: 200px;
   width: 100%;
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-  ${p => p.theme.mixins.transition('box-shadow background max-width')}
+  transition-property: box-shadow, background, max-width;
+  transition-duration: .2s, .2s, .2s;
+  transition-timing-function: ease-out, ease-out, ease-in-out;
+  transition-delay: 0s, 0s, .1s;
+  will-change: box-shadow, background, max-width;
   ${p => (p.isActive && activeState)}
   &:focus-within {
     ${activeState}

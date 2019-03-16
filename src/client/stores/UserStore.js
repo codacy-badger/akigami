@@ -2,9 +2,9 @@ import { computed } from 'mobx';
 import set from 'lodash/set';
 import gql from 'graphql-tag';
 
-import UserModel from '../models/User';
+import UserModel from '../models/UserModel';
 
-class User extends UserModel {
+class UserStore extends UserModel {
   constructor(app) {
     super(app);
     this.app = app;
@@ -80,4 +80,4 @@ class User extends UserModel {
   }
 }
 
-export default User;
+export default UserStore;

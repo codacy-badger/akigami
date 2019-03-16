@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx';
 
-class Genre {
+class GenreModel {
   @observable id = null;
 
   @observable title = null;
@@ -22,4 +22,4 @@ class Genre {
   }
 }
 
-export default Genre;
+export default GenreModel;

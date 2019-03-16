@@ -2,7 +2,7 @@ import { observable, action } from 'mobx';
 import shortid from 'shortid';
 import merge from 'lodash/merge';
 
-export default class Modal {
+class ModalModel {
   id;
 
   @observable show = true;
@@ -51,3 +51,5 @@ export default class Modal {
     merge(this, settings);
   };
 }
+
+export default ModalModel;

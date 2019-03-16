@@ -1,8 +1,8 @@
 import { observable, action } from 'mobx';
 import find from 'lodash/find';
-import ModalModel from '../models/Modal';
+import ModalModel from '../models/ModalModel';
 
-export default class Modal {
+class ModalStore {
   @observable modals = [];
 
   appState;
@@ -43,3 +43,5 @@ export default class Modal {
     this.showModal = false;
   };
 }
+
+export default ModalStore;

@@ -4,7 +4,7 @@ import moment from 'moment';
 const defaultAvatar = '/images/no_avatar.jpg';
 const defaultCover = '/images/no-cover.jpg';
 
-class User {
+class UserModel {
   @observable id = null;
 
   @observable username = null;
@@ -125,4 +125,4 @@ class User {
   }
 }
 
-export default User;
+export default UserModel;
