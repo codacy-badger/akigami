@@ -1,18 +1,20 @@
-import Router from './RouterStore';
-import TopBar from './TopBarStore';
-import Modal from './ModalStore';
-import UI from './UIStore';
-import User from './UserStore';
-import Notification from './NotificationStore';
+import RouterStore from './RouterStore';
+import TopBarStore from './TopBarStore';
+import ModalStore from './ModalStore';
+import UIStore from './UIStore';
+import UserStore from './UserStore';
+import NotificationStore from './NotificationStore';
+import SearchStore from './SearchStore';
 
 class AppStore {
   constructor() {
-    this.ui = new UI();
-    this.topBar = new TopBar();
-    this.modal = new Modal();
-    this.router = new Router(this);
-    this.user = new User(this);
-    this.notification = new Notification();
+    this.ui = new UIStore();
+    this.topBar = new TopBarStore();
+    this.modal = new ModalStore();
+    this.router = new RouterStore(this);
+    this.user = new UserStore(this);
+    this.search = new SearchStore();
+    this.notification = new NotificationStore();
     this.apolloClient = null;
   }
 
@@ -23,6 +25,7 @@ class AppStore {
     user: this.user,
     notification: this.notification,
     apolloClient: this.apolloClient,
+    search: this.search,
   })
 }
 
