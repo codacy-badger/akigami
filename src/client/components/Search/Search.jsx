@@ -47,7 +47,7 @@ class Search extends Component {
             onChange={search.handleSearch}
             onFocus={search.handleFocus}
             onBlur={search.handleBlur}
-            onTouchLeave={search.handleBlur}
+            onTouchEnd={search.handleBlur}
             placeholder="Начните поиск"
           />
         </SearchWrapper>
@@ -59,7 +59,7 @@ class Search extends Component {
             onTouchStart={search.handleBlockBlur}
             onClick={search.handleBlockBlur}
             onBlur={search.handleReleaseBlur}
-            onTouchLeave={search.handleReleaseBlur}
+            onTouchEnd={search.handleReleaseBlur}
           >
             Results
           </SearchResults>

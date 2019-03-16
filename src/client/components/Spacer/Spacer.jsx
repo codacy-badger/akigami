@@ -4,7 +4,7 @@ import SpacerStyled from './Spacer.styles';
 class Spacer extends Component {
   render() {
     return (
-      <SpacerStyled />
+      <SpacerStyled {...this.props} />
     );
   }
 }

@@ -5,6 +5,7 @@ import { FaBars /* , FaAlignRight */ } from 'react-icons/fa';
 import Button from '../Button';
 import Search from '../Search';
 import Spacer from '../Spacer';
+import HeaderUserPanel from '../HeaderUserPanel';
 
 import { HeaderWrapper, AutoHide } from './Header.styles';
 
@@ -35,6 +36,8 @@ class Header extends Component {
         /> */}
         <Spacer />
         <Search />
+        <Spacer full />
+        <HeaderUserPanel />
       </HeaderWrapper>
     );
   }
