@@ -23,6 +23,13 @@ export const SearchWrapper = styled('div')`
   transition-delay: 0s, 0s, .1s;
   will-change: box-shadow, background, max-width;
   ${p => (p.isActive && activeState)}
+  ${p => (p.isAbsolute && css`
+    @media screen and (max-width: 768px) {
+      position: absolute;
+      left: ${p.left || 0}px;
+      width: ${`calc(${p.width}px - ${(p.left || 0)}px - 42px)`};
+    }
+  `)}
   &:focus-within {
     ${activeState}
   }

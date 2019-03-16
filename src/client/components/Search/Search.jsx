@@ -9,11 +9,12 @@ import {
   SearchResults,
 } from './Search.styles';
 
-@inject('search')
+@inject('search', 'ui')
 @observer
 class Search extends Component {
   static propTypes = {
     search: PropTypes.object.isRequired,
+    ui: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -30,13 +31,16 @@ class Search extends Component {
   }
 
   render() {
-    const { search } = this.props;
+    const { search, ui } = this.props;
     return (
       <React.Fragment>
         <SearchWrapper
           ref={this.refSearchWrapper}
           isActive={!search.isClear}
           onTransitionEnd={this.handleTransition}
+          left={search.rect.left}
+          width={ui.screenWidth}
+          isAbsolute={!!search.rect.left && (search.focused || !search.isClear)}
         >
           <SearchIcon>
             <FaSearch />

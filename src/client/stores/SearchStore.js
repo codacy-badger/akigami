@@ -5,8 +5,6 @@ const defaultValue = '';
 class SearchStore {
   @observable value = defaultValue;
 
-  @observable restState = false;
-
   @observable focused = false;
 
   @observable rect = {
@@ -35,10 +33,6 @@ class SearchStore {
 
   handleFocus = () => {
     this.focused = true;
-  }
-
-  handleRest = () => {
-    this.restState = true;
   }
 
   @action.bound
