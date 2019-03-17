@@ -1,4 +1,4 @@
-import { action, observable, computed } from 'mobx';
+import { action, observable, computed, reaction } from 'mobx';
 
 const defaultValue = '';
 
@@ -10,6 +10,9 @@ class SearchStore {
   @observable rect = {
     left: 0,
     top: 0,
+  };
+
+  @observable rectWH = {
     height: 0,
     width: 0,
   };
@@ -25,6 +28,11 @@ class SearchStore {
   @action.bound
   setRect(object) {
     this.rect = object;
+  }
+
+  @action.bound
+  setRectWH(object) {
+    this.rectWH = object;
   }
 
   handleClear = () => {

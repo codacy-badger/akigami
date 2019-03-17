@@ -13,7 +13,7 @@ class AppStore {
     this.modal = new ModalStore();
     this.router = new RouterStore(this);
     this.user = new UserStore(this);
-    this.search = new SearchStore();
+    this.search = new SearchStore(this);
     this.notification = new NotificationStore();
     this.apolloClient = null;
   }

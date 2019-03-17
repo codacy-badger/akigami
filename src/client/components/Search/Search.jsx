@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { reaction } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import { FaSearch } from 'react-icons/fa';
 import SearchResults from '../SearchResults';
@@ -23,10 +24,23 @@ class Search extends Component {
     this.handleTransition = this.handleTransition.bind(this);
   }
 
+  componentDidMount() {
+    const { search, ui } = this.props;
+    search.setRect(this.getRect());
+    reaction(
+      () => ui.screenWidth,
+      () => {
+        search.setRect(this.getRect());
+      },
+    );
+  }
+
+  getRect = () => this.refSearchWrapper.current.getBoundingClientRect()
+
   handleTransition() {
     const { search } = this.props;
     if (search.focused) {
-      search.setRect(this.refSearchWrapper.current.getBoundingClientRect());
+      search.setRectWH(this.getRect());
     }
   }
 
@@ -37,6 +51,7 @@ class Search extends Component {
         <SearchWrapper
           ref={this.refSearchWrapper}
           isActive={!search.isClear}
+          onFocus={this.handleTransition}
           onTransitionEnd={this.handleTransition}
           left={search.rect.left}
           width={ui.screenWidth}

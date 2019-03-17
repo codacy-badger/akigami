@@ -11,8 +11,17 @@ class UIStore {
 
   @observable transparent = true;
 
+  @observable screenWidthVar = null;
+
   constructor() {
     this.overlayListener();
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', this.handleResize);
+    }
+  }
+
+  handleResize = () => {
+    this.screenWidthVar = window.innerWidth;
   }
 
   changeTransparented(value) {
@@ -81,6 +90,7 @@ class UIStore {
   }
 
   @computed get screenWidth() {
+    if (this.screenWidthVar) return this.screenWidthVar;
     if (typeof window !== 'undefined') return window.innerWidth;
     if (this.isMobile) return 320;
     return 1280;
