@@ -82,6 +82,10 @@ export const views = {
 };
 
 const sizes = {
+  extraSmall: css`
+    padding: 4px 8px;
+    font-size: 14px;
+  `,
   small: css`
     padding: 8px 16px;
     font-size: 14px;

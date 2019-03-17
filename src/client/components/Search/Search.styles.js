@@ -12,7 +12,7 @@ export const SearchWrapper = styled('div')`
   background: none;
   display: flex;
   align-items: center;
-  padding: 0 12px;
+  padding: 0 18px;
   overflow: hidden;
   max-width: 200px;
   width: 100%;
@@ -51,19 +51,4 @@ export const SearchInput = styled('input')`
   width: 100%;
   background: none;
   font-family: ${p => p.theme.fontFamily};
-`;
-
-export const SearchResults = styled('div')`
-  position: fixed;
-  top: ${p => (p.top || 0)}px;
-  left: ${p => (p.left || 0)}px;
-  width: ${p => (p.width || 0)}px;
-
-  background: ${p => p.theme.colors.white};
-  border-radius: ${p => p.theme.borderRadius};
-  box-shadow: 0 3px 16px -4px rgba(0, 0, 0, 0.25);
-  min-height: 100px;
-  padding: 12px;
-  margin-top: 8px;
-  box-sizing: border-box;
 `;

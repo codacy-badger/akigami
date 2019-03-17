@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
 import { FaSearch } from 'react-icons/fa';
+import SearchResults from '../SearchResults';
 import {
   SearchWrapper,
   SearchIcon,
   SearchInput,
-  SearchResults,
 } from './Search.styles';
 
 @inject('search', 'ui')
@@ -54,16 +54,7 @@ class Search extends Component {
             placeholder="Начните поиск"
           />
         </SearchWrapper>
-        {search.showResults && (
-          <SearchResults
-            top={search.rect.top + search.rect.height}
-            left={search.rect.left}
-            width={search.rect.width}
-            onMouseDown={search.handleBlockBlur}
-          >
-            Results
-          </SearchResults>
-        )}
+        <SearchResults />
       </React.Fragment>
     );
   }
