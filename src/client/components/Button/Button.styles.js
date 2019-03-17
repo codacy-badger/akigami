@@ -160,6 +160,9 @@ const collapsed = (p) => css`
   > span {
     display: none;
   }
+  > div {
+    margin-right: 0;
+  }
   ${p.size === 'large' && paddingWithIcons.largeSingle}
   ${p.size === 'small' && paddingWithIcons.smallSingle}
   ${p.size === 'default' && paddingWithIcons.defaultSingle}
@@ -174,7 +177,6 @@ export const StyledButton = styled('button')`
   ${makeSize}
   border-radius: ${p => p.theme.borderRadius};
   font-family: ${p => p.theme.fontFamily};
-  font-weight: 500;
   box-sizing: border-box;
   text-decoration: none;
   white-space: nowrap;

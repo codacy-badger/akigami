@@ -8,6 +8,7 @@ export const HeaderWrapper = styled('div')`
 `;
 
 export const AutoHide = styled('div')`
+  display: flex;
   @media screen and (min-width: 1280px) {
     display: none;
   }

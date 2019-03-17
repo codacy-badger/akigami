@@ -1,20 +1,31 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Image from '../Image';
 import {
   UserWrapper,
   UserAvatar,
   UserContent,
+  UserName,
 } from './HeaderUserPanel.styles';
 
 class HeaderUserPanel extends Component {
+  static propTypes = {
+    user: PropTypes.object.isRequired,
+  }
+
   render() {
-    // react-image-fallback
+    const { user } = this.props;
     return (
-      <UserWrapper>
+      <UserWrapper onClick={() => console.log('click')}>
         <UserAvatar>
-          img
+          <Image
+            src={user.avatar}
+            alt={user.displayName}
+            size={32}
+          />
         </UserAvatar>
         <UserContent>
-          Content
+          <UserName>{user.displayName}</UserName>
         </UserContent>
       </UserWrapper>
     );
