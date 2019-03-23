@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { inject, observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 import { Flex, Box } from '@rebass/grid/emotion';
-import sample from 'lodash/sample';
 import { StatefulButton } from '../../components/Button';
 import ContentWrapper from '../../components/ContentWrapper';
 import Item from '../../components/Item';
@@ -10,34 +9,17 @@ import Input from '../../components/Input';
 import Divider from '../../components/Divider';
 import Radio from '../../components/Radio';
 
-import image1 from './assets/1.jpg';
-import image2 from './assets/2.jpg';
-import image3 from './assets/3.jpg';
-import image4 from './assets/4.jpg';
-
-const image = sample([
-  image1,
-  image2,
-  image3,
-  image4,
-]);
-
-@inject('ui')
 @observer
 class Login extends Component {
   static propTypes = {
     ui: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired,
+    image: PropTypes.string.isRequired,
   };
 
   constructor(props) {
     super(props);
     this.changeEmail = this.changeEmail.bind(this);
-  }
-
-  componentWillMount() {
-    const { ui } = this.props;
-    ui.changeTransparented(true);
   }
 
   componentWillUnmount() {
@@ -52,7 +34,7 @@ class Login extends Component {
   }
 
   render() {
-    const { store } = this.props;
+    const { image, store } = this.props;
     return (
       <Flex flex="1">
         <Box
@@ -69,7 +51,7 @@ class Login extends Component {
                 margin: 'auto',
                 maxWidth: 420,
                 width: '100%',
-                padding: '0 16px 200px',
+                padding: '40px 16px 200px',
               }}
             >
               <h1>Вход</h1>

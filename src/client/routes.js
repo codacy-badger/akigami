@@ -1,3 +1,5 @@
+import sample from 'lodash/sample';
+
 const routes = [
   {
     path: '/', // optional
@@ -8,10 +10,23 @@ const routes = [
   },
   {
     path: '/signin',
-    action: async (ctx, params) => ({
-      title: 'Вход',
-      component: await import(/* webpackChunkName: "login" */ './pages/Login'),
-    }),
+    action: async (ctx, params) => {
+      ctx.app.ui.changeTransparented(true);
+      const image = sample([
+        '/images/auth-1.jpg',
+        '/images/auth-2.jpg',
+        '/images/auth-3.jpg',
+        '/images/auth-4.jpg',
+      ]);
+      return {
+        title: 'Вход',
+        component: await import(/* webpackChunkName: "login" */ './pages/Login'),
+        params: {
+          image,
+          ui: ctx.app.ui,
+        },
+      };
+    },
   },
 ];
 

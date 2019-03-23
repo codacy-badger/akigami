@@ -15,6 +15,7 @@ export const LayoutWrapper = styled('main')`
       background: rgba(0, 0, 0, .4);
       opacity: 0;
       visibility: hidden;
+      z-index: 2;
       ${p => p.theme.mixins.transition('opacity visibility')}
     }
   }

@@ -59,7 +59,7 @@ class Layout extends Component {
   scrollEvent() {
     const { ui } = this.props;
     const scroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const isTop = scroll <= 60;
+    const isTop = scroll <= 40;
     if (ui.transparented) {
       if (!ui.transparent && isTop) ui.changeTransparent(true);
       if (ui.transparent && !isTop) ui.changeTransparent(false);
