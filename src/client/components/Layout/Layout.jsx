@@ -76,7 +76,7 @@ class Layout extends Component {
           <Sidenav {...p.sidenav} />
           {ui.isMiniSidenav && <Sidebody />}
         </EnhancedSidenav>
-        <LayoutContent isOpenSidenav={ui.isOpenSidenav}>
+        <LayoutContent isTransparented={ui.transparented} isOpenSidenav={ui.isOpenSidenav}>
           <LayoutHeader isTransparent={transparent} isOpenSidenav={ui.isOpenSidenav}>
             <Header {...p.header} />
           </LayoutHeader>

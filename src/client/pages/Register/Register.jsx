@@ -12,6 +12,7 @@ class Register extends Component {
     app: PropTypes.object.isRequired,
     email: PropTypes.string.isRequired,
   };
+
   constructor(props) {
     super(props);
     this.store = new RegisterStore(this.props.app);
@@ -19,15 +20,19 @@ class Register extends Component {
     this.changeGenderToMale = this.changeGenderToMale.bind(this);
     this.changeUsername = this.changeUsername.bind(this);
   }
+
   changeGenderToMale() {
     this.store.handleChange('gender', 'male');
   }
+
   changeGenderToFemale() {
     this.store.handleChange('gender', 'female');
   }
+
   changeUsername(e) {
     this.store.handleChange('username', e.target.value);
   }
+
   render() {
     const { email } = this.props;
     const {

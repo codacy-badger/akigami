@@ -9,6 +9,7 @@ export default {
   fontFamily: '\'Futura PT\'',
   borderRadius: '4px',
   borderRadiusCircle: '100vw',
+  breakpoints: ['768px', '52em', '64em'],
   colors: {
     sidenav: '#ffffff',
     background: '#fafafb',

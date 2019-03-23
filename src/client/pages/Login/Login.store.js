@@ -32,22 +32,15 @@ export default class Login {
     this[key] = value;
   };
 
-  handleSend = () => {
-    this.loading = true;
-    // socket.emit('auth:send', this.email);
-    this.app.apolloClient.mutate({
+  handleSend = async () => {
+    await this.app.apolloClient.mutate({
       mutation: `
-      mutation {
-        sendEmail(email: "${this.email}")
-      }
+        mutation {
+          sendEmail(email: "${this.email}")
+        }
       `,
     });
-    setTimeout(() => {
-      this.loading = false;
-      setTimeout(() => {
-        this.step = 'confirm';
-      }, 100);
-    }, 200);
+    this.step = 'confirm';
   };
 
   removeListener = () => {

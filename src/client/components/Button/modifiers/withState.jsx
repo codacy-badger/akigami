@@ -89,7 +89,7 @@ export const withState = WrappedComponent => (
       const { state } = this.state;
       const { className, ...props } = this.props;
       return (
-        <Wrapper events={!state}>
+        <Wrapper block={props.block} events={!state}>
           {this.renderState()}
           <ClassNames>
             {({ css: _css, cx }) => (

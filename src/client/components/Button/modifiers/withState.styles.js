@@ -38,6 +38,6 @@ export const State = styled('div')`
 
 export const Wrapper = styled('div')`
   position: relative;
-  display: inline-block;
+  display: ${p => (p.block ? 'block' : 'inline-block')};
   pointer-events: ${p => (p.events ? 'initial' : 'none')};
 `;
