@@ -5,8 +5,8 @@ export const ItemWrapper = styled('div')`
 `;
 
 export const ItemTitle = styled('p')`
-  font-size: 16px;
   padding-bottom: 12px;
+  font-weight: 500;
 `;
 
 export const ItemContent = styled('div')`
@@ -14,7 +14,7 @@ export const ItemContent = styled('div')`
 `;
 
 export const ItemRequired = styled('span')`
-  font-weight: 300;
+  font-weight: 400;
   font-size: 14px;
   padding-left: 8px;
   color: ${p => p.theme.colors.gray};

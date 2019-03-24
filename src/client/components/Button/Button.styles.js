@@ -180,6 +180,7 @@ export const StyledButton = styled('button')`
   box-sizing: border-box;
   text-decoration: none;
   white-space: nowrap;
+  font-weight: 500;
   ${p => ((p.isIconSingle || p.isIconLeft || p.isIconRight) && css`
     display: inline-flex;
     align-items: center;

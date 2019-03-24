@@ -18,6 +18,7 @@ export const ResultsWrapper = styled('div')`
 export const ResultsHeader = styled('div')`
   display: flex;
   align-items: center;
+  font-weight: 500;
   padding: 8px 18px;
   border-bottom: 1px solid ${p => p.theme.colors.border};
 `;

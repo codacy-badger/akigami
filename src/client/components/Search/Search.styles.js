@@ -49,6 +49,7 @@ export const SearchInput = styled('input')`
   outline: none;
   padding: 8px 0;
   width: 100%;
+  font-weight: 500;
   background: none;
   font-family: ${p => p.theme.fontFamily};
 `;
