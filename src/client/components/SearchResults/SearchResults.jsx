@@ -17,9 +17,9 @@ class SearchResults extends Component {
     if (!search.showResults) return false;
     return (
       <ResultsWrapper
-        top={search.rect.top + search.rectWH.height}
+        top={search.rect.top + search.rect.height}
+        width={search.rect.width}
         left={search.rect.left}
-        width={search.rectWH.width}
         onMouseDown={search.handleBlockBlur}
       >
         <ResultsHeader>

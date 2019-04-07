@@ -7,18 +7,19 @@ import Search from '../Search';
 import Spacer from '../Spacer';
 import HeaderUserPanel from '../HeaderUserPanel';
 
-import { HeaderWrapper, AutoHide } from './Header.styles';
+import { HeaderWrapper, AutoHide, HiddenSearchBlock } from './Header.styles';
 
-@inject('ui', 'user')
+@inject('ui', 'user', 'search')
 @observer
 class Header extends Component {
   static propTypes = {
     ui: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
+    search: PropTypes.object.isRequired,
   }
 
   render() {
-    const { ui, user } = this.props;
+    const { ui, user, search } = this.props;
     return (
       <HeaderWrapper>
         <AutoHide>
@@ -37,21 +38,23 @@ class Header extends Component {
           onClick={ui.triggerMiniSidebar}
         /> */}
         <Search />
-        <Spacer full />
-        {user.isAuth
-          ? <HeaderUserPanel user={user} />
-          : (
-            <Button
-              as="a"
-              href="/signin"
-              transparent
-              collapsible
-              view="borderless"
-              iconLeft={<FaKey />}
-            >
-              Вход
-            </Button>
-          )}
+        <HiddenSearchBlock focused={search.focused}>
+          <Spacer full />
+          {user.isAuth
+            ? <HeaderUserPanel user={user} />
+            : (
+              <Button
+                as="a"
+                href="/signin"
+                transparent
+                collapsible
+                view="borderless"
+                iconLeft={<FaKey />}
+              >
+                Вход
+              </Button>
+            )}
+        </HiddenSearchBlock>
       </HeaderWrapper>
     );
   }

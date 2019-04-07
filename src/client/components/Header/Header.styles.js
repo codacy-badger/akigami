@@ -13,3 +13,11 @@ export const AutoHide = styled('div')`
     display: none;
   }
 `;
+
+export const HiddenSearchBlock = styled('div')`
+  display: ${p => (p.focused ? 'none' : 'flex')};
+  width: 100%;
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
+`;

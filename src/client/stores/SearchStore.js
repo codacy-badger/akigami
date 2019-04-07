@@ -1,4 +1,4 @@
-import { action, observable, computed, reaction } from 'mobx';
+import { action, observable, computed } from 'mobx';
 
 const defaultValue = '';
 
@@ -8,13 +8,10 @@ class SearchStore {
   @observable focused = false;
 
   @observable rect = {
-    left: 0,
-    top: 0,
-  };
-
-  @observable rectWH = {
     height: 0,
     width: 0,
+    top: 0,
+    left: 0,
   };
 
   handleSearch = (event) => {
@@ -30,11 +27,6 @@ class SearchStore {
     this.rect = object;
   }
 
-  @action.bound
-  setRectWH(object) {
-    this.rectWH = object;
-  }
-
   handleClear = () => {
     this.value = defaultValue;
   }
@@ -45,13 +37,11 @@ class SearchStore {
 
   @action.bound
   handleBlur() {
-    console.log('handleBlur');
     this.focused = false;
   }
 
   handleBlockBlur = (e) => {
     e.preventDefault();
-    console.log('block blur in results');
   }
 
   @computed get isClear() {

@@ -24,23 +24,12 @@ class Search extends Component {
     this.handleTransition = this.handleTransition.bind(this);
   }
 
-  componentDidMount() {
-    const { search, ui } = this.props;
-    search.setRect(this.getRect());
-    reaction(
-      () => ui.screenWidth,
-      () => {
-        search.setRect(this.getRect());
-      },
-    );
-  }
-
-  getRect = () => this.refSearchWrapper.current.getBoundingClientRect()
-
   handleTransition() {
     const { search } = this.props;
     if (search.focused) {
-      search.setRectWH(this.getRect());
+      setTimeout(() => {
+        search.setRect(this.refSearchWrapper.current.getBoundingClientRect());
+      }, 0);
     }
   }
 
@@ -53,9 +42,7 @@ class Search extends Component {
           isActive={!search.isClear}
           onFocus={this.handleTransition}
           onTransitionEnd={this.handleTransition}
-          left={search.rect.left}
           width={ui.screenWidth}
-          isAbsolute={!!search.rect.left && (search.focused || !search.isClear)}
         >
           <SearchIcon>
             <FaSearch />
