@@ -1,5 +1,11 @@
 import sample from 'lodash/sample';
 
+const notFoundError = () => {
+  const err = new Error();
+  err.status = 404;
+  return Promise.reject(err);
+};
+
 const routes = [
   {
     path: '/', // optional
@@ -30,6 +36,44 @@ const routes = [
         component: await import(/* webpackChunkName: "login" */ './pages/Login'),
         ...props,
       };
+    },
+  },
+  {
+    path: '/auth/:token',
+    action: async (ctx, params) => {
+      const response = await ctx.app.apolloClient.query({
+        query: `{
+          checkToken(token: "${params.token}")
+        }`,
+      });
+      if (response.data.checkToken !== 'auth') {
+        return notFoundError();
+      }
+      return {
+        title: 'Авторизация',
+        component: await import(/* webpackChunkName: "auth" */ './pages/Auth'),
+        params,
+      };
+    },
+  },
+  {
+    path: '/email-verification/:token',
+    action: async (ctx, params) => {
+      const response = await ctx.app.apolloClient.query({
+        query: `{
+          checkToken(token: "${params.token}")
+        }`,
+      });
+      switch (response.data.checkToken) {
+      case 'notfound':
+        return notFoundError();
+      case 'auth':
+        return { redirect: `/auth/${params.token}` };
+      case 'signup':
+        return { redirect: `/signup/${params.token}` };
+      default:
+        return { redirect: '/404' };
+      }
     },
   },
 ];

@@ -94,10 +94,10 @@ export default app => {
     appStore.user.setUserData(user);
     await appStore.ui.setIsMobile(!req.useragent.isDesktop);
     const { title, redirect } = await appStore.router.setContainer(req.url);
-    res.write(startRender({ title, user }));
     if (redirect) {
       return res.redirect(redirect);
     }
+    res.write(startRender({ title, user }));
 
     const h = Object.assign({}, {
       router: toJS(appStore).router,
