@@ -737,9 +737,8 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
 
 "@rebass/grid@^6.0.0-7":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@rebass/grid/-/grid-6.0.0.tgz#79ad5ae7951bba41a62db5caf1ee2006a201b3b1"
-  integrity sha512-2pbkfObgbfbPUL+spk5JaYt+L4zXAayBLfdDuqnDUxBcBRe2SMqDBTOkEcq1tQvsuhmtfkZ9rB51FyjBkO92vw==
+  version "6.0.0-7"
+  resolved "https://registry.yarnpkg.com/@rebass/grid/-/grid-6.0.0-7.tgz#9f17453620a7d8d91d7fa49c7938a2c72478c87d"
   dependencies:
     styled-system "^4.0.6"
 
@@ -7045,10 +7044,9 @@ strip-json-comments@^2.0.1, strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
-styled-system@^4.0.6:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/styled-system/-/styled-system-4.1.0.tgz#e5a58be23b89cf8fb7b181c8e425ab107b166693"
-  integrity sha512-ioIAJ029tRr6eJhiUrE3VZeahN+GBuJHv/jmckkfikY4ej8BaxvIKAaavmjFoqzNsIzr+x5HCpry1ybQYpchtQ==
+styled-system@^3.1.11:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/styled-system/-/styled-system-3.2.1.tgz#491e1e6f88d7ee021f6f49376f12852cde8007cb"
   dependencies:
     "@babel/runtime" "^7.4.2"
     prop-types "^15.7.2"
