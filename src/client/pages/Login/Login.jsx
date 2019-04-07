@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import { Flex, Box } from '@rebass/grid/emotion';
 import { StatefulButton } from '../../components/Button';
 import ContentWrapper from '../../components/ContentWrapper';
@@ -9,6 +9,7 @@ import Input from '../../components/Input';
 import Divider from '../../components/Divider';
 import Radio from '../../components/Radio';
 
+@inject('ui')
 @observer
 class Login extends Component {
   static propTypes = {

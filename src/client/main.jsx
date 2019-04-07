@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
 import { ThemeProvider } from 'emotion-theming';
 import debugNamespace from 'debug';
+import merge from 'lodash/merge';
 import AppStore from './stores/AppStore';
 import App from './App';
 import { ApolloClient } from './lib/modules';
@@ -14,11 +15,17 @@ const debug = debugNamespace('akigami:client:main');
 (async () => {
   const userData = JSON.parse(document.body.dataset.user);
   const app = new AppStore();
+  app.router.hydrateEnabled = true;
   app.apolloClient = ApolloClient;
   app.user.setUserData(userData);
   app.user.setListener();
 
   await app.router.setContainer(document.location.pathname);
+  console.log(h.router.container.props.image);
+  console.log('before merge', app.router.container.props.image);
+  merge(app, h);
+  console.log('after merge', app.router.container.props.image);
+  app.router.hydrateEnabled = false;
   const res = await app.apolloClient.query({
     query: `
       {

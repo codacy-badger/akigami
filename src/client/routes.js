@@ -11,20 +11,24 @@ const routes = [
   {
     path: '/signin',
     action: async (ctx, params) => {
-      ctx.app.ui.changeTransparented(true);
-      const image = sample([
-        '/images/auth-1.jpg',
-        '/images/auth-2.jpg',
-        '/images/auth-3.jpg',
-        '/images/auth-4.jpg',
-      ]);
-      return {
+      const props = {
         title: 'Вход',
-        component: await import(/* webpackChunkName: "login" */ './pages/Login'),
-        params: {
+      };
+      ctx.app.ui.changeTransparented(true);
+      if (!ctx.app.router.hydrateEnabled) {
+        const image = sample([
+          '/images/auth-1.jpg',
+          '/images/auth-2.jpg',
+          '/images/auth-3.jpg',
+          '/images/auth-4.jpg',
+        ]);
+        props.params = {
           image,
-          ui: ctx.app.ui,
-        },
+        };
+      }
+      return {
+        component: await import(/* webpackChunkName: "login" */ './pages/Login'),
+        ...props,
       };
     },
   },

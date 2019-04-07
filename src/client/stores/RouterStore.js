@@ -17,6 +17,8 @@ class RouterStore {
 
   router;
 
+  hydrateEnabled = false;
+
   constructor(app) {
     this.app = app;
     this.router = new UniversalRouter(routes, {
@@ -134,12 +136,18 @@ class RouterStore {
       };
       if (component.store) {
         const store = new component.store(this.app); // eslint-disable-line new-cap
-        if (store.initData) {
+        if (store.initData && !this.hydrateEnabled) {
           if (typeof window !== 'undefined') {
             store.initData(params);
           } else {
             await store.initData(params);
           }
+        }
+        if (store.initClient && typeof window !== 'undefined') {
+          store.initClient(params);
+        }
+        if (store.initServer && typeof window === 'undefined') {
+          await store.initServer(params);
         }
         Object.assign(container.props, { store });
       }

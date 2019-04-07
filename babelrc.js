@@ -26,6 +26,12 @@ module.exports = {
     '@babel/plugin-syntax-import-meta',
     ['@babel/plugin-proposal-class-properties', { loose: true }],
     '@babel/plugin-proposal-json-strings',
+    ['@emotion/babel-plugin-jsx-pragmatic', {
+      export: 'jsx',
+      module: '@emotion/core',
+      import: '___EmotionJSX',
+    }],
+    ['@babel/plugin-transform-react-jsx', { pragma: '___EmotionJSX', pragmaFrag: 'React.Fragment' }],
     '@babel/plugin-transform-modules-commonjs',
   ],
   env: {

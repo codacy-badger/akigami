@@ -3,12 +3,13 @@ import React from 'react';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { SchemaLink } from 'apollo-link-schema';
+import { toJS } from 'mobx';
 import { Provider } from 'mobx-react';
 import { renderToNodeStream } from 'react-dom/server';
 import { ThemeProvider } from 'emotion-theming';
-import { renderStylesToNodeStream } from 'emotion-server';
 import gql from 'graphql-tag';
 import pick from 'lodash/pick';
+import forEach from 'lodash/forEach';
 import { schema } from '../graphs';
 import AppStore from '../../client/stores/AppStore';
 import App from '../../client/App';
@@ -31,14 +32,26 @@ function startRender({ title, user, screen }) {
         <link rel="stylesheet" href="/external/reset.css">
       </head>
       <body data-user=${JSON.stringify(user || {})}>
-        <div id="root">
-  `;
+        <div id="root">`;
 }
 
-function endRender({ cache }) {
-  return `
-        </div>
+const getCircularReplacer = () => {
+  const seen = new WeakSet();
+  return (key, value) => {
+    if (typeof value === 'object' && value !== null) {
+      if (seen.has(value)) {
+        return;
+      }
+      seen.add(value);
+    }
+    return value;
+  };
+};
+
+function endRender({ cache, h }) {
+  return `</div>
         <script>window.__APOLLO_STATE__=${JSON.stringify(cache.extract())}</script>
+        <script>window.h=${JSON.stringify(h, getCircularReplacer())}</script>
         <script type="text/javascript" src="/assets/modules.chunk.js"></script>
         <script type="text/javascript" src="/assets/app.js"></script>
       </body>
@@ -85,16 +98,24 @@ export default app => {
     if (redirect) {
       return res.redirect(redirect);
     }
+
+    const h = Object.assign({}, {
+      router: toJS(appStore).router,
+    });
+    delete h.router.router;
+    delete h.router.app;
+    delete h.router.container?.props?.store?.app;
+
     const stream = renderToNodeStream((
       <ThemeProvider theme={theme}>
         <Provider {...appStore.provide()}>
           <App />
         </Provider>
       </ThemeProvider>
-    )).pipe(renderStylesToNodeStream());
+    ));
     stream.pipe(res, { end: 'false' });
     stream.on('end', () => {
-      res.write(endRender({ cache }));
+      res.write(endRender({ cache, h }));
       res.end();
     });
   });
