@@ -30,7 +30,7 @@ class RouterStore {
         return { title: 'Ошибка', component: await import(/* webpackChunkName: "error" */ '../pages/Error') };
       },
     });
-    if (typeof window !== 'undefined') {
+    if (_CLIENT_) {
       this.initHandler();
       this.setModal(window.location.search);
     }
@@ -126,7 +126,7 @@ class RouterStore {
     if (redirect) {
       return { redirect };
     }
-    if (typeof window !== 'undefined' && title) {
+    if (_CLIENT_ && title) {
       document.title = `${title} ~ akigami`;
     }
     if (component) {
@@ -137,16 +137,16 @@ class RouterStore {
       if (component.store) {
         const store = new component.store(this.app); // eslint-disable-line new-cap
         if (store.initData && !this.hydrateEnabled) {
-          if (typeof window !== 'undefined') {
+          if (_CLIENT_) {
             store.initData(params);
           } else {
             await store.initData(params);
           }
         }
-        if (store.initClient && typeof window !== 'undefined') {
+        if (store.initClient && _CLIENT_) {
           store.initClient(params);
         }
-        if (store.initServer && typeof window === 'undefined') {
+        if (store.initServer && _SERVER_) {
           await store.initServer(params);
         }
         Object.assign(container.props, { store });

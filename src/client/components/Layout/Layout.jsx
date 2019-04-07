@@ -43,7 +43,7 @@ class Layout extends Component {
 
   componentDidMount() {
     const { ui } = this.props;
-    if (ui.isLoaded && ui.transparented) {
+    if (_CLIENT_ && ui.transparented) {
       this.scrollEvent();
       document.addEventListener('scroll', this.scrollEvent);
     }
@@ -51,7 +51,7 @@ class Layout extends Component {
 
   componentWillUnmount() {
     const { ui } = this.props;
-    if (ui.isLoaded && ui.transparented) {
+    if (_CLIENT_ && ui.transparented) {
       document.removeEventListener('scroll', this.scrollEvent);
     }
   }

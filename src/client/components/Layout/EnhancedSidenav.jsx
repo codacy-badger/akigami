@@ -33,7 +33,7 @@ class EnhancedSidenav extends Component {
 
   componentDidMount() {
     const { ui } = this.props;
-    if (ui.isLoaded) {
+    if (_CLIENT_) {
       this.outsideDisposer();
       window.addEventListener('resize', this.outsideDisposer);
     }
@@ -41,7 +41,7 @@ class EnhancedSidenav extends Component {
 
   componentWillUnmount() {
     const { ui } = this.props;
-    if (ui.isLoaded) {
+    if (_CLIENT_) {
       window.removeEventListener('resize', this.outsideDisposer);
     }
   }
@@ -55,7 +55,7 @@ class EnhancedSidenav extends Component {
 
   outsideDisposer() {
     const { ui } = this.props;
-    if (ui.isLoaded) {
+    if (_CLIENT_) {
       if (this.isSwitchLayoutPoint(ui.screenWidth)) {
         this.memScreenWidth = ui.screenWidth;
         if (ui.isOpenSidenav) {

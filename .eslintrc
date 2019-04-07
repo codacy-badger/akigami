@@ -42,6 +42,8 @@
     "window": true,
     "test": true,
     "expect": true,
-    "FormData": true
+    "FormData": true,
+    "_CLIENT_": true,
+    "_SERVER_": true
   }
 }

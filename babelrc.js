@@ -3,6 +3,12 @@ module.exports = {
     '@babel/preset-react',
   ],
   plugins: [
+    ['@oliver-schoendorn/babel-plugin-transform-define', {
+      values: {
+        _CLIENT_: true,
+        _SERVER_: false,
+      },
+    }],
     // Stage 0
     '@babel/plugin-proposal-function-bind',
 

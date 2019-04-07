@@ -15,7 +15,7 @@ class UIStore {
 
   constructor() {
     this.overlayListener();
-    if (typeof window !== 'undefined') {
+    if (_CLIENT_) {
       window.addEventListener('resize', this.handleResize);
     }
   }
@@ -57,7 +57,7 @@ class UIStore {
   }
 
   addHtmlClass(classname) {
-    if (this.isLoaded) {
+    if (_CLIENT_) {
       const html = document.querySelector('html');
       if (!(html.className).includes(classname)) {
         html.classList.add(classname);
@@ -66,7 +66,7 @@ class UIStore {
   }
 
   removeHtmlClass(classname) {
-    if (this.isLoaded) {
+    if (_CLIENT_) {
       const html = document.querySelector('html');
       if ((html.className).includes(classname)) {
         html.classList.remove(classname);
@@ -91,13 +91,9 @@ class UIStore {
 
   @computed get screenWidth() {
     if (this.screenWidthVar) return this.screenWidthVar;
-    if (typeof window !== 'undefined') return window.innerWidth;
+    if (_CLIENT_) return window.innerWidth;
     if (this.isMobile) return 320;
     return 1280;
-  }
-
-  get isLoaded() {
-    return typeof window !== 'undefined';
   }
 }
 

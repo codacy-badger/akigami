@@ -9,9 +9,6 @@ export default class Login {
 
   constructor(app) {
     this.app = app;
-    if (typeof window !== 'undefined') {
-      // socket.on('sign:listen', this.handleListener);
-    }
   }
 
   handleListener = response => {

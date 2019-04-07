@@ -1,6 +1,9 @@
 const Promise = require('bluebird');
 const config = require('../babelrc');
 
+config.plugins[0][1].values._CLIENT_ = false;
+config.plugins[0][1].values._SERVER_ = true;
+
 config.plugins.unshift('dynamic-import-node');
 
 Promise.config({

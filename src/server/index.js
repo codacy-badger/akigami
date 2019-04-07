@@ -26,7 +26,6 @@ const port = config.get('server.port');
 const GQL_PATH = '/graphql';
 
 const app = express();
-
 const server = new ApolloServer({
   typeDefs,
   resolvers,
