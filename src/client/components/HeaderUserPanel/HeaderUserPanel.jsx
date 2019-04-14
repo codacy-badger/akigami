@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Dropdown, { DropdownMenu, DropdownItem, DropdownItemLink } from '../Dropdown';
 import Image from '../Image';
 import {
   UserWrapper,
@@ -16,18 +17,30 @@ class HeaderUserPanel extends Component {
   render() {
     const { user } = this.props;
     return (
-      <UserWrapper onClick={() => console.log('click')}>
-        <UserAvatar>
-          <Image
-            src={user.avatar}
-            alt={user.displayName}
-            size={32}
-          />
-        </UserAvatar>
-        <UserContent>
-          <UserName>{user.displayName}</UserName>
-        </UserContent>
-      </UserWrapper>
+      <Dropdown
+        trigger={['click']}
+        overlay={(
+          <DropdownMenu>
+            <DropdownItemLink href={`/@${user.username}`}>Мой профиль</DropdownItemLink>
+            <DropdownItem>Выход</DropdownItem>
+          </DropdownMenu>
+        )}
+      >
+        {({ isActive }) => (
+          <UserWrapper isActive={isActive}>
+            <UserAvatar>
+              <Image
+                src={user.avatar}
+                alt={user.displayName}
+                size={32}
+              />
+            </UserAvatar>
+            <UserContent>
+              <UserName>{user.displayName}</UserName>
+            </UserContent>
+          </UserWrapper>
+        )}
+      </Dropdown>
     );
   }
 }

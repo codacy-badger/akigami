@@ -18,9 +18,6 @@ export const UserWrapper = styled('button')`
   border-radius: ${p => p.theme.borderRadius};
   ${p => p.theme.mixins.transition('box-shadow background')}
   ${p => (p.isActive && activeStyle)}
-  &:focus {
-    ${activeStyle}
-  }
 `;
 
 export const UserAvatar = styled('div')`

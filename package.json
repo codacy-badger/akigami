@@ -58,6 +58,7 @@
     "path-to-regexp": "^3.0.0",
     "prop-types": "15.7.2",
     "querystringify": "^2.0.0",
+    "rc-dropdown": "^2.4.1",
     "react": "^16.4.0",
     "react-calendar": "^2.18.1",
     "react-custom-scrollbars": "^4.2.0",

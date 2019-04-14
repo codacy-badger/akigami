@@ -30,6 +30,7 @@ function startRender({ title, user, screen }) {
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
         <link rel="stylesheet" href="/fonts/stylesheet.css">
         <link rel="stylesheet" href="/external/reset.css">
+        <link rel="stylesheet" href="/external/dropdown.css">
       </head>
       <body data-user=${JSON.stringify(user || {})}>
         <div id="root">`;

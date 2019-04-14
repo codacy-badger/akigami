@@ -65,7 +65,7 @@ class RouterStore {
     if (reactEventHandlers) {
       const obj = element[reactEventHandlers];
       if (obj.onClick) {
-        obj.onClick();
+        obj.onClick(event);
       }
     }
     const targetAttribute = element.getAttribute('target');
