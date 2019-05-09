@@ -30,5 +30,5 @@
     "address": ""
   },
   "sessionSecret": "",
-  "enviroment": "default"
+  "environment": "default"
 }

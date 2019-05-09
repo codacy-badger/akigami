@@ -16,9 +16,11 @@ export const DropdownMenu = styled('div')`
 export const DropdownItem = styled('div')`
   display: block;
   ${(p) => p.as === 'a' && disableHref};
-  color: black;
-  padding: 7px;
-  :hover {
+  color: ${p => p.theme.colors.default};
+  padding: 8px 14px;
+  font-size: 16px;
+  font-family: ${p => p.theme.fontFamily};
+  &:hover {
     background: #eaeaea;
     cursor: pointer;
   }

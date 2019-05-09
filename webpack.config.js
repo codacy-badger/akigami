@@ -27,7 +27,7 @@ const stats = {
 };
 
 module.exports = () => {
-  const nodeEnv = config.get('enviroment');
+  const nodeEnv = config.get('environment');
   const isProd = nodeEnv === 'production';
 
   const plugins = [

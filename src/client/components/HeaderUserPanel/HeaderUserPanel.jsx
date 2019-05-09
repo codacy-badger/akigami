@@ -19,6 +19,7 @@ class HeaderUserPanel extends Component {
     return (
       <Dropdown
         trigger={['click']}
+        placement="bottomLeft"
         overlay={(
           <DropdownMenu>
             <DropdownItemLink href={`/@${user.username}`}>Мой профиль</DropdownItemLink>

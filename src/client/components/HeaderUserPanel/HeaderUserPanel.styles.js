@@ -33,6 +33,9 @@ export const UserContent = styled('div')`
 
 export const UserName = styled('div')`
   line-height: 1;
+  font-weight: 500;
+  letter-spacing: .2px;
+  color: ${p => p.theme.colors.default};
 `;
 
 export const UserRank = styled('div')`
