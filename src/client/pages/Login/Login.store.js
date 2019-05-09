@@ -30,6 +30,7 @@ export default class Login {
   };
 
   handleSend = async () => {
+    if (!this.email) return;
     await this.app.apolloClient.mutate({
       mutation: `
         mutation {

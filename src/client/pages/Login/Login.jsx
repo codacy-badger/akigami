@@ -8,6 +8,7 @@ import Item from '../../components/Item';
 import Input from '../../components/Input';
 import Divider from '../../components/Divider';
 import Radio from '../../components/Radio';
+import EmailButton from '../../components/EmailButton';
 
 @inject('ui')
 @observer
@@ -55,53 +56,69 @@ class Login extends Component {
                 padding: '40px 16px 200px',
               }}
             >
-              <h1>Вход</h1>
-              <Item required title="E-mail">
-                <Input
-                  block
-                  type="email"
-                  placeholder="Электронная почта"
-                  onChange={this.changeEmail}
-                  value={store.email}
-                />
-              </Item>
-              <StatefulButton
-                block
-                view="primary"
-                onClick={store.handleSend}
-              >
-                Войти
-              </StatefulButton>
-              <Divider>или зарегистрируйтесь</Divider>
-              <Item required title="Имя пользователя">
-                <Input
-                  block
-                  type="text"
-                  placeholder="Никнейм"
-                />
-              </Item>
-              <Item title="Город">
-                <Input
-                  block
-                  type="text"
-                  placeholder="Откуда вы"
-                />
-              </Item>
-              <Item title="Пол">
-                <Flex ml={-12}>
-                  <Box p={12}>
-                    <Radio id="male" name="gender">Мужчина</Radio>
-                  </Box>
-                  <Box p={12}>
-                    <Radio id="female" name="gender">Женщина</Radio>
-                  </Box>
-                </Flex>
-              </Item>
-              <StatefulButton
-                block
-              >
-                Зарегистрироваться
-              </StatefulButton>
+              {store.step === 'confirm' ? (
+                <React.Fragment>
+                  <h1>Проверьте почту</h1>
+                  <p>
+                    На указанный адрес
+                    <b>{` ${store.email} `}</b>
+                    было отправлено письмо с волшебной ссылкой.
+                  </p>
+                  <br />
+                  <br />
+                  <EmailButton>{store.email}</EmailButton>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <h1>Вход</h1>
+                  <Item required title="E-mail">
+                    <Input
+                      block
+                      type="email"
+                      placeholder="Электронная почта"
+                      onChange={this.changeEmail}
+                      value={store.email}
+                    />
+                  </Item>
+                  <StatefulButton
+                    block
+                    view="primary"
+                    onClick={store.handleSend}
+                  >
+                    Войти
+                  </StatefulButton>
+                  <Divider>или зарегистрируйтесь</Divider>
+                  <Item required title="Имя пользователя">
+                    <Input
+                      block
+                      type="text"
+                      placeholder="Никнейм"
+                    />
+                  </Item>
+                  <Item title="Город">
+                    <Input
+                      block
+                      type="text"
+                      placeholder="Откуда вы"
+                    />
+                  </Item>
+                  <Item title="Пол">
+                    <Flex ml={-12}>
+                      <Box p={12}>
+                        <Radio id="male" name="gender">Мужчина</Radio>
+                      </Box>
+                      <Box p={12}>
+                        <Radio id="female" name="gender">Женщина</Radio>
+                      </Box>
+                    </Flex>
+                  </Item>
+                  <StatefulButton
+                    block
+                  >
+                    Зарегистрироваться
+                  </StatefulButton>
+                </React.Fragment>
+              )}
             </Box>
           </ContentWrapper>
         </Box>

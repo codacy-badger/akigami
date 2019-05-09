@@ -19,4 +19,12 @@ export default css`
     position: fixed;
     width: 100%;
   }
+
+  b {
+    font-weight: bold;
+  }
+  
+  p {
+    line-height: initial;
+  }
 `;

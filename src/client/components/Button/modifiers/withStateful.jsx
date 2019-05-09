@@ -14,8 +14,8 @@ export const withStateful = WrappedComponent => (
       view: PropTypes.oneOf(['default', 'success', 'warning', 'danger', 'info', 'primary', 'disable']),
       state: PropTypes.oneOf([null, 'processing', 'success', 'error']),
       onClick: PropTypes.func,
-      onSubmit: PropTypes.func,
       onError: PropTypes.func,
+      onSuccess: PropTypes.func,
     }
 
     static defaultProps = {
@@ -25,8 +25,8 @@ export const withStateful = WrappedComponent => (
       state: null,
       size: 'default',
       view: 'default',
-      onSubmit: null,
       onError: null,
+      onSuccess: null,
       onClick: null,
     }
 
@@ -75,16 +75,13 @@ export const withStateful = WrappedComponent => (
     onClick(e) {
       if (this.getButtonState() === null) {
         const {
-          onSubmit,
           onClick,
-          form,
           state,
         } = this.props;
         this.resetInternalStateAfterProcessing = false;
 
         let event;
         if (onClick) event = onClick(e);
-        else if (form && onSubmit) event = onSubmit(form);
         else event = Promise.resolve;
 
         if (!state) {
@@ -148,17 +145,18 @@ export const withStateful = WrappedComponent => (
     }
 
     attachPromiseHandlers(promise) {
-      const { stableSuccess, onError } = this.props;
+      const { stableSuccess, onError, onSuccess } = this.props;
       if (typeof promise === 'object') {
-        return promise.then(() => (
+        return promise.then((data) => (
           this.isMounted && this.setState({
             internalState: 'success',
-          }, () => {
+          }, async () => {
             if (!stableSuccess) {
               this.doResetInternalStateAfterTimer();
             } else if (this.resetInternalStateAfterProcessing) {
               this.doResetInternalState();
             }
+            if (onSuccess) await onSuccess(data);
           })
         )).catch((err) => {
           if (this.isMounted) {
