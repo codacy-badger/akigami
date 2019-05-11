@@ -175,12 +175,14 @@ export const StyledButton = styled('button')`
   outline: none !important;
   ${makeView}
   ${makeSize}
+  display: inline-block;
   border-radius: ${p => p.theme.borderRadius};
   font-family: ${p => p.theme.fontFamily};
   box-sizing: border-box;
   text-decoration: none;
   white-space: nowrap;
   font-weight: 500;
+  line-height: normal;
   ${p => ((p.isIconSingle || p.isIconLeft || p.isIconRight) && css`
     display: inline-flex;
     align-items: center;
@@ -223,6 +225,7 @@ export const StyledButton = styled('button')`
   ${p => (p.collapsed && collapsed)}
   ${p => (p.block && css`
     width: 100%;
+    display: block;
   `)}
   ${p => (p.transparent && css`
     background: transparent;

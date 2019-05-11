@@ -3,7 +3,7 @@ import { css } from '@emotion/core';
 
 const activeState = p => css`
   background: ${p.theme.colors.white};
-  box-shadow: 0 3px 16px -4px rgba(0, 0, 0, 0.25);
+  box-shadow: ${p.theme.shadow};
   max-width: 500px;
 `;
 

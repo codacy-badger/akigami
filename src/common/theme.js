@@ -7,12 +7,16 @@ import {
 
 export default {
   fontFamily: '\'Futura PT\'',
+  shadow: '0 3px 16px -4px rgba(0, 0, 0, 0.25)',
   borderRadius: '4px',
   borderRadiusCircle: '100vw',
-  breakpoints: ['768px', '52em', '64em'],
+  breakpoints: ['768px', '992px', '1280px', '1490px', '1800px'],
+  containers: ['680px', '890px', '940px', '1150px', '1460px'],
   colors: {
     sidenav: '#ffffff',
-    background: '#fafafb',
+    brand: '#d54343',
+    // background: '#fafafb',
+    background: '#f4f6f7',
     primary: '#0b78ff',
     success: '#3ed485',
     warning: '#f5ad45',

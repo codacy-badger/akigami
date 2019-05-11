@@ -4,7 +4,7 @@ export const HeaderWrapper = styled('div')`
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 0 16px;
+  padding: 0 24px;
 `;
 
 export const AutoHide = styled('div')`
