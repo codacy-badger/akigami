@@ -184,7 +184,7 @@ export const StyledButton = styled('button')`
   font-weight: 500;
   line-height: normal;
   ${p => ((p.isIconSingle || p.isIconLeft || p.isIconRight) && css`
-    display: inline-flex;
+    display: ${p.block ? 'flex' : 'inline-flex'} !important;
     align-items: center;
   `)}
   ${(p) => {
