@@ -41,6 +41,7 @@ export const LayoutSidenav = styled('section')`
   overflow: hidden;
   z-index: 3;
   background: ${p => p.theme.colors.sidenav};
+  border-radius: ${p => `0 ${p.theme.borderRadius} ${p.theme.borderRadius} 0`};
   /* border-right: 1px solid ${p => p.theme.colors.border}; */
   height: 100%;
   ${p => p.theme.mixins.transition('width transform')}
@@ -75,22 +76,8 @@ export const LayoutHeader = styled('header')`
   width: 100%;
   height: 68px;
   z-index: 2;
-  box-shadow: inset 0 0 0 -24px rgba(0, 0, 0, .05);
   background: ${p => (p.isTransparent ? 'none' : p.theme.colors.background)};
-  ${p => p.theme.mixins.transition('margin-left box-shadow')}
-  ${p => (!p.isTransparent && css`
-    @media screen and (min-width: 768px) {
-      box-shadow: inset 94px 0 16px -24px rgba(0, 0, 0, .05);
-    }
-    @media screen and (min-width: 1280px) {
-      box-shadow: inset 350px 0 16px -24px rgba(0, 0, 0, .05);
-    }
-    ${p.isOpenSidenav && css`
-      @media screen and (min-width: 1280px) {
-        box-shadow: inset 94px 0 16px -24px rgba(0, 0, 0, .05);
-      }
-    `}
-  `)}
+  ${p => p.theme.mixins.transition('margin-left')}
   > div {
     margin-left: 0;
     @media screen and (min-width: 768px) {
@@ -110,20 +97,16 @@ export const LayoutHeader = styled('header')`
 export const LayoutContent = styled('section')`
   padding-top: ${p => (p.isTransparented ? 0 : '68px')};
   padding-left: 0;
-  box-shadow: inset 0 0 0 -24px rgba(0, 0, 0, .05);
-  ${p => p.theme.mixins.transition('padding-left box-shadow')}
+  ${p => p.theme.mixins.transition('padding-left')}
   @media screen and (min-width: 768px) {
     padding-left: 64px;
-    box-shadow: inset 94px 0 16px -24px rgba(0, 0, 0, .05);
   }
   @media screen and (min-width: 1280px) {
     padding-left: 320px;
-    box-shadow: inset 350px 0 16px -24px rgba(0, 0, 0, .05);
   }
   ${p => (p.isOpenSidenav && css`
     @media screen and (min-width: 1280px) {
       padding-left: 64px;
-      box-shadow: inset 94px 0 16px -24px rgba(0, 0, 0, .05);
     }
   `)}
   flex: 1;

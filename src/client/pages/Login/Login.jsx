@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withTheme } from 'emotion-theming';
 import { observer, inject } from 'mobx-react';
 import { Flex, Box } from '@rebass/grid/emotion';
 import { StatefulButton } from '../../components/Button';
@@ -10,6 +11,7 @@ import Divider from '../../components/Divider';
 import Radio from '../../components/Radio';
 import EmailButton from '../../components/EmailButton';
 
+@withTheme
 @inject('ui')
 @observer
 class Login extends Component {
@@ -36,15 +38,18 @@ class Login extends Component {
   }
 
   render() {
-    const { image, store } = this.props;
+    const { theme, image, store } = this.props;
     return (
       <Flex flex="1">
         <Box
           width={[1, 0.5]}
           css={{
-            boxShadow: '6px 0 16px 0 rgba(0,0,0,.05)',
             zIndex: 1,
             display: 'flex',
+            borderRadius: `0 ${theme.borderRadius} ${theme.borderRadius} 0`,
+            background: theme.colors.background,
+            marginLeft: 6,
+            marginRight: -6,
           }}
         >
           <ContentWrapper>
