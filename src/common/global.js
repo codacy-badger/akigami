@@ -1,4 +1,5 @@
 import { css } from '@emotion/core';
+import slick from './external/slick';
 
 export default css`
   * {
@@ -23,8 +24,9 @@ export default css`
   b {
     font-weight: bold;
   }
-  
+
   p {
     line-height: initial;
   }
+  ${slick}
 `;

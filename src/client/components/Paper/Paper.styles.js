@@ -5,6 +5,7 @@ const paper = styled('div')`
   position: relative;
   border-radius: ${p => p.theme.borderRadius};
   background: ${p => p.theme.colors.white};
+  overflow: ${p => p.overflow};
   ${p => (p.shadow && css`
     box-shadow: ${p.theme.shadow};
   `)}

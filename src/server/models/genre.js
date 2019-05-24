@@ -2,7 +2,7 @@ import MongooseClass from '../utils/mongooseClass';
 import autoIncrement from '../utils/mongooseAutoIncrement';
 
 class Genre extends MongooseClass {
-  title = { type: String, required: true };
+  key = { type: String, required: true };
 
   plugins = [
     [

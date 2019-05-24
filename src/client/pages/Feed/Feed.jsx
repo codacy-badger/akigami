@@ -1,26 +1,16 @@
 import React, { Component } from 'react';
+import range from 'lodash/range';
 import { Container, Row, Col } from '../../components/Grid';
 import Hero from '../../components/Hero';
+import { animes } from '../mock';
 
 class Feed extends Component {
   render() {
     return (
       <React.Fragment>
-        <Container>
-          <Row>
-            <Col>
-              <Hero
-                items={[
-                  {
-                    title: 'Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka II',
-                    image: 'https://s4.anilist.co/file/anilistcdn/media/anime/banner/101167-VirZ21Z7DGZk.jpg',
-                    href: '/anime/1',
-                  },
-                ]}
-              />
-            </Col>
-          </Row>
-        </Container>
+        <Hero
+          items={range(40).map(e => ({ id: e, ...animes[0] })).slice(0, 20)}
+        />
         <Container>
           <Row>
             <Col width={[1 / 2]}>

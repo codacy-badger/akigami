@@ -1,59 +1,44 @@
 import styled from '@emotion/styled';
-import { Textfit } from 'react-textfit';
+import { css } from '@emotion/core';
 
-export const Wrapper = styled('div')`
-  height: 280px;
-  width: 100%;
-  overflow: hidden;
-  border-radius: ${p => p.theme.borderRadius};
-  @media (min-width: 768px) {
-    height: 380px;
-  }
-`;
-
-export const Item = styled('div')`
-  overflow: hidden;
-  height: 100%;
-`;
-
-export const Image = styled('img')`
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-  user-select: none;
-  pointer-events: none;
-`;
-
-export const Title = styled(Textfit)`
-  font-size: 47px;
-  font-weight: bold;
-  line-height: normal;
-  color: #fff;
-  height: 120px;
-  display: block;
-  overflow: hidden;
-  margin-bottom: 16px;
-  @media (min-width: 768px) {
-    height: 138px;
-  }
-`;
-
-
-export const Foreground = styled('div')`
+export const Background = styled('div')`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
-  border-radius: ${p => p.theme.borderRadius};
-  overflow: hidden;
+  background: ${p => `url(${p.src}) no-repeat center center / cover`};
+`;
+
+export const Foreground = styled('div')`
+  padding: 16px 18px;
+  color: ${p => p.theme.colors.white};
+  position: relative;
   box-sizing: border-box;
-  padding: 24px;
-  background: radial-gradient(
-    ellipse at left top,
-    rgba(0, 0, 0, 0.3) 0%,
-    rgba(0, 0, 0, 0) 65%
-  );
+  height: 180px;
+`;
+
+export const globalSlick = css`
+  .akg-hero {
+    margin: 0 -20%;
+  }
+  .akg-hero .slick-slide.slick-center {
+    opacity: 1;
+  }
+  .akg-hero .slick-slide {
+    opacity: .3;
+  }
+  @media (max-width: 768px) {
+    .akg-hero {
+      margin: 0;
+    }
+    .akg-hero .slick-slide {
+      opacity: 1 !important;
+    }
+  }
+`;
+
+export const Wrapper = styled('div')`
+  width: 100%;
+  overflow: hidden;
 `;

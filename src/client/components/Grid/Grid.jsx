@@ -38,6 +38,8 @@ Col.defaultProps = {
 class Grid extends Component {
   static Row = Row;
 
+  static Col = Col;
+
   static propTypes = propTypes;
 
   static defaultProps = defaultProps;

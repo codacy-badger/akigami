@@ -1,48 +1,64 @@
 import React, { Component } from 'react';
-import truncate from 'lodash/truncate';
+import Slider from 'react-slick';
+import { Global } from '@emotion/core';
 import Paper from '../Paper';
-import Button from '../Button';
-import { Row, Col } from '../Grid';
-import { Wrapper, Title, Foreground, Item, Image } from './Hero.styles';
+import { Wrapper, Background, Foreground, globalSlick } from './Hero.styles';
 
 class Hero extends Component {
   render() {
     const { items } = this.props;
+    const settings = {
+      className: 'akg-hero',
+      infinite: true,
+      centerPadding: 0,
+      centerMode: true,
+      slidesToShow: 3,
+      speed: 500,
+      rows: 2,
+      slidesPerRow: 2,
+      responsive: [
+        {
+          breakpoint: 1490,
+          settings: {
+            slidesPerRow: 1,
+          },
+        },
+        {
+          breakpoint: 992,
+          settings: {
+            rows: 1,
+            slidesPerRow: 1,
+          },
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            centerMode: false,
+            slidesToShow: 1,
+            rows: 1,
+            slidesPerRow: 1,
+          },
+        },
+      ],
+    };
     return (
-      <Paper>
-        <Wrapper>
-          {items.map((item, index) => {
-            return (
-              <Item key={index}> {/* eslint-disable-line */}
-                <Foreground>
-                  <Row>
-                    <Col width={[1 / 1.5]}>
-                      <Title mode="multi" throttle={300}>
-                        {truncate(item.title, {
-                          length: 165,
-                          separator: /,? +/,
-                        })}
-                      </Title>
-                      <Row>
-                        <Col>
-                          <Button as="a" href={item.href} view="danger">
-                            Подробнее
-                          </Button>
-                          {' '}
-                          <Button view="borderless">
-                            Добавить в список
-                          </Button>
-                        </Col>
-                      </Row>
-                    </Col>
-                  </Row>
-                </Foreground>
-                <Image alt={item.title} src={item.image} />
-              </Item>
-            );
-          })}
-        </Wrapper>
-      </Paper>
+      <Wrapper>
+        <Global styles={globalSlick} />
+        <Slider {...settings}>
+          {items.map(item => (
+            <div key={item.id}>
+              <div style={{ margin: '6px 8px' }}>
+                <Paper overflow="hidden">
+                  <Background src={item.cover} />
+                  <Foreground>
+                    {item.title.russian}
+                  </Foreground>
+                </Paper>
+              </div>
+            </div>
+          ))}
+        </Slider>
+      </Wrapper>
     );
   }
 }
