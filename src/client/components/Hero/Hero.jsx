@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Slider from 'react-slick';
 import { Global } from '@emotion/core';
 import Paper from '../Paper';
+import AspectRatio from '../AspectRatio';
 import { Wrapper, Background, Foreground, globalSlick } from './Hero.styles';
 
 class Hero extends Component {
@@ -48,12 +49,14 @@ class Hero extends Component {
           {items.map(item => (
             <div key={item.id}>
               <div style={{ margin: '6px 8px' }}>
-                <Paper overflow="hidden">
-                  <Background src={item.cover} />
-                  <Foreground>
-                    {item.title.russian}
-                  </Foreground>
-                </Paper>
+                <AspectRatio ratio="21:9">
+                  <Paper overflow="hidden" style={{ height: '100%' }}>
+                    <Background src={item.cover} />
+                    <Foreground>
+                      {item.title.russian}
+                    </Foreground>
+                  </Paper>
+                </AspectRatio>
               </div>
             </div>
           ))}

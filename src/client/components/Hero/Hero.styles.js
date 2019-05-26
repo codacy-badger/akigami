@@ -15,7 +15,7 @@ export const Foreground = styled('div')`
   color: ${p => p.theme.colors.white};
   position: relative;
   box-sizing: border-box;
-  height: 180px;
+  height: 100%;
 `;
 
 export const globalSlick = css`
