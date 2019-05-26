@@ -9,7 +9,8 @@ class Feed extends Component {
     return (
       <React.Fragment>
         <Hero
-          items={range(40).map(e => ({ id: e, ...animes[0] })).slice(0, 20)}
+          items={animes}
+          // items={range(40).map(e => ({ id: e, ...animes[0] })).slice(0, 20)}
         />
         <Container>
           <Row>
