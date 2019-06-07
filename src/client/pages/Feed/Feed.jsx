@@ -3,6 +3,23 @@ import range from 'lodash/range';
 import { Container, Row, Col } from '../../components/Grid';
 import Hero from '../../components/Hero';
 import { animes } from '../mock';
+import Glide from '../../components/Glide/Glide';
+
+const demoData = range(10).map(e => ({ id: e, children: `Элементъ №${e}` }));
+
+const DemoComponent = ({ children }) => (
+  <div
+    style={{
+      background: '#fff',
+      width: 200,
+      height: 280,
+      border: '1px solid #cdcdcd',
+    }}
+  >
+    {children}
+  </div>
+);
+
 
 class Feed extends Component {
   render() {
@@ -12,6 +29,48 @@ class Feed extends Component {
           items={animes}
           // items={range(40).map(e => ({ id: e, ...animes[0] })).slice(0, 20)}
         />
+        <Container>
+          <Row>
+            <Col>
+              <Glide
+                effect
+                effectColor="#fbf8f8"
+                items={demoData}
+              />
+            </Col>
+          </Row>
+        </Container>
+        <Container>
+          <Row>
+            <Col>
+              <Glide
+                items={demoData}
+              />
+            </Col>
+          </Row>
+        </Container>
+        <Container>
+          <Row>
+            <Col>
+              <Glide
+                horizontalScroll
+                items={demoData}
+              />
+            </Col>
+          </Row>
+        </Container>
+        <Container>
+          <Row>
+            <Col>
+              <Glide
+                effect
+                horizontalScroll
+                ItemComponent={DemoComponent}
+                items={demoData}
+              />
+            </Col>
+          </Row>
+        </Container>
         <Container>
           <Row>
             <Col width={[1 / 2]}>
