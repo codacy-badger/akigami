@@ -1,72 +1,31 @@
 import React, { Component } from 'react';
 import range from 'lodash/range';
+import sample from 'lodash/sample';
 import { Container, Row, Col } from '../../components/Grid';
-import Hero from '../../components/Hero';
+// import Hero from '../../components/Hero';
+import AnimeCard from '../../components/AnimeCard';
 import { animes } from '../mock';
 import Glide from '../../components/Glide/Glide';
 
 const demoData = range(10).map(e => ({ id: e, children: `Элементъ №${e}` }));
-
-const DemoComponent = ({ children }) => (
-  <div
-    style={{
-      background: '#fff',
-      width: 200,
-      height: 280,
-      border: '1px solid #cdcdcd',
-    }}
-  >
-    {children}
-  </div>
-);
 
 
 class Feed extends Component {
   render() {
     return (
       <React.Fragment>
-        <Hero
+        {/* <Hero
           items={animes}
           // items={range(40).map(e => ({ id: e, ...animes[0] })).slice(0, 20)}
-        />
-        <Container>
-          <Row>
-            <Col>
-              <Glide
-                effect
-                effectColor="#fbf8f8"
-                items={demoData}
-              />
-            </Col>
-          </Row>
-        </Container>
-        <Container>
-          <Row>
-            <Col>
-              <Glide
-                items={demoData}
-              />
-            </Col>
-          </Row>
-        </Container>
-        <Container>
-          <Row>
-            <Col>
-              <Glide
-                horizontalScroll
-                items={demoData}
-              />
-            </Col>
-          </Row>
-        </Container>
+        /> */}
         <Container>
           <Row>
             <Col>
               <Glide
                 effect
                 horizontalScroll
-                ItemComponent={DemoComponent}
-                items={demoData}
+                ItemComponent={AnimeCard}
+                items={range(20).map(e => ({ id: e, ...animes[sample(range(5))] }))}
               />
             </Col>
           </Row>

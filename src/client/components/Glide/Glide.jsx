@@ -7,6 +7,7 @@ class Glide extends Component {
     speed: PropTypes.number,
     reach: PropTypes.number,
     effect: PropTypes.bool,
+    lockScroll: PropTypes.bool,
     effectColor: PropTypes.string,
     horizontalScroll: PropTypes.bool,
     ItemComponent: PropTypes.element,
@@ -19,8 +20,9 @@ class Glide extends Component {
   }
 
   static defaultProps = {
-    speed: 10,
+    speed: 40,
     reach: 30,
+    lockScroll: false,
     effect: false,
     effectColor: '',
     horizontalScroll: false,
@@ -77,11 +79,16 @@ class Glide extends Component {
   }
 
   listenerHorizontalScroll(e) {
-    const { speed } = this.props;
+    const { speed, lockScroll } = this.props;
     const el = this.scroll.current.container.childNodes[0];
     const delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+    const prevScroll = el.scrollLeft;
     el.scrollLeft -= (delta * speed);
-    e.preventDefault();
+    if (prevScroll !== el.scrollLeft) {
+      e.preventDefault();
+    } else if (lockScroll) {
+      e.preventDefault();
+    }
   }
 
   scrollEffectHandler(values) {
@@ -122,7 +129,7 @@ class Glide extends Component {
           <Inner>
             {items.map(item => (
               <Item key={item.id}>
-                <ItemComponent {...item} />
+                <ItemComponent item={item} />
               </Item>
             ))}
           </Inner>
