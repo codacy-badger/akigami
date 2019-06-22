@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Wrapper, Scroll, Inner, Item, Shade } from './Glide.styles';
+import { Container } from '../Grid';
 
 class Glide extends Component {
   static propTypes = {
@@ -20,7 +21,7 @@ class Glide extends Component {
   }
 
   static defaultProps = {
-    speed: 40,
+    speed: 50,
     reach: 30,
     lockScroll: false,
     effect: false,
@@ -126,13 +127,15 @@ class Glide extends Component {
           ref={this.scroll}
           onScrollFrame={effect && this.scrollEffectHandler}
         >
-          <Inner>
-            {items.map(item => (
-              <Item key={item.id}>
-                <ItemComponent item={item} />
-              </Item>
-            ))}
-          </Inner>
+          <Container style={{ paddingBottom: 0, paddingTop: 0 }}>
+            <Inner>
+              {items.map(item => (
+                <Item key={item.id}>
+                  <ItemComponent item={item} />
+                </Item>
+              ))}
+            </Inner>
+          </Container>
         </Scroll>
         <Shade
           position="right"

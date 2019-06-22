@@ -18,6 +18,7 @@ const container = styled('div')`
   margin-right: auto;
   padding: 24px 12px;
   position: relative;
+  width: 100%;
 `;
 
 export default container;

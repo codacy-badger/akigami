@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Paper from '../Paper';
 import AspectRatio from '../AspectRatio';
-import { Wrapper, Inner } from './AnimeCard.styles';
+import { Paper, Wrapper, Inner, Title } from './AnimeCard.styles';
 
 class AnimeCard extends Component {
   render() {
@@ -19,7 +18,9 @@ class AnimeCard extends Component {
             />
           </AspectRatio>
           <Inner>
-            {item.title.russian}
+            <Title>
+              {item.title.russian}
+            </Title>
           </Inner>
         </Paper>
       </Wrapper>

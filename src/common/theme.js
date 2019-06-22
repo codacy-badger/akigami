@@ -16,7 +16,7 @@ export default {
     sidenav: '#ffffff',
     brand: '#d54343',
     // background: '#fafafb',
-    background: '#fbf8f8',
+    background: '#f9f5f5',
     primary: '#0b78ff',
     success: '#3ed485',
     warning: '#f5ad45',

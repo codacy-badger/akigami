@@ -28,5 +28,8 @@ export default css`
   p {
     line-height: initial;
   }
+  .no-mr {
+    margin: 0;
+  }
   ${slick}
 `;

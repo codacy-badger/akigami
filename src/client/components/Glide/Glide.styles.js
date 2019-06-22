@@ -18,7 +18,10 @@ export const Inner = styled('div')`
 
 export const Item = styled('div')`
   flex-shrink: 0;
-  padding: 0 6px 16px;
+  padding: 4px 6px 16px;
+  &:last-child {
+    padding-right: 24px;
+  }
 `;
 
 export const Shade = styled('div')`

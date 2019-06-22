@@ -12,7 +12,7 @@ class Paper extends Component {
   static defaultProps = {
     children: null,
     shadow: false,
-    overflow: 'auto',
+    overflow: 'visible',
   }
 
   render() {
