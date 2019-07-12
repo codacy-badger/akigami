@@ -22,6 +22,7 @@ class Feed extends Component {
         />
         <Container>
           <ResponsiveReverseGrid
+            reverse
             left={(
               <Paper>
                 Left block

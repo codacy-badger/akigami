@@ -10,6 +10,11 @@ class ResponsiveReverseGrid extends Component {
     left: PropTypes.any.isRequired,
     right: PropTypes.any.isRequired,
     center: PropTypes.any.isRequired,
+    reverse: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    reverse: false,
   }
 
   constructor(props) {
@@ -36,31 +41,65 @@ class ResponsiveReverseGrid extends Component {
   listener() {
     const { mobile } = this.state;
     const w = window.innerWidth;
-    if (w >= 1280 && mobile) {
+    if (w >= 1490 && mobile) {
       this.setState({ mobile: false });
     }
-    if (w < 1280 && !mobile) {
+    if (w < 1490 && !mobile) {
       this.setState({ mobile: true });
     }
   }
 
-  render() {
+  renderLeft() {
     const { mobile } = this.state;
-    const { left, right, center } = this.props;
-    return (
-      <Row>
+    const { left, right, reverse } = this.props;
+    if (reverse && !mobile) {
+      return (
         <Col width={sideSizes}>
           {left}
-          {mobile && right}
         </Col>
+      );
+    }
+    if (!reverse && mobile) {
+      return (
+        <Col width={sideSizes}>
+          {left}
+          {right}
+        </Col>
+      );
+    }
+    return false;
+  }
+
+  renderRight() {
+    const { mobile } = this.state;
+    const { left, right, reverse } = this.props;
+    if (!mobile) {
+      return (
+        <Col width={sideSizes}>
+          {left}
+        </Col>
+      );
+    }
+    if (reverse && mobile) {
+      return (
+        <Col width={sideSizes}>
+          {left}
+          {right}
+        </Col>
+      );
+    }
+    return false;
+  }
+
+  render() {
+    const { center } = this.props;
+    return (
+      <Row>
+        {this.renderLeft()}
         <Col width={mainSizes}>
           {center}
         </Col>
-        {!mobile && (
-          <Col width={sideSizes}>
-            {right}
-          </Col>
-        )}
+        {this.renderRight()}
       </Row>
     );
   }
