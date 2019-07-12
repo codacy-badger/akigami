@@ -1,4 +1,5 @@
 import sample from 'lodash/sample';
+import UserStore from './stores/UserStore';
 
 const notFoundError = () => {
   const err = new Error();
@@ -74,6 +75,27 @@ const routes = [
       default:
         return { redirect: '/404' };
       }
+    },
+  },
+  {
+    path: '/@:username/:tab?/:subTab?',
+    action: async (ctx, { username }) => {
+      const params = { username };
+      const user = new UserStore(ctx.app);
+      await user.initData({ username });
+      params.user = user;
+      if (user.displayName == null) {
+        return notFoundError();
+      }
+      ctx.app.ui.changeTransparented(true);
+      if (typeof window !== 'undefined' && ctx.app.router.currentURL?.startsWith(`/@${username}`)) {
+        return { params };
+      }
+      return {
+        title: user.displayName,
+        component: await import(/* webpackChunkName: "profile" */ './pages/User'),
+        params,
+      };
     },
   },
 ];

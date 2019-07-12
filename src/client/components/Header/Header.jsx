@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import debugNamespace from 'debug';
 import { inject, observer } from 'mobx-react';
 import { FaBars, FaKey /* , FaAlignRight */ } from 'react-icons/fa';
 import Button from '../Button';
@@ -8,6 +9,8 @@ import Spacer from '../Spacer';
 import HeaderUserPanel from '../HeaderUserPanel';
 
 import { HeaderWrapper, AutoHide, HiddenSearchBlock } from './Header.styles';
+
+const debug = debugNamespace('akigami:client:header');
 
 @inject('ui', 'user', 'search')
 @observer
@@ -20,6 +23,7 @@ class Header extends Component {
 
   render() {
     const { ui, user, search } = this.props;
+    debug('user', user);
     return (
       <HeaderWrapper>
         <AutoHide>

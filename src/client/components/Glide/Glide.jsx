@@ -11,7 +11,7 @@ class Glide extends Component {
     lockScroll: PropTypes.bool,
     effectColor: PropTypes.string,
     horizontalScroll: PropTypes.bool,
-    ItemComponent: PropTypes.element,
+    ItemComponent: PropTypes.node,
     items: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.oneOfType([
         PropTypes.string,
