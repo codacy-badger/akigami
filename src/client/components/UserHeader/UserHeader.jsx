@@ -3,18 +3,65 @@ import PropTypes from 'prop-types';
 import UserStore from '../../stores/UserStore';
 import Grid, { Row, Col } from '../Grid';
 import Image from '../Image';
+import Button, { StatefulButton } from '../Button';
 
-import { Wrapper, Background, Foreground } from './UserHeader.styles';
+import { Wrapper, ImageWrapper, Background, Foreground, Content, Title, Info, FlexInfo } from './UserHeader.styles';
 
-const UserHeader = ({ user }) => (
+const UserHeader = ({ user, isOwner }) => (
   <Wrapper>
-    <Background src={'https://s4.anilist.co/file/anilistcdn/user/banner/b214278-mVganCxB6QHz.jpg' || user.getCover} />
+    <Background src={user.getCover} />
     <Foreground>
       <Grid>
         <Row>
           <Col>
-            <Image shape="circle" size={140} src={user.getAvatar} />
-            {user.displayName}
+            <Content>
+              <ImageWrapper>
+                <Image shape="circle" size={100} src={user.getAvatar} />
+              </ImageWrapper>
+              <Info>
+                <Title>{user.displayName}</Title>
+                <FlexInfo>
+                  <div>
+                    {isOwner() ? (
+                      <Button
+                        as="a"
+                        href={`/@${user.username}/settings`}
+                        view="shadow"
+                        size="small"
+                      >
+                        Изменить
+                      </Button>
+                    ) : (
+                      <React.Fragment>
+                        <StatefulButton
+                          onClick={async () => {
+                            await new Promise(r => setTimeout(r, 600));
+                          }}
+                          type="button"
+                          view="primary"
+                          size="small"
+                        >
+                          Подписаться
+                        </StatefulButton>
+                        <StatefulButton
+                          onClick={async () => {
+                            await new Promise(r => setTimeout(r, 600));
+                          }}
+                          type="button"
+                          view="danger"
+                          size="small"
+                        >
+                          Отписаться
+                        </StatefulButton>
+                      </React.Fragment>
+                    )}
+                  </div>
+                  <div>
+                    socials
+                  </div>
+                </FlexInfo>
+              </Info>
+            </Content>
           </Col>
         </Row>
       </Grid>
@@ -24,6 +71,7 @@ const UserHeader = ({ user }) => (
 
 UserHeader.propTypes = {
   user: PropTypes.instanceOf(UserStore).isRequired,
+  isOwner: PropTypes.func.isRequired,
 };
 
 export default UserHeader;
