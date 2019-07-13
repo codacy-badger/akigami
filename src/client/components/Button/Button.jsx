@@ -49,7 +49,7 @@ const Button = ({
 
 Button.propTypes = {
   size: PropTypes.oneOf(['extraSmall', 'default', 'small', 'large']),
-  view: PropTypes.oneOf(['default', 'success', 'warning', 'danger', 'info', 'primary', 'borderless', 'disable']),
+  view: PropTypes.oneOf(['default', 'success', 'warning', 'danger', 'info', 'primary', 'borderless', 'disable', 'shadow']),
   children: PropTypes.any,
   disabled: PropTypes.bool,
   transparent: PropTypes.bool,

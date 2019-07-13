@@ -73,6 +73,17 @@ export const views = {
       background: ${mixins.darken(colors.white, '10%')};
     }
   `,
+  shadow: ({ theme: { colors, mixins } }) => css`
+    background: ${mixins.withOpacity(colors.gray, 0.3)};
+    color: ${colors.white};
+    border-color: ${colors.border};
+    &:hover {
+      background: ${mixins.withOpacity(colors.gray, 0.5)};
+    }
+    &:active {
+      background: ${mixins.withOpacity(colors.gray, 0.7)};
+    }
+  `,
   disable: ({ theme: { colors } }) => css`
     pointer-events: none;
     background: ${colors.white};
