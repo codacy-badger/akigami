@@ -18,7 +18,7 @@ class HeaderUserPanel extends Component {
         overlay={(
           <DropdownMenu>
             <DropdownItemLink href={`/@${user.username}`}>Мой профиль</DropdownItemLink>
-            <DropdownItem>Выход</DropdownItem>
+            <DropdownItem onClick={user.logout}>Выход</DropdownItem>
           </DropdownMenu>
         )}
       >

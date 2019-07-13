@@ -61,12 +61,12 @@ class User extends Component {
 
   render() {
     const { activeTab } = this.state;
-    const { user } = this.props;
+    const { user, myUser } = this.props;
     debug('user', user);
     debug('activeTab', activeTab);
     return (
       <React.Fragment>
-        <UserHeader isOwner={this.isOwner} user={user} />
+        <UserHeader isOwner={this.isOwner} user={user} myUser={myUser} />
         <PageContent>
           <Container>
             <TabsContent

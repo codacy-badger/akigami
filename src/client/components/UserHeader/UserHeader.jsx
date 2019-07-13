@@ -7,7 +7,7 @@ import Button, { StatefulButton } from '../Button';
 
 import { Wrapper, ImageWrapper, Background, Foreground, Content, Title, Info, FlexInfo } from './UserHeader.styles';
 
-const UserHeader = ({ user, isOwner }) => (
+const UserHeader = ({ user, myUser, isOwner }) => (
   <Wrapper>
     <Background src={user.getCover} />
     <Foreground>
@@ -22,7 +22,7 @@ const UserHeader = ({ user, isOwner }) => (
                 <Title>{user.displayName}</Title>
                 <FlexInfo>
                   <div>
-                    {isOwner() ? (
+                    {isOwner() && (
                       <Button
                         as="a"
                         href={`/@${user.username}/settings`}
@@ -31,7 +31,8 @@ const UserHeader = ({ user, isOwner }) => (
                       >
                         Изменить
                       </Button>
-                    ) : (
+                    )}
+                    {myUser.isAuth && !isOwner() && (
                       <React.Fragment>
                         <StatefulButton
                           onClick={async () => {
@@ -70,6 +71,7 @@ const UserHeader = ({ user, isOwner }) => (
 );
 
 UserHeader.propTypes = {
+  myUser: PropTypes.instanceOf(UserStore).isRequired,
   user: PropTypes.instanceOf(UserStore).isRequired,
   isOwner: PropTypes.func.isRequired,
 };

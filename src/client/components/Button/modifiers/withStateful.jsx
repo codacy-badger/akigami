@@ -177,7 +177,7 @@ export const withStateful = WrappedComponent => (
     render() {
       return (
         <WrappedComponent
-          {...omit(this.props, ['onClick', 'state'])}
+          {...omit(this.props, ['onClick', 'state', 'onSuccess', 'onError'])}
           onClick={this.onClick}
           state={this.getButtonState()}
         />
