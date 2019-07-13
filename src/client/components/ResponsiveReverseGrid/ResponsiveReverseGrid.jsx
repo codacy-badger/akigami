@@ -52,7 +52,7 @@ class ResponsiveReverseGrid extends Component {
   renderLeft() {
     const { mobile } = this.state;
     const { left, right, reverse } = this.props;
-    if (reverse && !mobile) {
+    if (!mobile) {
       return (
         <Col width={sideSizes}>
           {left}
