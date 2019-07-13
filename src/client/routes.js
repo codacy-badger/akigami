@@ -79,8 +79,8 @@ const routes = [
   },
   {
     path: '/@:username/:tab?/:subTab?',
-    action: async (ctx, { username }) => {
-      const params = { username };
+    action: async (ctx, { username, tab, subTab }) => {
+      const params = { username, tab, subTab };
       const user = new UserStore(ctx.app);
       await user.initData({ username });
       params.user = user;
