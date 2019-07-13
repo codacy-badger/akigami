@@ -18,7 +18,7 @@ class Feed extends Component {
         <Glide
           horizontalScroll
           ItemComponent={AnimeCard}
-          items={range(20).map(e => ({ id: e, ...animes[sample(range(5))] }))}
+          items={range(20).map(e => ({ ...animes[sample(range(5))], id: e }))}
         />
         <Container>
           <ResponsiveReverseGrid
