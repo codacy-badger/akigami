@@ -12,7 +12,7 @@ const defaultProps = {
 };
 
 export const Row = ({ children, ...props }) => (
-  <Flex mx={-16} flexDirection={['column', 'row']} {...props}>
+  <Flex mx={-2} flexDirection={['column', 'row']} {...props}>
     {children}
   </Flex>
 );
@@ -21,7 +21,7 @@ Row.propTypes = propTypes;
 Row.defaultProps = defaultProps;
 
 export const Col = ({ children, width, ...props }) => (
-  <Box px={16} width={[1, ...width]} {...props}>
+  <Box px={2} width={[1, ...width]} {...props}>
     {children}
   </Box>
 );
