@@ -47,7 +47,7 @@ export const LayoutSidenav = styled('section')`
   ${p => p.theme.mixins.transition('width transform')}
 
   > nav {
-    background: ${p => p.theme.colors.sidenav};
+    background: transparent;
   }
 
   @media screen and (min-width: 768px) {
@@ -67,6 +67,20 @@ export const LayoutSidenav = styled('section')`
       width: 64px;
     }
   `)}
+`;
+
+export const LayoutSidenavBackground = styled('div')`
+  position: absolute;
+  background-image: ${p => (p.src ? `url(${p.src})` : 'none')};
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left;
+  z-index: 0;
+  opacity: .4;
+  filter: blur(50px);
+  margin: -80px;
+  width: calc(100% + 180px);
+  height: calc(100% + 180px);
 `;
 
 export const LayoutHeader = styled('header')`

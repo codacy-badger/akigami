@@ -13,6 +13,8 @@ class UIStore {
 
   @observable screenWidthVar = null;
 
+  @observable blurMenuBackground = null;
+
   constructor() {
     this.overlayListener();
     if (_CLIENT_) {
@@ -30,6 +32,14 @@ class UIStore {
 
   changeTransparent(value) {
     this.transparent = value;
+  }
+
+  setBlurMenuBackground(img) {
+    this.blurMenuBackground = img;
+  }
+
+  removeBlurMenuBackground() {
+    this.blurMenuBackground = null;
   }
 
   minimizeSidebar = () => {

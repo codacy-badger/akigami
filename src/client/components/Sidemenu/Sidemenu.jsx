@@ -87,6 +87,7 @@ class Sidemenu extends Component {
               block
               as="a"
               key={item.href}
+              transparent
               view="borderless"
               href={item.href}
               css={css`

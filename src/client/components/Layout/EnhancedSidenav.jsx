@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { observable } from 'mobx';
 import { Provider, inject, observer } from 'mobx-react';
 import onClickOutside from 'react-onclickoutside';
-import { LayoutSidenav } from './Layout.styles';
+import { LayoutSidenav, LayoutSidenavBackground } from './Layout.styles';
 
 @inject('ui')
 @onClickOutside
@@ -77,6 +77,7 @@ class EnhancedSidenav extends Component {
     const { ui, children } = this.props;
     return (
       <LayoutSidenav isOpen={ui.isOpenSidenav}>
+        <LayoutSidenavBackground src={ui.blurMenuBackground} />
         <Provider enhanced={this}>
           <React.Fragment>
             {children}

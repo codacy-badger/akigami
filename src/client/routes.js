@@ -87,6 +87,7 @@ const routes = [
       if (user.displayName == null) {
         return notFoundError();
       }
+      ctx.app.ui.setBlurMenuBackground(user.getCover);
       ctx.app.ui.changeTransparented(true);
       if (typeof window !== 'undefined' && ctx.app.router.currentURL?.startsWith(`/@${username}`)) {
         return { params };

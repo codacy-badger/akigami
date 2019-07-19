@@ -48,6 +48,7 @@ class User extends Component {
   componentWillUnmount() {
     const { ui } = this.props;
     ui.changeTransparented(false);
+    ui.removeBlurMenuBackground();
   }
 
   setTab({ tab, subTab }) {

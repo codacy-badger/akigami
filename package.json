@@ -4,7 +4,7 @@
   "private": true,
   "main": "tools/run.js",
   "scripts": {
-    "start": "concurrently \"yarn run client\" \"yarn run server\"",
+    "start": "concurrently -rki \"yarn run client\" \"yarn run server\"",
     "server": "cross-env DEBUG='akigami:server:*' sh tools/start.sh",
     "client": "webpack --watch",
     "defaults": "webpack-defaults",
