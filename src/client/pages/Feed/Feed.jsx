@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import range from 'lodash/range';
 import sample from 'lodash/sample';
-import Paper from '../../components/Paper';
+import Block from '../../components/Block';
 import { Container } from '../../components/Grid';
 import ResponsiveReverseGrid from '../../components/ResponsiveReverseGrid';
 import AnimeCard from '../../components/AnimeCard';
@@ -13,7 +13,7 @@ class Feed extends Component {
     return (
       <React.Fragment>
         <Container>
-          <h1 className="no-mr">Сейчас в эфире</h1>
+          <h2 className="no-mr">Сейчас в эфире</h2>
         </Container>
         <Glide
           horizontalScroll
@@ -24,12 +24,12 @@ class Feed extends Component {
           <ResponsiveReverseGrid
             reverse
             left={(
-              <Paper>
+              <Block>
                 Left block
-              </Paper>
+              </Block>
             )}
             center={(
-              <Paper>
+              <Block>
                 <div style={{ fontSize: 24, lineHeight: 4 }}>
                   <div style={{ fontWeight: 300 }}>Проверка шрифта 300 / Test font 300 Light</div>
                   <div style={{ fontWeight: 400 }}>Проверка шрифта 400 / Test font 400 Book</div>
@@ -39,12 +39,12 @@ class Feed extends Component {
                   <div style={{ fontWeight: 800 }}>Проверка шрифта 800 / Test font 800 Bold</div>
                   <div style={{ fontWeight: 900 }}>Проверка шрифта 900 / Test font 900 Extra Bold</div>
                 </div>
-              </Paper>
+              </Block>
             )}
             right={(
-              <Paper>
+              <Block>
                 Right block
-              </Paper>
+              </Block>
             )}
           />
         </Container>

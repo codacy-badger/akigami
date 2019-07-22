@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import AspectRatio from '../AspectRatio';
-import { Paper, Wrapper, Inner, Title } from './AnimeCard.styles';
+import { Wrapper, Inner, Title } from './AnimeCard.styles';
+import Block from '../Block';
 
 class AnimeCard extends Component {
+  static propTypes = {
+    item: PropTypes.object.isRequired,
+  };
+
   render() {
     const { item } = this.props;
     return (
       <Wrapper href={`/anime/${item.id}`}>
-        <Paper overflow="hidden">
+        <Block padded={false} mb={false} overflow="hidden">
           <AspectRatio ratio="4:6">
             <img
               src={item.poster}
@@ -22,7 +28,7 @@ class AnimeCard extends Component {
               {item.title.russian}
             </Title>
           </Inner>
-        </Paper>
+        </Block>
       </Wrapper>
     );
   }

@@ -25,7 +25,7 @@ export default {
     default: '#2f333a',
     white: '#ffffff',
     gray: '#7f8fa4',
-    border: '#d5dfe7',
+    border: '#d5dfe766',
   },
   mixins: {
     withOpacity,

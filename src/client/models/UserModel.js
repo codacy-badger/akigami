@@ -2,7 +2,8 @@ import { computed, action, observable } from 'mobx';
 import moment from 'moment';
 
 const defaultAvatar = '/images/no_avatar.jpg';
-const defaultCover = '/images/no-cover.jpg';
+// const defaultCover = '/images/no-cover.jpg';
+const defaultCover = 'https://s4.anilist.co/file/anilistcdn/media/anime/banner/20964-etLaKGc0pXvo.jpg';
 
 class UserModel {
   @observable id = null;
@@ -81,7 +82,7 @@ class UserModel {
     this.gender = gender;
     this.birthday = birthday;
     this.role = role;
-  }
+  };
 
   @computed
   get getAvatar() {

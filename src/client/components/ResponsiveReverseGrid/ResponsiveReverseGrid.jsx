@@ -11,11 +11,11 @@ class ResponsiveReverseGrid extends Component {
     right: PropTypes.any.isRequired,
     center: PropTypes.any.isRequired,
     reverse: PropTypes.bool,
-  }
+  };
 
   static defaultProps = {
     reverse: false,
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -76,7 +76,7 @@ class ResponsiveReverseGrid extends Component {
     if (!mobile) {
       return (
         <Col width={sideSizes}>
-          {left}
+          {right}
         </Col>
       );
     }

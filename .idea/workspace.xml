@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="df94f3da-2210-4ef6-a551-f49fc1bb7698" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="df94f3da-2210-4ef6-a551-f49fc1bb7698" name="Default Changelist" comment="Shadows, user page, block info">
+      <change afterPath="$PROJECT_DIR$/src/client/components/Block/Block.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/components/Block/Block.styles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/components/Block/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/components/BlockTitle/BlockTitle.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/components/BlockTitle/BlockTitle.styles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/components/BlockTitle/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/components/LineInfo/LineInfo.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/components/LineInfo/LineInfo.styles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/components/LineInfo/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/components/Layout/EnhancedSidenav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/Layout/EnhancedSidenav.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/AnimeCard/AnimeCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/AnimeCard/AnimeCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/AnimeCard/AnimeCard.styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/AnimeCard/AnimeCard.styles.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/components/Layout/Layout.styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/Layout/Layout.styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/components/Sidemenu/Sidemenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/Sidemenu/Sidemenu.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/pages/User/User.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/pages/User/User.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/stores/UIStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/stores/UIStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/ResponsiveReverseGrid/ResponsiveReverseGrid.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/ResponsiveReverseGrid/ResponsiveReverseGrid.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/models/UserModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/models/UserModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/pages/Feed/Feed.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/pages/Feed/Feed.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/pages/User/tabs/UserBrowse.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/pages/User/tabs/UserBrowse.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/global.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/theme.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,8 +36,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="GraphQL File" />
-        <option value="JavaScript File" />
         <option value="GraphQL Endpoint File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -56,7 +67,7 @@
     <property name="node.js.selected.package.standard" value="$PROJECT_DIR$/node_modules/eslint" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Colors" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -91,8 +102,21 @@
       <workItem from="1540120411392" duration="1506000" />
       <workItem from="1540121930632" duration="5188000" />
       <workItem from="1563547016189" duration="257000" />
-      <workItem from="1563547288006" duration="1655000" />
+      <workItem from="1563547288006" duration="1835000" />
+      <workItem from="1563559317223" duration="1101000" />
+      <workItem from="1563560436854" duration="1934000" />
+      <workItem from="1563562546687" duration="150000" />
+      <workItem from="1563788957125" duration="49000" />
+      <workItem from="1563799035096" duration="5056000" />
     </task>
+    <task id="LOCAL-00001" summary="Blur UI sidemenu">
+      <created>1563549393454</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1563549393455</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -110,5 +134,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Blur UI sidemenu" />
+    <MESSAGE value="Shadows, user page, block info" />
+    <option name="LAST_COMMIT_MESSAGE" value="Shadows, user page, block info" />
   </component>
 </project>

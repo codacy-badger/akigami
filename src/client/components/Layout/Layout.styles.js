@@ -43,6 +43,7 @@ export const LayoutSidenav = styled('section')`
   background: ${p => p.theme.colors.sidenav};
   border-radius: ${p => `0 ${p.theme.borderRadius} ${p.theme.borderRadius} 0`};
   /* border-right: 1px solid ${p => p.theme.colors.border}; */
+  box-shadow: 0 0 12px -6px ${p => p.theme.mixins.withOpacity(p.theme.colors.default, 0.6)};
   height: 100%;
   ${p => p.theme.mixins.transition('width transform')}
 
@@ -76,11 +77,12 @@ export const LayoutSidenavBackground = styled('div')`
   background-size: cover;
   background-position: left;
   z-index: 0;
-  opacity: .4;
-  filter: blur(50px);
+  opacity: ${p => (p.src ? 0.4 : 0.0)};
+  filter: blur(100px);
   margin: -80px;
   width: calc(100% + 180px);
   height: calc(100% + 180px);
+  ${p => p.theme.mixins.transition('opacity')}
 `;
 
 export const LayoutHeader = styled('header')`
@@ -111,19 +113,19 @@ export const LayoutHeader = styled('header')`
 export const LayoutContent = styled('section')`
   padding-top: ${p => (p.isTransparented ? 0 : '68px')};
   padding-left: 0;
-  ${p => p.theme.mixins.transition('padding-left')}
   @media screen and (min-width: 768px) {
     padding-left: 64px;
   }
   @media screen and (min-width: 1280px) {
     padding-left: 320px;
   }
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  ${p => p.theme.mixins.transition('padding-left')}
   ${p => (p.isOpenSidenav && css`
     @media screen and (min-width: 1280px) {
       padding-left: 64px;
     }
   `)}
-  flex: 1;
-  display: flex;
-  flex-direction: column;
 `;

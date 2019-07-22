@@ -14,6 +14,15 @@ export default css`
     margin-bottom: 24px;
     position: relative;
   }
+  
+  h2 {
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: -1.2px;
+    line-height: 28px;
+    margin-bottom: 18px;
+    position: relative;
+  }
 
   .scroll-lock {
     overflow: hidden;
