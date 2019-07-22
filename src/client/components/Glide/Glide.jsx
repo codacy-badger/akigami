@@ -43,6 +43,7 @@ class Glide extends Component {
       ...(props.controls ? {
         itemsSize: [],
         controlIndex: 0,
+        animated: false,
       } : {}),
     };
     this.scroll = React.createRef();
@@ -50,6 +51,8 @@ class Glide extends Component {
     this.controlRightHandler = this.controlRightHandler.bind(this);
     this.controlLeftHandler = this.controlLeftHandler.bind(this);
     this.controlManager = this.controlManager.bind(this);
+    this.startAnimatedControlledScroll = this.startAnimatedControlledScroll.bind(this);
+    this.endAnimatedControlledScroll = this.endAnimatedControlledScroll.bind(this);
     this.scrollManager = this.scrollManager.bind(this);
     this.scrollHandler = this.scrollHandler.bind(this);
     this.enableHorizontalScroll = this.enableHorizontalScroll.bind(this);
@@ -131,15 +134,28 @@ class Glide extends Component {
     });
   }
 
+  startAnimatedControlledScroll() {
+    this.setState({ animated: true });
+  }
+
+  endAnimatedControlledScroll() {
+    this.setState({ animated: false });
+  }
+
   controlRightHandler() {
-    this.controlManager('right');
+    clearTimeout(this.rightControlTimeoutId);
+    this.startAnimatedControlledScroll();
+    this.rightControlTimeoutId = setTimeout(() => this.controlManager('right'), 0);
   }
 
   controlLeftHandler() {
-    this.controlManager('left');
+    clearTimeout(this.leftControlTimeoutId);
+    this.startAnimatedControlledScroll();
+    this.leftControlTimeoutId = setTimeout(() => this.controlManager('left'), 0);
   }
 
   controlManager(position) {
+    clearTimeout(this.timeoutId);
     const { controlIndex, itemsSize } = this.state;
     let index = controlIndex;
     const { scrollLeft } = this.scroll.current.getValues();
@@ -149,12 +165,14 @@ class Glide extends Component {
       setScrollLeft(item);
       this.setState({
         controlIndex: controlIndex + 1,
+      }, () => {
+        this.timeoutId = setTimeout(this.endAnimatedControlledScroll, 200);
       });
     }
   }
 
   render() {
-    const { itemsSize, canScrollPrev, canScrollNext } = this.state;
+    const { animated, canScrollPrev, canScrollNext } = this.state;
     const { items, effect, controls, effectColor, reach, ItemComponent, ...props } = this.props;
     const shadeProps = {
       color: effect ? effectColor : null,
@@ -179,6 +197,7 @@ class Glide extends Component {
           </Control>
         )}
         <Scroll
+          animated={animated}
           autoHide
           universal
           autoWidth
