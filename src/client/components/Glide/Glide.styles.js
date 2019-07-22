@@ -48,5 +48,17 @@ export const Shade = styled('div')`
   ${p => p.theme.mixins.transition('opacity visibility')}
 `;
 
-
-export default null;
+export const Control = styled('div')`
+  top: 0;
+  bottom: 0;
+  padding: 0 24px;
+  ${p => (p.position === 'left' && css`left: 0;`)}
+  ${p => (p.position === 'right' && css`right: 0;`)}
+  opacity: ${p => (p.visible ? 1 : 0)};
+  visibility: ${p => (p.visible ? 'visible' : 'hidden')};
+  ${p => p.theme.mixins.transition('opacity visibility')}
+  position: absolute;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+`;

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Wrapper, Scroll, Inner, Item, Shade } from './Glide.styles';
+import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
+import { Wrapper, Scroll, Inner, Item, Shade, Control } from './Glide.styles';
+import Button from '../Button';
 import { Container } from '../Grid';
 
 class Glide extends Component {
@@ -8,6 +10,7 @@ class Glide extends Component {
     speed: PropTypes.number,
     reach: PropTypes.number,
     effect: PropTypes.bool,
+    controls: PropTypes.bool,
     lockScroll: PropTypes.bool,
     effectColor: PropTypes.string,
     horizontalScroll: PropTypes.bool,
@@ -25,6 +28,7 @@ class Glide extends Component {
     reach: 30,
     lockScroll: false,
     effect: false,
+    controls: false,
     effectColor: '',
     horizontalScroll: false,
     ItemComponent: ({ children }) => <div>{children}</div>,
@@ -36,20 +40,34 @@ class Glide extends Component {
     this.state = {
       canScrollNext: false,
       canScrollPrev: false,
+      ...(props.controls ? {
+        itemsSize: [],
+        controlIndex: 0,
+      } : {}),
     };
     this.scroll = React.createRef();
-    this.effectManager = this.effectManager.bind(this);
-    this.scrollEffectHandler = this.scrollEffectHandler.bind(this);
+    this.prepareItemSizes = this.prepareItemSizes.bind(this);
+    this.controlRightHandler = this.controlRightHandler.bind(this);
+    this.controlLeftHandler = this.controlLeftHandler.bind(this);
+    this.controlManager = this.controlManager.bind(this);
+    this.scrollManager = this.scrollManager.bind(this);
+    this.scrollHandler = this.scrollHandler.bind(this);
     this.enableHorizontalScroll = this.enableHorizontalScroll.bind(this);
     this.disableHorizontalScroll = this.disableHorizontalScroll.bind(this);
     this.listenerHorizontalScroll = this.listenerHorizontalScroll.bind(this);
+    props.items.forEach((item, index) => {
+      this[`item${index}`] = React.createRef();
+    });
   }
 
   componentDidMount() {
-    const { effect, horizontalScroll } = this.props;
-    if (effect) {
+    const { effect, horizontalScroll, controls } = this.props;
+    if (effect || controls) {
       const { left: percent } = this.scroll.current.getValues();
-      this.effectManager(percent);
+      this.scrollManager(percent);
+    }
+    if (controls) {
+      this.prepareItemSizes();
     }
     if (horizontalScroll) {
       this.enableHorizontalScroll();
@@ -61,6 +79,16 @@ class Glide extends Component {
     if (horizontalScroll) {
       this.disableHorizontalScroll();
     }
+  }
+
+  prepareItemSizes() {
+    const { items } = this.props;
+    const itemsSize = [];
+    items.forEach((item, index) => {
+      const el = this[`item${index}`].current;
+      if (el) itemsSize.push(el.offsetWidth);
+    });
+    this.setState({ itemsSize });
   }
 
   enableHorizontalScroll() {
@@ -92,31 +120,61 @@ class Glide extends Component {
     }
   }
 
-  scrollEffectHandler(values) {
-    this.effectManager(values.left);
+  scrollHandler(values) {
+    this.scrollManager(values.left);
   }
 
-  effectManager(percent) {
+  scrollManager(percent) {
+    console.log(percent);
     this.setState({
-      canScrollNext: percent < 1,
+      canScrollNext: percent < 0.99,
       canScrollPrev: percent > 0,
     });
   }
 
+  controlRightHandler() {
+    this.controlManager('right');
+  }
+
+  controlLeftHandler() {
+    this.controlManager('left');
+  }
+
+  controlManager(position) {
+    const { controlIndex, itemsSize } = this.state;
+    let index = controlIndex;
+    const { scrollLeft } = this.scroll.current.getValues();
+    const setScrollLeft = this.scroll.current.scrollLeft;
+    const item = itemsSize[index];
+    console.log(this.scroll);
+  }
+
   render() {
-    const { canScrollPrev, canScrollNext } = this.state;
-    const { items, effect, effectColor, reach, ItemComponent, ...props } = this.props;
+    const { itemsSize, canScrollPrev, canScrollNext } = this.state;
+    const { items, effect, controls, effectColor, reach, ItemComponent, ...props } = this.props;
     const shadeProps = {
       color: effect ? effectColor : null,
       reach,
     };
+    console.log(itemsSize);
     return (
       <Wrapper>
-        <Shade
-          position="left"
-          visible={canScrollPrev}
-          {...shadeProps}
-        />
+        {effect && (
+          <Shade
+            position="left"
+            visible={canScrollPrev}
+            {...shadeProps}
+          />
+        )}
+        {controls && (
+          <Control
+            position="left"
+            visible={canScrollPrev}
+            onClick={this.controlLeftHandler}
+          >
+            <Button icon={<FaArrowLeft />} />
+          </Control>
+        )}
         <Scroll
           autoHide
           universal
@@ -125,23 +183,34 @@ class Glide extends Component {
           autoHeightMax="100%"
           {...props}
           ref={this.scroll}
-          onScrollFrame={effect ? this.scrollEffectHandler : null}
+          onScrollFrame={this.scrollHandler}
         >
           <Container style={{ paddingBottom: 0, paddingTop: 0 }}>
             <Inner>
-              {items.map(item => (
-                <Item key={item.id}>
+              {items.map((item, index) => (
+                <Item ref={this[`item${index}`]} key={item.id}>
                   <ItemComponent item={item} />
                 </Item>
               ))}
             </Inner>
           </Container>
         </Scroll>
-        <Shade
-          position="right"
-          visible={canScrollNext}
-          {...shadeProps}
-        />
+        {controls && (
+          <Control
+            position="right"
+            visible={canScrollNext}
+            onClick={this.controlRightHandler}
+          >
+            <Button icon={<FaArrowRight />} />
+          </Control>
+        )}
+        {effect && (
+          <Shade
+            position="right"
+            visible={canScrollNext}
+            {...shadeProps}
+          />
+        )}
       </Wrapper>
     );
   }

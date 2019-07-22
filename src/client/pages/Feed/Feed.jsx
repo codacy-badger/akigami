@@ -16,6 +16,7 @@ class Feed extends Component {
           <h2 className="no-mr">Сейчас в эфире</h2>
         </Container>
         <Glide
+          controls
           horizontalScroll
           ItemComponent={AnimeCard}
           items={range(20).map(e => ({ ...animes[sample(range(5))], id: e }))}

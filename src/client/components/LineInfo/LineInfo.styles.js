@@ -14,6 +14,7 @@ export const Title = styled('div')`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 14px;
 `;
 
 export const Value = styled('div')`
@@ -21,4 +22,5 @@ export const Value = styled('div')`
   margin-left: 12px;
   text-align: right;
   white-space: nowrap;
+  font-size: 14px;
 `;
