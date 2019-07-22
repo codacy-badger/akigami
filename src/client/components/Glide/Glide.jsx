@@ -125,7 +125,6 @@ class Glide extends Component {
   }
 
   scrollManager(percent) {
-    console.log(percent);
     this.setState({
       canScrollNext: percent < 0.99,
       canScrollPrev: percent > 0,
@@ -145,8 +144,13 @@ class Glide extends Component {
     let index = controlIndex;
     const { scrollLeft } = this.scroll.current.getValues();
     const setScrollLeft = this.scroll.current.scrollLeft;
-    const item = itemsSize[index];
-    console.log(this.scroll);
+    const item = itemsSize.slice(0, index + 1).reduce((accumulator, currentValue) => accumulator + currentValue);
+    if (scrollLeft < item) {
+      setScrollLeft(item);
+      this.setState({
+        controlIndex: controlIndex + 1,
+      });
+    }
   }
 
   render() {
@@ -156,7 +160,6 @@ class Glide extends Component {
       color: effect ? effectColor : null,
       reach,
     };
-    console.log(itemsSize);
     return (
       <Wrapper>
         {effect && (
