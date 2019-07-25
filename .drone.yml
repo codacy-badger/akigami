@@ -25,6 +25,7 @@ pipeline:
     commands:
       - yarn client-build:dev
       - echo ${CONFIG} > config/development.json
+      - ls -la config
 
   publish:
     image: plugins/docker
