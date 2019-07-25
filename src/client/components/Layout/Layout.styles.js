@@ -113,6 +113,7 @@ export const LayoutHeader = styled('header')`
 export const LayoutContent = styled('section')`
   padding-top: ${p => (p.isTransparented ? 0 : '68px')};
   padding-left: 0;
+  overflow-x: hidden;
   @media screen and (min-width: 768px) {
     padding-left: 64px;
   }

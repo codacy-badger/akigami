@@ -6,7 +6,7 @@ import { Container } from '../../components/Grid';
 import ResponsiveReverseGrid from '../../components/ResponsiveReverseGrid';
 import AnimeCard from '../../components/AnimeCard';
 import { animes } from '../mock';
-import Glide from '../../components/Glide/Glide';
+import Slider from '../../components/Slider/Slider';
 
 class Feed extends Component {
   render() {
@@ -15,13 +15,15 @@ class Feed extends Component {
         <Container>
           <h2 className="no-mr">Сейчас в эфире</h2>
         </Container>
-        <Glide
-          controls
-          horizontalScroll
-          ItemComponent={AnimeCard}
-          items={range(20).map(e => ({ ...animes[sample(range(5))], id: e }))}
-        />
         <Container>
+          <Slider
+            itemHeight={292}
+            ItemComponent={AnimeCard}
+            items={range(20).map(e => ({ ...animes[sample(range(5))], id: e }))}
+            style={{
+              marginBottom: 24,
+            }}
+          />
           <ResponsiveReverseGrid
             reverse
             left={(

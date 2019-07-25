@@ -64,6 +64,7 @@
     "react-custom-scrollbars": "^4.2.0",
     "react-dom": "^16.4.0",
     "react-dropzone": "^9.0.0",
+    "react-flickity-component": "^3.3.0",
     "react-icons": "^3.5.0",
     "react-image-fallback": "^8.0.0",
     "react-notification-system": "^0.2.17",

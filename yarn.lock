@@ -2490,7 +2490,7 @@ core-js@^2.4.0, core-js@^2.5.0:
   version "2.6.5"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.5.tgz#44bc8d249e7fb2ff5d00e0341a7ffb94fbf67895"
 
-core-js@^2.5.7:
+core-js@^2.4.1, core-js@^2.5.7:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.9.tgz#6b4b214620c834152e179323727fc19741b084f2"
   integrity sha512-HOpZf6eXmnl7la+cUdMnLvUxKNqLUzJvgIziQ0DiF3JwSImNphIqdGqzj6hIKyX04MmV0poclQ7+wjWvxQyR2A==
@@ -2832,6 +2832,11 @@ des.js@^1.0.0:
   dependencies:
     inherits "^2.0.1"
     minimalistic-assert "^1.0.0"
+
+desandro-matches-selector@^2.0.0:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/desandro-matches-selector/-/desandro-matches-selector-2.0.2.tgz#717beed4dc13e7d8f3762f707a6d58a6774218e1"
+  integrity sha1-cXvu1NwT59jzdi9wem1YpndCGOE=
 
 destroy@~1.0.4:
   version "1.0.4"
@@ -3343,6 +3348,11 @@ etag@~1.8.1:
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
 
+ev-emitter@^1.0.0, ev-emitter@^1.0.1, ev-emitter@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/ev-emitter/-/ev-emitter-1.1.1.tgz#8f18b0ce5c76a5d18017f71c0a795c65b9138f2a"
+  integrity sha512-ipiDYhdQSCZ4hSbX4rMW+XzNKMD1prg/sTvoVmSLkuQ1MVlwjJQQA+sW8tMYR3BLUr9KjodFV4pvzunvRhd33Q==
+
 eventemitter3@^3.1.0:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.1.2.tgz#2d3d48f9c346698fce83a85d7d664e98535df6e7"
@@ -3546,11 +3556,30 @@ fast-levenshtein@~2.0.4:
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
 
+fbjs-css-vars@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/fbjs-css-vars/-/fbjs-css-vars-1.0.2.tgz#216551136ae02fe255932c3ec8775f18e2c078b8"
+  integrity sha512-b2XGFAFdWZWg0phtAWLHCk836A1Xann+I+Dgd3Gk64MHKZO44FfoD1KxyvbSh0qZsIoXQGGlVztIY+oitJPpRQ==
+
 fbjs@^0.8.9:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   dependencies:
     core-js "^1.0.0"
+    isomorphic-fetch "^2.1.1"
+    loose-envify "^1.0.0"
+    object-assign "^4.1.0"
+    promise "^7.1.1"
+    setimmediate "^1.0.5"
+    ua-parser-js "^0.7.18"
+
+fbjs@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-1.0.0.tgz#52c215e0883a3c86af2a7a776ed51525ae8e0a5a"
+  integrity sha512-MUgcMEJaFhCaF1QtWGnmq9ZDRAzECTCRAF7O6UZIlAlkTs1SasiX9aP0Iw7wfD2mJ7wDTNfg2w7u5fSCwJk1OA==
+  dependencies:
+    core-js "^2.4.1"
+    fbjs-css-vars "^1.0.0"
     isomorphic-fetch "^2.1.1"
     loose-envify "^1.0.0"
     object-assign "^4.1.0"
@@ -3679,6 +3708,13 @@ findup-sync@3.0.0:
     micromatch "^3.0.4"
     resolve-dir "^1.0.1"
 
+fizzy-ui-utils@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/fizzy-ui-utils/-/fizzy-ui-utils-2.0.7.tgz#7df45dcc4eb374a08b65d39bb9a4beedf7330505"
+  integrity sha512-CZXDVXQ1If3/r8s0T+v+qVeMshhfcuq0rqIFgJnrtd+Bu8GmDmqMjntjUePypVtjHXKJ6V4sw9zeyox34n9aCg==
+  dependencies:
+    desandro-matches-selector "^2.0.0"
+
 flat-cache@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-2.0.1.tgz#5d296d6f04bda44a4630a301413bdbc2ec085ec0"
@@ -3692,6 +3728,18 @@ flatted@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-2.0.0.tgz#55122b6536ea496b4b44893ee2608141d10d9916"
   integrity sha512-R+H8IZclI8AAkSBRQJLVOsxwAoHd6WC40b4QTNWIjzAa6BXOBfQcM587MXDTVPeYaopFNWHUFLx7eNmHDSxMWg==
+
+flickity@^2.2.0:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/flickity/-/flickity-2.2.1.tgz#81126e3d656cb54577358a5f959ffdbda088e670"
+  integrity sha512-fCZJGNqabgDrIhaUBqt2ydE8c5V6iiB3KQAf6dH3Z45MoDUm7g6+uZmteN0aLV9pzVItNqCbfOJQjsJM/rHuSA==
+  dependencies:
+    desandro-matches-selector "^2.0.0"
+    ev-emitter "^1.1.1"
+    fizzy-ui-utils "^2.0.7"
+    get-size "^2.0.3"
+    unidragger "^2.3.0"
+    unipointer "^2.3.0"
 
 flush-write-stream@^1.0.0:
   version "1.1.1"
@@ -3845,6 +3893,11 @@ get-caller-file@^2.0.1:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-2.0.5.tgz#4f94412a82db32f36e3b0b9741f8a97feb031f7e"
   integrity sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==
+
+get-size@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/get-size/-/get-size-2.0.3.tgz#54a1d0256b20ea7ac646516756202769941ad2ef"
+  integrity sha512-lXNzT/h/dTjTxRbm9BXb+SGxxzkm97h/PCIKtlN/CBCxxmkkIVV21udumMS93MuVTDX583gqc94v3RjuHmI+2Q==
 
 get-stream@^3.0.0:
   version "3.0.0"
@@ -4357,6 +4410,13 @@ ignore@^4.0.6:
 image-size@^0.6.2:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.6.3.tgz#e7e5c65bb534bd7cdcedd6cb5166272a85f75fb2"
+
+imagesloaded@^4.1.4:
+  version "4.1.4"
+  resolved "https://registry.yarnpkg.com/imagesloaded/-/imagesloaded-4.1.4.tgz#1376efcd162bb768c34c3727ac89cc04051f3cc7"
+  integrity sha512-ltiBVcYpc/TYTF5nolkMNsnREHW+ICvfQ3Yla2Sgr71YFwQ86bDwV9hgpFhFtrGPuwEx5+LqOHIrdXBdoWwwsA==
+  dependencies:
+    ev-emitter "^1.0.0"
 
 import-fresh@^2.0.0:
   version "2.0.0"
@@ -6911,6 +6971,16 @@ react-dropzone@^9.0.0:
     prop-types "^15.6.2"
     prop-types-extra "^1.1.0"
 
+react-flickity-component@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/react-flickity-component/-/react-flickity-component-3.3.0.tgz#ea667325f29ef78e2459bb2488fccf1dfa401f59"
+  integrity sha512-dv3RLBvGrWLmxzJtzacBdaPQP1FR/vWiFIQv/f6noZTp/s5XLK4MCewM/8vw65IC54FcSOnawYcqB33LF7jJjQ==
+  dependencies:
+    fbjs "^1.0.0"
+    flickity "^2.2.0"
+    imagesloaded "^4.1.4"
+    prop-types "^15.7.2"
+
 react-icons@^3.5.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.7.0.tgz#64fe46231fabfeea27895edeae6c3b78114b8c8f"
@@ -8187,6 +8257,13 @@ undefsafe@^2.0.2:
   dependencies:
     debug "^2.2.0"
 
+unidragger@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/unidragger/-/unidragger-2.3.0.tgz#ab9d9fd62106f3252d88fae5f3a99575e6d31d02"
+  integrity sha512-dVkSqQdwcsaNmXaandBAOcJ4QVvkrDPosfCcZ7opYPkAiisCQaGlNw0pg00lBV4MQoWEXsEaiwhtQlbnvlXrQQ==
+  dependencies:
+    unipointer "^2.3.0"
+
 union-value@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/union-value/-/union-value-1.0.1.tgz#0b6fe7b835aecda61c6ea4d4f02c14221e109847"
@@ -8196,6 +8273,13 @@ union-value@^1.0.0:
     get-value "^2.0.6"
     is-extendable "^0.1.1"
     set-value "^2.0.1"
+
+unipointer@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/unipointer/-/unipointer-2.3.0.tgz#ba0dc462ce31c2a88e80810e19c3bae0ce47ed9f"
+  integrity sha512-m85sAoELCZhogI1owtJV3Dva7GxkHk2lI7A0otw3o0OwCuC/Q9gi7ehddigEYIAYbhkqNdri+dU1QQkrcBvirQ==
+  dependencies:
+    ev-emitter "^1.0.1"
 
 unique-filename@^1.1.1:
   version "1.1.1"
