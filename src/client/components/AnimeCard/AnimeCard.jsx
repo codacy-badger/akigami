@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AspectRatio from '../AspectRatio';
-import { Wrapper, Inner, Title } from './AnimeCard.styles';
+import { Inner, Title, Wrapper } from './AnimeCard.styles';
 import Block from '../Block';
 
 class AnimeCard extends Component {

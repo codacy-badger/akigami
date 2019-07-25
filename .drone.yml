@@ -1,0 +1,47 @@
+pipeline:
+  restore-cache:
+    image: drillster/drone-volume-cache
+    restore: true
+    mount:
+      - ./.yarn-cache
+      - ./node_modules
+    volumes:
+      - /tmp/cache:/cache
+
+  install:
+    image: node:latest
+    commands:
+      - node -v
+      - npm -v
+      - yarn --version
+      - yarn config set cache-folder .yarn-cache
+      - NODE_ENV=development yarn install --pure-lockfile
+
+  build:
+    image: node:latest
+    environment:
+      CONFIG:
+        from_secret: DEVELOPMENT_CONFIG
+    commands:
+      - yarn client-build:dev
+      - echo ${CONFIG} > config/development.json
+
+  publish:
+    image: plugins/docker
+    repo: yukioru/akigami
+    dockerfile: Dockerfile
+    secrets:
+      - source: docker_id
+        target: docker_username
+      - source: docker_password
+        target: docker_password
+    tags: [ latest, '${DRONE_TAG}' ]
+
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    rebuild: true
+    mount:
+      - ./.yarn-cache
+      - ./node_modules
+    volumes:
+      - /tmp/cache:/cache

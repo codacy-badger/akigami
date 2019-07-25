@@ -7,6 +7,9 @@
     "start": "concurrently -rki \"yarn run client\" \"yarn run server\"",
     "server": "cross-env DEBUG='akigami:server:*' sh tools/start.sh",
     "client": "webpack --watch",
+    "client-build:dev": "webpack",
+    "server:once:dev": "cross-env DEBUG='akigami:server:*' sh tools/start-once.sh",
+    "start:once:dev": "yarn client-build:dev && yarn server:once:dev",
     "defaults": "webpack-defaults",
     "webpack-defaults": "webpack-defaults"
   },

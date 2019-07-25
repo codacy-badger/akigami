@@ -1,0 +1,1 @@
+node_modules/.bin/cross-env DEBUG='akigami:server:*' sh tools/start-once.sh

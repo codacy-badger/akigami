@@ -1,27 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="df94f3da-2210-4ef6-a551-f49fc1bb7698" name="Default Changelist" comment="Shadows, user page, block info">
-      <change afterPath="$PROJECT_DIR$/src/client/components/Block/Block.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/components/Block/Block.styles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/components/Block/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/components/BlockTitle/BlockTitle.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/components/BlockTitle/BlockTitle.styles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/components/BlockTitle/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/components/LineInfo/LineInfo.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/components/LineInfo/LineInfo.styles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/components/LineInfo/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="df94f3da-2210-4ef6-a551-f49fc1bb7698" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/components/AnimeCard/AnimeCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/AnimeCard/AnimeCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/components/AnimeCard/AnimeCard.styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/AnimeCard/AnimeCard.styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/components/Layout/Layout.styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/Layout/Layout.styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/components/ResponsiveReverseGrid/ResponsiveReverseGrid.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/ResponsiveReverseGrid/ResponsiveReverseGrid.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/models/UserModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/models/UserModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/pages/Feed/Feed.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/pages/Feed/Feed.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/pages/User/tabs/UserBrowse.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/pages/User/tabs/UserBrowse.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/global.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/theme.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -107,7 +89,8 @@
       <workItem from="1563560436854" duration="1934000" />
       <workItem from="1563562546687" duration="150000" />
       <workItem from="1563788957125" duration="49000" />
-      <workItem from="1563799035096" duration="5056000" />
+      <workItem from="1563799035096" duration="5078000" />
+      <workItem from="1563868058552" duration="12000" />
     </task>
     <task id="LOCAL-00001" summary="Blur UI sidemenu">
       <created>1563549393454</created>
@@ -116,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1563549393455</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Shadows, user page, block info">
+      <created>1563804863596</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1563804863597</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
