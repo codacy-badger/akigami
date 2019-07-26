@@ -39,6 +39,7 @@ module.exports = () => {
         context: process.cwd(), // or the same value as `context`
       },
     }),
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /ru|en/),
   ];
 
   if (!isProd) {

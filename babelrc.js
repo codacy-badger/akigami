@@ -38,7 +38,6 @@ module.exports = {
       import: '___EmotionJSX',
     }],
     ['@babel/plugin-transform-react-jsx', { pragma: '___EmotionJSX', pragmaFrag: 'React.Fragment' }],
-    '@babel/plugin-transform-modules-commonjs',
   ],
   env: {
     production: {

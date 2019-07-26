@@ -5,6 +5,7 @@ config.plugins[0][1].values._CLIENT_ = false;
 config.plugins[0][1].values._SERVER_ = true;
 
 config.plugins.unshift('dynamic-import-node');
+config.plugins.push('@babel/plugin-transform-modules-commonjs');
 
 Promise.config({
   longStackTraces: true,

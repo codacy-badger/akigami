@@ -8,13 +8,18 @@ class Radio extends PureComponent {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     children: PropTypes.string.isRequired,
+    onChange: PropTypes.func,
+  }
+
+  static defaultProps = {
+    onChange: () => {},
   }
 
   render() {
-    const { id, name, children } = this.props;
+    const { id, name, onChange, children } = this.props;
     return (
       <RadioWrapper>
-        <RadioInput id={id} type="radio" name={name} />
+        <RadioInput id={id} type="radio" name={name} onChange={onChange} />
         <RadioLabel htmlFor={id}>{children}</RadioLabel>
       </RadioWrapper>
     );
